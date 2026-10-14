@@ -70,15 +70,15 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 - [ ] Live samples in every new recipe's README (the four Batch 1 live runs: Exit Ramp, No Speech
       Detected, Minnesota Tater Tot Hotdish, the 2026-10-14 Trending Movers)
 
-## 2b. Consolidate after Batch 1
+## 2b. Consolidate after Batch 1 ✅
 
 - [x] Runner: subfolder paths in `files`, `optional_files`, `0`/`false` no longer read as missing
 - [x] Inline JSON data blocks skipped by the JS syntax checks (a live run caught this)
-- [ ] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `weekly-browser-game`
+- [x] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `weekly-browser-game`
       to the shared web checks
-- [ ] Pass the run context to `validate()` (removes the novella's module-level state)
-- [ ] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
-- [ ] Unit tests for the shared modules (today they carry self-checks)
+- [x] Pass the run context to `validate()` (removes the novella's module-level state)
+- [x] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
+- [x] Unit tests for the shared modules and the new hooks (27 tests)
 
 ## 3. Batch 2 — runner additions, then 11 more recipes
 

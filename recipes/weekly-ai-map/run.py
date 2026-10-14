@@ -11,16 +11,14 @@ from __future__ import annotations
 import argparse
 import logging
 import re
-import shutil
-import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RecipeError, RunContext, run  # noqa: E402
+from core.web import check_refs, node_check  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
 
 log = logging.getLogger("recipes")
@@ -57,22 +55,8 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
     html = (staging / "index.html").read_text(encoding="utf-8")
     if not re.search(r"\bstops\s*=\s*\[", html):
         raise RecipeError("index.html has no `stops = [` array")
-    for src in re.findall(r"""<(?:script|link|img)[^>]+(?:src|href)\s*=\s*["']([^"']+)""", html, re.I):
-        if not src.startswith(ALLOWED):
-            raise RecipeError(f"index.html references a disallowed resource: {src}")
-
-    node = shutil.which("node")
-    if not node:
-        log.warning("node not on PATH — skipping the JS syntax check")
-        return
-    inline = re.findall(r'''<script(?![^>]*\bsrc\s*=)(?![^>]*\btype\s*=\s*["']?(?!(?:text|application)/javascript\b|module\b)[\w/+.-]+)[^>]*>(.*?)</script>''', html, re.S | re.I)
-    with tempfile.TemporaryDirectory() as tmp:
-        for i, body in enumerate(inline):
-            js = Path(tmp) / f"inline-{i}.js"
-            js.write_text(body, encoding="utf-8")
-            proc = subprocess.run([node, "--check", str(js)], capture_output=True, text=True)
-            if proc.returncode != 0:
-                raise RecipeError(f"inline script {i} fails `node --check`:\n{proc.stderr[-1500:]}")
+    check_refs(staging, "index.html", https_prefixes=tuple(a for a in ALLOWED if a.startswith("https://")))
+    node_check(staging, pages=("index.html",))
 
 
 RECIPE = Recipe(

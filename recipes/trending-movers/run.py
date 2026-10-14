@@ -15,9 +15,9 @@ import re
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_digest"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from digest import MAIN, candidates_block, digest_recipe, fetch_candidates  # noqa: E402
+from core.digest import MAIN, candidates_block, digest_recipe, fetch_candidates  # noqa: E402
 
 from core import RecipeError, run  # noqa: E402
 

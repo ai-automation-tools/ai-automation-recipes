@@ -41,7 +41,6 @@ GENRES: dict[str, str] = {
     "cozy speculative mystery": "mystery",
 }
 CRAFT_GENRES = ("fantasy", "horror", "litfic", "mystery", "romance", "thriller")
-_STATE: dict[str, object] = {}  # prepare() -> validate()/finish(), one run per process
 
 SEED_TASK = """**There is no story bible yet — this run starts a new novel.** Invent it, in **{genre}**,
 and write two files: the bible and chapter 1.
@@ -112,7 +111,7 @@ def prepare(ctx: RunContext) -> dict[str, str]:
         archived = len(list(col.glob("story-bible.*.md")))
         genre = args.genre or list(GENRES)[archived % len(GENRES)]
         craft_genre = GENRES.get(genre, "litfic")
-        _STATE.update(seed=True, expect={"chapter": 1})
+        ctx.state.update(seed=True, expect={"chapter": 1})
         return {
             "NOVEL_TITLE": "<the title you invent>",
             "NOVEL_SLUG": "<your-novel-slug>",
@@ -128,7 +127,7 @@ def prepare(ctx: RunContext) -> dict[str, str]:
 
     slug, chapters = bible["slug"], _chapters(col, bible["slug"])
     n = len(chapters) + 1
-    _STATE.update(seed=False, expect={"chapter": n, "novel_slug": slug})
+    ctx.state.update(seed=False, expect={"chapter": n, "novel_slug": slug})
 
     continuity = ""
     if chapters:
@@ -158,8 +157,8 @@ def prepare(ctx: RunContext) -> dict[str, str]:
     }
 
 
-def validate(staging: Path, manifest: dict[str, object]) -> None:
-    for key, want in _STATE["expect"].items():
+def validate(staging: Path, manifest: dict[str, object], ctx: RunContext) -> None:
+    for key, want in ctx.state["expect"].items():
         if str(manifest.get(key)) != str(want):
             raise RecipeError(f"final JSON has {key}={manifest.get(key)!r}, expected {want!r}")
     words = len((staging / "chapter.md").read_text(encoding="utf-8").split())
@@ -169,7 +168,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
     if len(synopsis) > SYNOPSIS_MAX_WORDS:
         # ponytail: hard word cut; the prompt asks the agent to condense, this is only a guard
         manifest["synopsis"] = " ".join(synopsis[:SYNOPSIS_MAX_WORDS])
-    if _STATE["seed"]:
+    if ctx.state["seed"]:
         if not (staging / BIBLE).is_file():
             raise RecipeError(f"the seed run did not write {BIBLE}")
         bible = _frontmatter((staging / BIBLE).read_text(encoding="utf-8"))
@@ -181,7 +180,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
 
 
 def finish(ctx: RunContext, final: Path, manifest: dict[str, object]) -> None:
-    if _STATE.get("seed"):
+    if ctx.state.get("seed"):
         # The chapter-1 folder keeps its copy as a snapshot; the live bible sits at the collection root.
         shutil.copy2(final / BIBLE, ctx.collection_dir / BIBLE)
 

@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RunContext, run  # noqa: E402
-from recipes._shared.webcheck import check_refs, check_sources_csv, node_check  # noqa: E402
+from core.web import check_refs, check_sources_csv, node_check  # noqa: E402
 
 # One per ISO week, in order.
 GENRES = [

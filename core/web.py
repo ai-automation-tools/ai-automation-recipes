@@ -1,8 +1,6 @@
 """Checks for recipes that ship runnable HTML/JS: every local reference exists, external
 references are HTTPS (optionally from an allowlist), and every script parses under
 `node --check` when Node is installed.
-
-ponytail: lives beside the recipes, not in core/, until a second category needs it.
 """
 
 from __future__ import annotations
@@ -15,7 +13,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from core import RecipeError
+from .runner import RecipeError
 
 log = logging.getLogger("recipes")
 
@@ -137,19 +135,3 @@ def check_sources_csv(staging: Path, name: str = "sources.csv", lo: int = 3, hi:
             raise RecipeError(f"{name} has a malformed row: {r}")
 
 
-if __name__ == "__main__":  # self-check
-    import sys
-    with tempfile.TemporaryDirectory() as tmp:
-        d = Path(tmp)
-        (d / "a.css").write_text("", encoding="utf-8")
-        (d / "p.html").write_text('<link href="a.css"><img src="cover.png"><script src="https://x/y.js"></script>', encoding="utf-8")
-        check_refs(d, "p.html", pending=("cover.png",))
-        for kwargs in ({"allow_external_scripts": False}, {"https_prefixes": ("https://cdn/",)}):
-            try:
-                check_refs(d, "p.html", pending=("cover.png",), **kwargs)
-                sys.exit("expected a RecipeError")
-            except RecipeError:
-                pass
-        (d / "s.csv").write_text("title,url,note\na,https://a,n\nb,https://b,\"x, y\"\nc,https://c,n\n", encoding="utf-8")
-        check_sources_csv(d, "s.csv")
-    print("webcheck self-check ok")

@@ -34,11 +34,16 @@ RECIPE = Recipe(
     fields=("genre",),              # extra required keys in the final JSON
     cover_aspect="16:9",            # or None for no cover
     default_model="sonnet",
-    prepare=prepare,                # -> dict of {{TOKENS}}
-    validate=validate,              # optional: raise RecipeError to reject the output
-    finish=finish,                  # optional: runs after publishing
+    optional_files=("notes.md",),   # published when present, never required
+    prepare=prepare,                # (ctx) -> dict of {{TOKENS}}; stash per-run data in ctx.state
+    validate=validate,              # (staging, manifest[, ctx]): raise RecipeError to reject
+    after_cover=after_cover,        # (ctx, staging, manifest) -> extra files that need the cover
+    finish=finish,                  # (ctx, final, manifest): runs after publishing
 )
 ```
+
+Shared helpers live in `core/`: `core.web` for HTML/JS/extension checks, `core.food` for
+recipes, `core.digest` for research digests (`digest_recipe()` builds a whole digest recipe).
 
 Give the agent the narrowest tool list that works. No `Bash` unless the recipe can't do without it.
 

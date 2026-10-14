@@ -1,11 +1,7 @@
 version: 2
 updates:
+  # Majors are ignored, as in the org's other repos; review them by hand.
   - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-  - package-ecosystem: pip
     directory: /
     schedule:
       interval: weekly
@@ -13,3 +9,11 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+  # requirements.txt uses open >= floors, so version updates only raise the floor.
+  # Security updates still arrive; routine version PRs are switched off.
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 0

@@ -17,6 +17,7 @@ staging folder behind for inspection (or deletes it, without --keep-staging).
 from __future__ import annotations
 
 import argparse
+import inspect
 import json
 import logging
 import os
@@ -50,6 +51,7 @@ class RunContext:
     day: date
     existing: list[artifacts.Existing]
     args: argparse.Namespace
+    state: dict[str, object] = field(default_factory=dict)  # prepare() -> later hooks, one run
 
 
 @dataclass
@@ -68,7 +70,8 @@ class Recipe:
     timeout_s: int = 1800
     add_args: Callable[[argparse.ArgumentParser], None] | None = None
     prepare: Callable[[RunContext], dict[str, str]] | None = None
-    validate: Callable[[Path, dict[str, object]], None] | None = None
+    validate: Callable[..., None] | None = None  # (staging, manifest[, ctx]); raise RecipeError to reject
+    after_cover: Callable[[RunContext, Path, dict[str, object]], list[str] | None] | None = None  # in staging, cover exists; returns extra files to publish
     finish: Callable[[RunContext, Path, dict[str, object]], None] | None = None
     extra: dict[str, object] = field(default_factory=dict)
 
@@ -239,7 +242,11 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
             shutil.rmtree(stray) if stray.is_dir() else stray.unlink()
 
     if recipe.validate:
-        recipe.validate(staging, manifest)
+        # validate(staging, manifest) or validate(staging, manifest, ctx)
+        if len(inspect.signature(recipe.validate).parameters) >= 3:
+            recipe.validate(staging, manifest, ctx)
+        else:
+            recipe.validate(staging, manifest)
 
     cover = None
     if recipe.cover_aspect and args.image_engine != "none":
@@ -249,13 +256,20 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
             cover = images.render(str(manifest["cover_prompt"]), staging / "cover.png",
                                   recipe.cover_aspect, args.image_engine)
 
+    extra: list[str] = []
+    if recipe.after_cover:
+        extra = list(recipe.after_cover(ctx, staging, manifest) or [])
+        for name in extra:
+            if not (staging / name).is_file():
+                raise RecipeError(f"after_cover reported {name}, which does not exist")
+
     slug = artifacts.slugify(str(manifest.get("slug") or manifest["title"]))
     final = artifacts.artifact_dir(ctx.collection_dir, ctx.day, slug)
     final.parent.mkdir(parents=True, exist_ok=True)
     shutil.move(str(staging), str(final))
     _cleanup_staging_root(ctx.collection_dir)
 
-    published = [*recipe.files[1:], *(f for f in recipe.optional_files if (final / f).is_file())]
+    published = [*recipe.files[1:], *(f for f in recipe.optional_files if (final / f).is_file()), *extra]
     files = {"main": recipe.files[0], **{Path(f).with_suffix("").as_posix(): f for f in published}}
     if cover:
         files["cover"] = "cover.png"

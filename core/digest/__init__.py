@@ -25,7 +25,6 @@ from __future__ import annotations
 import html
 import json
 import re
-import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -36,10 +35,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parents[1]))
 
-from core import Recipe, RecipeError, RunContext  # noqa: E402
-from core.artifacts import MANIFEST  # noqa: E402
+from ..runner import Recipe, RecipeError, RunContext
+from ..artifacts import MANIFEST
 
 MAIN = "digest.md"
 RULES = (HERE / "rules.md").read_text(encoding="utf-8")
@@ -449,7 +447,7 @@ def digest_recipe(*, name: str, collection: str, archive_title: str, prepare_ext
         name=name,
         collection=collection,
         version="0.1.0",
-        prompt_path=HERE.parent / name / "prompt.md",
+        prompt_path=HERE.parents[1] / "recipes" / name / "prompt.md",
         files=(MAIN,),
         skills=("llm-writing", "humanizer", "image-prompt-craft") if cover else ("llm-writing", "humanizer"),
         tools=("Read", "Write", "Edit", "Glob", "Grep", "Skill", "WebSearch", "WebFetch"),

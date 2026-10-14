@@ -15,7 +15,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RunContext, run  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
-from recipes._shared.webcheck import check_json, check_refs, node_check  # noqa: E402
+from core.web import check_json, check_refs, node_check  # noqa: E402
 
 THEMES: dict[str, str] = {
     "Investing": "Brokerage basics, index funds, dividends, dollar-cost averaging, allocation and "

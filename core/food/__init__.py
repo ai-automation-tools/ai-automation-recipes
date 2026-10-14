@@ -24,9 +24,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-sys.path.insert(0, str(ROOT))
 
-from core import RecipeError  # noqa: E402
+from ..runner import RecipeError
 
 log = logging.getLogger("recipes")
 
@@ -84,19 +83,16 @@ SAVORY = ["#16a34a", "#ea580c", "#0d9488", "#ca8a04"]
 REST_SECTIONS = ["Food Safety", "Serving", "Scaling", "Chef", "Nutrition", "Sources", "Credits"]
 
 
-def add_cooks_card(final: Path) -> None:
-    """Render cooks-card.html beside recipe.md and record it in artifact.json."""
+def cooks_card(ctx: object, staging: Path, manifest: dict[str, object]) -> list[str]:
+    """after_cover hook: render cooks-card.html beside recipe.md, with the cover inlined."""
     try:
-        html = render_card(final / "recipe.md", final / "cover.png")
+        html = render_card(staging / "recipe.md", staging / "cover.png")
     except ImportError:
         log.warning("`markdown` not installed — skipping the Cook's Card (pip install -r requirements.txt)")
-        return
-    (final / CARD).write_text(html, encoding="utf-8")
-    manifest_path = final / "artifact.json"
-    data = json.loads(manifest_path.read_text(encoding="utf-8"))
-    data.setdefault("files", {})["cooks_card"] = CARD
-    manifest_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    log.info("Cook's Card written: %s", final / CARD)
+        return []
+    (staging / CARD).write_text(html, encoding="utf-8")
+    log.info("Cook's Card written")
+    return [CARD]
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, object], str]:

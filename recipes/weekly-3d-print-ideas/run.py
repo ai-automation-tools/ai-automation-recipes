@@ -18,7 +18,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RecipeError, RunContext, run  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
-from recipes._shared.webcheck import check_json, check_sources_csv  # noqa: E402
+from core.web import check_json, check_sources_csv  # noqa: E402
 
 BUILD_VOLUME_MM = 220
 

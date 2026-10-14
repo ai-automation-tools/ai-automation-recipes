@@ -14,7 +14,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RunContext, run  # noqa: E402
 from core.artifacts import existing_digest, load_existing  # noqa: E402
-from recipes._shared.webcheck import check_json, check_mv3, check_refs, node_check  # noqa: E402
+from core.web import check_json, check_mv3, check_refs, node_check  # noqa: E402
 
 
 def prepare(ctx: RunContext) -> dict[str, str]:

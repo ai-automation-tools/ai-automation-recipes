@@ -15,11 +15,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
-sys.path.insert(0, str(HERE.parent / "_shared"))
 
 from core import Recipe, RunContext, run  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
-import food  # noqa: E402
+from core import food  # noqa: E402
 
 CUISINES = ["Midwest", "New Orleans", "Italian", "Thai", "Mexican", "Southern US", "Chinese"]
 
@@ -47,7 +46,7 @@ RECIPE = Recipe(
     add_args=add_args,
     prepare=prepare,
     validate=food.check_recipe,
-    finish=lambda ctx, final, manifest: food.add_cooks_card(final),
+    after_cover=food.cooks_card,
 )
 
 if __name__ == "__main__":
