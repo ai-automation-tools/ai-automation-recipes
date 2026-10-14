@@ -37,7 +37,8 @@ def slideshow(images: list[Path], audio: Path, out: Path, size: tuple[int, int] 
         return None
     if not images:
         raise ValueError("slideshow needs at least one image")
-    per = max(duration_s(audio) / len(images), 0.5)
+    total = duration_s(audio)
+    per = max(total / len(images), 0.5)
     w, h = size
     with tempfile.TemporaryDirectory() as tmp:
         listing = Path(tmp) / "images.txt"
@@ -46,7 +47,9 @@ def slideshow(images: list[Path], audio: Path, out: Path, size: tuple[int, int] 
         listing.write_text("\n".join(rows) + "\n", encoding="utf-8")
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(listing), "-i", str(audio),
                "-vf", f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},format=yuv420p",
-               "-r", "30", "-c:v", "libx264", "-c:a", "aac", "-shortest", str(out)]
+               # Pin the length to the audio: -shortest is unreliable with still-image input (it
+               # overshot a live run by 18 s and cut short clips early).
+               "-r", "30", "-c:v", "libx264", "-c:a", "aac", "-t", f"{total:.3f}", str(out)]
         proc = subprocess.run(cmd, capture_output=True, text=True)
     if proc.returncode != 0:
         log.warning("ffmpeg failed, no video: %s", proc.stderr[-400:])

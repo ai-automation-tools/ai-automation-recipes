@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
-from .constraints import NO_TEXT, with_constraints
+from .constraints import LETTERING_ONLY, NO_TEXT, with_constraints, with_lettering_constraint
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ class ImageResult:
     model: str
 
 
-def _gemini(prompt: str, aspect: str) -> tuple[bytes, str]:
+def _gemini(prompt: str, aspect: str, size: str | None = None) -> tuple[bytes, str]:
     from google import genai
     from google.genai import types
 
@@ -48,7 +48,7 @@ def _gemini(prompt: str, aspect: str) -> tuple[bytes, str]:
         contents=[prompt],
         config=types.GenerateContentConfig(
             response_modalities=["IMAGE"],
-            image_config=types.ImageConfig(aspect_ratio=aspect),
+            image_config=types.ImageConfig(aspect_ratio=aspect, **({"image_size": size} if size else {})),
         ),
     )
     for candidate in resp.candidates or []:
@@ -58,7 +58,7 @@ def _gemini(prompt: str, aspect: str) -> tuple[bytes, str]:
     raise ImageError("Gemini returned no image part (often a content refusal).")
 
 
-def _openai(prompt: str, aspect: str) -> tuple[bytes, str]:
+def _openai(prompt: str, aspect: str, size: str | None = None) -> tuple[bytes, str]:  # size: n/a, max 1536px
     import base64
 
     from openai import OpenAI
@@ -84,10 +84,13 @@ def available_engines() -> list[str]:
     return [name for name, (env, _) in ENGINES.items() if os.environ.get(env)]
 
 
-def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok: bool = False) -> ImageResult:
+def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok: bool = False,
+           size: str | None = None) -> ImageResult:
     """Render `prompt` to `out` as PNG. engine: auto | gemini | openai.
 
-    text_ok skips the no-text constraint, for the rare image that is meant to carry words (a meme).
+    text_ok swaps the no-text constraint for LETTERING_ONLY, for images meant to carry the words
+    quoted in their prompt (a meme caption, comic balloons).
+    size asks for a resolution tier ("1K", "2K", "4K") where the engine supports one (Gemini).
     """
     if aspect not in ASPECTS:
         raise ImageError(f"Unsupported aspect {aspect!r}; use one of {ASPECTS}.")
@@ -97,7 +100,7 @@ def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok
 
     from PIL import Image
 
-    prompt = prompt.strip() if text_ok else with_constraints(prompt)
+    prompt = with_lettering_constraint(prompt) if text_ok else with_constraints(prompt)
     errors: list[str] = []
     for name in ladder:
         if name not in ENGINES:
@@ -107,7 +110,7 @@ def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok
             errors.append(f"{name}: {env} not set")
             continue
         try:
-            raw, model = fn(prompt, aspect)
+            raw, model = fn(prompt, aspect, size) if size else fn(prompt, aspect)
             img = Image.open(io.BytesIO(raw))
             out.parent.mkdir(parents=True, exist_ok=True)
             img.save(out, format="PNG")
@@ -121,4 +124,4 @@ def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok
     raise ImageError("All image engines failed — " + "; ".join(errors))
 
 
-__all__ = ["ASPECTS", "NO_TEXT", "ImageError", "ImageResult", "available_engines", "render", "with_constraints"]
+__all__ = ["ASPECTS", "LETTERING_ONLY", "NO_TEXT", "ImageError", "ImageResult", "available_engines", "render", "with_constraints"]

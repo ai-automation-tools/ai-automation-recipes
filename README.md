@@ -23,8 +23,8 @@ ideas, a shelf of playable browser games, an anthology of short stories.
 Every recipe writes into the same folder layout with an `artifact.json` beside each piece, so
 anything that can read JSON can display the results.
 
-26 recipes in four groups, each importable on its own as a Cronsole pack. Schedules are defaults; change them on import.
-**Apps & Games**
+38 recipes in 6 groups. Each group is also a Cronsole pack, and `ai-recipes` imports them all. Schedules are defaults; change them on import.
+**Apps & Games** — pack `ai-recipes-apps-games`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
@@ -37,7 +37,7 @@ anything that can read JSON can display the results.
 | [`weekly-pc-game-concept`](recipes/weekly-pc-game-concept/README.md) | Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art | Weekly (Mon) |
 | [`weekly-3d-print-ideas`](recipes/weekly-3d-print-ideas/README.md) | Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD | Tue, Thu, Sat |
 
-**Writing**
+**Writing** — pack `ai-recipes-writing`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
@@ -48,7 +48,7 @@ anything that can read JSON can display the results.
 | [`content-idea-gen`](recipes/content-idea-gen/README.md) | Claude researches what is working on social platforms in a rotating topic area and pitches one automatable content series — hook, treatment, automation angle, sources — with a cover | Weekly (Wed) |
 | [`weekly-funny-ai-content`](recipes/weekly-funny-ai-content/README.md) | Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag | Weekly (Fri) |
 
-**Food & Maps**
+**Food & Maps** — pack `ai-recipes-food-maps`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
@@ -56,7 +56,7 @@ anything that can read JSON can display the results.
 | [`weekly-regional-recipe`](recipes/weekly-regional-recipe/README.md) | Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes | Weekly (Fri) |
 | [`weekly-ai-map`](recipes/weekly-ai-map/README.md) | Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover | Weekly (Mon) |
 
-**Research Digests**
+**Research Digests** — pack `ai-recipes-digests`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
@@ -70,11 +70,42 @@ anything that can read JSON can display the results.
 | [`security-toolkit`](recipes/security-toolkit/README.md) | Claude researches 24+ security tools across identity, detection, recon, AppSec, cloud and labs, with licences stated | Monthly (28) |
 | [`finance-toolkit`](recipes/finance-toolkit/README.md) | Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps | Monthly (25) |
 
+**Images** — pack `ai-recipes-images`
+
+| Recipe | Makes | Schedule |
+|:---|:---|:---|
+| [`comics`](recipes/comics/README.md) | Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering | Weekly (Wed) |
+| [`ai-meme-generator`](recipes/ai-meme-generator/README.md) | Claude invents one original AI-and-tech-themed meme in a rotating theme, never a copied template or a real person, and the runner renders it square with the caption baked in | Tue, Fri |
+| [`daily-poster`](recipes/daily-poster/README.md) | Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3 | Mon, Thu |
+| [`future-cities`](recipes/future-cities/README.md) | Claude imagines a real city 475 years forward — landmarks, climate adaptation, transport, a named colour grade — and the runner renders one cinematic 16:9 cityscape | Weekly (Sat) |
+| [`image-prompt-packs`](recipes/image-prompt-packs/README.md) | Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image | Weekly (Sat) |
+| [`wallpaper-packs`](recipes/wallpaper-packs/README.md) | Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render | Weekly (Sun) |
+| [`icon-packs`](recipes/icon-packs/README.md) | Claude designs a cohesive pack of 12 icons and draws each symbol as SVG; code adds an identical container to all twelve and ships SVG, transparent 1024 px PNG and multi-size ICO | Weekly (Wed) |
+| [`weekend-yearly-collections`](recipes/weekend-yearly-collections/README.md) | Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json | Tue, Sat |
+
+**Audio** — pack `ai-recipes-audio`
+
+| Recipe | Makes | Schedule |
+|:---|:---|:---|
+| [`song-generator`](recipes/song-generator/README.md) | Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover | Weekly (Wed) |
+| [`podcast-script-generator`](recipes/podcast-script-generator/README.md) | Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover | Weekly (Fri) |
+| [`weekly-audio-podcast`](recipes/weekly-audio-podcast/README.md) | Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech | Weekly (Sat) |
+| [`voiceover-script-generator`](recipes/voiceover-script-generator/README.md) | Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills | Weekly (Sun) |
+
 ## Quick start
 
 You need **Python 3.10+** and **[Claude Code](https://docs.claude.com/claude-code)** signed in (a
-Claude subscription or an `ANTHROPIC_API_KEY`). Cover images need a Gemini or OpenAI key; without
-one, recipes publish without a cover.
+Claude subscription or an `ANTHROPIC_API_KEY`). Media needs its own keys:
+
+| Output | Key | Without it |
+|:---|:---|:---|
+| Covers | `GEMINI_API_KEY` or `OPENAI_API_KEY` | Published without a cover |
+| Image recipes (comics, wallpapers, …) | `GEMINI_API_KEY` or `OPENAI_API_KEY` | The run fails before the agent starts |
+| Speech (podcast, voiceover) | `GEMINI_API_KEY` or `ELEVENLABS_API_KEY` | The run fails before the agent starts |
+| Music (songs) | `ELEVENLABS_API_KEY` | The run fails before the agent starts |
+
+`ffmpeg` is optional: with it, audio is MP3 and voiceovers get a vertical video; without it, WAV and no video.
+Voices are always premade presets — these recipes never clone a voice.
 
 ```bash
 git clone https://github.com/ai-automation-tools/ai-automation-recipes
@@ -93,6 +124,7 @@ Every recipe takes the same flags:
 | `--output-dir` | `$RECIPES_OUTPUT_DIR` | Root for all output |
 | `--model` | per recipe | Claude model alias (`sonnet`, `opus`, `haiku`) |
 | `--image-engine` | `auto` | `auto`, `gemini`, `openai`, or `none` |
+| `--speech-engine` | `auto` | `auto`, `gemini`, or `elevenlabs` (audio recipes) |
 | `--date` | today | Target date, `YYYY-MM-DD` |
 | `--dry-run` | — | Print the filled prompt and exit, no agent call |
 | `--keep-staging` | — | Keep a failed run's working folder for inspection |
@@ -103,7 +135,8 @@ Plus recipe-specific overrides (`--category`, `--genre`, `--cuisine`, `--region`
 
 [Cronsole](https://cronsole.ai-automation-tools.dev) imports these as templates. Import everything with the
 **AI Content Recipes** pack ([`registry/packs/ai-recipes.json`](registry/packs/ai-recipes.json)), one
-category pack (`ai-recipes-apps-games`, `-writing`, `-food-maps`, `-digests`), or one template at a
+category pack (`ai-recipes-apps-games`, `-writing`, `-food-maps`, `-digests`, `-images`, `-audio`), or one
+template at a
 time from [`registry/templates/`](registry/templates/). Each asks for your
 clone's path and an output folder. Add **AI Recipes: Update Clone** too, so the clone stays current.
 
@@ -152,7 +185,8 @@ More in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). Adding a recipe:
 
 - Claude usage counts against your subscription or API account. The game recipe on `opus` is the
   heaviest; switch it to `sonnet` if usage matters more than polish.
-- Each cover is one billed image call.
+- Each cover or image is one billed image call; wallpapers render at Gemini's 4K tier.
+- A song is one ElevenLabs Music generation; podcasts and voiceovers bill per line of speech.
 - Recipes that search the web cite real sources, but check them before you act on a card.
 
 ## Project docs

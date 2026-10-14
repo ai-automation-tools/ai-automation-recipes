@@ -54,6 +54,15 @@ CATEGORY_PACKS = [
      "tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
      ["agent-toolkit", "ai-stack-radar", "oss-spotlight", "cool-websites", "top-10-github-repos",
       "trending-movers", "signal-sources", "security-toolkit", "finance-toolkit"]),
+    ("ai-recipes-images", "AI Recipes: Images",
+     "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon "
+     "packs and long-running yearly image collections.",
+     ["comics", "ai-meme-generator", "daily-poster", "future-cities", "image-prompt-packs",
+      "wallpaper-packs", "icon-packs", "weekend-yearly-collections"]),
+    ("ai-recipes-audio", "AI Recipes: Audio",
+     "Songs composed from AI-written lyrics, a two-step debate podcast, and narrated voiceover shorts — "
+     "preset voices only.",
+     ["song-generator", "podcast-script-generator", "weekly-audio-podcast", "voiceover-script-generator"]),
 ]
 
 

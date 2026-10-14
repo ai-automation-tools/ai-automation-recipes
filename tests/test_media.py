@@ -158,6 +158,19 @@ class AudioTests(unittest.TestCase):
         self.assertNotEqual(seen[0], seen[1])
         self.assertEqual(cast, {"Host": seen[0], "Guest": seen[1]})
 
+    def test_gemini_empty_response_is_retried(self):
+        # A live podcast run died on line 36 of 42 when Gemini returned a candidate with no content.
+        from types import SimpleNamespace as NS
+
+        empty = NS(candidates=[NS(content=None, finish_reason="OTHER")])
+        good = NS(candidates=[NS(content=NS(parts=[NS(inline_data=NS(data=b"\x01\x00" * 10))]))])
+        calls = iter([empty, good])
+        client = NS(models=NS(generate_content=lambda **kw: next(calls)))
+        with mock.patch("google.genai.Client", return_value=client), mock.patch.object(audio.time, "sleep"), \
+                mock.patch.dict("os.environ", {"GEMINI_API_KEY": "k", "ELEVENLABS_API_KEY": ""}):
+            out, _, _ = audio.speech([audio.Line("A", "hi")], Path(tempfile.mkdtemp()) / "a.wav")
+        self.assertTrue(out.is_file())
+
     def test_speech_rejects_non_preset_voices(self):
         with mock.patch.dict("os.environ", {"GEMINI_API_KEY": "k"}):
             with self.assertRaises(audio.AudioError):
@@ -198,6 +211,8 @@ class VideoTests(unittest.TestCase):
             out = video.slideshow([d / "a.png", d / "b.png"], d / "v.wav", d / "short.mp4", size=(360, 640))
             self.assertIsNotNone(out)
             self.assertGreater(out.stat().st_size, 1000)
+            # A live run overshot the audio by 18 s before the length was pinned.
+            self.assertAlmostEqual(video.duration_s(out), 1.0, delta=0.15)
 
 
 if __name__ == "__main__":

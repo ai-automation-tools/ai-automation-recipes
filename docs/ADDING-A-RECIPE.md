@@ -35,6 +35,8 @@ RECIPE = Recipe(
     cover_aspect="16:9",            # or None for no cover
     default_model="sonnet",
     optional_files=("notes.md",),   # published when present, never required
+    images=ImageSpec(min=1, max=4, aspects=("1:1",)),  # agent lists {file, prompt, aspect}; runner renders
+    requires=("speech",),           # "images" / "speech" / "music": fail before the agent if no key
     prepare=prepare,                # (ctx) -> dict of {{TOKENS}}; stash per-run data in ctx.state
     validate=validate,              # (staging, manifest[, ctx]): raise RecipeError to reject
     after_cover=after_cover,        # (ctx, staging, manifest) -> extra files that need the cover
@@ -43,7 +45,9 @@ RECIPE = Recipe(
 ```
 
 Shared helpers live in `core/`: `core.web` for HTML/JS/extension checks, `core.food` for
-recipes, `core.digest` for research digests (`digest_recipe()` builds a whole digest recipe).
+recipes, `core.digest` for research digests (`digest_recipe()` builds a whole digest recipe),
+`core.images.process` for crops/ICO/SVG, `core.audio` for speech and music, `core.video` for
+slideshows. Raise `NothingToDo` from `prepare()` when there is no work this run.
 
 Give the agent the narrowest tool list that works. No `Bash` unless the recipe can't do without it.
 

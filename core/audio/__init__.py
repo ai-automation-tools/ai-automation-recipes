@@ -28,8 +28,22 @@ log = logging.getLogger(__name__)
 
 RATE = 24000  # Hz, 16-bit mono throughout
 
-# Premade voices. Gemini's are prebuilt names; ElevenLabs' are its public library voices.
-GEMINI_VOICES = ("Kore", "Puck", "Charon", "Fenrir", "Aoede", "Zephyr", "Leda", "Orus")
+# Premade voices only. Gemini's prebuilt voices with Google's own one-word descriptors (the first
+# eight are the default cast order); ElevenLabs' public library voices by name -> id.
+GEMINI_VOICE_NOTES = {
+    "Kore": "firm", "Puck": "upbeat", "Charon": "informative", "Fenrir": "excitable", "Aoede": "breezy",
+    "Zephyr": "bright", "Leda": "youthful", "Orus": "firm", "Callirrhoe": "easy-going", "Autonoe": "bright",
+    "Enceladus": "breathy", "Iapetus": "clear", "Umbriel": "easy-going", "Algieba": "smooth", "Despina": "smooth",
+    "Erinome": "clear", "Algenib": "gravelly", "Rasalgethi": "informative", "Laomedeia": "upbeat",
+    "Achernar": "soft", "Alnilam": "firm", "Schedar": "even", "Gacrux": "mature", "Pulcherrima": "forward",
+    "Achird": "friendly", "Zubenelgenubi": "casual", "Vindemiatrix": "gentle", "Sadachbia": "lively",
+    "Sadaltager": "knowledgeable", "Sulafat": "warm",
+}
+GEMINI_VOICES = tuple(GEMINI_VOICE_NOTES)
+ELEVENLABS_VOICE_NOTES = {
+    "Rachel": "calm, female, American", "Adam": "deep, male, American", "Antoni": "well-rounded, male",
+    "Bella": "soft, female", "Josh": "deep, young male", "Domi": "strong, female",
+}
 ELEVENLABS_VOICES = {
     "Rachel": "21m00Tcm4TlvDq8ikWAM",
     "Adam": "pNInz6obpgDQGcFmaJgB",
@@ -60,9 +74,14 @@ def music_available() -> bool:
     return bool(os.environ.get("ELEVENLABS_API_KEY"))
 
 
+def voice_notes(engine: str) -> dict[str, str]:
+    """Preset voice -> short description, for listing choices in a prompt."""
+    return dict(GEMINI_VOICE_NOTES) if engine == "gemini" else dict(ELEVENLABS_VOICE_NOTES)
+
+
 def default_voices(speakers: list[str], engine: str) -> dict[str, str]:
     """Assign distinct preset voices to speakers in order of first appearance."""
-    pool = list(GEMINI_VOICES) if engine == "gemini" else list(ELEVENLABS_VOICES)
+    pool = list(GEMINI_VOICES[:8]) if engine == "gemini" else list(ELEVENLABS_VOICES)
     return {s: pool[i % len(pool)] for i, s in enumerate(speakers)}
 
 
@@ -96,7 +115,13 @@ def _gemini_pcm(text: str, voice: str, style: str) -> bytes:
                 prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=voice))),
         ),
     )
-    return resp.candidates[0].content.parts[0].inline_data.data
+    # Gemini TTS occasionally returns a candidate with no content; treat it as transient.
+    cand = (resp.candidates or [None])[0]
+    parts = cand.content.parts if cand is not None and cand.content else None
+    if not parts or parts[0].inline_data is None:
+        reason = getattr(cand, "finish_reason", None)
+        raise AudioError(f"empty TTS response (finish_reason={reason}) — unavailable")
+    return parts[0].inline_data.data
 
 
 def _elevenlabs_request(path: str, body: dict, accept: str) -> bytes:
@@ -205,5 +230,5 @@ def to_mp3(wav: Path, out: Path | None = None) -> Path:
     return out
 
 
-__all__ = ["AudioError", "ELEVENLABS_VOICES", "GEMINI_VOICES", "Line", "default_voices", "ffmpeg_available",
+__all__ = ["AudioError", "ELEVENLABS_VOICES", "GEMINI_VOICES", "Line", "default_voices", "voice_notes", "ffmpeg_available",
            "music", "music_available", "speech", "speech_engines", "to_mp3"]

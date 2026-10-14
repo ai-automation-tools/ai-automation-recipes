@@ -80,30 +80,43 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 - [x] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
 - [x] Unit tests for the shared modules and the new hooks (27 tests)
 
-## 3. Batch 2 — runner additions, then 11 more recipes
+## 3. Batch 2 — runner additions, then 12 more recipes ✅
 
 **`core/` additions**
 
-- [ ] Multi-image output: a recipe returns several image prompts (panels, packs, wallpaper crops)
-- [ ] Image post-processing: transparent PNG, SVG passthrough, multi-size ICO, paired 16:9 + 9:16 crops
-- [ ] Audio engine interface: ElevenLabs (music + speech) and Gemini TTS, **preset voices only**,
-      bring-your-own key, skipped cleanly when no key is set
-- [ ] Optional video step (ffmpeg) for vertical shorts, skipped when ffmpeg is missing
-- [ ] Tests for each addition with the engines faked
+- [x] Multi-image output: `ImageSpec` — the agent lists `{file, prompt, aspect}`, the runner renders
+- [x] Image post-processing: aspect crops, multi-size ICO, SVG → PNG (`resvg-py`), `use_as_cover`
+- [x] Resolution tiers for image renders (`ImageSpec(size="4K")`, Gemini)
+- [x] Lettering-only constraint for images that carry words (`text_ok`)
+- [x] Audio: Gemini or ElevenLabs speech with **preset voices only** (30 Gemini, 6 ElevenLabs),
+      ElevenLabs Music from an agent-written composition plan, MP3 via ffmpeg
+- [x] Optional video step (`core.video.slideshow`), skipped when ffmpeg is missing
+- [x] `requires=` preflight: a missing key fails the run before the agent starts
+- [x] `NothingToDo` skip signal, `prepare()` errors fail cleanly, per-run tool lists via `ctx.state["tools"]`
+- [x] Tests for each addition with the engines faked, plus faked-engine smoke runs of every Batch 2 recipe
 
-**Recipes**
+**Recipes** (12, so 38 in all)
 
-- [ ] `comics` — full-page comic: script + strip image
-- [ ] `ai-meme-generator` — one AI-themed meme
-- [ ] `daily-poster` — 2:3 poster from a rotating theme list
-- [ ] `image-prompt-packs` — themed prompt pack with rendered examples
-- [ ] `wallpaper-packs` — three packs, desktop + mobile crops
-- [ ] `icon-packs` — 12-icon pack as SVG + PNG + ICO
-- [ ] `future-cities` — cityscape series
-- [ ] `weekend-yearly-collections` — advances every yearly image collection
-- [ ] `song-generator` — one song per run, genre as a parameter (replaces the four single-genre jobs)
-- [ ] `podcast-script-generator` + `weekly-audio-podcast` — debate script, then the rendered episode
-- [ ] `voiceover-script-generator` — narrated script → audio → optional vertical short
+- [x] `comics` — four-panel strip, lettered (live run ✅)
+- [x] `ai-meme-generator` — one AI-themed meme, optional idea queue
+- [x] `daily-poster` — 2:3 poster from 200 themes
+- [x] `future-cities` — speculative cityscapes of 68 real cities
+- [x] `image-prompt-packs` — 5–8 prompts with a rendered example each
+- [x] `wallpaper-packs` — three 4K masters, each cropped to desktop 16:9 + phone 9:16
+- [x] `icon-packs` — 12 icons as SVG + PNG + ICO, plus a contact sheet (live run ✅)
+- [x] `weekend-yearly-collections` — user-editable collections that each gain an image per run
+- [x] `song-generator` — 37 song types, lyrics + ElevenLabs composition plan → MP3 (live run ✅)
+- [x] `podcast-script-generator` — debate script with an invented cast (live run ✅)
+- [x] `weekly-audio-podcast` — renders the oldest unrendered script with preset voices (live run ✅,
+      13.5-minute episode)
+- [x] `voiceover-script-generator` — narrated script → audio → vertical short (live run ✅)
+
+**Batch 2 follow-ups**
+
+- [ ] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
+      real browser marks) — required before publishing
+- [ ] Review the other theme lists (posters, comics, memes) for brand, artist and real-person risk
+- [ ] Live samples in the Batch 2 READMEs
 
 ## Not porting
 

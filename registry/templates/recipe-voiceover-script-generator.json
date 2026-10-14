@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-voiceover-script-generator",
+  "name": "AI Recipe: Voiceover Script",
+  "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "claude-code",
+    "content",
+    "recipe",
+    "voiceover",
+    "audio",
+    "video",
+    "research"
+  ],
+  "icon": "Video",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 17 * * 0"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/voiceover-script-generator/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}} --speech-engine {{speechEngine}} --voice {{voice}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "sonnet",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    },
+    {
+      "key": "imageEngine",
+      "label": "Cover image engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "openai",
+        "none"
+      ],
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+    },
+    {
+      "key": "speechEngine",
+      "label": "Speech engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "elevenlabs"
+      ],
+      "help": "auto uses GEMINI_API_KEY if set, else ELEVENLABS_API_KEY. Preset voices only."
+    },
+    {
+      "key": "voice",
+      "label": "Narrator voice",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "Kore",
+        "Puck",
+        "Charon",
+        "Fenrir",
+        "Aoede",
+        "Zephyr",
+        "Leda",
+        "Orus",
+        "Rachel",
+        "Adam",
+        "Antoni",
+        "Bella",
+        "Josh",
+        "Domi"
+      ],
+      "help": "auto lets Claude pick by tone. Gemini voices: Kore…Orus; ElevenLabs premade: Rachel…Domi — must match the speech engine."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 2400,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

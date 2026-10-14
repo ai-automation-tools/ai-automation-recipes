@@ -72,6 +72,14 @@ def svg_to_png(svg: Path, out: Path, size: int = 512) -> Path:
         raise ImageError("No SVG renderer: pip install resvg-py (or cairosvg with Cairo)") from exc
 
 
+def use_as_cover(staging: Path, image: str) -> str:
+    """after_cover helper: copy a rendered image to cover.png and return the name to publish."""
+    import shutil
+
+    shutil.copy2(staging / image, staging / "cover.png")
+    return "cover.png"
+
+
 def svg_renderer_available() -> bool:
     for mod in ("resvg_py", "cairosvg"):
         try:

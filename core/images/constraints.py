@@ -12,3 +12,15 @@ def with_constraints(prompt: str) -> str:
     if NO_TEXT in prompt:
         return prompt
     return f"{prompt}\n\n{NO_TEXT}"
+
+
+# For images that are meant to carry words (meme captions, comic balloons, poster lettering).
+LETTERING_ONLY = (
+    "STRICT: the only text in the image is the lettering quoted in this prompt, spelled exactly as "
+    "written; no other text, captions, labels, logos, watermarks, signatures, UI chrome, or borders."
+)
+
+
+def with_lettering_constraint(prompt: str) -> str:
+    prompt = prompt.strip()
+    return prompt if LETTERING_ONLY in prompt else f"{prompt}\n\n{LETTERING_ONLY}"

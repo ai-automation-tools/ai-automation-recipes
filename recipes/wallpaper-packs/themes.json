@@ -1,0 +1,171 @@
+{
+  "themes": [
+    {
+      "slug": "dark-abstract-flow",
+      "label": "Dark Abstract Flow",
+      "style": "digital-art",
+      "categories": [
+        "Dark",
+        "Abstract",
+        "Modern"
+      ],
+      "scene": "Flowing abstract 3D ribbons and folded silk drifting through a deep matte-black void, their edges catching thin glowing lines of electric blue and violet. Smooth volumetric depth, soft specular highlights, a faint film grain over pure black negative space. Premium modern digital-art wallpaper."
+    },
+    {
+      "slug": "deep-space-void",
+      "label": "Deep Space Void",
+      "style": "photorealistic",
+      "categories": [
+        "Space",
+        "Universe",
+        "Dark"
+      ],
+      "scene": "The profound black of deep space — a lone distant planet rim-lit along one crescent edge, a scattering of razor-sharp stars, faint drifting cosmic dust, and an immense sense of silent emptiness. Long-exposure astrophotography, crisp pinpoint stars, deep true blacks."
+    },
+    {
+      "slug": "cosmic-nebula",
+      "label": "Cosmic Nebula",
+      "style": "digital-art",
+      "categories": [
+        "Universe",
+        "Space",
+        "Abstract"
+      ],
+      "scene": "A vast glowing nebula unfurling across the dark cosmos — billowing clouds of magenta, teal, and gold interstellar gas, clusters of newborn stars burning bright within, dark dust lanes threading through. Hubble-style cosmic grandeur, luminous color against deep black."
+    },
+    {
+      "slug": "cyberpunk-city",
+      "label": "Cyberpunk City",
+      "style": "photorealistic",
+      "categories": [
+        "City",
+        "Tech",
+        "Dark",
+        "Modern"
+      ],
+      "scene": "A rain-slicked neon megacity at night seen from high above — endless towers drenched in magenta and cyan signage, holographic billboards, flying-vehicle light trails threading the canyons, deep wet shadows and glowing reflections. Cinematic blade-runner mood, high dynamic range."
+    },
+    {
+      "slug": "linux-ricing-minimal",
+      "label": "Linux Ricing Minimal",
+      "style": "digital-art",
+      "categories": [
+        "Linux",
+        "Abstract",
+        "Dark",
+        "Modern"
+      ],
+      "scene": "A clean minimalist dark desktop wallpaper in the Linux desktop-ricing aesthetic — a single low-poly gradient mountain-range silhouette against a smooth dark gradient sky with a small soft moon, generous clean negative space, a muted Nord/Dracula palette of deep navy, muted teal, and soft purple. Flat, calm, uncluttered, tasteful."
+    },
+    {
+      "slug": "neon-tech-grid",
+      "label": "Neon Tech Grid",
+      "style": "digital-art",
+      "categories": [
+        "Tech",
+        "Abstract",
+        "Modern",
+        "Dark"
+      ],
+      "scene": "A dark futuristic perspective grid receding to a glowing horizon line, floating wireframe polygons and thin circuitry traces of cyan and orange, subtle HUD-like geometry and data-flow lines. Sleek sci-fi tech aesthetic, neon glow against a near-black backdrop, crisp vectors."
+    },
+    {
+      "slug": "dark-mountain-nature",
+      "label": "Dark Mountain Nature",
+      "style": "photorealistic",
+      "categories": [
+        "Nature",
+        "Dark",
+        "Modern"
+      ],
+      "scene": "Moody jagged mountain peaks under a deep starry night sky, low fog pooling in the valleys, cold blue moonlight raking the ridgelines, and a faint sliver of aurora on the horizon. Atmospheric landscape photography, immense scale, dark cinematic contrast."
+    },
+    {
+      "slug": "fluid-gradient-abstract",
+      "label": "Fluid Gradient Abstract",
+      "style": "digital-art",
+      "categories": [
+        "Abstract",
+        "Modern",
+        "Dark"
+      ],
+      "scene": "A smooth liquid blend of deep indigo, magenta, and teal flowing across the frame in soft blurred waves, with gentle depth and a subtle dark vignette. A sleek modern abstract gradient wallpaper — calm, premium, endlessly smooth color transitions on a dark base."
+    },
+    {
+      "slug": "galaxy-spiral",
+      "label": "Galaxy Spiral",
+      "style": "photorealistic",
+      "categories": [
+        "Universe",
+        "Space",
+        "Dark"
+      ],
+      "scene": "A grand spiral galaxy seen at a dramatic angle — a luminous golden core, sweeping arms threaded with pink star-forming regions and dark dust lanes, set against a dense field of distant stars in the black of space. Deep-field astrophotography, immense cosmic scale."
+    },
+    {
+      "slug": "bioluminescent-forest",
+      "label": "Bioluminescent Forest",
+      "style": "photorealistic",
+      "categories": [
+        "Nature",
+        "Dark",
+        "Abstract"
+      ],
+      "scene": "A dark enchanted forest at night glowing with bioluminescence — teal and violet mushrooms and glowing flora lighting a misty forest floor, faint drifting spores catching the light, deep shadow between the trees. Mysterious, cinematic, jewel-like glow against darkness."
+    },
+    {
+      "slug": "abstract-crystal-tech",
+      "label": "Abstract Crystal Tech",
+      "style": "digital-art",
+      "categories": [
+        "Tech",
+        "Abstract",
+        "Modern",
+        "Dark"
+      ],
+      "scene": "Floating translucent crystalline shards and faceted glass forms refracting neon light in a dark studio void — glassmorphism and holographic iridescence, sharp reflections and soft caustics of cyan, magenta, and gold. Sleek high-tech abstract, premium and futuristic."
+    },
+    {
+      "slug": "dark-ocean-waves",
+      "label": "Dark Ocean Waves",
+      "style": "photorealistic",
+      "categories": [
+        "Nature",
+        "Dark",
+        "Abstract"
+      ],
+      "scene": "An aerial view of a dark stormy ocean at night — moonlit foam tracing swirling abstract patterns across near-black water, deep swells and subtle texture, a minimal high-contrast composition. Moody fine-art aerial photography, silver light on black sea."
+    }
+  ],
+  "variation_axes": {
+    "light": [
+      "Lit with soft diffused light",
+      "Lit with dramatic directional light and long shadows",
+      "Lit with a luminous backlit glow",
+      "Lit with gentle rim lighting",
+      "Lit with high-contrast chiaroscuro lighting"
+    ],
+    "palette": [
+      "a cool blue-and-teal color grade",
+      "a warm amber-and-rose color grade",
+      "a moody muted palette",
+      "a vivid jewel-toned palette",
+      "a soft pastel palette",
+      "a rich high-contrast palette"
+    ],
+    "mood": [
+      "serene and minimal",
+      "dramatic and cinematic",
+      "dreamy and ethereal",
+      "bold and energetic",
+      "calm and contemplative"
+    ],
+    "framing": [
+      "a sweeping wide vista",
+      "a strong central focal point",
+      "dynamic diagonal framing",
+      "layered foreground-to-background depth",
+      "expansive breathing negative space"
+    ]
+  }
+}

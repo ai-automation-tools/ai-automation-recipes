@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-weekend-yearly-collections",
+  "name": "AI Recipe: Yearly Collections",
+  "description": "Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "claude-code",
+    "content",
+    "recipe",
+    "images",
+    "collections",
+    "research"
+  ],
+  "icon": "LayoutGrid",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 15 * * 2,6"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/weekend-yearly-collections/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "sonnet",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    },
+    {
+      "key": "imageEngine",
+      "label": "Image engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "openai"
+      ],
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (task secret or the clone's .env). This recipe makes images, so it needs one."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 3600,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

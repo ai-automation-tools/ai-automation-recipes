@@ -1,0 +1,15 @@
+### The comedy dial — outrageous, hard-R, and cranked to the top of what will render
+
+This is a **comedy** song — the funny twin of its genre, in the same lane as the house's comedy country, comedy punk and comedy rap. Aim for the **most outrageous, laugh-out-loud edge you can hit** while keeping it a song a music model will actually sing. Adults-only, profane when it lands, and proud of it. The humor comes from **absurd exaggeration, tall tales, double-entendre, self-owning disaster, cartoonish bravado, and the genre's own clichés turned inside out** — dirty because it's *clever*, not because it's cruel. The brief's **premise menu** sets this genre's flavour of joke; this section sets the rules every comedy type shares.
+
+- **The renderability ceiling — filthy-but-deniable:** go as hard as you want on profanity and innuendo, but stay **explicit by *implication*, not by literal pornographic description.** A line the listener *knows* is filthy but that never states the act outright is both funnier and far more likely to render cleanly; flat clinical or pornographic description tends to get filtered or refused mid-render. Double-entendre > graphic. Make them fill in the blank.
+- **The three guardrails that keep it funny AND renderable — do not cross:** (1) punch **up** or at the narrator, **never down** at a protected group — no slurs, no hateful or demeaning content toward any race, religion, gender, orientation, or nationality; (2) **no minors, ever** — no sexualizing, referencing, or hinting at anyone underage in any sexual or suggestive way, period; (3) **no real living people named or defamed** (also a hard ElevenLabs input ban) and no glorifying real-world violence. Everything else is fair game.
+- **Played straight, musically.** The track must sound like a real, well-produced record in its genre — the joke is in the words. Always add "novelty kazoo", "comedy sound effects", "cartoon sound effects", and "slide whistle" to `negative_styles`.
+- **The title IS the joke.** It sits in the chorus, and the chorus is the biggest laugh in the song.
+- **Escalate.** Each verse tops the last; the bridge is the comedic turn (a spoken aside, a breakdown, or a twist that recontextualizes everything) right before the final, biggest chorus.
+- The test: someone hearing it cold **laughs out loud by the first chorus**, it reads as an obvious over-the-top joke, and the dirtiest lines are the ones everyone *understood* without them being spelled out.
+
+**Comedy carve-outs to the craft skills** (on top of the general ones below):
+
+- **The rhyme *is* the joke.** `songwriting-craft` says never force a rhyme — here, a groan-worthy reach that lands the punchline is the genre working as intended. The rule it does not relax: never bend grammar or invent a word for a rhyme that isn't funny.
+- **Give the joke room to land.** Comedy needs the setup line and the payoff line to sit in the same breath. If a chunk's syllable budget would rush a punchline, cut a *different* line — never compress the payoff.

@@ -13,7 +13,9 @@
 | `core/digest/` | The research-digest toolkit: feed and GitHub Trending fetchers, digest parser, bookmark/OPML writers, shared rules |
 | `core/run-contract.md` | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
 | `core/engines/` | Text engines behind one interface (`claude` today) |
-| `core/images/` | Cover rendering: Gemini and OpenAI, tried in order |
+| `core/images/` | Image rendering (Gemini, then OpenAI) and `process.py`: crops, ICO, SVG → PNG |
+| `core/audio/` | Speech (Gemini or ElevenLabs, preset voices only) and ElevenLabs music |
+| `core/video.py` | Optional ffmpeg slideshow for vertical shorts |
 | `core/artifacts.py` | Output layout, `artifact.json`, rotation and do-not-repeat helpers |
 | `.claude/skills/` | Skills the recipes load, copied into each run's staging folder |
 | `cronsole/` | Templates that aren't recipes (the clone updater) |
@@ -37,12 +39,16 @@
    (subfolder paths like `extension/manifest.json` are allowed; `optional_files` are kept when
    present); any other top-level entry is deleted. The recipe's `validate()` hook runs here (the game
    recipe syntax-checks its script); it may take the run context as a third argument.
-6. **Render the cover** from `cover_prompt`, with the no-text constraint appended, then run the
-   recipe's `after_cover()` hook, which can add files that need the cover (the Cook's Card).
+6. **Render media.** Any `images` the agent listed (for recipes with an `ImageSpec`), then the cover
+   from `cover_prompt`, each with the no-text constraint (or lettering-only for `text_ok`). Then the
+   recipe's `after_cover()` hook adds files that need them: the Cook's Card, wallpaper crops, icon
+   PNG/ICO, rendered speech and music, the short video.
 7. **Publish.** Move the folder to `<collection>/<YYYY-MM>/<date>_<slug>/`, write `artifact.json`,
    run the `finish()` hook, append to `runs.jsonl`.
 
-Any failure before step 7 publishes nothing.
+Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires` (and any
+`ImageSpec`) is checked against the keys that are set, so a missing key fails before the agent runs;
+`prepare()` can raise `NothingToDo` to skip the run with exit 0.
 
 ## `artifact.json` (schema `ai-automation-recipes/artifact@1`)
 

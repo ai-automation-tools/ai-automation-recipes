@@ -45,6 +45,10 @@ class RecipeError(RuntimeError):
     """The run produced something unusable; nothing was published."""
 
 
+class NothingToDo(Exception):
+    """Raised by prepare() when there is no work this run (a finished series). Exits 0."""
+
+
 @dataclass
 class RunContext:
     output_dir: Path
@@ -65,7 +69,8 @@ class ImageSpec:
     max: int = 12
     aspects: tuple[str, ...] = ("16:9",)
     folder: str = "images"  # "" puts them beside the main file
-    text_ok: bool = False  # True skips the no-text constraint (memes)
+    text_ok: bool = False  # True swaps the no-text constraint for lettering-only (memes, comics)
+    size: str | None = None  # resolution tier where supported: "1K", "2K", "4K"
 
 
 @dataclass
@@ -202,7 +207,14 @@ def run(recipe: Recipe, argv: list[str] | None = None) -> int:
         "OUTPUT_FILES": "\n".join(f"- `{f}`" for f in recipe.files),
         "SKILLS": "\n".join(f"- `{s}`" for s in recipe.skills) or "- (none)",
     }
-    tokens.update(recipe.prepare(ctx) if recipe.prepare else {})
+    try:
+        tokens.update(recipe.prepare(ctx) if recipe.prepare else {})
+    except NothingToDo as exc:
+        log.info("RECIPE_SKIPPED %s: %s", recipe.name, exc)
+        return 0
+    except (RecipeError, audio.AudioError, images.ImageError) as exc:
+        log.error("RECIPE_FAILED %s: %s", recipe.name, exc)
+        return 1
     prompt = fill(recipe.prompt_path.read_text(encoding="utf-8"), tokens)
 
     if args.dry_run:
@@ -234,7 +246,9 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     stage_skills(staging, recipe.skills)
 
     result = engine.run(EngineRequest(
-        prompt=prompt, workdir=staging, tools=recipe.tools, model=args.model, timeout_s=args.timeout,
+        # prepare() may narrow the tool list for this run via ctx.state["tools"]
+        prompt=prompt, workdir=staging, tools=tuple(ctx.state.get("tools") or recipe.tools), model=args.model,
+        timeout_s=args.timeout,
     ))
     shutil.rmtree(staging / ".claude", ignore_errors=True)
 
@@ -360,7 +374,7 @@ def _render_images(recipe: Recipe, args: argparse.Namespace, staging: Path, mani
             raise RecipeError(f"images[{i}] has no prompt")
         seen.add(name)
         rel = f"{spec.folder}/{name}" if spec.folder else name
-        images.render(prompt, staging / rel, aspect, args.image_engine, text_ok=spec.text_ok)
+        images.render(prompt, staging / rel, aspect, args.image_engine, text_ok=spec.text_ok, size=spec.size)
         out.append(rel)
     return out
 

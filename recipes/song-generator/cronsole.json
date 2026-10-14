@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-song-generator",
+  "name": "AI Recipe: Song",
+  "description": "Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "claude-code",
+    "content",
+    "recipe",
+    "music",
+    "songs",
+    "elevenlabs"
+  ],
+  "icon": "Music",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 18 * * 3"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/song-generator/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}} --type {{songType}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "opus",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    },
+    {
+      "key": "imageEngine",
+      "label": "Cover image engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "openai",
+        "none"
+      ],
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+    },
+    {
+      "key": "songType",
+      "label": "Song type",
+      "type": "select",
+      "default": "weekly",
+      "required": true,
+      "options": [
+        "blues",
+        "blues-comedy",
+        "country",
+        "country-classic",
+        "edm",
+        "edm-comedy",
+        "folk",
+        "folk-comedy",
+        "hard-rock",
+        "hard-rock-comedy",
+        "hip-hop",
+        "indie",
+        "indie-comedy",
+        "jazz",
+        "jazz-comedy",
+        "latin",
+        "latin-comedy",
+        "metal",
+        "metal-comedy",
+        "pop",
+        "pop-comedy",
+        "psychedelic",
+        "psychedelic-comedy",
+        "punk",
+        "punk-comedy",
+        "rap",
+        "reggae",
+        "reggae-comedy",
+        "rnb",
+        "rnb-comedy",
+        "rock",
+        "rock-comedy",
+        "ska",
+        "ska-comedy",
+        "synthwave",
+        "synthwave-comedy",
+        "weekly"
+      ],
+      "help": "Which creative brief to write against. weekly researches the week's news; the -comedy types are adults-only humour."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 2400,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}
