@@ -16,6 +16,11 @@ The repo stays private until the publish phase below is done and the maintainer 
 work moves out of this file and into the [changelog](CHANGELOG.md). There's no paid tier planned:
 this is the free companion to Cronsole.
 
+**Where things stand (2026-10-14).** 41 recipes in six groups, every one dry-run and faked-engine
+tested in CI; 13 have had a real run. Three text engines are wired (Claude live, Codex and Gemini
+built but unrun). The private content fleet is fully ported; what stays out is listed at the bottom.
+Everything below is either a live run that hasn't happened yet or the publish checklist.
+
 ## 🧪 Live-test status
 
 Every recipe passes dry runs, unit tests and faked-engine runs in CI. This table tracks **real**
@@ -80,6 +85,17 @@ made.
       retired free Code Assist tier, so it will be `GEMINI_API_KEY`
 - [ ] Decide whether the Cronsole templates expose `engine` as a parameter once Codex and Gemini
       have each shipped a recipe. Until then every template runs Claude
+- [ ] A live `news-digest` run on one topic, then one per topic over three weeks of the Mon/Wed/Fri
+      default schedule; watch whether the 16-per-source cap keeps the loud feeds (Nature, Podnews,
+      Deadline) from owning a week, and whether five sections is the right number for every topic
+- [ ] A live `model-benchmark-watch` run, then a second so the previous-edition handover is seen
+      working (the second should lead with movement, not restate the table)
+- [ ] A live `viral-recipe` run: does Claude find something genuinely current, and does the
+      safety gate catch the kind of shortcut viral food carries
+- [ ] New automations that aren't ports (the private fleet is fully ported, see *Not ported*).
+      Candidates the current core already supports: a release-notes digest that watches a list of
+      GitHub repos the user names, a weekly quiz built from the news digests, a "year in review"
+      that reads a collection's artifacts and writes a retrospective
 
 ## 🚦 Launch-ready
 
@@ -89,6 +105,9 @@ made.
 - [ ] One full pack scheduled through Cronsole for a week with no manual fixes
 - [ ] Re-run `check_public.py --history` the day before the flip (clean on 2026-10-14, 604 blobs;
       CI runs it on every push)
+- [ ] Re-probe every `news-digest` feed the week before the flip (101 of 102 fetched and parsed on
+      2026-10-14 after the fetcher learned gzip, BOMs, control bytes and bare ampersands; three
+      publishers that 403 non-browsers were swapped out)
 
 ## 📣 Publish & promote
 

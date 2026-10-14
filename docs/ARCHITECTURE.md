@@ -15,7 +15,7 @@
 
 | Path | Holds |
 |:---|:---|
-| `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md` |
+| `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md`, plus any data a user would edit (`themes.md`, `topics.json`) |
 | `core/runner.py` | The run loop every recipe shares |
 | `core/web.py` | Checks for HTML/JS output: references, `node --check`, Manifest V3, JSON, sources CSV, and a headless-browser smoke test |
 | `core/food/` | The recipe-validator safety gate, allergen fix-ups and the Cook's Card |

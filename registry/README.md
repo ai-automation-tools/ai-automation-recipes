@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/templates-40-8B5CF6?style=for-the-badge" alt="40 templates">
+  <img src="https://img.shields.io/badge/templates-43-8B5CF6?style=for-the-badge" alt="43 templates">
   <img src="https://img.shields.io/badge/schema-Registry_v1-0078D4?style=for-the-badge" alt="Registry v1">
   <a href="../README.md"><img src="https://img.shields.io/badge/↩-repository_root-6B7280?style=for-the-badge" alt="Repository root"></a>
 </p>

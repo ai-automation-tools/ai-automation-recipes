@@ -47,7 +47,10 @@ through all nine every three weeks.
 
 Add a topic by adding an entry; nothing else changes. Feed lists are public RSS and Atom; a dead feed
 is skipped and reported in the prompt, never fatal. A window with no items at all fails the run
-before the agent starts.
+before the agent starts. Every feed was fetched on 2026-10-14; three publishers that block
+non-browser clients outright (CISA's advisories, Fierce Biotech, StreamTV Insider) were swapped for
+Krebs on Security, Endpoints News and Next TV. CISA's exploited-vulnerabilities signal still arrives
+through the security newsrooms and the vendor blogs.
 
 ## What the runner checks
 

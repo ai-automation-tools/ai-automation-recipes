@@ -21,6 +21,7 @@ smoke test, which drives a local headless browser and skips itself when none is 
 | File | What it covers |
 |:---|:---|
 | [**test_core.py**](test_core.py) | The run loop: JSON extraction, prompt filling, rotation, staging, hooks, all-or-nothing publishing |
+| [**test_new_recipes.py**](test_new_recipes.py) | Viral Recipe, Model Benchmark Watch and News Digest: their checks and hooks, and News Digest end to end with the feeds faked |
 | [**test_engines.py**](test_engines.py) | The three text engines: command shape, Claude-alias handling, and parsing of Codex's JSONL and Gemini's JSON, from recorded output |
 | [**test_media.py**](test_media.py) | Multi-image runs, key preflight, crops, ICO, SVG, speech, music, video length |
 | [**test_shared.py**](test_shared.py) | Web checks, the food safety gate, the Cook's Card, digests, the webhook, the browser smoke test |

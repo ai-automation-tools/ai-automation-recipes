@@ -144,7 +144,7 @@
       "https://www.billboard.com/feed/",
       "https://www.tubefilter.com/feed/",
       "https://podnews.net/rss",
-      "https://www.streamtvinsider.com/rss/xml",
+      "https://www.nexttv.com/feeds/all",
       "https://www.socialmediatoday.com/feeds/news/"
     ]
   },
@@ -170,7 +170,7 @@
       "https://www.tomshardware.com/feeds/all",
       "https://www.therobotreport.com/feed/",
       "https://www.statnews.com/feed/",
-      "https://www.fiercebiotech.com/rss/xml",
+      "https://endpts.com/feed/",
       "https://medcitynews.com/feed/",
       "https://www.finextra.com/rss/headlines.aspx",
       "https://www.pymnts.com/feed/"
@@ -189,7 +189,7 @@
       "https://www.securityweek.com/feed/",
       "https://therecord.media/feed",
       "https://www.darkreading.com/rss.xml",
-      "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "https://krebsonsecurity.com/feed/",
       "https://api.msrc.microsoft.com/update-guide/rss",
       "https://security.googleblog.com/feeds/posts/default",
       "https://blog.talosintelligence.com/rss/",

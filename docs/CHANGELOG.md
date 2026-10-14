@@ -32,6 +32,23 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - `tests/test_new_recipes.py`: the three recipes' checks and hooks, and news-digest end to end with
   the feeds faked.
 
+**Fixed**
+- The feed fetcher now handles what real feeds ship: gzip bodies sent regardless of the request,
+  a newline or BOM before the XML declaration, stray control bytes, and a bare `&` in content.
+  All 102 `news-digest` feeds were fetched; 8 failed before this, 1 after (PYMNTS, fixed by the
+  ampersand rule). Three publishers that refuse non-browser clients (CISA, Fierce Biotech, StreamTV
+  Insider) were swapped for Krebs on Security, Endpoints News and Next TV.
+- The fetcher's User-Agent is browser-shaped with the project named at the end; VentureBeat
+  rate-limited the old "compatible; bot" shape.
+
+**Docs**
+- `CONTRIBUTING.md`: what's welcome, the pre-PR commands, and that the house rules apply to people
+  too. *(roadmap: Launch-ready)*
+- Every page re-read against the repo: counts (41 recipes, 43 templates, 11 digests), the three
+  engines and their limits in the README, CLAUDE.md and the recipe guide, recipe-local data files
+  and `ImageSpec(optional=True)` in the guide, and a *Where things stand* note plus the open
+  live-run and launch items in the roadmap.
+
 ## 0.7.0 — 2026-10-14
 
 **Added**

@@ -17,7 +17,13 @@ Public recipes for scheduled Claude Code automations, importable into Cronsole. 
 - **Docs follow the repo-docs-builder layout:** every folder has a README index with a header,
   catalog table and footer nav. A new recipe also goes into `recipes/README.md` and `CATEGORY_PACKS`.
 - **Agents get the narrowest tool list that works.** No `Bash` in a recipe without a reason in its
-  README.
+  README. Tool names are Claude Code's; Codex and Gemini treat the list as advisory.
+- **Three engines, one contract.** `core/engines/` has `claude` (default), `codex` and `gemini`. A
+  recipe never knows which it got; anything engine-specific goes in the engine module. Codex and
+  Gemini have had no live run; the templates expose Claude only until they do.
+- **Recipe-local data lives beside the four files** (`themes.md`, `topics.json`) and is read by
+  `run.py`, never pasted into a prompt. `ImageSpec(optional=True)` is for images that are a bonus:
+  the run publishes text-only without an image key instead of failing.
 - Python 3.10+, stdlib `unittest` (`python -m unittest discover -s tests`), `logging` not `print`
   (the dry-run prompt dump is the one exception).
 - Before a PR: dry-run the recipe you touched, run the tests, `build_registry.py --check`,

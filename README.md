@@ -64,8 +64,8 @@ pitches, playable games, short stories, songs, research digests.
 |:---|:---|:---|
 | [**🧩 Apps & Games**](recipes/README.md#-apps--games) | 8 | A Manifest V3 extension, a playable HTML game, a 3D-print spec |
 | [**📝 Writing**](recipes/README.md#-writing) | 6 | Short stories, a serialized novella, alternate histories |
-| [**🍲 Food & Maps**](recipes/README.md#-food--maps) | 3 | Safety-checked recipes with a Cook's Card, interactive maps |
-| [**🔎 Research Digests**](recipes/README.md#-research-digests) | 9 | Agent tooling, trending repos, security and finance tools |
+| [**🍲 Food & Maps**](recipes/README.md#-food--maps) | 4 | Safety-checked recipes with a Cook's Card, this week's viral dish, interactive maps |
+| [**🔎 Research Digests**](recipes/README.md#-research-digests) | 11 | Agent tooling, trending repos, a model benchmark watch, a nine-topic news digest |
 | [**🎨 Images**](recipes/README.md#-images) | 8 | Comics, posters, 4K wallpapers, SVG icon packs |
 | [**🎧 Audio**](recipes/README.md#-audio) | 4 | Songs, a two-step debate podcast, narrated shorts |
 
@@ -74,7 +74,9 @@ When a recipe runs is your call. Templates ship with a default schedule you chan
 ## 🚀 Quick start
 
 You need Python 3.10+ and [Claude Code](https://docs.claude.com/claude-code) signed in, with either a
-Claude subscription or an `ANTHROPIC_API_KEY`.
+Claude subscription or an `ANTHROPIC_API_KEY`. The Codex CLI and the Gemini CLI also work as the
+agent (`--engine codex`, `--engine gemini`); both are wired and unit-tested but have not written a
+real recipe yet, so Claude is the default and the only engine the Cronsole templates expose.
 
 ```bash
 git clone https://github.com/ai-automation-tools/ai-automation-recipes
@@ -166,7 +168,8 @@ run.py ─▶ core/runner.py ─▶ claude --print, inside a staging folder
 ```
 
 - The agent can only write to its staging folder: Claude runs under `--permission-mode dontAsk`
-  with an explicit tool allowlist, and anything else is denied.
+  with an explicit tool allowlist, and anything else is denied. Codex runs in its `workspace-write`
+  sandbox; Gemini relies on the contract in the prompt. The recipe never knows which engine it got.
 - The agent never holds a media key. It describes the cover or writes the composition plan, and the
   runner does the rendering.
 - Skills ship in the repo and are copied into each run, so a run behaves the same on every machine.
