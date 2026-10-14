@@ -575,6 +575,56 @@
       "sha256": "45327e79f1d5d866d59d082b35f55309cbbf9dbca785bb76b01ae36e801a7d2a"
     },
     {
+      "id": "recipe-model-benchmark-watch",
+      "name": "AI Recipe: Model Benchmark Watch",
+      "description": "Claude researches the week's AI model releases, commercial and open-weight, and writes a briefing with a sourced head-to-head benchmark table of the current frontier, leading with what changed since the previous edition. Every number traces to a cited source.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "research",
+        "models",
+        "benchmarks"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-model-benchmark-watch.json",
+      "sha256": "77bdf56b55dfa5d0d87a9eecc41a1c7dc59e6a864c5e3471c0092c5f8e0b7331"
+    },
+    {
+      "id": "recipe-news-digest",
+      "name": "AI Recipe: News Digest",
+      "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "news",
+        "rss",
+        "briefing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-news-digest.json",
+      "sha256": "4a18d41b8c976c76eee7bb5aa25ef214c8765c2ed66bde022784a78b92673e7c"
+    },
+    {
       "id": "recipe-oss-spotlight",
       "name": "AI Recipe: Open-Source Spotlight",
       "description": "Pulls seven open-source news feeds, then Claude writes a six-section editorial read on the period — releases, community news, hidden gems — graded by significance.",
@@ -944,6 +994,31 @@
       "sha256": "238d37e3f71e2815c5e82edf79f1e84d11fce1500dbb1ed766a19bf3f855c90a"
     },
     {
+      "id": "recipe-viral-recipe",
+      "name": "AI Recipe: Viral Recipe",
+      "description": "Claude finds the recipe currently blowing up on TikTok, Instagram, YouTube, Reddit or Facebook, recreates it as a cookable recipe that credits the originating creator and explains why it went viral, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "food",
+        "cooking",
+        "trends"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-viral-recipe.json",
+      "sha256": "eeabf5b31c8ba1f6566f2da514b5f51057717400d858c3fe71d4bc9b05c8be0e"
+    },
+    {
       "id": "recipe-voiceover-script-generator",
       "name": "AI Recipe: Voiceover Script",
       "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills.",
@@ -1023,6 +1098,8 @@
         "recipe-image-collections",
         "recipe-image-prompt-packs",
         "recipe-mobile-game",
+        "recipe-model-benchmark-watch",
+        "recipe-news-digest",
         "recipe-oss-spotlight",
         "recipe-pc-game-concept",
         "recipe-podcast-episode",
@@ -1038,11 +1115,12 @@
         "recipe-top-10-github-repos",
         "recipe-trending-movers",
         "recipe-viewer-rebuild",
+        "recipe-viral-recipe",
         "recipe-voiceover-script-generator",
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "33fc29a5c939ed1294a1204200ed4b34d9a29ba5059a097ee18fc92c4f73a11a"
+      "sha256": "4cdd22fcb391f98beca9421d7a82fd4b82a924f205d47d727988ddb32286911f"
     },
     {
       "id": "ai-recipes-apps-games",
@@ -1083,26 +1161,29 @@
     {
       "id": "ai-recipes-food-maps",
       "name": "AI Recipes: Food & Maps",
-      "description": "Safety-checked recipes with a printable Cook's Card, and researched interactive maps.",
+      "description": "Safety-checked recipes with a printable Cook's Card, a viral-recipe recreator, and researched interactive maps.",
       "templateIds": [
         "recipe-ai-map",
         "recipe-family-recipe",
         "recipe-recipes-update",
         "recipe-regional-recipe",
-        "recipe-viewer-rebuild"
+        "recipe-viewer-rebuild",
+        "recipe-viral-recipe"
       ],
       "path": "packs/ai-recipes-food-maps.json",
-      "sha256": "b8c37dbb084b84387e25aa6982c57bbecff52ead9680afcb204d61a057d83338"
+      "sha256": "c5cfc15a41f3d70542af5dbbb578c61a4cf5a96ecb82cc80073e1eda4c5278cb"
     },
     {
       "id": "ai-recipes-digests",
       "name": "AI Recipes: Research Digests",
-      "description": "Monthly researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
+      "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing and a nine-topic news digest written from RSS feeds.",
       "templateIds": [
         "recipe-agent-toolkit",
         "recipe-ai-stack-radar",
         "recipe-cool-websites",
         "recipe-finance-toolkit",
+        "recipe-model-benchmark-watch",
+        "recipe-news-digest",
         "recipe-oss-spotlight",
         "recipe-recipes-update",
         "recipe-security-toolkit",
@@ -1112,7 +1193,7 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-digests.json",
-      "sha256": "9f624c2f8631faa20a9c6a4e8f944f3b60f36a6a8a9031dc8b1198a18207c677"
+      "sha256": "723931955c200954689a87422e476775fbbfb6c828bc2475bff08a7a4885f02b"
     },
     {
       "id": "ai-recipes-images",

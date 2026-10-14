@@ -48,13 +48,15 @@ CATEGORY_PACKS = [
      ["short-story", "serialized-novella", "alternate-history", "agent-persona-original",
       "content-idea-gen", "funny-ai-content"]),
     ("ai-recipes-food-maps", "AI Recipes: Food & Maps",
-     "Safety-checked recipes with a printable Cook's Card, and researched interactive maps.",
-     ["family-recipe", "regional-recipe", "ai-map"]),
+     "Safety-checked recipes with a printable Cook's Card, a viral-recipe recreator, and researched interactive maps.",
+     ["family-recipe", "regional-recipe", "viral-recipe", "ai-map"]),
     ("ai-recipes-digests", "AI Recipes: Research Digests",
-     "Monthly researched roundups — AI tools, agent tooling, open source, security and finance "
-     "tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
+     "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, "
+     "trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI "
+     "model benchmark briefing and a nine-topic news digest written from RSS feeds.",
      ["agent-toolkit", "ai-stack-radar", "oss-spotlight", "cool-websites", "top-10-github-repos",
-      "trending-movers", "signal-sources", "security-toolkit", "finance-toolkit"]),
+      "trending-movers", "signal-sources", "security-toolkit", "finance-toolkit",
+      "model-benchmark-watch", "news-digest"]),
     ("ai-recipes-images", "AI Recipes: Images",
      "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon "
      "packs and long-running yearly image collections.",

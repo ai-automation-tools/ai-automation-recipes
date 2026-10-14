@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.7.0-2ea44f?style=for-the-badge" alt="Version 0.7.0">
+  <img src="https://img.shields.io/badge/version-0.8.0-2ea44f?style=for-the-badge" alt="Version 0.8.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,24 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.8.0 — 2026-10-14
+
+**Added**
+- Three recipes, 41 in all. `viral-recipe` (Food & Maps): the dish trending on TikTok, Instagram,
+  YouTube, Reddit or Facebook, recreated under the same safety gate and Cook's Card as the other
+  food recipes, with the originating post in the frontmatter and a *Why This Went Viral* section.
+  `model-benchmark-watch` (Research Digests): the week's model releases and a sourced head-to-head
+  table of the current frontier, handed the previous edition so it leads with what moved; the
+  runner rejects a hedged number or an under-sourced table. `news-digest` (Research Digests): a
+  briefing on one of nine topics written from that topic's own RSS feeds, which the runner fetches,
+  windows and caps per source; topics, feeds, sections and palettes live in `topics.json`.
+- The private fleet's ten general-interest newsletters are now covered: nine as `news-digest`
+  topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology,
+  cybersecurity) and the model watch as its own recipe. The roadmap's *Not ported* table says what
+  stays out and why.
+- `tests/test_new_recipes.py`: the three recipes' checks and hooks, and news-digest end to end with
+  the feeds faked.
 
 ## 0.7.0 — 2026-10-14
 

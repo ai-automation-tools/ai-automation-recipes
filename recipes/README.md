@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/recipes-38-8B5CF6?style=for-the-badge" alt="38 recipes">
+  <img src="https://img.shields.io/badge/recipes-41-8B5CF6?style=for-the-badge" alt="41 recipes">
   <img src="https://img.shields.io/badge/live--tested-13-F59E0B?style=for-the-badge" alt="13 live-tested">
   <a href="../README.md"><img src="https://img.shields.io/badge/↩-repository_root-6B7280?style=for-the-badge" alt="Repository root"></a>
 </p>
@@ -53,11 +53,13 @@ on import. Which recipes have had a real run so far is tracked in the
 |:---|:---|:---|
 | [**🥘 Family Recipe**](family-recipe/README.md) | A cookable recipe with full allergen labels and a printable Cook's Card | Nothing |
 | [**🌍 Regional Recipe**](regional-recipe/README.md) | One dish for the region with the fewest recipes so far | Nothing |
+| [**🔥 Viral Recipe**](viral-recipe/README.md) | The dish trending on social media this week, made cookable and credited to its creator | Nothing |
 | [**🗺️ AI Map**](ai-map/README.md) | A researched interactive Leaflet map of 8–20 real places | Nothing |
 
 ## 🔎 Research Digests
 
-Each digest writes browser bookmarks and never repeats an entry from an earlier issue.
+The nine link-list digests write browser bookmarks and never repeat an entry from an earlier issue.
+The last two are briefings rather than lists: one researched on the web, one written from feeds.
 
 | Recipe | Makes | Also needs |
 |:---|:---|:---|
@@ -70,6 +72,8 @@ Each digest writes browser bookmarks and never repeats an entry from an earlier 
 | [**📰 Signal Sources**](signal-sources/README.md) | A growing reading list of blogs and newsletters, with an OPML file | Nothing |
 | [**🛡️ Security Toolkit**](security-toolkit/README.md) | Security tools across identity, detection, AppSec and cloud | Nothing |
 | [**💹 Finance Toolkit**](finance-toolkit/README.md) | Market-data APIs, backtesting engines, broker SDKs and ledgers | Nothing |
+| [**📏 Model Benchmark Watch**](model-benchmark-watch/README.md) | The week's AI model releases and a sourced head-to-head benchmark table (no bookmarks) | Nothing |
+| [**📰 News Digest**](news-digest/README.md) | A briefing on one of nine topics, written from that topic's RSS feeds (no bookmarks) | Nothing |
 
 ## 🎨 Images
 

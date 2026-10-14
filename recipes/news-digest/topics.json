@@ -1,0 +1,200 @@
+{
+  "ai": {
+    "name": "AI News",
+    "emoji": "🤖",
+    "focus": "What shipped, what was announced and what changed in AI this week: models, agent tooling, the Model Context Protocol, developer tools and the companies behind them.",
+    "sections": ["Models & Labs", "Agents, MCP & Tooling", "Developer Tools & Releases", "Business & Funding", "Research & Policy"],
+    "palette": "deep indigo, electric violet, warm amber, off-white",
+    "motif": "a constellation of nodes and signal arcs",
+    "feeds": [
+      "https://openai.com/blog/rss.xml",
+      "https://deepmind.google/blog/rss.xml",
+      "https://huggingface.co/blog/feed.xml",
+      "https://blogs.nvidia.com/feed/",
+      "https://news.microsoft.com/source/topics/ai/feed/",
+      "https://the-decoder.com/feed/",
+      "https://venturebeat.com/category/ai/feed/",
+      "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "https://simonwillison.net/atom/everything/",
+      "https://www.latent.space/feed",
+      "https://github.blog/changelog/feed/",
+      "https://github.com/anthropics/claude-code/releases.atom",
+      "https://github.com/modelcontextprotocol/modelcontextprotocol/releases.atom",
+      "https://github.com/modelcontextprotocol/servers/releases.atom",
+      "https://github.com/ollama/ollama/releases.atom",
+      "https://github.com/vercel/ai/releases.atom",
+      "https://github.com/langchain-ai/langchain/releases.atom"
+    ]
+  },
+  "science-space": {
+    "name": "Science & Space",
+    "emoji": "🔭",
+    "focus": "The week's research results, missions and discoveries across the sciences and spaceflight, with the gap between a press release and a peer-reviewed result kept visible.",
+    "sections": ["Space & Missions", "Physics & Astronomy", "Life Sciences & Medicine", "Earth & Climate", "Methods & Instruments"],
+    "palette": "midnight blue, pale gold, coral, chalk white",
+    "motif": "an orbital diagram of thin rings and a lone bright point",
+    "feeds": [
+      "https://www.nasa.gov/rss/dyn/breaking_news.rss",
+      "https://spacenews.com/feed/",
+      "https://www.nature.com/nature.rss",
+      "https://www.science.org/rss/news_current.xml",
+      "https://www.quantamagazine.org/feed/",
+      "https://feeds.arstechnica.com/arstechnica/science",
+      "https://www.newscientist.com/feed/home/"
+    ]
+  },
+  "world": {
+    "name": "World & Geopolitics",
+    "emoji": "🌍",
+    "focus": "The week's international news read for consequence: conflicts, elections, diplomacy, sanctions, migration and the institutions that respond, from several newsrooms at once.",
+    "sections": ["Conflict & Security", "Elections & Politics", "Diplomacy & Alliances", "Economy & Sanctions", "Humanitarian & Climate"],
+    "palette": "slate blue, oxblood, sand, ivory",
+    "motif": "a globe of latitude lines with a few routes drawn across it",
+    "feeds": [
+      "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "https://www.theguardian.com/world/rss",
+      "https://www.aljazeera.com/xml/rss/all.xml",
+      "https://rss.dw.com/rdf/rss-en-world",
+      "https://www.france24.com/en/rss",
+      "https://feeds.npr.org/1004/rss.xml",
+      "https://foreignpolicy.com/feed/",
+      "https://warontherocks.com/feed/",
+      "https://news.un.org/feed/subscribe/en/news/all/rss.xml",
+      "https://www.politico.eu/feed/"
+    ]
+  },
+  "tech-policy": {
+    "name": "Tech Policy & Regulation",
+    "emoji": "⚖️",
+    "focus": "What governments, courts and regulators did to technology this week: AI rules, antitrust, privacy, platform liability, surveillance and the cases working through the courts.",
+    "sections": ["AI Regulation", "Antitrust & Competition", "Privacy & Surveillance", "Platforms & Speech", "Courts & Enforcement"],
+    "palette": "navy, brass, stone grey, parchment",
+    "motif": "a balance of thin lines over a lattice",
+    "feeds": [
+      "https://feeds.arstechnica.com/arstechnica/tech-policy",
+      "https://thehill.com/policy/technology/feed/",
+      "https://www.theverge.com/rss/index.xml",
+      "https://techcrunch.com/feed/",
+      "https://www.wired.com/feed/rss",
+      "https://www.eff.org/rss/updates.xml",
+      "https://www.techdirt.com/feed/",
+      "https://www.technologyreview.com/feed/",
+      "https://therecord.media/feed",
+      "https://www.politico.eu/feed/"
+    ]
+  },
+  "energy": {
+    "name": "Energy",
+    "emoji": "⚡",
+    "focus": "The energy industry this week across oil and gas, power and utilities, renewables and storage, with prices, projects and policy kept apart.",
+    "sections": ["Oil & Gas", "Power & Grid", "Renewables & Storage", "Policy & Markets", "Transport & Electrification"],
+    "palette": "charcoal, amber, teal, bone white",
+    "motif": "pylons and a sun disc reduced to geometric lines",
+    "feeds": [
+      "https://oilprice.com/rss/main",
+      "https://www.worldoil.com/rss?feed=news",
+      "https://www.rigzone.com/news/rss/rigzone_latest.aspx",
+      "https://www.powermag.com/feed/",
+      "https://www.utilitydive.com/feeds/news/",
+      "https://www.eia.gov/rss/todayinenergy.xml",
+      "https://www.canarymedia.com/articles.rss",
+      "https://electrek.co/feed/",
+      "https://cleantechnica.com/feed/",
+      "https://www.pv-magazine.com/feed/"
+    ]
+  },
+  "gaming": {
+    "name": "Gaming Industry",
+    "emoji": "🎮",
+    "focus": "The business of games this week: studios, platforms, deals, layoffs, engines, releases that matter commercially, and what developers are shipping with.",
+    "sections": ["Studios & Deals", "Platforms & Hardware", "Releases & Performance", "Development & Engines", "Policy & Labor"],
+    "palette": "violet, neon green, black, pale lilac",
+    "motif": "stacked isometric blocks with one lit edge",
+    "feeds": [
+      "https://www.gamesindustry.biz/feed",
+      "https://www.gamedeveloper.com/rss.xml",
+      "https://www.videogameschronicle.com/feed/",
+      "https://www.eurogamer.net/feed",
+      "https://www.rockpapershotgun.com/feed",
+      "https://www.pcgamer.com/rss/",
+      "https://www.gamespot.com/feeds/news/",
+      "https://www.ign.com/rss/articles/feed?tags=games",
+      "https://www.nintendolife.com/feeds/latest",
+      "https://www.gematsu.com/feed"
+    ]
+  },
+  "media": {
+    "name": "Media & Creator Economy",
+    "emoji": "🎬",
+    "focus": "The business of media this week across studios, streaming, advertising, journalism, music, podcasts and creator platforms; deals and numbers, not reviews.",
+    "sections": ["Studios & Streaming", "Advertising & Platforms", "Journalism", "Music & Audio", "Creators"],
+    "palette": "burnt orange, deep plum, cream, charcoal",
+    "motif": "overlapping film frames and sound-wave bars",
+    "feeds": [
+      "https://variety.com/feed/",
+      "https://www.hollywoodreporter.com/feed/",
+      "https://deadline.com/feed/",
+      "https://www.thewrap.com/feed/",
+      "https://digiday.com/feed/",
+      "https://www.adweek.com/feed/",
+      "https://www.niemanlab.org/feed/",
+      "https://www.poynter.org/feed/",
+      "https://www.musicbusinessworldwide.com/feed/",
+      "https://www.billboard.com/feed/",
+      "https://www.tubefilter.com/feed/",
+      "https://podnews.net/rss",
+      "https://www.streamtvinsider.com/rss/xml",
+      "https://www.socialmediatoday.com/feeds/news/"
+    ]
+  },
+  "emerging-tech": {
+    "name": "Emerging Technology",
+    "emoji": "🔬",
+    "focus": "Technology advancement across every field this week, computing, biotech, energy, transport, materials and robotics, sorted by how close each thing is to something you can use.",
+    "sections": ["Research Results", "In Development", "Pilots & Trials", "Now Shipping", "Coming to the Public"],
+    "palette": "hot pink, graphite, mint, white",
+    "motif": "a ladder of ascending planes with light moving up it",
+    "feeds": [
+      "https://www.technologyreview.com/feed/",
+      "https://spectrum.ieee.org/feeds/feed.rss",
+      "https://feeds.arstechnica.com/arstechnica/index",
+      "https://techcrunch.com/feed/",
+      "https://www.theverge.com/rss/index.xml",
+      "https://www.newscientist.com/subject/technology/feed/",
+      "https://www.sciencedaily.com/rss/top/technology.xml",
+      "https://phys.org/rss-feed/technology-news/",
+      "https://www.nature.com/nature.rss",
+      "https://newatlas.com/index.rss",
+      "https://interestingengineering.com/rss",
+      "https://www.tomshardware.com/feeds/all",
+      "https://www.therobotreport.com/feed/",
+      "https://www.statnews.com/feed/",
+      "https://www.fiercebiotech.com/rss/xml",
+      "https://medcitynews.com/feed/",
+      "https://www.finextra.com/rss/headlines.aspx",
+      "https://www.pymnts.com/feed/"
+    ]
+  },
+  "cybersecurity": {
+    "name": "Cybersecurity",
+    "emoji": "🛡️",
+    "focus": "The week in vulnerabilities and attacks: what is being exploited in the wild, which patches matter, which breaches are confirmed, and what the vendors and CISA said.",
+    "sections": ["Exploited in the Wild", "Patches That Matter", "Breaches & Incidents", "Threat Actors & Malware", "Vendor & Government Advisories"],
+    "palette": "crimson, near-black, steel grey, white",
+    "motif": "a hexagonal lattice with one broken cell",
+    "feeds": [
+      "https://www.bleepingcomputer.com/feed/",
+      "https://feeds.feedburner.com/TheHackersNews",
+      "https://www.securityweek.com/feed/",
+      "https://therecord.media/feed",
+      "https://www.darkreading.com/rss.xml",
+      "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "https://api.msrc.microsoft.com/update-guide/rss",
+      "https://security.googleblog.com/feeds/posts/default",
+      "https://blog.talosintelligence.com/rss/",
+      "https://filestore.fortinet.com/fortiguard/rss/ir.xml",
+      "https://unit42.paloaltonetworks.com/feed/"
+    ]
+  }
+}

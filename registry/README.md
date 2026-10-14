@@ -27,11 +27,11 @@
 
 | Pack | Holds |
 |:---|:---|
-| [**ai-recipes**](packs/ai-recipes.json) | All 38 recipes and both helpers |
+| [**ai-recipes**](packs/ai-recipes.json) | All 41 recipes and both helpers |
 | [**ai-recipes-apps-games**](packs/ai-recipes-apps-games.json) | The 8 apps and games recipes |
 | [**ai-recipes-writing**](packs/ai-recipes-writing.json) | The 6 writing recipes |
-| [**ai-recipes-food-maps**](packs/ai-recipes-food-maps.json) | The 3 food and map recipes |
-| [**ai-recipes-digests**](packs/ai-recipes-digests.json) | The 9 research digests |
+| [**ai-recipes-food-maps**](packs/ai-recipes-food-maps.json) | The 4 food and map recipes |
+| [**ai-recipes-digests**](packs/ai-recipes-digests.json) | The 11 research digests and briefings |
 | [**ai-recipes-images**](packs/ai-recipes-images.json) | The 8 image recipes |
 | [**ai-recipes-audio**](packs/ai-recipes-audio.json) | The 4 audio recipes |
 

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/live--tested-13_of_38-F59E0B?style=for-the-badge" alt="13 of 38 live-tested">
+  <img src="https://img.shields.io/badge/live--tested-13_of_41-F59E0B?style=for-the-badge" alt="13 of 41 live-tested">
   <img src="https://img.shields.io/badge/visibility-private-6B7280?style=for-the-badge" alt="Private">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
@@ -41,6 +41,7 @@ made.
 | [**Funny AI Content**](../recipes/funny-ai-content/README.md) | Writing | ⬜ not yet · Cronsole test task, first run Fri 2026-10-16 |
 | [**Family Recipe**](../recipes/family-recipe/README.md) | Food & Maps | ✅ Minnesota Tater Tot Hotdish |
 | [**Regional Recipe**](../recipes/regional-recipe/README.md) | Food & Maps | ⬜ not yet |
+| [**Viral Recipe**](../recipes/viral-recipe/README.md) | Food & Maps | ⬜ not yet · added 2026-10-14 |
 | [**AI Map**](../recipes/ai-map/README.md) | Food & Maps | ⬜ not yet |
 | [**Agent Toolkit**](../recipes/agent-toolkit/README.md) | Research Digests | ⬜ not yet |
 | [**AI Stack Radar**](../recipes/ai-stack-radar/README.md) | Research Digests | ⬜ not yet |
@@ -51,6 +52,8 @@ made.
 | [**Signal Sources**](../recipes/signal-sources/README.md) | Research Digests | ⬜ not yet |
 | [**Security Toolkit**](../recipes/security-toolkit/README.md) | Research Digests | ⬜ not yet |
 | [**Finance Toolkit**](../recipes/finance-toolkit/README.md) | Research Digests | ⬜ not yet |
+| [**Model Benchmark Watch**](../recipes/model-benchmark-watch/README.md) | Research Digests | ⬜ not yet · added 2026-10-14 |
+| [**News Digest**](../recipes/news-digest/README.md) | Research Digests | ⬜ not yet · added 2026-10-14; nine topics, so one live run per topic before it counts as done |
 | [**Comic**](../recipes/comics/README.md) | Images | ✅ Circular Dependency |
 | [**AI Meme**](../recipes/ai-meme-generator/README.md) | Images | ⬜ not yet |
 | [**Poster**](../recipes/poster/README.md) | Images | ⬜ not yet |
@@ -117,6 +120,8 @@ Jobs from the private fleet that stay out, and why.
 | `rock-` / `country-` / `psychedelic-` / `weekly-song-generator` | Covered by `song-generator` types |
 | `eleven-podcast`, `adhoc-eleven-podcast` | Legacy, replaced by the podcast pair |
 | `cosmic-wallpapers` | Sources images instead of generating them; needs a licensing check first |
+| `daily-pr-review`, `weekly-tool-enhancement`, `fleet-doctor`, `repo-pull` | Ops jobs on the private fleet itself, not content |
+| the finance and rewards newsletters (stock market, trade suggestions, investment insights, card bonuses, portals, transfer bonuses) | Personal finance, and the IAM briefing is employer-domain. The nine general-interest newsletters became `news-digest` topics |
 
 ---
 

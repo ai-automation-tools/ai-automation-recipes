@@ -46,5 +46,5 @@ python recipes/finance-toolkit/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../comics/README.md">Next: Comic →</a>
+  <a href="../model-benchmark-watch/README.md">Next: Model Benchmark Watch →</a>
 </p>

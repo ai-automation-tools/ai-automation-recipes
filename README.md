@@ -25,7 +25,7 @@
 </p>
 
 <p align="center">
-  <a href="recipes/README.md"><img src="https://img.shields.io/badge/recipes-38-2ea44f?style=for-the-badge" alt="38 recipes"></a>
+  <a href="recipes/README.md"><img src="https://img.shields.io/badge/recipes-41-2ea44f?style=for-the-badge" alt="41 recipes"></a>
   <img src="https://img.shields.io/badge/status-experimental-F59E0B?style=for-the-badge" alt="Status: experimental">
   <a href="docs/ROADMAP.md"><img src="https://img.shields.io/badge/plan-ROADMAP-8B5CF6?style=for-the-badge" alt="Roadmap"></a>
 </p>
@@ -49,7 +49,7 @@ pitches, playable games, short stories, songs, research digests.
 
 | Folder | What it holds |
 |:---|:---|
-| [**🍳 recipes/**](recipes/README.md) | The 38 recipes, grouped, each with its own README |
+| [**🍳 recipes/**](recipes/README.md) | The 41 recipes, grouped, each with its own README |
 | [**⚙️ core/**](core/README.md) | The shared runner: engines, images, audio, video, checks |
 | [**📚 docs/**](docs/README.md) | Architecture, the recipe guide, roadmap and changelog |
 | [**🧰 scripts/**](scripts/README.md) | Registry builder, viewer builder, the pre-publish leak scan |
@@ -179,7 +179,7 @@ run.py ─▶ core/runner.py ─▶ claude --print, inside a staging folder
   the most.
 - A song is one ElevenLabs Music generation. Podcasts and voiceovers bill per spoken line.
 - Research recipes cite real sources, but check a source before you act on it.
-- 13 of the 38 recipes have had a real run so far; the rest have only run with the engines faked.
+- 13 of the 41 recipes have had a real run so far; the rest have only run with the engines faked.
   The [roadmap](docs/ROADMAP.md#-live-test-status) tracks which.
 
 ## 📖 Documentation

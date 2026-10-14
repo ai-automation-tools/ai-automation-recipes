@@ -41,5 +41,5 @@ python recipes/regional-recipe/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../ai-map/README.md">Next: AI Map →</a>
+  <a href="../viral-recipe/README.md">Next: Viral Recipe →</a>
 </p>

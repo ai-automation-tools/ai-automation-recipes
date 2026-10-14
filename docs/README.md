@@ -35,7 +35,7 @@ changing how the recipes work or adding one of your own.
 
 | Index | What's in it |
 |:---|:---|
-| [**🍳 Recipes**](../recipes/README.md) | All 38 recipes, grouped, with what each needs |
+| [**🍳 Recipes**](../recipes/README.md) | All 41 recipes, grouped, with what each needs |
 | [**⚙️ Core**](../core/README.md) | The modules behind the run loop |
 | [**📋 Registry**](../registry/README.md) | The Cronsole packs and how to import them |
 | [**🤖 CLAUDE.md**](../CLAUDE.md) | House rules for an AI agent editing this repo |
