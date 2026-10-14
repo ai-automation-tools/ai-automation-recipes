@@ -150,7 +150,7 @@ def script_md():
 class PodcastPairTests(unittest.TestCase):
     def test_script_then_render_then_nothing(self):
         out = Path(tempfile.mkdtemp())
-        script_mod, audio_mod = load("podcast-script-generator"), load("weekly-audio-podcast")
+        script_mod, audio_mod = load("podcast-script-generator"), load("podcast-episode")
 
         def write_script(d):
             (d / "script.md").write_text(script_md(), encoding="utf-8")

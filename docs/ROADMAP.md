@@ -14,23 +14,23 @@ output has been read (or played, or listened to) by a person.
 
 | Group | Recipe | Live run | Notes |
 |:---|:---|:---|:---|
-| Apps & Games | `daily-app-card` | ✅ TapCheck | Also scheduled in Cronsole (daily, no cover) |
-| Apps & Games | `weekly-app-prototype` | ⬜ not yet |  |
-| Apps & Games | `weekly-browser-extension` | ✅ Exit Ramp |  |
-| Apps & Games | `weekly-financial-idea` | ⬜ not yet |  |
-| Apps & Games | `weekly-browser-game` | ✅ Plumb Line (played in a browser) |  |
-| Apps & Games | `weekly-mobile-game` | ⬜ not yet |  |
-| Apps & Games | `weekly-pc-game-concept` | ⬜ not yet |  |
-| Apps & Games | `weekly-3d-print-ideas` | ⬜ not yet |  |
-| Writing | `weekly-short-story` | ✅ The Blue Words |  |
+| Apps & Games | `app-idea-card` | ✅ TapCheck | Also scheduled in Cronsole (daily, no cover) |
+| Apps & Games | `app-prototype` | ⬜ not yet |  |
+| Apps & Games | `browser-extension` | ✅ Exit Ramp |  |
+| Apps & Games | `finance-app-prototype` | ⬜ not yet |  |
+| Apps & Games | `browser-game` | ✅ Plumb Line (played in a browser) |  |
+| Apps & Games | `mobile-game` | ⬜ not yet |  |
+| Apps & Games | `pc-game-concept` | ⬜ not yet |  |
+| Apps & Games | `3d-print-design` | ⬜ not yet |  |
+| Writing | `short-story` | ✅ The Blue Words |  |
 | Writing | `serialized-novella` | ✅ No Speech Detected, ch. 1 (seed run only) | Next: a second run, to prove chapter 2 picks up the bible |
 | Writing | `alternate-history` | ⬜ not yet |  |
 | Writing | `agent-persona-original` | ⬜ not yet |  |
 | Writing | `content-idea-gen` | ⬜ not yet |  |
-| Writing | `weekly-funny-ai-content` | ⬜ not yet | Scheduled in Cronsole — first real run Fri 2026-10-16 |
-| Food & Maps | `recipe-of-the-week` | ✅ Minnesota Tater Tot Hotdish |  |
-| Food & Maps | `weekly-regional-recipe` | ⬜ not yet |  |
-| Food & Maps | `weekly-ai-map` | ⬜ not yet |  |
+| Writing | `funny-ai-content` | ⬜ not yet | Scheduled in Cronsole — first real run Fri 2026-10-16 |
+| Food & Maps | `family-recipe` | ✅ Minnesota Tater Tot Hotdish |  |
+| Food & Maps | `regional-recipe` | ⬜ not yet |  |
+| Food & Maps | `ai-map` | ⬜ not yet |  |
 | Research Digests | `agent-toolkit` | ⬜ not yet |  |
 | Research Digests | `ai-stack-radar` | ⬜ not yet |  |
 | Research Digests | `oss-spotlight` | ⬜ not yet |  |
@@ -42,21 +42,21 @@ output has been read (or played, or listened to) by a person.
 | Research Digests | `finance-toolkit` | ⬜ not yet |  |
 | Images | `comics` | ✅ Circular Dependency |  |
 | Images | `ai-meme-generator` | ⬜ not yet |  |
-| Images | `daily-poster` | ⬜ not yet |  |
+| Images | `poster` | ⬜ not yet |  |
 | Images | `future-cities` | ⬜ not yet |  |
 | Images | `image-prompt-packs` | ⬜ not yet |  |
 | Images | `wallpaper-packs` | ⬜ not yet | Heaviest: three 4K renders per run |
 | Images | `icon-packs` | ✅ Browser Actions (re-run after de-branding) |  |
-| Images | `weekend-yearly-collections` | ⬜ not yet | Needs research; check the seeded collections file |
+| Images | `image-collections` | ⬜ not yet | Needs research; check the seeded collections file |
 | Audio | `song-generator` | ✅ Every Stone I Set (`folk` only) | Other song types untested |
 | Audio | `podcast-script-generator` | ✅ Should We Text the Aliens First? |  |
-| Audio | `weekly-audio-podcast` | ✅ Should We Text the Aliens First? (13.5 min) |  |
+| Audio | `podcast-episode` | ✅ Should We Text the Aliens First? (13.5 min) |  |
 | Audio | `voiceover-script-generator` | ✅ The Spacecraft Lost to a Unit Label |  |
 
 ## 1. Pilot ✅
 
 - [x] Shared runner, Claude engine, Gemini/OpenAI cover step, `artifact.json` contract
-- [x] Three recipes: `daily-app-card`, `weekly-browser-game`, `weekly-short-story`
+- [x] Three recipes: `app-idea-card`, `browser-game`, `short-story`
 - [x] Cronsole Registry v1 templates + `ai-recipes` pack, validated against Cronsole's own schema
 - [x] Pre-publish leak scan with an out-of-repo denylist
 - [x] One live run of each recipe, output read by a person (the game played in a browser)
@@ -73,12 +73,12 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 **Apps & games**
 
-- [x] `weekly-app-prototype` — runnable single-page app prototype + requirements + sample data
-- [x] `weekly-browser-extension` — loadable Manifest V3 extension folder
-- [x] `weekly-financial-idea` — consumer-finance app prototype
-- [x] `weekly-mobile-game` — single-file, portrait, touch-first game
-- [x] `weekly-pc-game-concept` — design brief, `pitch.html`, key art, sources
-- [x] `weekly-3d-print-ideas` — three printable product specs with `design-spec.json`
+- [x] `app-prototype` — runnable single-page app prototype + requirements + sample data
+- [x] `browser-extension` — loadable Manifest V3 extension folder
+- [x] `finance-app-prototype` — consumer-finance app prototype
+- [x] `mobile-game` — single-file, portrait, touch-first game
+- [x] `pc-game-concept` — design brief, `pitch.html`, key art, sources
+- [x] `3d-print-design` — three printable product specs with `design-spec.json`
 
 **Books & writing**
 
@@ -86,14 +86,14 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 - [x] `serialized-novella` — one chapter a run against a story bible
 - [x] `agent-persona-original` — an invented, debate-ready character card
 - [x] `content-idea-gen` — one social-media content idea with a cover
-- [x] `weekly-funny-ai-content` — one funny AI-themed content idea
+- [x] `funny-ai-content` — one funny AI-themed content idea
 
 **Food & maps**
 
-- [x] `recipe-of-the-week` — family recipe + Cook's Card HTML; **generated** hero image instead of a
+- [x] `family-recipe` — family recipe + Cook's Card HTML; **generated** hero image instead of a
       downloaded photo; `recipe-validator` skill bundled
-- [x] `weekly-regional-recipe` — same, cycling through regions
-- [x] `weekly-ai-map` — researched interactive Leaflet map + companion markdown
+- [x] `regional-recipe` — same, cycling through regions
+- [x] `ai-map` — researched interactive Leaflet map + companion markdown
 
 **Research digests**
 
@@ -111,8 +111,8 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 - [x] Bundle any extra skills the ports need, scrubbed and license-checked (`recipe-validator`;
       eight Apache-2.0 writing skills with attribution in `.claude/skills/_vendor/`)
-- [x] One live run per category, output reviewed: `weekly-browser-extension`, `serialized-novella`
-      (seed run), `recipe-of-the-week`, `trending-movers`
+- [x] One live run per category, output reviewed: `browser-extension`, `serialized-novella`
+      (seed run), `family-recipe`, `trending-movers`
 - [x] Split the registry into per-category packs alongside the all-in-one pack (5 packs, 27 templates)
 - [x] README recipe table and CHANGELOG updated
 - [x] Live samples in the READMEs of the four Batch 1 live runs
@@ -121,7 +121,7 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 - [x] Runner: subfolder paths in `files`, `optional_files`, `0`/`false` no longer read as missing
 - [x] Inline JSON data blocks skipped by the JS syntax checks (a live run caught this)
-- [x] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `weekly-browser-game`
+- [x] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `browser-game`
       to the shared web checks
 - [x] Pass the run context to `validate()` (removes the novella's module-level state)
 - [x] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
@@ -146,15 +146,15 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 - [x] `comics` — four-panel strip, lettered (live run ✅)
 - [x] `ai-meme-generator` — one AI-themed meme, optional idea queue
-- [x] `daily-poster` — 2:3 poster from 200 themes
+- [x] `poster` — 2:3 poster from 200 themes
 - [x] `future-cities` — speculative cityscapes of 68 real cities
 - [x] `image-prompt-packs` — 5–8 prompts with a rendered example each
 - [x] `wallpaper-packs` — three 4K masters, each cropped to desktop 16:9 + phone 9:16
 - [x] `icon-packs` — 12 icons as SVG + PNG + ICO, plus a contact sheet (live run ✅)
-- [x] `weekend-yearly-collections` — user-editable collections that each gain an image per run
+- [x] `image-collections` — user-editable collections that each gain an image per run
 - [x] `song-generator` — 37 song types, lyrics + ElevenLabs composition plan → MP3 (live run ✅)
 - [x] `podcast-script-generator` — debate script with an invented cast (live run ✅)
-- [x] `weekly-audio-podcast` — renders the oldest unrendered script with preset voices (live run ✅,
+- [x] `podcast-episode` — renders the oldest unrendered script with preset voices (live run ✅,
       13.5-minute episode)
 - [x] `voiceover-script-generator` — narrated script → audio → vertical short (live run ✅)
 

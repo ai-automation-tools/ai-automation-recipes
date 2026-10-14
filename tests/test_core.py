@@ -82,7 +82,7 @@ class HelperTests(unittest.TestCase):
 
 class BrowserGameValidateTests(unittest.TestCase):
     def setUp(self):
-        self.mod = load_recipe("weekly-browser-game")
+        self.mod = load_recipe("browser-game")
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = Path(self.tmp.name)
 
@@ -118,7 +118,7 @@ class EndToEndTests(unittest.TestCase):
     """The full run loop with the engine and image step faked."""
 
     def test_app_card_publishes_artifact(self):
-        mod = load_recipe("daily-app-card")
+        mod = load_recipe("app-idea-card")
         reply = "```json\n" + json.dumps({
             "title": "Receipt Radar", "slug": "receipt-radar", "summary": "Finds refunds you are owed.",
             "category": "Browser Extension", "form_factor": "browser extension",
@@ -157,7 +157,7 @@ class EndToEndTests(unittest.TestCase):
             self.assertNotEqual(mod.prepare(ctx)["CATEGORY"], "Browser Extension")
 
     def test_subfolder_and_optional_files_survive(self):
-        mod = load_recipe("daily-app-card")
+        mod = load_recipe("app-idea-card")
         recipe = runner.Recipe(
             name="t", collection="things", version="0", prompt_path=mod.RECIPE.prompt_path,
             files=("index.html", "extension/manifest.json"), optional_files=("extension/background.js", "notes.md"),
@@ -185,7 +185,7 @@ class EndToEndTests(unittest.TestCase):
                                      "extension/background": "extension/background.js"})
 
     def test_validate_gets_ctx_and_after_cover_adds_files(self):
-        mod = load_recipe("daily-app-card")
+        mod = load_recipe("app-idea-card")
         seen = {}
 
         def prepare(ctx):
@@ -219,7 +219,7 @@ class EndToEndTests(unittest.TestCase):
             self.assertEqual(files["card"], "card.html")
 
     def test_agent_error_publishes_nothing(self):
-        mod = load_recipe("weekly-short-story")
+        mod = load_recipe("short-story")
 
         class FailingEngine:
             name = "claude"
@@ -234,7 +234,7 @@ class EndToEndTests(unittest.TestCase):
             self.assertEqual(list(col.iterdir()), [])
 
     def test_story_idea_queue_is_ticked(self):
-        mod = load_recipe("weekly-short-story")
+        mod = load_recipe("short-story")
         reply = '```json\n{"title": "The Keeper", "slug": "the-keeper", "summary": "s", "genre": "g", "cover_prompt": "c"}\n```'
 
         class Engine:

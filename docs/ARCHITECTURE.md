@@ -57,7 +57,7 @@ Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires
 ```json
 {
   "schema": "ai-automation-recipes/artifact@1",
-  "recipe": "daily-app-card",
+  "recipe": "app-idea-card",
   "recipe_version": "0.1.0",
   "collection": "idea-cards",
   "title": "Receipt Radar",

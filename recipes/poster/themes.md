@@ -1,0 +1,220 @@
+# Poster Themes
+
+One theme per poster, picked least-used first. Add, remove or reorder freely —
+lines starting with `- ` under any heading are themes.
+
+## Art Styles & Movements
+- Minimalist Movie
+- Bauhaus Geometric
+- Swiss Style Typography
+- Art Nouveau
+- Psychedelic 60s
+- Soviet Constructivism
+- Synthwave / Outrun
+- Solarpunk
+- Brutalist Architecture
+- Low Poly Art
+- Glitch Art
+- Pop Art (Ben-Day Dots)
+- Surrealist Dreamscape
+- Japanese Woodblock Print (Ukiyo-e)
+- Impressionist Landscape
+- Fauvist Color Explosion
+- Dadaist Collage
+- De Stijl Abstraction
+- Italian Futurism
+- Rococo Elegance
+- Gothic Revival
+- Mid-Century Modern
+- Art Deco Glamour
+- Pre-Raphaelite Romance
+- Minimalist Sculpture
+- Op Art (Optical Illusion)
+- Street Art / Graffiti
+- Stencil Street Art
+- Vaporwave Aesthetic
+- Lo-fi Aesthetic
+- Dark Academia
+- Cottagecore
+- Steampunk
+- Cyberpunk
+- Biomorphic Abstraction
+- Kinetic Art
+- ASCII Art
+- Pixel Art
+- Isometric Illustration
+- Chalkboard Art
+
+## Nature & Landscapes
+- National Park Vintage
+- Botanical Illustration
+- Deep Sea Exploration
+- Microscopic World
+- Aurora Borealis
+- Bioluminescent Forest
+- Volcanic Eruption
+- Tornado / Supercell
+- Desert Oasis
+- Rainforest Canopy
+- Coral Reef
+- Tundra Solitude
+- Savannah Sunset
+- Bamboo Forest
+- Cherry Blossom Season
+- Autumn Leaves in Vermont
+- Snowflake Macro
+- Crystal Formation / Geode
+- Amber Fossil
+- Butterfly Wing Pattern
+- Peacock Feather Detail
+- Octopus Camouflage
+- Jellyfish Glow
+- Sequoia Giant
+- Mangrove Mystery
+- Iceberg / Glacier
+- Canyon Grandeur
+- Waterfall / Misty Gorge
+- Lavender Fields in Provence
+- Rice Terraces
+
+## Science & Technology
+- Blueprint / Technical Drawing
+- Molecular Structure
+- Fractal Geometry
+- DNA Helix
+- Neural Network Visualization
+- Artificial Intelligence Concept
+- Robot / Android Anatomy
+- Cybernetic Augmentation
+- Virtual Reality World
+- Hologram Projection
+- Laser Light Show
+- Particle Accelerator
+- Quantum Physics Concept
+- Periodic Table Artistic
+- Patent Drawing (Vintage)
+- Exploded View Diagram
+- Circuit Board Pattern
+- Fiber Optic Network
+- Satellite Imagery Art
+- X-Ray Art
+- Thermal Imaging Style
+- Ultrasound Aesthetic
+- Oscilloscope Waveforms
+- Vacuum Tube Tech
+- Mainframe Computer (Retro)
+- Nanotechnology Concept
+- Gene Editing (CRISPR)
+- Renewable Energy (Wind/Solar)
+- Fusion Reactor
+- Smart City Architecture
+
+## Space & Exploration
+- Retro NASA Space Travel
+- Mars Colony Concept
+- Dyson Sphere Megastructure
+- Space Elevator
+- Nebula / Star Nursery
+- Black Hole / Singularity
+- Supernova Remnant
+- Exoplanet Discovery
+- Lunar Phase Chart
+- Solar System Map
+- Constellation Map
+- Saturn's Rings Close-up
+- Jupiter's Great Red Spot
+- Voyager Golden Record
+- Hubble Deep Field
+- ISS Interior View
+- Lunar Lander (Apollo Style)
+- Space Shuttle Launch
+- Asteroid Mining Operation
+- Interstellar Voyage
+
+## Mythology & Folklore
+- Greek Mythology (Olympus)
+- Norse Mythology (Yggdrasil)
+- Ancient Egyptian Gods
+- Mayan Calendar / Ruins
+- Japanese Yokai
+- Chinese Dragon (Long)
+- Phoenix Rebirth
+- Kraken / Sea Monster
+- Thunderbird (Indigenous Myth)
+- Aztec Sun Stone
+- Arthurian Legend (Excalibur)
+- Celtic Knotwork
+- Tarot Card (Major Arcana)
+- Zodiac Sign Series
+- Chimera / Hybrid Beast
+- Griffin Crest
+- Mermaid / Siren
+- Centaur Silhouette
+- Unicorn in the Garden
+- Basilisk / Medusa
+
+## Architecture & Urban
+- Art Deco Skyscraper
+- Gothic Cathedral Detail
+- Japanese Zen Garden
+- Mediterranean Village
+- Futuristic Megacity
+- Abandoned Factory (Urbex)
+- Treehouse Village
+- Underwater Habitat
+- Ancient Roman Forum
+- Forbidden City (Beijing)
+- Taj Mahal Symmetry
+- Sagrada Familia (Gaudi)
+- Fallingwater (Frank Lloyd Wright)
+- Bauhaus School Building
+- Centre Pompidou (High-Tech)
+- Guggenheim Museum (Bilbao)
+- Burj Khalifa Height
+- Flatiron Building (NYC)
+- Shinto Torii Gate
+- Moroccan Riad Interior
+
+## Food & Lifestyle
+- Coffee Brewing Ritual
+- Sushi Platter Art
+- Farmers Market Bounty
+- Vintage Wine Cellar
+- Tea Ceremony (Japan)
+- Spicy Ramen Bowl
+- French Patisserie
+- Tropical Cocktail
+- Spice Market (Marrakech)
+- Bread Making (Sourdough)
+- Yoga in Nature
+- Vinyl Record Collection
+- Sneaker Culture
+- Skateboarding Urban
+- Surfing Big Wave
+- Camping under Stars
+- Gardening Tools
+- Knitting / Textiles
+- Pottery / Ceramics
+- Biking through the City
+
+## Miscellaneous & Abstract
+- Origami Crane
+- Mosaic Tiling
+- Stained Glass Window
+- Quilt Pattern
+- Marbled Paper
+- Kaleidoscope Pattern
+- Ink Wash (Sumie)
+- Chalkboard Physics
+- Neon Sign "Open"
+- Map of an Imaginary Land
+- Infographic of Time
+- Typewriter Close-up
+- Compass / Sextant
+- Hourglass / Sand of Time
+- Skeleton Key
+- Hot Air Balloon Festival
+- Carousel Horse
+- Ferris Wheel at Night
+- Lighthouse Beam
+- Message in a Bottle

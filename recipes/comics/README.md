@@ -1,4 +1,4 @@
-# Weekly Comic
+# Comic
 
 [← All recipes](../../README.md)
 

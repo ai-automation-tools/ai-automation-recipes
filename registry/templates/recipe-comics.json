@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "id": "recipe-comics",
-  "name": "AI Recipe: Weekly Comic",
+  "name": "AI Recipe: Comic",
   "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering.",
   "runtime": "python",
   "os": "cross-platform",

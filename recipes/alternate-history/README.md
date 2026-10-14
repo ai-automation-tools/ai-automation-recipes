@@ -1,4 +1,4 @@
-# Weekly Alternate History
+# Alternate History
 
 [← All recipes](../../README.md)
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "id": "recipe-alternate-history",
-  "name": "AI Recipe: Weekly Alternate History",
+  "name": "AI Recipe: Alternate History",
   "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with scene-by-scene illustration prompts and a portrait cover. Optional premise queue via alt-history-ideas.md.",
   "runtime": "python",
   "os": "cross-platform",

@@ -1,4 +1,4 @@
-# Weekly Alternate History
+# Alternate History
 
 Goal: write ONE illustrated "what if" timeline — a real, well-documented turning point in history,
 changed at one clear point of divergence, traced forward section by section — plus the image

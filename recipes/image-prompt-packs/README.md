@@ -1,4 +1,4 @@
-# Weekly Image Prompt Pack
+# Image Prompt Pack
 
 [← All recipes](../../README.md)
 

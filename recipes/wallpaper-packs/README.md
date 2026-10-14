@@ -1,4 +1,4 @@
-# Weekly Wallpaper Pack
+# Wallpaper Pack
 
 [← All recipes](../../README.md)
 

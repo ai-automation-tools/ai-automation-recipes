@@ -4,7 +4,7 @@
 
 One AI-vs-AI debate podcast episode per run: a host and 3–4 guests with clashing personalities,
 1,500–3,000 words of real back-and-forth, written as a speaker-labelled transcript that the
-[Audio Podcast](../weekly-audio-podcast/README.md) recipe renders to sound.
+[Podcast Episode](../podcast-episode/README.md) recipe renders to sound.
 
 | | |
 |:---|:---|

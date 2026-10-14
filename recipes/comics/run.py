@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly Comic — one four-panel strip a week: a script and the rendered full-page strip.
+"""Comic — one four-panel strip a week: a script and the rendered full-page strip.
 
     python recipes/comics/run.py --output-dir ~/ai-output [--topic "smart fridges with opinions"]
 """

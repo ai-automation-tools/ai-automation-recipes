@@ -41,15 +41,15 @@ SUPPORT = ["recipe-recipes-update", "recipe-viewer-rebuild"]
 CATEGORY_PACKS = [
     ("ai-recipes-apps-games", "AI Recipes: Apps & Games",
      "Idea cards, runnable app and extension prototypes, playable games, game and 3D-print concepts.",
-     ["daily-app-card", "weekly-app-prototype", "weekly-browser-extension", "weekly-financial-idea",
-      "weekly-browser-game", "weekly-mobile-game", "weekly-pc-game-concept", "weekly-3d-print-ideas"]),
+     ["app-idea-card", "app-prototype", "browser-extension", "finance-app-prototype",
+      "browser-game", "mobile-game", "pc-game-concept", "3d-print-design"]),
     ("ai-recipes-writing", "AI Recipes: Writing",
      "Short stories, a serialized novella, alternate histories, original characters and content ideas.",
-     ["weekly-short-story", "serialized-novella", "alternate-history", "agent-persona-original",
-      "content-idea-gen", "weekly-funny-ai-content"]),
+     ["short-story", "serialized-novella", "alternate-history", "agent-persona-original",
+      "content-idea-gen", "funny-ai-content"]),
     ("ai-recipes-food-maps", "AI Recipes: Food & Maps",
      "Safety-checked recipes with a printable Cook's Card, and researched interactive maps.",
-     ["recipe-of-the-week", "weekly-regional-recipe", "weekly-ai-map"]),
+     ["family-recipe", "regional-recipe", "ai-map"]),
     ("ai-recipes-digests", "AI Recipes: Research Digests",
      "Monthly researched roundups — AI tools, agent tooling, open source, security and finance "
      "tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
@@ -58,12 +58,12 @@ CATEGORY_PACKS = [
     ("ai-recipes-images", "AI Recipes: Images",
      "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon "
      "packs and long-running yearly image collections.",
-     ["comics", "ai-meme-generator", "daily-poster", "future-cities", "image-prompt-packs",
-      "wallpaper-packs", "icon-packs", "weekend-yearly-collections"]),
+     ["comics", "ai-meme-generator", "poster", "future-cities", "image-prompt-packs",
+      "wallpaper-packs", "icon-packs", "image-collections"]),
     ("ai-recipes-audio", "AI Recipes: Audio",
      "Songs composed from AI-written lyrics, a two-step debate podcast, and narrated voiceover shorts — "
      "preset voices only.",
-     ["song-generator", "podcast-script-generator", "weekly-audio-podcast", "voiceover-script-generator"]),
+     ["song-generator", "podcast-script-generator", "podcast-episode", "voiceover-script-generator"]),
 ]
 
 

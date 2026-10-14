@@ -2,7 +2,7 @@
 
 [← README](../README.md)
 
-A recipe is four files in `recipes/<name>/`. Copy `daily-app-card` and change what differs.
+A recipe is four files in `recipes/<name>/`. Copy `app-idea-card` and change what differs.
 
 ## 1. `prompt.md`
 
@@ -24,7 +24,7 @@ validation the runner can do itself.
 
 ```python
 RECIPE = Recipe(
-    name="weekly-thing",            # matches the folder
+    name="thing-maker",            # matches the folder
     collection="things",            # output subfolder
     version="0.1.0",
     prompt_path=HERE / "prompt.md",

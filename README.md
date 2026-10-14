@@ -28,33 +28,33 @@ anything that can read JSON can display the results.
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
-| [`daily-app-card`](recipes/daily-app-card/README.md) | Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover | Daily |
-| [`weekly-app-prototype`](recipes/weekly-app-prototype/README.md) | Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover | Weekly (Thu) |
-| [`weekly-browser-extension`](recipes/weekly-browser-extension/README.md) | Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover | Weekly (Mon) |
-| [`weekly-financial-idea`](recipes/weekly-financial-idea/README.md) | Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced | Monthly (6) |
-| [`weekly-browser-game`](recipes/weekly-browser-game/README.md) | Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover | Weekly (Sat) |
-| [`weekly-mobile-game`](recipes/weekly-mobile-game/README.md) | Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art | Weekly (Thu) |
-| [`weekly-pc-game-concept`](recipes/weekly-pc-game-concept/README.md) | Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art | Weekly (Mon) |
-| [`weekly-3d-print-ideas`](recipes/weekly-3d-print-ideas/README.md) | Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD | Tue, Thu, Sat |
+| [`app-idea-card`](recipes/app-idea-card/README.md) | Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover | Daily |
+| [`app-prototype`](recipes/app-prototype/README.md) | Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover | Weekly (Thu) |
+| [`browser-extension`](recipes/browser-extension/README.md) | Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover | Weekly (Mon) |
+| [`finance-app-prototype`](recipes/finance-app-prototype/README.md) | Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced | Monthly (6) |
+| [`browser-game`](recipes/browser-game/README.md) | Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover | Weekly (Sat) |
+| [`mobile-game`](recipes/mobile-game/README.md) | Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art | Weekly (Thu) |
+| [`pc-game-concept`](recipes/pc-game-concept/README.md) | Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art | Weekly (Mon) |
+| [`3d-print-design`](recipes/3d-print-design/README.md) | Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD | Tue, Thu, Sat |
 
 **Writing** — pack `ai-recipes-writing`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
-| [`weekly-short-story`](recipes/weekly-short-story/README.md) | Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration | Weekly (Sun) |
+| [`short-story`](recipes/short-story/README.md) | Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration | Weekly (Sun) |
 | [`serialized-novella`](recipes/serialized-novella/README.md) | Claude writes the next chapter of an ongoing novel against its story bible — inventing the bible on the first run — keeping continuity through a rolling synopsis and the latest chapters, with a chapter illustration | Weekly (Mon) |
 | [`alternate-history`](recipes/alternate-history/README.md) | Claude writes an eight-section "what if" timeline from one real historical divergence, with scene-by-scene illustration prompts and a portrait cover | Weekly (Fri) |
 | [`agent-persona-original`](recipes/agent-persona-original/README.md) | Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover | Weekly (Thu) |
 | [`content-idea-gen`](recipes/content-idea-gen/README.md) | Claude researches what is working on social platforms in a rotating topic area and pitches one automatable content series — hook, treatment, automation angle, sources — with a cover | Weekly (Wed) |
-| [`weekly-funny-ai-content`](recipes/weekly-funny-ai-content/README.md) | Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag | Weekly (Fri) |
+| [`funny-ai-content`](recipes/funny-ai-content/README.md) | Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag | Weekly (Fri) |
 
 **Food & Maps** — pack `ai-recipes-food-maps`
 
 | Recipe | Makes | Schedule |
 |:---|:---|:---|
-| [`recipe-of-the-week`](recipes/recipe-of-the-week/README.md) | Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page | Weekly (Sat) |
-| [`weekly-regional-recipe`](recipes/weekly-regional-recipe/README.md) | Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes | Weekly (Fri) |
-| [`weekly-ai-map`](recipes/weekly-ai-map/README.md) | Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover | Weekly (Mon) |
+| [`family-recipe`](recipes/family-recipe/README.md) | Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page | Weekly (Sat) |
+| [`regional-recipe`](recipes/regional-recipe/README.md) | Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes | Weekly (Fri) |
+| [`ai-map`](recipes/ai-map/README.md) | Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover | Weekly (Mon) |
 
 **Research Digests** — pack `ai-recipes-digests`
 
@@ -76,12 +76,12 @@ anything that can read JSON can display the results.
 |:---|:---|:---|
 | [`comics`](recipes/comics/README.md) | Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering | Weekly (Wed) |
 | [`ai-meme-generator`](recipes/ai-meme-generator/README.md) | Claude invents one original AI-and-tech-themed meme in a rotating theme, never a copied template or a real person, and the runner renders it square with the caption baked in | Tue, Fri |
-| [`daily-poster`](recipes/daily-poster/README.md) | Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3 | Mon, Thu |
+| [`poster`](recipes/poster/README.md) | Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3 | Mon, Thu |
 | [`future-cities`](recipes/future-cities/README.md) | Claude imagines a real city 475 years forward — landmarks, climate adaptation, transport, a named colour grade — and the runner renders one cinematic 16:9 cityscape | Weekly (Sat) |
 | [`image-prompt-packs`](recipes/image-prompt-packs/README.md) | Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image | Weekly (Sat) |
 | [`wallpaper-packs`](recipes/wallpaper-packs/README.md) | Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render | Weekly (Sun) |
 | [`icon-packs`](recipes/icon-packs/README.md) | Claude designs a cohesive pack of 12 icons and draws each symbol as SVG; code adds an identical container to all twelve and ships SVG, transparent 1024 px PNG and multi-size ICO | Weekly (Wed) |
-| [`weekend-yearly-collections`](recipes/weekend-yearly-collections/README.md) | Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json | Tue, Sat |
+| [`image-collections`](recipes/image-collections/README.md) | Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json | Tue, Sat |
 
 **Audio** — pack `ai-recipes-audio`
 
@@ -89,7 +89,7 @@ anything that can read JSON can display the results.
 |:---|:---|:---|
 | [`song-generator`](recipes/song-generator/README.md) | Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover | Weekly (Wed) |
 | [`podcast-script-generator`](recipes/podcast-script-generator/README.md) | Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover | Weekly (Fri) |
-| [`weekly-audio-podcast`](recipes/weekly-audio-podcast/README.md) | Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech | Weekly (Sat) |
+| [`podcast-episode`](recipes/podcast-episode/README.md) | Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech | Weekly (Sat) |
 | [`voiceover-script-generator`](recipes/voiceover-script-generator/README.md) | Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills | Weekly (Sun) |
 
 ## Quick start
@@ -113,8 +113,8 @@ cd ai-automation-recipes
 pip install -r requirements.txt
 cp .env.example .env          # add GEMINI_API_KEY or OPENAI_API_KEY, and RECIPES_OUTPUT_DIR
 
-python recipes/daily-app-card/run.py --output-dir ~/ai-output --dry-run   # see the prompt
-python recipes/daily-app-card/run.py --output-dir ~/ai-output             # run it
+python recipes/app-idea-card/run.py --output-dir ~/ai-output --dry-run   # see the prompt
+python recipes/app-idea-card/run.py --output-dir ~/ai-output             # run it
 ```
 
 Every recipe takes the same flags:

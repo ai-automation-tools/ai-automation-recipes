@@ -1,4 +1,4 @@
-# Weekly Wallpaper Pack
+# Wallpaper Pack
 
 Goal: write the image prompts for THREE wallpapers, one per theme the runner picked, plus a short
 pack note. Each prompt renders one **square master**; the runner crops a 16:9 desktop wallpaper

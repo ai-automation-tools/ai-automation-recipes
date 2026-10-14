@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly Wallpaper Pack — three themed wallpapers, each shipped as a matching desktop + phone pair.
+"""Wallpaper Pack — three themed wallpapers, each shipped as a matching desktop + phone pair.
 
     python recipes/wallpaper-packs/run.py --output-dir ~/ai-output
 

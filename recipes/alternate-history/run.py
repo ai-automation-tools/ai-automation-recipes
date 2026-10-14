@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly Alternate History — one illustrated "what if" timeline a week.
+"""Alternate History — one illustrated "what if" timeline a week.
 
     python recipes/alternate-history/run.py --output-dir ~/ai-output
 

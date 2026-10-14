@@ -3,7 +3,7 @@
 
     python recipes/podcast-script-generator/run.py --output-dir ~/ai-output
 
-Render it to audio with the `weekly-audio-podcast` recipe.
+Render it to audio with the `podcast-episode` recipe.
 
 Optional, in <output-dir>/podcast-scripts/:
 - `podcast-topics.md` — a topic queue, one `- [ ] Title — angle, angle, angle` per line. The first

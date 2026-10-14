@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Weekly Image Prompt Pack — 5–8 reusable image prompts on one theme, each with a rendered example.
+"""Image Prompt Pack — 5–8 reusable image prompts on one theme, each with a rendered example.
 
     python recipes/image-prompt-packs/run.py --output-dir ~/ai-output [--theme "Steampunk Contraptions"]
 """

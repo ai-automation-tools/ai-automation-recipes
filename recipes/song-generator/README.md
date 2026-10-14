@@ -12,14 +12,14 @@ with ElevenLabs Music, embeds the cover and tags (with ffmpeg), and draws a squa
 | **Schedule** | Wednesdays, 18:00 UTC (the original was on-demand — each run spends music credits) |
 | **Model** | `opus` |
 | **Needs** | `ELEVENLABS_API_KEY` (music); an image key for the cover |
-| **Tools** | Read, Write, Edit, Glob, Grep, Skill, WebSearch, WebFetch (research is for the weekly type only) |
+| **Tools** | Read, Write, Edit, Glob, Grep, Skill, WebSearch, WebFetch (research is for the news type only) |
 | **Skills** | `songwriting-craft`, `llm-writing`, `humanizer`, `image-prompt-craft` |
 
 ## Types
 
 `--type` picks a creative brief from [`briefs/`](briefs/) — 37 of them:
 
-- **weekly** — researches the week's news and picks a modern genre (the default).
+- **news** — researches the latest news and picks a modern genre (the default).
 - **rock, hard-rock, punk, country-classic, psychedelic, rap, folk, blues, edm, hip-hop, indie,
   jazz, latin, metal, pop, reggae, rnb, ska, synthwave**.
 - **Comedy twins** (`rock-comedy`, `folk-comedy`, …, plus `punk-comedy` and `country`, which are

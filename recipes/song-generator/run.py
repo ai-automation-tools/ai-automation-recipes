@@ -4,7 +4,7 @@ MP3 and a square cover.
 
     python recipes/song-generator/run.py --output-dir ~/ai-output [--type rock] [--direction "..."]
 
-Types are the files in briefs/ (37 of them: weekly news songs, rock, country, rap, psychedelic,
+Types are the files in briefs/ (37 of them: news songs, rock, country, rap, psychedelic,
 folk, jazz, and a comedy twin for most genres). Needs ELEVENLABS_API_KEY — each run spends
 ElevenLabs music credits.
 """
@@ -34,13 +34,13 @@ SECTION_RE = re.compile(r"^\s*\[[^\]]*\]\s*$", re.M)
 
 
 def add_args(p: argparse.ArgumentParser) -> None:
-    p.add_argument("--type", dest="song_type", choices=TYPES, default="weekly", help="Song type (a brief in briefs/).")
+    p.add_argument("--type", dest="song_type", choices=TYPES, default="news", help="Song type (a brief in briefs/).")
     p.add_argument("--direction", default="", help="Optional topic or direction the song should follow.")
 
 
 def prepare(ctx: RunContext) -> dict[str, str]:
     t = ctx.args.song_type
-    if t != "weekly":  # only the weekly brief researches the news; the others forbid web access
+    if t != "news":  # only the news brief researches; the others forbid web access
         ctx.state["tools"] = tuple(tool for tool in RECIPE.tools if not tool.startswith("Web"))
     recent =[e for e in reversed(ctx.existing) if e.fields.get("song_type") == t][:4]
     rows = "\n".join(
@@ -151,7 +151,7 @@ RECIPE = Recipe(
     prompt_path=HERE / "prompt.md",
     files=("song.md", "composition-plan.json"),
     skills=("songwriting-craft", "llm-writing", "humanizer", "image-prompt-craft"),
-    # WebSearch/WebFetch are only used by the weekly news type; the other briefs forbid research.
+    # WebSearch/WebFetch are only used by the news type; the other briefs forbid research.
     tools=("Read", "Write", "Edit", "Glob", "Grep", "Skill", "WebSearch", "WebFetch"),
     fields=("song_type", "genre", "mood", "key"),
     cover_aspect="1:1",

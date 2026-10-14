@@ -34,7 +34,7 @@ from the last 4:
 ## WORKFLOW
 
 1. **Write the song** following the CREATIVE BRIEF. Unless the brief tells you to research (only
-   the weekly news type does), this is a *purely original* synthesis: do **not** research, and do
+   the news type does), this is a *purely original* synthesis: do **not** research, and do
    **not** copy or closely imitate any existing song, artist, lyric, melody, chord progression or
    vocal phrasing. Pick this run's stance / premise from the brief's menus, rotating against
    RECENT SONGS, and an original title.

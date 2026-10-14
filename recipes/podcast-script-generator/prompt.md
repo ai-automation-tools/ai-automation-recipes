@@ -1,7 +1,7 @@
 # Podcast Script
 
 Goal: write one entertaining **AI-vs-AI debate podcast** episode as a speaker-labelled transcript
-that the `weekly-audio-podcast` recipe can render to audio — plus a square cover description.
+that the `podcast-episode` recipe can render to audio — plus a square cover description.
 
 Target date: **{{DATE_LONG}}** (`{{DATE}}`).
 

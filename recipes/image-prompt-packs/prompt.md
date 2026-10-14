@@ -1,4 +1,4 @@
-# Weekly Image Prompt Pack
+# Image Prompt Pack
 
 Goal: write ONE themed pack of 5–8 polished, reusable image-generation prompts, each with a
 rendered example the runner makes from your prompt.
