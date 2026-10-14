@@ -3,7 +3,7 @@
 <h1 align="center">📚 AI Automation Recipes Documentation</h1>
 
 <p align="center">
-  <em>How the recipes run, how to write one, and what's left before this goes public.</em>
+  <em>How the recipes run, how to write one, and what's left to build.</em>
 </p>
 
 <p align="center">

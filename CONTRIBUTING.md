@@ -4,8 +4,8 @@ Thanks for looking. Two kinds of contribution are welcome, and one kind isn't.
 
 **A new recipe.** Read [docs/ADDING-A-RECIPE.md](docs/ADDING-A-RECIPE.md): four files in one folder,
 a dry run, the tests, the registry check and the leak scan. Open a *Recipe request* issue first if
-you want to check the idea fits before you build it. A recipe that depicts, impersonates or names
-real living people, or that reads a source it isn't allowed to, won't be merged whatever its quality.
+you want to check the idea fits before you build it. A recipe that reads a source it isn't allowed
+to won't be merged whatever its quality.
 
 **A fix.** Open a *Bug in a recipe* issue with the log tail, or just send the PR with the failing
 case in `tests/`. Prompt changes are code changes here: say what the old prompt got wrong and what

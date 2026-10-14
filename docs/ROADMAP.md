@@ -1,19 +1,20 @@
 <h1 align="center">🗺️ Roadmap</h1>
 
 <p align="center">
-  <em>Which recipes have had a real run, and the work left before this repo goes public.</em>
+  <em>Which recipes have had a real run, and the work left to do.</em>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/live--tested-13_of_48-F59E0B?style=for-the-badge" alt="13 of 48 live-tested">
-  <img src="https://img.shields.io/badge/visibility-private-6B7280?style=for-the-badge" alt="Private">
+  <img src="https://img.shields.io/badge/visibility-public-2ea44f?style=for-the-badge" alt="Public">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
 ---
 
-The repo stays private until the publish phase below is done and the maintainer says go. Finished
-work moves out of this file and into the [changelog](CHANGELOG.md). There's no paid tier planned:
+The repo went public on 2026-10-14, with live samples at
+[ai-automation-recipes-demo.ai-automation-tools.dev](https://ai-automation-recipes-demo.ai-automation-tools.dev). Finished work moves out of this file
+and into the [changelog](CHANGELOG.md). There's no paid tier planned:
 this is the free companion to Cronsole.
 
 **Where things stand (2026-10-14).** 48 recipes in seven groups, every one dry-run and faked-engine
@@ -84,11 +85,6 @@ made.
 
 ## 🔨 Build
 
-- [ ] Decide what the public set does about real people. Seven recipes ported on 2026-10-14 were
-      held back earlier that day: `agent-persona` writes cards for real public figures and
-      `satirical-news` riffs on real events, while `news-collage` keeps the fleet's own no-likeness
-      rule. `CONTRIBUTING.md` still says a recipe that depicts real people won't be merged, so
-      either that line changes or the two recipes get a parody carve-out spelled out there
 - [ ] A live `news-collage` run per window: day (the six-panel grid with a readable timestamp),
       week (one scene, title and date range spelled right), month. The captions are the thing to
       check; six garbled captions was the fleet's most common visible defect
@@ -123,28 +119,23 @@ made.
       GitHub repos the user names, a weekly quiz built from the news digests, a "year in review"
       that reads a collection's artifacts and writes a retrospective
 
-## 🚦 Launch-ready
+## 🚦 Proving it
 
 - [ ] Live runs for every ⬜ recipe in the table above, each sample added to its README
 - [ ] The Cronsole test tasks fire on their own and their run history shows a published artifact
       (first runs Thu 2026-10-15 and Fri 2026-10-16)
 - [ ] One full pack scheduled through Cronsole for a week with no manual fixes
-- [ ] Re-run `check_public.py --history` the day before the flip (clean on 2026-10-14, 604 blobs;
-      CI runs it on every push)
-- [ ] Re-probe every `news-digest` feed the week before the flip (101 of 102 fetched and parsed on
-      2026-10-14 after the fetcher learned gzip, BOMs, control bytes and bare ampersands; three
-      publishers that 403 non-browsers were swapped out)
+- [ ] Re-probe every `news-digest` feed monthly (101 of 102 fetched and parsed on 2026-10-14 after
+      the fetcher learned gzip, BOMs, control bytes and bare ampersands; three publishers that 403
+      non-browsers were swapped out)
+- [ ] Add each new live run's folder to the demo site
 
 ## 📣 Publish & promote
 
-Only on the maintainer's go.
-
-- [ ] Repo flipped to public
-- [ ] Packs shipped through Cronsole's registry and linked from the Cronsole site
-- [ ] A demo viewer of curated output on a subdomain of `ai-automation-tools.dev`, with an "Import
-      into Cronsole" link on each recipe
-- [ ] Repo added to the org PR sweep, the Dependabot fleet docs and the org landing page
-- [ ] Clone moved out of `Custom/` to its permanent folder, with the workspace docs updated
+- [ ] Packs shipped through Cronsole's registry and linked from the Cronsole site (needs Cronsole's
+      multiple-registry-sources work, under *Later*)
+- [ ] A one-click "Import into Cronsole" on the demo, once Cronsole can import a template by URL;
+      today each sample links to its recipe and its template file
 
 ## 🔭 Later
 

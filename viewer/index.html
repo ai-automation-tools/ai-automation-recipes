@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AI Automation Recipes viewer. Copied into an output folder by scripts/build_viewer.py, which writes
      catalog.js beside it. Works from file:// and any static host. House style: web-house-style app shell
-     with a content sidebar (drawer on phones). Accent: fuchsia. -->
+     with a content sidebar (drawer on phones). Accent: indigo. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>AI Recipes Viewer</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0e'/%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='none' stroke='%237f4288' stroke-width='2'/%3E%3Cg transform='translate(6 6) scale(0.8333)' fill='none' stroke='%23e879f9' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7' rx='1.5'/%3E%3Crect x='14' y='3' width='7' height='7' rx='1.5'/%3E%3Crect x='3' y='14' width='7' height='7' rx='1.5'/%3E%3Cpath d='M17.5 13.5v7M14 17h7'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b0e'/%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='none' stroke='%23474d88' stroke-width='2'/%3E%3Cg transform='translate(6 6) scale(0.8333)' fill='none' stroke='%23818cf8' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7' rx='1.5'/%3E%3Crect x='14' y='3' width='7' height='7' rx='1.5'/%3E%3Crect x='3' y='14' width='7' height='7' rx='1.5'/%3E%3Cpath d='M17.5 13.5v7M14 17h7'/%3E%3C/g%3E%3C/svg%3E" />
   <meta name="theme-color" content="#060606" />
   <script>
     // Pre-paint: theme and drawer state, so neither flashes. Default must equal THEME_DEFAULT below.
@@ -34,7 +34,7 @@
       --line: rgba(63,63,70,.45); --line-2: rgba(63,63,70,.8); --rule: rgba(39,39,42,.6);
       --fg: #f4f4f5; --fg-2: #d4d4d8; --fg-3: #a1a1aa; --fg-4: #71717a; --fg-5: #52525b;
       --scrim: rgba(0,0,0,.55); --media-bg: #0b0b0e; --code-bg: rgba(39,39,42,.55);
-      --accent: #e879f9; --accent-ink: #1a0520;
+      --accent: #818cf8; --accent-ink: #0b0b2a;
       --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
       --r-lg: 12px; --r-md: 8px;
@@ -53,7 +53,7 @@
       --line: #e4e4e7; --line-2: #d4d4d8; --rule: #e4e4e7;
       --fg: #09090b; --fg-2: #27272a; --fg-3: #52525b; --fg-4: #63636b; --fg-5: #76767f;
       --scrim: rgba(9,9,11,.35); --media-bg: #e4e4e7; --code-bg: #f4f4f5;
-      --accent: #a21caf; --accent-ink: #fff;
+      --accent: #4338ca; --accent-ink: #fff;
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -200,7 +200,7 @@
 
 <aside class="side" id="side" aria-label="Collections">
   <div class="side-brand">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0b0b0e"/><rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#7f4288" stroke-width="2"/><g transform="translate(6 6) scale(0.8333)" fill="none" stroke="#e879f9" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 13.5v7M14 17h7"/></g></svg>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0b0b0e"/><rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#474d88" stroke-width="2"/><g transform="translate(6 6) scale(0.8333)" fill="none" stroke="#818cf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 13.5v7M14 17h7"/></g></svg>
     <span>Recipes Viewer</span>
   </div>
   <div class="side-list" id="sideList"></div>
@@ -318,7 +318,10 @@
     const actions = [];
     if (it.html) actions.push(`<a class="btn btn-primary" href="${url(it.html)}" target="_blank" rel="noopener">Open full screen</a>`);
     (it.pages || []).forEach(p => actions.push(`<a class="btn btn-ghost" href="${url(p)}" target="_blank" rel="noopener">${esc(p.split('/').pop().replace(/\.html$/, '').replace(/-/g, ' '))}</a>`));
-    actions.push(`<a class="btn btn-ghost" href="${url(it.folder)}/" target="_blank" rel="noopener">Open folder</a>`);
+    if (CATALOG.repo && it.recipe) {
+      actions.push(`<a class="btn btn-ghost" href="${esc(CATALOG.repo)}/tree/main/recipes/${encodeURIComponent(it.recipe)}" target="_blank" rel="noopener">The recipe</a>`);
+      if (it.template) actions.push(`<a class="btn btn-ghost" href="${esc(CATALOG.repo)}/blob/main/registry/templates/recipe-${encodeURIComponent(it.recipe)}.json" target="_blank" rel="noopener">Cronsole template</a>`);
+    } else actions.push(`<a class="btn btn-ghost" href="${url(it.folder)}/" target="_blank" rel="noopener">Open folder</a>`);
     $('#view').innerHTML = `<button class="back" type="button" id="back">&larr; Back</button>
       <div class="detail-head"><div class="eyebrow">${esc(labelOf(it.collection))} · ${esc(it.date)}</div><h1>${esc(it.title)}</h1>
       <p class="summary">${esc(it.summary)}</p><div class="fields">${fields}</div><div class="actions">${actions.join('')}</div></div>
