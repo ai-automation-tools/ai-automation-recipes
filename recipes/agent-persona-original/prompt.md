@@ -170,6 +170,16 @@ those render stat blocks. End with the skill's constraint block verbatim, then: 
 no RANK/AGE/CLASS fields, no silhouette, shadow figure, faceless, back-turned or obscured face.
 
 --------------------------------------------------
+## CHAT AVATAR
+
+The runner also renders a square avatar, `avatar.png`, for chat UIs and debate transcripts. Its
+prompt is the **same character and the same physical description, word for word**, as the cover
+(there is no memory between image calls), but framed for a small square: a tight head-and-shoulders
+crop, face centred and filling the frame, a plain or softly blurred background in the palette, no
+props that need room, the same illustrated style. End with the same constraint block. List it in
+the final message as the single `images` entry with `aspect` `"1:1"`.
+
+--------------------------------------------------
 ## FINAL MESSAGE
 
 ```json
@@ -180,6 +190,9 @@ no RANK/AGE/CLASS fields, no silhouette, shadow figure, faceless, back-turned or
   "archetype_group": "{{GROUP}}",
   "subcategory": "<the facet>",
   "cover_prompt": "<the full portrait description>",
+  "images": [
+    {"file": "avatar.png", "prompt": "<the avatar description, in full>", "aspect": "1:1"}
+  ],
   "error": null
 }
 ```

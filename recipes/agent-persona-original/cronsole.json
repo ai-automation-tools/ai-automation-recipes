@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "recipe-agent-persona-original",
   "name": "AI Recipe: Original Agent Persona",
-  "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover.",
+  "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
   "runtime": "python",
   "os": "cross-platform",
   "category": "ai-agent",
@@ -61,7 +61,7 @@
         "openai",
         "none"
       ],
-      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover and the avatar; the card still publishes."
     }
   ],
   "compatibleTargets": [

@@ -68,11 +68,15 @@ made.
 
 - [ ] A second `serialized-novella` run writes chapter 2 from the saved story bible, keeping names,
       places and the rolling synopsis consistent
-- [ ] `alternate-history` renders its eight scene prompts as images (the agent already writes them;
-      `ImageSpec` can now render them)
-- [ ] `agent-persona-original` renders a square chat avatar beside the card
-- [ ] A Codex CLI engine in `core/engines/`, so a recipe can run on Claude or Codex with one flag
-- [ ] A Gemini CLI engine in `core/engines/`, same contract
+- [ ] A live `alternate-history` run with an image key: the eight scenes read as one illustrated
+      piece, and the shared style survives eight separate image calls
+- [ ] A live `agent-persona-original` run: the avatar and the cover are recognisably the same person
+- [ ] A live run on `--engine codex`, then on `--engine gemini` (the engines are built and
+      unit-tested against recorded CLI output; neither has written a real recipe yet). Gemini first
+      needs a headless auth that works on the maintainer's machine: the CLI's Google login is on the
+      retired free Code Assist tier, so it will be `GEMINI_API_KEY`
+- [ ] Decide whether the Cronsole templates expose `engine` as a parameter once Codex and Gemini
+      have each shipped a recipe. Until then every template runs Claude
 
 ## 🚦 Launch-ready
 
@@ -80,8 +84,8 @@ made.
 - [ ] The Cronsole test tasks fire on their own and their run history shows a published artifact
       (first runs Thu 2026-10-15 and Fri 2026-10-16)
 - [ ] One full pack scheduled through Cronsole for a week with no manual fixes
-- [ ] Full-history leak scan clean: `check_public.py` on the tree, plus a scan of every commit
-- [ ] Issue templates for "recipe request" and "bug in a recipe"
+- [ ] Re-run `check_public.py --history` the day before the flip (clean on 2026-10-14, 604 blobs;
+      CI runs it on every push)
 
 ## 📣 Publish & promote
 

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.6.0-2ea44f?style=for-the-badge" alt="Version 0.6.0">
+  <img src="https://img.shields.io/badge/version-0.7.0-2ea44f?style=for-the-badge" alt="Version 0.7.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,28 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.7.0 — 2026-10-14
+
+**Added**
+- Two more text engines behind the same interface, picked with `--engine`: `codex` (Codex CLI,
+  `codex exec` in the `workspace-write` sandbox) and `gemini` (Gemini CLI, `-o json`). Each stages
+  the recipe's skills where its agent looks for them (`.agents/skills/`, `.gemini/skills/`), and the
+  run contract names that folder instead of assuming Claude's. A Claude model alias means "that
+  CLI's default" on either. Built and tested against recorded CLI output; neither has had a live
+  run. *(roadmap: Build)*
+- `alternate-history` renders its eight scene prompts into `scenes/` at 16:9 when an image key is
+  set, nine images a run with the cover. *(roadmap: Build)*
+- `agent-persona-original` renders a square `avatar.png` from the same description as the cover.
+  *(roadmap: Build)*
+- `ImageSpec(optional=True)`: a recipe whose images are a bonus publishes text-only when no image
+  key is set instead of failing before the agent runs. The two recipes above use it.
+- `check_public.py --history` scans every blob in every commit on every ref, not just the tree.
+  Clean today across 604 blobs; CI runs it on every push. *(roadmap: Launch-ready)*
+- Issue templates for a recipe request and a bug in a recipe, with blank issues off and Cronsole's
+  own tracker linked. *(roadmap: Launch-ready)*
+- `tests/test_engines.py` and a third smoke script for the optional-image recipes (good, bad and
+  keyless runs).
 
 ## 0.6.0 — 2026-10-14
 

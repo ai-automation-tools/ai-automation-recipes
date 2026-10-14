@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
-from .base import EngineError, EngineRequest, EngineResult, TextEngine
+from .base import CLAUDE_ALIASES, EngineError, EngineRequest, EngineResult, TextEngine, model_for
 from .claude import ClaudeEngine
+from .codex import CodexEngine
+from .gemini import GeminiEngine
 
 ENGINES: dict[str, type] = {
     "claude": ClaudeEngine,
+    "codex": CodexEngine,
+    "gemini": GeminiEngine,
 }
 
 
@@ -17,4 +21,5 @@ def get_engine(name: str) -> TextEngine:
         raise EngineError(f"Unknown engine {name!r}. Available: {', '.join(sorted(ENGINES))}") from None
 
 
-__all__ = ["ENGINES", "EngineError", "EngineRequest", "EngineResult", "TextEngine", "get_engine"]
+__all__ = ["CLAUDE_ALIASES", "ENGINES", "EngineError", "EngineRequest", "EngineResult", "TextEngine",
+           "get_engine", "model_for"]

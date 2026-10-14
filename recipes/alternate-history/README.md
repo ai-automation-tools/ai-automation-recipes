@@ -18,14 +18,15 @@ illustration prompt, all written to one shared palette.
 
 | | |
 |:---|:---|
-| **Output** | `alternate-history/<YYYY-MM>/<date>_<slug>/` → `story.md`, `scene-prompts.md`, `cover.png`, `artifact.json` |
+| **Output** | `alternate-history/<YYYY-MM>/<date>_<slug>/` → `story.md`, `scene-prompts.md`, `cover.png`, `scenes/01-….png` to `08-….png`, `artifact.json` |
 | **Model** | `opus` |
 | **Tools** | Read, Write, Edit, Glob, Grep, Skill (no web access) |
 | **Skills** | `writing-principles`, `creative-writing-craft`, `llm-writing`, `humanizer`, `image-prompt-craft` |
 
 The runner rejects a piece unless `story.md` has exactly eight sections and `scene-prompts.md` has a
-prompt for each. Only the 2:3 cover is rendered; the eight scene prompts are written but not
-rendered.
+prompt for each. With an image key set it renders all eight scenes at 16:9 into `scenes/` plus the
+2:3 cover, nine images a run. Without a key the piece publishes as text with the prompts written,
+so it still runs on a machine with no image engine.
 
 ## Premise queue (optional)
 

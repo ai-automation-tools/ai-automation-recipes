@@ -21,7 +21,7 @@
 | `core/food/` | The recipe-validator safety gate, allergen fix-ups and the Cook's Card |
 | `core/digest/` | The research-digest toolkit: feed and GitHub Trending fetchers, digest parser, bookmark/OPML writers, shared rules |
 | `core/run-contract.md` | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
-| `core/engines/` | Text engines behind one interface (`claude` today) |
+| `core/engines/` | Text engines behind one interface: `claude`, `codex` and `gemini` |
 | `core/images/` | Image rendering (Gemini, then OpenAI) and `process.py`: crops, ICO, SVG → PNG |
 | `core/audio/` | Speech (Gemini or ElevenLabs, preset voices only) and ElevenLabs music |
 | `core/video.py` | Optional ffmpeg slideshow for vertical shorts |
@@ -50,7 +50,8 @@
    (subfolder paths like `extension/manifest.json` are allowed; `optional_files` are kept when
    present); any other top-level entry is deleted. The recipe's `validate()` hook runs here (the game
    recipe syntax-checks its script); it may take the run context as a third argument.
-6. **Render media.** Any `images` the agent listed (for recipes with an `ImageSpec`), then the cover
+6. **Render media.** Any `images` the agent listed (for recipes with an `ImageSpec`; an `optional`
+   spec is skipped, not failed, when no image key is set), then the cover
    from `cover_prompt`, each with the no-text constraint (or lettering-only for `text_ok`). Then the
    recipe's `after_cover()` hook adds files that need them: the Cook's Card, wallpaper crops, icon
    PNG/ICO, rendered speech and music, the short video.
@@ -91,8 +92,25 @@ This is the contract with any viewer. Add fields freely; bump the schema only fo
 ## 🤖 Engines
 
 An engine implements `preflight()` and `run(EngineRequest) -> EngineResult` (see
-`core/engines/base.py`). The request carries the prompt, the staging folder, the tool allowlist,
-model and timeout; the result is the agent's final message and the model that produced it.
+`core/engines/base.py`) and says where its agent looks for project skills (`skills_dir`). The
+request carries the prompt, the staging folder, the tool allowlist, model and timeout; the result
+is the agent's final message and the model that produced it. `--engine` picks one; a recipe never
+knows which it got.
+
+| Engine | Runs | Writes are confined by | Tool allowlist | Skills staged to |
+|:---|:---|:---|:---|:---|
+| `claude` (default) | `claude --print --output-format json` | `--permission-mode dontAsk` plus the recipe's `--allowedTools` | Enforced | `.claude/skills/` |
+| `codex` | `codex exec --json -s workspace-write -C <staging>` | the `workspace-write` sandbox | Advisory: Codex has none, the contract in the prompt is the rule | `.agents/skills/` |
+| `gemini` | `gemini -p -o json --approval-mode yolo` | nothing but the contract | Advisory | `.gemini/skills/` |
+
+A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Codex and Gemini treat an
+alias as "your own default" and pass a full model id through unchanged. The image, speech and music
+steps are the runner's, so they are identical whichever engine wrote the prompts.
+
+Codex and Gemini have had no live run yet: both are built against the CLIs' documented headless
+output (JSONL events for Codex, one JSON object for Gemini) and tested against recorded shapes.
+The Gemini CLI also needs an auth setup that works headless on your machine, which a Google login
+tied to the retired free Code Assist tier does not.
 
 Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change: they
 name their tools the way Claude Code does, and an engine maps those names to its own.

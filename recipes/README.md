@@ -42,8 +42,8 @@ on import. Which recipes have had a real run so far is tracked in the
 |:---|:---|:---|
 | [**📖 Short Story**](short-story/README.md) | A finished 2,000–4,000-word story that avoids every premise already written | Nothing |
 | [**📚 Serialized Novella**](serialized-novella/README.md) | The next chapter of an ongoing novel, kept consistent by a story bible | Nothing |
-| [**🕰️ Alternate History**](alternate-history/README.md) | An eight-section "what if" timeline from one real divergence | Nothing |
-| [**🎭 Original Agent Persona**](agent-persona-original/README.md) | An invented character card any model can adopt for a debate | Nothing |
+| [**🕰️ Alternate History**](alternate-history/README.md) | An eight-section "what if" timeline from one real divergence, one rendered scene per section | Nothing; an image key adds the eight scenes |
+| [**🎭 Original Agent Persona**](agent-persona-original/README.md) | An invented character card any model can adopt for a debate, with a matching chat avatar | Nothing; an image key adds the avatar |
 | [**📣 Content Idea**](content-idea-gen/README.md) | One automatable social content series, researched | Nothing |
 | [**🤖 Funny AI Content**](funny-ai-content/README.md) | A satirical bit about an absurd AI-agent use case | Nothing |
 

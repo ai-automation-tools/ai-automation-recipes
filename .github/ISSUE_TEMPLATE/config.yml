@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Cronsole itself
+    url: https://github.com/ai-automation-tools/cronsole/issues
+    about: Importing, scheduling or running templates is Cronsole's side. Report that there.
+  - name: Adding a recipe yourself
+    url: https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/ADDING-A-RECIPE.md
+    about: The four files a recipe is made of, and how to test one before opening a PR.

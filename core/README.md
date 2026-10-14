@@ -20,7 +20,7 @@ publishing. The step-by-step version is in [Architecture](../docs/ARCHITECTURE.m
 | [**runner.py**](runner.py) | The run loop: `Recipe`, `ImageSpec`, `RunContext`, the hooks, `NothingToDo` |
 | [**run-contract.md**](run-contract.md) | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
 | [**artifacts.py**](artifacts.py) | Output layout, `artifact.json`, rotation and do-not-repeat helpers |
-| [**engines/**](engines/__init__.py) | Text engines behind one interface. Only `claude` today |
+| [**engines/**](engines/__init__.py) | Text engines behind one interface: `claude` (default), `codex`, `gemini`. Each says where its agent reads project skills |
 | [**images/**](images/__init__.py) | Gemini and OpenAI rendering, the no-text and lettering constraints, resolution tiers |
 | [**images/process.py**](images/process.py) | Aspect crops, multi-size ICO, SVG to PNG |
 | [**audio/**](audio/__init__.py) | Speech from Gemini or ElevenLabs preset voices; ElevenLabs music from a composition plan |

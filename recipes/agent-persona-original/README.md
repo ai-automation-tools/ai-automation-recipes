@@ -19,7 +19,7 @@ it, with one lens, a blind spot that matters, and a voice you'd recognize.
 
 | | |
 |:---|:---|
-| **Output** | `agent-personas/<YYYY-MM>/<date>_<slug>/` → `persona.md`, `cover.png`, `artifact.json` |
+| **Output** | `agent-personas/<YYYY-MM>/<date>_<slug>/` → `persona.md`, `cover.png`, `avatar.png`, `artifact.json` |
 | **Model** | `sonnet` |
 | **Tools** | Read, Write, Edit, Glob, Grep, Skill, WebSearch, WebFetch |
 | **Skills** | `character-sim`, `llm-writing`, `humanizer`, `image-prompt-craft` |
@@ -36,7 +36,8 @@ The runner rejects a card unless its frontmatter starts at byte 0, `tags` is a Y
 frontmatter has no `#` comments, `## Purpose` is under 240 characters, and `## Persona` opens in the
 second person. Everything after the frontmatter works as a system prompt.
 
-The recipe doesn't render a square chat avatar yet; the portrait cover is the only image.
+With an image key set, the run renders the 2:3 portrait cover and a square `avatar.png` for chat
+UIs, drawn from the same description so the two match. Without a key the card publishes on its own.
 
 ## Run it
 

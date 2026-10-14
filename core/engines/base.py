@@ -12,6 +12,17 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol
 
+# Claude Code's model aliases. A recipe's `default_model` is one of these, so an engine that
+# isn't Claude treats them as "use your own default" rather than passing them through.
+CLAUDE_ALIASES = frozenset({"sonnet", "opus", "haiku"})
+
+
+def model_for(engine_name: str, model: str | None) -> str | None:
+    """The model id to hand a non-Claude CLI: a Claude alias means that CLI's default."""
+    if not model or (engine_name != "claude" and model in CLAUDE_ALIASES):
+        return None
+    return model
+
 
 class EngineError(RuntimeError):
     """The agent could not be run, or it ended in an error state."""
@@ -35,6 +46,9 @@ class EngineResult:
 
 class TextEngine(Protocol):
     name: str
+    # Where this agent looks for project skills, relative to its working directory. The runner
+    # copies the recipe's skills there and tells the prompt where they are.
+    skills_dir: str
 
     def preflight(self) -> None:
         """Raise EngineError if the engine cannot run on this machine."""

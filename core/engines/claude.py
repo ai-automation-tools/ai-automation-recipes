@@ -25,6 +25,7 @@ log = logging.getLogger(__name__)
 
 class ClaudeEngine:
     name = "claude"
+    skills_dir = ".claude/skills"
 
     def __init__(self) -> None:
         self.binary = os.environ.get("CLAUDE_BIN", "claude")

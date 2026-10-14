@@ -149,6 +149,14 @@ following the same rules and ending with the shared style and the constraint blo
 renders it at 2:3 — don't put the ratio in the prompt.
 
 --------------------------------------------------
+## SCENE IMAGES
+
+The runner also renders the eight scene prompts, one 16:9 image per section, into `scenes/`. List
+them in the final message as `images`, in section order: `file` is `NN-<short-slug>.png` (`01-` to
+`08-`), `prompt` is that section's scene prompt from `scene-prompts.md` **in full, including the
+shared style and the constraint block**, and `aspect` is always `"16:9"`. Exactly eight entries.
+
+--------------------------------------------------
 ## FINAL MESSAGE
 
 ```json
@@ -159,6 +167,16 @@ renders it at 2:3 — don't put the ratio in the prompt.
   "era": "<era label>",
   "divergence_point": "<as in the frontmatter>",
   "cover_prompt": "<the full cover description>",
+  "images": [
+    {"file": "01-<slug>.png", "prompt": "<scene 1 prompt, in full>", "aspect": "16:9"},
+    {"file": "02-<slug>.png", "prompt": "<scene 2 prompt, in full>", "aspect": "16:9"},
+    {"file": "03-<slug>.png", "prompt": "<scene 3 prompt, in full>", "aspect": "16:9"},
+    {"file": "04-<slug>.png", "prompt": "<scene 4 prompt, in full>", "aspect": "16:9"},
+    {"file": "05-<slug>.png", "prompt": "<scene 5 prompt, in full>", "aspect": "16:9"},
+    {"file": "06-<slug>.png", "prompt": "<scene 6 prompt, in full>", "aspect": "16:9"},
+    {"file": "07-<slug>.png", "prompt": "<scene 7 prompt, in full>", "aspect": "16:9"},
+    {"file": "08-<slug>.png", "prompt": "<scene 8 prompt, in full>", "aspect": "16:9"}
+  ],
   "error": null
 }
 ```

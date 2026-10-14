@@ -103,7 +103,8 @@ WAV and no video. Voices are always premade presets. Nothing here clones a voice
 | Flag | Default | Does |
 |:---|:---|:---|
 | `--output-dir` | `$RECIPES_OUTPUT_DIR` | Root for all output |
-| `--model` | per recipe | Claude model alias: `sonnet`, `opus` or `haiku` |
+| `--engine` | `claude` | The agent that writes: `claude`, `codex` or `gemini` (the last two have had no live run yet) |
+| `--model` | per recipe | Claude model alias (`sonnet`, `opus`, `haiku`) or a full model id. On `codex` and `gemini` an alias means that CLI's default |
 | `--image-engine` | `auto` | `auto`, `gemini`, `openai` or `none` |
 | `--speech-engine` | `auto` | `auto`, `gemini` or `elevenlabs` |
 | `--date` | today | Target date, `YYYY-MM-DD` |

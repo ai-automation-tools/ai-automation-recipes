@@ -29,7 +29,7 @@
     {
       "id": "recipe-agent-persona-original",
       "name": "AI Recipe: Original Agent Persona",
-      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover.",
+      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -49,7 +49,7 @@
         "macos"
       ],
       "path": "templates/recipe-agent-persona-original.json",
-      "sha256": "16882cee88bc1a5e4132d71589561711b4286173098f53c68f6e0d52bd7b72a0"
+      "sha256": "1b4b5717c79c4af68391eb1eb21c8f04895abf5c331221152339ad00f16cc613"
     },
     {
       "id": "recipe-agent-toolkit",
@@ -155,7 +155,7 @@
     {
       "id": "recipe-alternate-history",
       "name": "AI Recipe: Alternate History",
-      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with scene-by-scene illustration prompts and a portrait cover. Optional premise queue via alt-history-ideas.md.",
+      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with a portrait cover and one rendered 16:9 scene per section when an image key is set. Optional premise queue via alt-history-ideas.md.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -175,7 +175,7 @@
         "macos"
       ],
       "path": "templates/recipe-alternate-history.json",
-      "sha256": "f1e6b35ed34dd9244a84fec0419dd5799631bff1089c7260918d91da955b0623"
+      "sha256": "b98a5a7b931ee974a0e523ffd8ad11ec6636fc9ecb42813cc8b096af343821a3"
     },
     {
       "id": "recipe-app-idea-card",
@@ -1042,7 +1042,7 @@
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "3963fd2bf4f0e79639cbd860b75e464a899d3bf1ffeb1791f8fd1c1f31100d96"
+      "sha256": "33fc29a5c939ed1294a1204200ed4b34d9a29ba5059a097ee18fc92c4f73a11a"
     },
     {
       "id": "ai-recipes-apps-games",
@@ -1078,7 +1078,7 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-writing.json",
-      "sha256": "65d674d869cad44a16725c0fa291eecb8d754aa51bccc9fa4c547e34f3322d33"
+      "sha256": "49c3d722136122c3ec1bca0028b182e042fcb39c4333585d97db935496b69acd"
     },
     {
       "id": "ai-recipes-food-maps",

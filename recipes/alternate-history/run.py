@@ -7,8 +7,9 @@ Optional premise queue: put `alt-history-ideas.md` in <output-dir>/alternate-his
 like `- [ ] The Library of Alexandria is never destroyed.` The first unchecked premise is used,
 then ticked off with a link to the piece. With no queue, the agent invents a premise.
 
-The eight scene illustrations are written as prompts (scene-prompts.md) but not rendered yet;
-only the 2:3 cover is. Rendering them needs the runner's multi-image step (roadmap, batch 2).
+With an image key set, the eight scene prompts are rendered to scenes/01-….png … 08-….png at
+16:9 alongside the 2:3 cover. Without one, the prompts are still written (scene-prompts.md) and
+the piece publishes text-only.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from core import Recipe, RecipeError, RunContext, run  # noqa: E402
+from core import ImageSpec, Recipe, RecipeError, RunContext, run  # noqa: E402
 
 IDEAS_FILE = "alt-history-ideas.md"
 UNCHECKED = re.compile(r"^(\s*[-*]\s*)\[ \]\s*(.+)$", re.M)
@@ -79,6 +80,7 @@ RECIPE = Recipe(
     skills=("writing-principles", "creative-writing-craft", "llm-writing", "humanizer", "image-prompt-craft"),
     fields=("era", "divergence_point"),
     cover_aspect="2:3",
+    images=ImageSpec(min=SECTIONS, max=SECTIONS, aspects=("16:9",), folder="scenes", optional=True),
     default_model="opus",
     timeout_s=2400,
     prepare=prepare,
