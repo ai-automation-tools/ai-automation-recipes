@@ -1,5 +1,5 @@
-"""Shared runtime for ai-automation-recipes: engines, images, artifact layout, the run loop."""
+"""Shared runtime for ai-automation-recipes: engines, images, audio, artifact layout, the run loop."""
 
-from .runner import Recipe, RecipeError, RunContext, run
+from .runner import ImageSpec, Recipe, RecipeError, RunContext, run
 
-__all__ = ["Recipe", "RecipeError", "RunContext", "run"]
+__all__ = ["ImageSpec", "Recipe", "RecipeError", "RunContext", "run"]

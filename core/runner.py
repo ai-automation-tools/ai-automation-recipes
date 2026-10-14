@@ -29,13 +29,14 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Callable
 
-from . import artifacts, images
+from . import artifacts, audio, images
 from .engines import EngineError, EngineRequest, get_engine
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SKILLS_DIR = REPO_ROOT / ".claude" / "skills"
 RUN_CONTRACT = (Path(__file__).parent / "run-contract.md").read_text(encoding="utf-8")
-RESERVED_KEYS = ("title", "slug", "summary", "cover_prompt", "error")
+RESERVED_KEYS = ("title", "slug", "summary", "cover_prompt", "images", "error")
+IMAGE_FILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*\.png$")
 
 log = logging.getLogger("recipes")
 
@@ -52,6 +53,19 @@ class RunContext:
     existing: list[artifacts.Existing]
     args: argparse.Namespace
     state: dict[str, object] = field(default_factory=dict)  # prepare() -> later hooks, one run
+
+
+@dataclass(frozen=True)
+class ImageSpec:
+    """A recipe whose agent asks for several images: final JSON carries
+    `"images": [{"file": "panel-1.png", "prompt": "...", "aspect": "16:9"}]` and the runner
+    renders each into `folder/` after validate()."""
+
+    min: int = 1
+    max: int = 12
+    aspects: tuple[str, ...] = ("16:9",)
+    folder: str = "images"  # "" puts them beside the main file
+    text_ok: bool = False  # True skips the no-text constraint (memes)
 
 
 @dataclass
@@ -73,6 +87,8 @@ class Recipe:
     validate: Callable[..., None] | None = None  # (staging, manifest[, ctx]); raise RecipeError to reject
     after_cover: Callable[[RunContext, Path, dict[str, object]], list[str] | None] | None = None  # in staging, cover exists; returns extra files to publish
     finish: Callable[[RunContext, Path, dict[str, object]], None] | None = None
+    images: ImageSpec | None = None
+    requires: tuple[str, ...] = ()  # "images", "speech", "music": checked before the agent runs
     extra: dict[str, object] = field(default_factory=dict)
 
 
@@ -149,6 +165,8 @@ def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--image-engine", default=os.environ.get("RECIPES_IMAGE_ENGINE", "auto"),
                    choices=["auto", "gemini", "openai", "none"],
                    help="auto = first engine with a key set; skips the cover if none is set.")
+    p.add_argument("--speech-engine", default=os.environ.get("RECIPES_SPEECH_ENGINE", "auto"),
+                   choices=["auto", "gemini", "elevenlabs"], help="Text-to-speech engine for audio recipes.")
     p.add_argument("--timeout", type=int, default=recipe.timeout_s, help="Agent timeout in seconds.")
     p.add_argument("--keep-staging", action="store_true", help="Keep the staging folder on failure.")
     p.add_argument("--dry-run", action="store_true", help="Print the filled prompt and exit.")
@@ -194,7 +212,7 @@ def run(recipe: Recipe, argv: list[str] | None = None) -> int:
     staging = collection_dir / ".staging" / f"{ctx.day.isoformat()}_{datetime.now():%H%M%S}"
     try:
         final = _run_staged(recipe, ctx, prompt, staging)
-    except (RecipeError, EngineError, images.ImageError) as exc:
+    except (RecipeError, EngineError, images.ImageError, audio.AudioError) as exc:
         log.error("RECIPE_FAILED %s: %s", recipe.name, exc)
         if staging.exists() and not args.keep_staging:
             shutil.rmtree(staging, ignore_errors=True)
@@ -210,6 +228,7 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     args = ctx.args
     engine = get_engine(args.engine)
     engine.preflight()
+    _preflight_media(recipe, args)
 
     staging.mkdir(parents=True)
     stage_skills(staging, recipe.skills)
@@ -236,6 +255,8 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     # Keep each declared file's top-level entry (a subfolder like extension/ survives whole);
     # anything else at the top level is a sidecar the agent wasn't asked for.
     keep = {Path(f).parts[0] for f in (*recipe.files, *recipe.optional_files)}
+    if recipe.images and recipe.images.folder:
+        keep.add(recipe.images.folder)
     for stray in staging.iterdir():
         if stray.name not in keep:
             log.warning("removing unexpected file from output: %s", stray.name)
@@ -247,6 +268,8 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
             recipe.validate(staging, manifest, ctx)
         else:
             recipe.validate(staging, manifest)
+
+    rendered = _render_images(recipe, args, staging, manifest) if recipe.images else []
 
     cover = None
     if recipe.cover_aspect and args.image_engine != "none":
@@ -273,6 +296,8 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     files = {"main": recipe.files[0], **{Path(f).with_suffix("").as_posix(): f for f in published}}
     if cover:
         files["cover"] = "cover.png"
+    if rendered:
+        files["images"] = rendered
     entry = {
         "recipe": recipe.name,
         "recipe_version": recipe.version,
@@ -301,6 +326,43 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
         "path": final.relative_to(ctx.output_dir).as_posix(),
     })
     return final
+
+
+def _preflight_media(recipe: Recipe, args: argparse.Namespace) -> None:
+    """Fail before the agent runs when a key the recipe can't do without is missing."""
+    needs = set(recipe.requires) | ({"images"} if recipe.images else set())
+    if "images" in needs and (args.image_engine == "none" or
+                              (args.image_engine == "auto" and not images.available_engines())):
+        raise RecipeError("this recipe makes images: set GEMINI_API_KEY or OPENAI_API_KEY")
+    if "speech" in needs and not (audio.speech_engines() if args.speech_engine == "auto"
+                                  else [args.speech_engine] if args.speech_engine in audio.speech_engines() else []):
+        raise RecipeError("this recipe speaks: set GEMINI_API_KEY or ELEVENLABS_API_KEY")
+    if "music" in needs and not audio.music_available():
+        raise RecipeError("this recipe makes music: set ELEVENLABS_API_KEY")
+
+
+def _render_images(recipe: Recipe, args: argparse.Namespace, staging: Path, manifest: dict[str, object]) -> list[str]:
+    spec = recipe.images
+    assert spec is not None
+    wanted = manifest.get("images")
+    if not isinstance(wanted, list) or not spec.min <= len(wanted) <= spec.max:
+        raise RecipeError(f"final JSON needs {spec.min}–{spec.max} entries in `images`")
+    out, seen = [], set()
+    for i, item in enumerate(wanted, 1):
+        if not isinstance(item, dict):
+            raise RecipeError(f"images[{i}] is not an object")
+        name, prompt, aspect = str(item.get("file", "")), str(item.get("prompt", "")).strip(), str(item.get("aspect", spec.aspects[0]))
+        if not IMAGE_FILE_RE.match(name) or name in seen:
+            raise RecipeError(f"images[{i}].file must be a unique lowercase .png name, got {name!r}")
+        if aspect not in spec.aspects:
+            raise RecipeError(f"images[{i}].aspect {aspect!r} not in {spec.aspects}")
+        if not prompt:
+            raise RecipeError(f"images[{i}] has no prompt")
+        seen.add(name)
+        rel = f"{spec.folder}/{name}" if spec.folder else name
+        images.render(prompt, staging / rel, aspect, args.image_engine, text_ok=spec.text_ok)
+        out.append(rel)
+    return out
 
 
 def _cleanup_staging_root(collection_dir: Path) -> None:

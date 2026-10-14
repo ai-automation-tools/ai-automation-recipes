@@ -5,3 +5,6 @@ pillow>=10.0
 
 # Food recipes: renders the Cook's Card HTML (skipped with a warning if missing).
 markdown>=3.5
+
+# Icon packs: renders agent-written SVG icons to PNG/ICO (SVG-only output without it).
+resvg-py>=0.2

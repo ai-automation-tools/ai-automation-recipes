@@ -84,8 +84,11 @@ def available_engines() -> list[str]:
     return [name for name, (env, _) in ENGINES.items() if os.environ.get(env)]
 
 
-def render(prompt: str, out: Path, aspect: str, engine: str = "auto") -> ImageResult:
-    """Render `prompt` to `out` as PNG. engine: auto | gemini | openai."""
+def render(prompt: str, out: Path, aspect: str, engine: str = "auto", *, text_ok: bool = False) -> ImageResult:
+    """Render `prompt` to `out` as PNG. engine: auto | gemini | openai.
+
+    text_ok skips the no-text constraint, for the rare image that is meant to carry words (a meme).
+    """
     if aspect not in ASPECTS:
         raise ImageError(f"Unsupported aspect {aspect!r}; use one of {ASPECTS}.")
     ladder = available_engines() if engine == "auto" else [engine]
@@ -94,7 +97,7 @@ def render(prompt: str, out: Path, aspect: str, engine: str = "auto") -> ImageRe
 
     from PIL import Image
 
-    prompt = with_constraints(prompt)
+    prompt = prompt.strip() if text_ok else with_constraints(prompt)
     errors: list[str] = []
     for name in ladder:
         if name not in ENGINES:
