@@ -1,106 +1,142 @@
-# Changelog
+<h1 align="center">📋 Changelog</h1>
 
-[← README](../README.md)
+<p align="center">
+  <em>Every change to the recipes, the runner and the docs, newest first.</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.6.0-2ea44f?style=for-the-badge" alt="Version 0.6.0">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
+</p>
+
+---
+
+Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
+0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.6.0 — 2026-10-14
+
+**Changed**
+- Recipe names no longer say how often they run. Sixteen were renamed, with their template IDs and
+  display names: `daily-app-card` → `app-idea-card`, `weekly-browser-game` → `browser-game`,
+  `weekly-short-story` → `short-story`, `recipe-of-the-week` → `family-recipe`,
+  `weekly-audio-podcast` → `podcast-episode`, `weekend-yearly-collections` → `image-collections`,
+  `weekly-financial-idea` → `finance-app-prototype`, `weekly-3d-print-ideas` → `3d-print-design`,
+  `daily-poster` → `poster`, and the `weekly-` prefix dropped from the other seven. Collections kept
+  their names, so earlier output stays where it is.
+- The song recipe's `weekly` type is now `news`.
+- Prompts and help text no longer assume a cadence ("this week's genre", "one chapter per week").
+  Cadence that the code depends on, like GitHub's weekly trending pages, stays.
+
+**Docs**
+- Rebuilt the docs as one linked tree: a root README, an index for every folder (`recipes/`,
+  `core/`, `scripts/`, `registry/`, `tests/`, `.claude/skills/`, `docs/`), and a header and footer
+  on every recipe README that link back up and on to the next recipe.
+- The recipe list lost its schedule column. Each Cronsole template still ships a default schedule
+  you can change on import.
+- The roadmap is now grouped by phase, with finished work moved here.
 
 ## 0.5.0 — 2026-10-14
 
-- **Browser smoke test** (`core.web.browser_smoke`): game and app recipes load their page in a
-  headless browser (Playwright with Chromium, or the system Chrome or Edge), click and press keys,
-  and reject the run on any uncaught error. Catches the dead-title-screen class `node --check`
-  can't. Skipped when no browser is available or `RECIPES_BROWSER_CHECK=off`.
-- **Webhook delivery** (`core/deliver.py`): `RECIPES_WEBHOOK_URL` announces each published
-  artifact; Discord and Slack get native messages, anything else JSON. Best-effort.
-- 49 tests.
+**Added**
+- A headless-browser smoke test for the six game and app recipes: the page loads, gets clicked and
+  keyed, and the run fails on any uncaught error. It uses Playwright's Chromium or the system Chrome
+  or Edge, and skips itself when there's no browser. *(roadmap: Hardening)*
+- `RECIPES_WEBHOOK_URL` announces each published artifact to Discord, Slack or any URL as JSON. A
+  failed delivery never fails the run. *(roadmap: Hardening)*
+- Three templates were imported into a live Cronsole through its import API and scheduled as
+  Cronsole-native tasks; the viewer rebuild ran with exit 0.
+
+**Docs**
+- A live-test table tracks which recipes have had a real run.
 
 ## 0.4.0 — 2026-10-14
 
-- **Viewer**: `scripts/build_viewer.py` turns any output folder into a browsable page
-  (`index.html` + `catalog.js`): collections in a sidebar, cover grid, search, rendered Markdown,
-  games and apps in a sandboxed iframe, galleries, audio and video. Works from `file://`. House
-  style (fuchsia accent, light/dark, phone drawer). Model-written HTML in documents is escaped and
-  the catalog can't close its own `<script>` tag.
-- **Cronsole**: new `AI Recipes: Rebuild Viewer` template, shipped in every pack.
-- **icon-packs**: 35 brand-named themes rewritten as generic functional sets, and the prompt now
-  forbids naming or echoing any product, company or brand — a live run had echoed real browser
-  logos. Other theme lists reviewed: clean.
-- **Docs**: live samples in nine recipe READMEs.
-- 46 tests.
+**Added**
+- `scripts/build_viewer.py` turns any output folder into a browsable page: collections, covers,
+  search, rendered Markdown, games and apps in a sandboxed frame, galleries, audio and video. It
+  works from disk, and model-written HTML can't run in it. *(roadmap: Viewer)*
+- The **Rebuild Viewer** Cronsole template, in every pack.
+
+**Changed**
+- `icon-packs` themes no longer name products or brands. A live run on a "Web Browsers" theme drew
+  icons that echoed real browser logos, so 35 themes became generic sets and the prompt forbids
+  brands. The other image theme lists were checked and are clean.
+
+**Fixed**
+- The leak scan stopped reading SVG path data as IP addresses.
+
+**Docs**
+- Live samples in nine recipe READMEs.
 
 ## 0.3.0 — 2026-10-14
 
-Batch 2: media support and 12 image and audio recipes, 38 in all.
+**Added**
+- Twelve image and audio recipes, 38 in all: `comics`, `ai-meme-generator`, `daily-poster`,
+  `future-cities`, `image-prompt-packs`, `wallpaper-packs`, `icon-packs`,
+  `weekend-yearly-collections`, `song-generator`, `podcast-script-generator`, `weekly-audio-podcast`
+  and `voiceover-script-generator`. Voices are presets only. *(roadmap: Batch 2)*
+- Multi-image runs (`ImageSpec`) with resolution tiers and a lettering-only mode for images that
+  carry words.
+- `core/images/process.py` for crops, ICO and SVG; `core/audio` for Gemini or ElevenLabs speech and
+  ElevenLabs music; `core/video.py` for an ffmpeg slideshow.
+- A key preflight (`requires=`), a `NothingToDo` skip signal and per-run tool lists.
+- The `songwriting-craft` skill, CC0-derived and attributed.
 
-- **Images**: `comics`, `ai-meme-generator`, `daily-poster`, `future-cities`, `image-prompt-packs`,
-  `wallpaper-packs` (4K masters cropped to desktop and phone), `icon-packs` (SVG + PNG + ICO from
-  agent-written glyphs), `weekend-yearly-collections` (user-editable collections). Theme lists were
-  cleaned of real people and named artists.
-- **Audio**: `song-generator` (37 song types, ElevenLabs composition plans), `podcast-script-generator`
-  and `weekly-audio-podcast` (script, then a rendered episode), `voiceover-script-generator`
-  (narration and a vertical short). Preset voices only.
-- **Runner**: `ImageSpec` multi-image output with resolution tiers and a lettering-only mode;
-  `requires=` preflight; `NothingToDo` skip signal; `prepare()` errors fail cleanly; per-run tool
-  lists via `ctx.state["tools"]`.
-- **core**: `core/images/process.py` (crops, ICO, SVG rasterizing), `core/audio` (Gemini and
-  ElevenLabs speech, ElevenLabs music), `core/video.py` (ffmpeg slideshow).
-- **Consolidation**: shared helpers moved into `core/web.py`, `core/food/`, `core/digest/`;
-  `validate()` can take the run context; new `after_cover` hook.
-- **Fixed from live runs**: a slideshow ran 18 s past its audio; an empty Gemini TTS response killed
-  a 42-line episode at line 36 (now retried).
-- **Skills**: `songwriting-craft` (CC0-derived, attributed).
-- **Registry**: 39 templates in seven packs. **Tests**: 43, plus faked-engine smoke runs of every
-  Batch 2 recipe. CI installs requirements and ffmpeg. Dependabot ignores majors and pip version
-  PRs until publish.
+**Changed**
+- Shared helpers moved into `core/web.py`, `core/food/` and `core/digest/`. `validate()` can take
+  the run context, and a new `after_cover` hook publishes files that need the cover.
+- CI installs the requirements and ffmpeg. Dependabot ignores major versions, and pip version PRs
+  are off until publish.
+
+**Fixed**
+- A voiceover video ran 18 seconds past its audio.
+- An empty Gemini speech response stopped a 42-line podcast at line 36. Empty responses are now
+  retried.
 
 ## 0.2.0 — 2026-10-14
 
-Batch 1: 23 more recipes, 26 in all.
+**Added**
+- Twenty-three recipes across apps and games, writing, food and maps, and research digests, 26 in
+  all. *(roadmap: Batch 1)*
+- The browser extension recipe checks Manifest V3, missing files, remote code and `eval`.
+- The serialized novella keeps a story bible in its collection and reseeds a new novel when one
+  finishes.
+- Food recipes generate their cover instead of downloading a photo, say plainly that the recipe is
+  AI-adapted and untested, gate on the recipe-validator scanner and render a Cook's Card.
+- Research digests write browser bookmarks and never repeat an earlier entry; `trending-movers`
+  rejects figures that don't match what it measured.
+- The `recipe-validator` skill and eight Apache-2.0 writing skills, attributed.
+- Five registry packs: everything, plus one per group.
 
-- **Apps & games**: `weekly-app-prototype`, `weekly-browser-extension` (loadable Manifest V3 folder,
-  checked for MV3, missing files, remote code and `eval`), `weekly-financial-idea`,
-  `weekly-mobile-game`, `weekly-pc-game-concept`, `weekly-3d-print-ideas` (one design per run,
-  three runs a week).
-- **Writing**: `serialized-novella` (story bible kept in the collection, chapter number and rolling
-  synopsis derived from published chapters, archived and reseeded at the target length),
-  `alternate-history` (optional premise queue), `agent-persona-original`, `content-idea-gen`,
-  `weekly-funny-ai-content`.
-- **Food & maps**: `recipe-of-the-week` and `weekly-regional-recipe` (generated covers instead of
-  downloaded photos, credits that say the recipe is AI-adapted and untested, the recipe-validator
-  scanner as a hard safety gate, a self-contained Cook's Card page), `weekly-ai-map` (Leaflet,
-  per-stop photo downloads dropped).
-- **Research digests** (monthly): `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`,
-  `cool-websites`, `top-10-github-repos`, `trending-movers` (published figures must match the
-  measured ones), `signal-sources` (cumulative, with OPML), `security-toolkit`, `finance-toolkit`.
-  Each writes browser bookmarks and never repeats an earlier entry.
-- **Shared helpers**: `recipes/_shared/` (web and MV3 checks, Cook's Card) and `recipes/_digest/`
-  (fetchers, parser, bookmark and OPML writers).
-- **Runner**: subfolder paths and `optional_files`; `0` and `false` are no longer treated as
-  missing fields; inline JSON data blocks are skipped by the JS syntax checks.
-- **Skills**: `recipe-validator`; eight Apache-2.0 writing skills from creative-writing-skills,
-  attributed in `.claude/skills/_vendor/` (which now also covers `llm-writing`).
-- **Registry**: 27 templates in five packs — everything, plus one per category.
-- `markdown` added to `requirements.txt` for the Cook's Card.
+**Changed**
+- Recipe output may include subfolders and optional files.
+
+**Fixed**
+- A field set to `0` or `false` was treated as missing.
+- JSON data blocks inside HTML were syntax-checked as JavaScript. A live run caught it.
 
 ## 0.1.0 — 2026-10-14
 
-First pilot build.
+**Added**
+- The runner: staged runs that publish all or nothing, a shared headless contract, prompt filling
+  that fails on unfilled tokens, and `runs.jsonl`.
+- The Claude engine: `claude --print` in the staging folder under `--permission-mode dontAsk`, with a
+  tool allowlist per recipe.
+- Covers from Gemini, then OpenAI, whichever key is set.
+- Three recipes: `daily-app-card`, `weekly-browser-game` and `weekly-short-story`, each with one
+  live run. *(roadmap: Pilot)*
+- Cronsole Registry v1 templates, a clone-updater template and the `ai-recipes` pack, checked
+  against Cronsole's own schema and substitution code.
+- `scripts/check_public.py`, and CI running the tests, the registry check, the leak scan and every
+  prompt's dry run.
 
-- **Runner** (`core/runner.py`): staged runs that publish all-or-nothing, a shared headless run
-  contract, `{{TOKEN}}` prompt filling that fails on leftovers, JSON extraction from the agent's
-  final message, stray-file cleanup, `runs.jsonl`.
-- **Claude engine**: `claude --print` in the staging folder under `--permission-mode dontAsk` with a
-  per-recipe tool allowlist.
-- **Covers**: Gemini then OpenAI, by whichever key is set; PNG re-encoded through Pillow; the
-  canonical no-text constraint appended once.
-- **Recipes**: `daily-app-card` (five rotating categories), `weekly-browser-game` (thirteen genres
-  by ISO week, resource and `node --check` validation), `weekly-short-story` (eleven genres,
-  optional `story-ideas.md` queue).
-- **Skills**: `humanizer` (MIT, vendored), `llm-writing`, `game-design`, `single-file-game-dev`,
-  `image-prompt-craft` (engine references rewritten for public image APIs).
-- **Cronsole**: one Registry v1 template per recipe, a clone-updater template, and the
-  `ai-recipes` pack; `scripts/build_registry.py` with `--check`.
-- **Safety**: `scripts/check_public.py`.
-- **CI**: tests, registry check, leak scan and prompt dry runs on every push and PR; Dependabot
-  for Actions and pip (majors ignored).
-- **Covers** are asked for full-bleed, after the first live run produced an inset panel.
-- Verified live: one real run of each recipe, and the pack run through Cronsole's own import and
-  substitution code.
+**Changed**
+- Covers are requested full-bleed, after the first live cover came out as an inset panel.
+
+---
+
+<p align="center">
+  <a href="README.md">← Docs home</a> ·
+  <a href="ROADMAP.md">Roadmap</a>
+</p>

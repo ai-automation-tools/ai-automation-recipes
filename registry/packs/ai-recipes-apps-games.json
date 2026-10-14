@@ -561,7 +561,7 @@
       "schemaVersion": "1.0",
       "id": "recipe-pc-game-concept",
       "name": "AI Recipe: PC Game Concept",
-      "description": "Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
+      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",

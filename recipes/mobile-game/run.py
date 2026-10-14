@@ -32,7 +32,7 @@ GENRES = [
 
 
 def add_args(p: argparse.ArgumentParser) -> None:
-    p.add_argument("--genre", help="Override the weekly genre rotation (any string).")
+    p.add_argument("--genre", help="Override the genre rotation (any string).")
 
 
 def prepare(ctx: RunContext) -> dict[str, str]:

@@ -208,7 +208,7 @@
       "schemaVersion": "1.0",
       "id": "recipe-regional-recipe",
       "name": "AI Recipe: Regional Recipe",
-      "description": "Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
+      "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",

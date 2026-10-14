@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Browser Extension — a loadable Manifest V3 extension plus a mock-browser demo, weekly.
+"""Browser Extension — a loadable Manifest V3 extension plus a mock-browser demo.
 
     python recipes/browser-extension/run.py --output-dir ~/ai-output
 """

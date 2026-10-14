@@ -1,6 +1,6 @@
 # PC Game Concept
 
-Goal: produce ONE original, substantial **PC game concept** in this week's genre — a game-design brief,
+Goal: produce ONE original, substantial **PC game concept** in this run's genre — a game-design brief,
 a polished one-page pitch, and key art — the package a small studio or solo dev could take into a
 pre-production greenlight discussion.
 
@@ -11,7 +11,7 @@ Target date: **{{DATE_LONG}}** (`{{DATE}}`).
 --------------------------------------------------
 ## THIS RUN
 
-**Genre: `{{GENRE}}`** — chosen by the runner from a weekly rotation. Do not pick a different one.
+**Genre: `{{GENRE}}`** — chosen by the runner from a rotation. Do not pick a different one.
 
 **Concepts already written** (date · slug · title — hook). Pick a clearly different concept:
 

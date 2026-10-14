@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AI Stack Radar — a monthly radar of hosted AI products, each with what it replaces and costs.
+"""AI Stack Radar — a radar of hosted AI products, each with what it replaces and costs.
 
     python recipes/ai-stack-radar/run.py --output-dir ~/ai-output
 """

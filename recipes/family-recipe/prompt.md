@@ -1,6 +1,6 @@
 # Family Recipe
 
-Goal: write ONE popular, family-friendly recipe from this week's cuisine as a clean, cookable
+Goal: write ONE popular, family-friendly recipe from this run's cuisine as a clean, cookable
 Markdown recipe, plus the description of a cover image.
 
 Target date: **{{DATE_LONG}}** (`{{DATE}}`).

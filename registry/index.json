@@ -603,7 +603,7 @@
     {
       "id": "recipe-pc-game-concept",
       "name": "AI Recipe: PC Game Concept",
-      "description": "Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
+      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -623,7 +623,7 @@
         "macos"
       ],
       "path": "templates/recipe-pc-game-concept.json",
-      "sha256": "8f383e61ec43a96d14067a9ad62863a5f6a826aa1b7a7a59e9c0d5754e31c70d"
+      "sha256": "6580328c86a14f8d52606c3537b2a9ac720a66dd58f9bd71b4dec7ebd019896b"
     },
     {
       "id": "recipe-podcast-episode",
@@ -723,7 +723,7 @@
     {
       "id": "recipe-regional-recipe",
       "name": "AI Recipe: Regional Recipe",
-      "description": "Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
+      "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -742,7 +742,7 @@
         "macos"
       ],
       "path": "templates/recipe-regional-recipe.json",
-      "sha256": "22e0ef02d3e8805938228ac1dd490383a571bc0628111574f0456af9e9c1ed80"
+      "sha256": "0a6ad3aef2565b347b8675d536d47eb903f83d4899c3a81aea90258c9b0f2c64"
     },
     {
       "id": "recipe-security-toolkit",
@@ -1042,7 +1042,7 @@
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "9a7045722b6d6888649651b6dd1fca3846817c0a5aa3d90676a4c3d2b6da439d"
+      "sha256": "3963fd2bf4f0e79639cbd860b75e464a899d3bf1ffeb1791f8fd1c1f31100d96"
     },
     {
       "id": "ai-recipes-apps-games",
@@ -1061,7 +1061,7 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-apps-games.json",
-      "sha256": "03b5d05b5b88178ca5f4f8ea885bb2039dc5a508beebdbb96d17c54b3570ef8b"
+      "sha256": "bade4d21a96abcd323947f20a9b754dceb90f0c882821c2486a8ca7bb07691f4"
     },
     {
       "id": "ai-recipes-writing",
@@ -1092,7 +1092,7 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-food-maps.json",
-      "sha256": "7c6bb9248ef0ae46f3d851a1ba81cdd2c3a9a048b17011b23b8f1788c97152da"
+      "sha256": "b8c37dbb084b84387e25aa6982c57bbecff52ead9680afcb204d61a057d83338"
     },
     {
       "id": "ai-recipes-digests",

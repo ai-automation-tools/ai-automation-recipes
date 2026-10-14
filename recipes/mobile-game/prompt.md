@@ -11,7 +11,7 @@ Target date: **{{DATE_LONG}}** (`{{DATE}}`).
 --------------------------------------------------
 ## THIS RUN
 
-**Genre: `{{GENRE}}`** — chosen by the runner from a weekly rotation. Build a game in this genre; do
+**Genre: `{{GENRE}}`** — chosen by the runner from a rotation. Build a game in this genre; do
 not substitute another.
 
 **Games already built** (date · slug · title — hook). Pick a clearly different title and concept —

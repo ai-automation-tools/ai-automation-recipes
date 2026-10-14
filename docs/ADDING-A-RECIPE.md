@@ -1,26 +1,37 @@
-# Adding a recipe
+<h1 align="center">🛠️ Adding a Recipe</h1>
 
-[← README](../README.md)
+<p align="center">
+  <em>Four files in one folder, then a few commands before the pull request.</em>
+</p>
 
-A recipe is four files in `recipes/<name>/`. Copy `app-idea-card` and change what differs.
+<p align="center">
+  <img src="https://img.shields.io/badge/files-4-8B5CF6?style=for-the-badge" alt="4 files">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
+</p>
 
-## 1. `prompt.md`
+---
+
+A recipe is four files in `recipes/<name>/`. Copy `app-idea-card` and change what differs. Name it
+for what it makes, not how often it runs: `browser-game`, not `weekly-browser-game`. The schedule
+belongs to whoever imports the template.
+
+## 📝 1. `prompt.md`
 
 The job description the agent reads. Keep these, in roughly this order:
 
-- `{{RUN_CONTRACT}}` near the top — the headless rules every recipe shares.
+- `{{RUN_CONTRACT}}` near the top: the headless rules every recipe shares.
 - What this run is about: the rotation pick from `prepare()`, and `{{EXISTING}}` so the agent
   doesn't repeat itself.
 - `{{SKILLS}}` and which skills to load before which step, with the carve-outs the skill can't know.
 - `{{OUTPUT_FILES}}` and the exact format of each file.
 - A cover section if the recipe has one: what to depict, and what is forbidden.
-- **FINAL MESSAGE**: the JSON keys the runner reads — always `title`, `slug`, `summary`,
-  `cover_prompt`, `error`, plus your recipe's `fields`.
+- **FINAL MESSAGE**: the JSON keys the runner reads. Always `title`, `slug`, `summary`,
+  `cover_prompt` and `error`, plus your recipe's `fields` (and `images` with an `ImageSpec`).
 
 Things that belong in code, not the prompt: dates, folder paths, rotation, deduplication lists,
 validation the runner can do itself.
 
-## 2. `run.py`
+## 🐍 2. `run.py`
 
 ```python
 RECIPE = Recipe(
@@ -51,10 +62,10 @@ slideshows. Raise `NothingToDo` from `prepare()` when there is no work this run.
 
 Give the agent the narrowest tool list that works. No `Bash` unless the recipe can't do without it.
 
-## 3. `cronsole.json`
+## 📅 3. `cronsole.json`
 
 A Registry v1 template. Copy an existing one and change `id` (`recipe-<name>`), `name`,
-`description`, `tags`, the cron (5-field, UTC) and the path in `commandTemplate`. Keep
+`description`, `tags`, a sensible default cron (5-field, UTC) and the path in `commandTemplate`. Keep
 `recipesPath`, `outputDir`, `model` and `imageEngine` as parameters, and never add a parameter for
 an API key.
 
@@ -64,11 +75,15 @@ Then rebuild the registry:
 python scripts/build_registry.py
 ```
 
-## 4. `README.md`
+## 📖 4. `README.md`
 
-What it makes, a sample of the output, the schedule, the cost driver, and any recipe-specific flags.
+Use the same shape as the others: a centered emoji title and one-line tagline, a badge row (default
+model, any key it needs, a back link to `../README.md`), a facts table (output, model, tools,
+skills), the recipe-specific flags, a sample once it has had a live run, and the run command. End
+with the footer nav row. Leave the schedule out. Then add the recipe to its group in
+[`recipes/README.md`](../recipes/README.md) and to `CATEGORY_PACKS` in `scripts/build_registry.py`.
 
-## Before you open a PR
+## ✅ Before you open a PR
 
 ```bash
 python recipes/<name>/run.py --output-dir ./output --dry-run   # prompt fills, no {{ left
@@ -78,3 +93,11 @@ python scripts/check_public.py
 ```
 
 Then run it for real once and read what it made.
+
+---
+
+<p align="center">
+  <a href="README.md">← Docs home</a> ·
+  <a href="ARCHITECTURE.md">Architecture</a> ·
+  <a href="ROADMAP.md">Next: Roadmap →</a>
+</p>

@@ -1,8 +1,17 @@
-# Architecture
+<h1 align="center">🧱 Architecture</h1>
 
-[← README](../README.md)
+<p align="center">
+  <em>What happens between a recipe starting and its folder being published, and the contract a viewer can rely on.</em>
+</p>
 
-## Layout
+<p align="center">
+  <img src="https://img.shields.io/badge/artifact-schema_v1-0078D4?style=for-the-badge" alt="artifact.json schema v1">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
+</p>
+
+---
+
+## 🗂️ Layout
 
 | Path | Holds |
 |:---|:---|
@@ -19,13 +28,13 @@
 | `core/deliver.py` | Optional webhook announcement of each published artifact |
 | `core/artifacts.py` | Output layout, `artifact.json`, rotation and do-not-repeat helpers |
 | `.claude/skills/` | Skills the recipes load, copied into each run's staging folder |
-| `cronsole/` | Templates that aren't recipes (the clone updater) |
+| `cronsole/` | The two helper templates that aren't recipes: Update Clone and Rebuild Viewer |
 | `registry/` | **Generated.** The Cronsole registry, built by `scripts/build_registry.py` |
 | `scripts/check_public.py` | Pre-publish scan for keys, personal paths and a private denylist |
 | `viewer/index.html` | The viewer page; `scripts/build_viewer.py` copies it into an output folder beside a generated `catalog.js` |
-| `tests/` | `unittest` coverage of the run loop with the engine faked |
+| `tests/` | `unittest` coverage of the run loop, media steps, recipes and the viewer, with every engine faked |
 
-## The run loop
+## 🔁 The run loop
 
 1. **Read the collection.** `load_existing()` reads every `artifact.json` under the recipe's
    collection. Recipes use it to rotate categories and genres (`least_used`) and to show the agent
@@ -52,7 +61,9 @@ Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires
 `ImageSpec`) is checked against the keys that are set, so a missing key fails before the agent runs;
 `prepare()` can raise `NothingToDo` to skip the run with exit 0.
 
-## `artifact.json` (schema `ai-automation-recipes/artifact@1`)
+## 📄 `artifact.json`
+
+Schema `ai-automation-recipes/artifact@1`, written into every published folder.
 
 ```json
 {
@@ -77,17 +88,25 @@ Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires
 
 This is the contract with any viewer. Add fields freely; bump the schema only for a breaking change.
 
-## Engines
+## 🤖 Engines
 
 An engine implements `preflight()` and `run(EngineRequest) -> EngineResult` (see
 `core/engines/base.py`). The request carries the prompt, the staging folder, the tool allowlist,
 model and timeout; the result is the agent's final message and the model that produced it.
 
-Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change — they
-already describe their tools by Claude Code's names, which an engine maps to its own.
+Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change: they
+name their tools the way Claude Code does, and an engine maps those names to its own.
 
-## Skills
+## 🧠 Skills
 
-Recipes name skills; they never paste skill text into a prompt. The copy in `.claude/skills/` is
-the single source of truth. A skill that reads like it was written for an interactive session gets
+Recipes name skills; they never paste skill text into a prompt, so the copy in
+[`.claude/skills/`](../.claude/skills/README.md) is the only one. A skill that reads like it was written for an interactive session gets
 carve-outs in the prompt ("skip the audit, the output format wins"), not edits to the skill.
+
+---
+
+<p align="center">
+  <a href="README.md">← Docs home</a> ·
+  <a href="../core/README.md">Core</a> ·
+  <a href="ADDING-A-RECIPE.md">Next: Adding a recipe →</a>
+</p>
