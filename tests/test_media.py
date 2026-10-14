@@ -7,6 +7,12 @@ Every API is faked; nothing here spends a key.
 
 from __future__ import annotations
 
+
+import os
+
+# Validators open a real browser when one is available; tests opt in explicitly (BrowserSmokeTests).
+os.environ.setdefault("RECIPES_BROWSER_CHECK", "off")
+
 import io
 import json
 import shutil

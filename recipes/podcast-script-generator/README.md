@@ -31,6 +31,12 @@ speaker may be, or be named after, a real living person.
 At least two guests, each speaking 4–7 times; at least ten turns; 1,200–3,500 words; a `## Script`
 section; `cast.md` when the cast was invented.
 
+## Sample
+
+> **Should We Text the Aliens First?** — A cautious astrophysicist, a backyard radio enthusiast, a contrarian linguist and a cruise-ship crooner argue over whether humanity should beam deliberate messages to the stars, covering the 'dark forest' risk, who gets to decide, whether anyone could understand us, and the century of TV and radar we've already leaked.
+>
+> *First live pilot run, 2026-10-14 · Opus · 42 turns, about 2,000 words, invented cast*
+
 ## Run it
 
 ```bash

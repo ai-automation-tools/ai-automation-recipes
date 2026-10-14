@@ -29,7 +29,7 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Callable
 
-from . import artifacts, audio, images
+from . import artifacts, audio, deliver, images
 from .engines import EngineError, EngineRequest, get_engine
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -335,10 +335,11 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     if recipe.finish:
         recipe.finish(ctx, final, manifest)
 
+    path = final.relative_to(ctx.output_dir).as_posix()
     artifacts.append_run_log(ctx.output_dir, {
-        "date": entry["date"], "recipe": recipe.name, "title": entry["title"],
-        "path": final.relative_to(ctx.output_dir).as_posix(),
+        "date": entry["date"], "recipe": recipe.name, "title": entry["title"], "path": path,
     })
+    deliver.announce({**entry, "path": path})  # no-op unless RECIPES_WEBHOOK_URL is set
     return final
 
 

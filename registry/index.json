@@ -601,6 +601,27 @@
       "sha256": "5fae785de48576b5a66ae45825b5497605934f26d2d4e08d063523d6ce781719"
     },
     {
+      "id": "recipe-viewer-rebuild",
+      "name": "AI Recipes: Rebuild Viewer",
+      "description": "Rebuild the browsable viewer (index.html + catalog.js) in your recipes output folder, so everything your recipes made shows up in one page you can open from disk or host anywhere.",
+      "category": "ai-agent",
+      "tags": [
+        "recipe",
+        "viewer",
+        "gallery"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-viewer-rebuild.json",
+      "sha256": "238d37e3f71e2815c5e82edf79f1e84d11fce1500dbb1ed766a19bf3f855c90a"
+    },
+    {
       "id": "recipe-voiceover-script-generator",
       "name": "AI Recipe: Voiceover Script",
       "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills.",
@@ -1003,6 +1024,7 @@
         "recipe-song-generator",
         "recipe-top-10-github-repos",
         "recipe-trending-movers",
+        "recipe-viewer-rebuild",
         "recipe-voiceover-script-generator",
         "recipe-wallpaper-packs",
         "recipe-weekend-yearly-collections",
@@ -1020,7 +1042,7 @@
         "recipe-weekly-short-story"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "a43dffce8ddd238ee8451688e7ec828a2463ad993c22209a158fe356e47fa675"
+      "sha256": "baf7e480916f926eec364de0d5c5e5c946e94900d8c7d885c2da2b4b09996439"
     },
     {
       "id": "ai-recipes-apps-games",
@@ -1029,6 +1051,7 @@
       "templateIds": [
         "recipe-daily-app-card",
         "recipe-recipes-update",
+        "recipe-viewer-rebuild",
         "recipe-weekly-3d-print-ideas",
         "recipe-weekly-app-prototype",
         "recipe-weekly-browser-extension",
@@ -1038,7 +1061,7 @@
         "recipe-weekly-pc-game-concept"
       ],
       "path": "packs/ai-recipes-apps-games.json",
-      "sha256": "82024c1653eabc7d1363e61793bc90eba6d1678a61f4b03540d60241f5b949cf"
+      "sha256": "5ee0b7ef5233f50fcc511e3cf7b571f7a06b8a8caf56adbe5f4f7c70d4659750"
     },
     {
       "id": "ai-recipes-writing",
@@ -1050,11 +1073,12 @@
         "recipe-content-idea-gen",
         "recipe-recipes-update",
         "recipe-serialized-novella",
+        "recipe-viewer-rebuild",
         "recipe-weekly-funny-ai-content",
         "recipe-weekly-short-story"
       ],
       "path": "packs/ai-recipes-writing.json",
-      "sha256": "84d47d74894c375bb4a5b8355b2c4b304b731fbc5dc0d0f52abb21c35c52737d"
+      "sha256": "9fc6f1473058334072d805f24ae80fc4b7e24f1ebd0989adb02e7f7496015d8c"
     },
     {
       "id": "ai-recipes-food-maps",
@@ -1063,11 +1087,12 @@
       "templateIds": [
         "recipe-recipe-of-the-week",
         "recipe-recipes-update",
+        "recipe-viewer-rebuild",
         "recipe-weekly-ai-map",
         "recipe-weekly-regional-recipe"
       ],
       "path": "packs/ai-recipes-food-maps.json",
-      "sha256": "56a348a3dbf872cd9230727492ea3fdfa45201774180f26be55deb088f14bf1c"
+      "sha256": "4a903d7a07f10db9291901c06fd02340ba2056d060ea098d812e9f8841857f9f"
     },
     {
       "id": "ai-recipes-digests",
@@ -1083,10 +1108,11 @@
         "recipe-security-toolkit",
         "recipe-signal-sources",
         "recipe-top-10-github-repos",
-        "recipe-trending-movers"
+        "recipe-trending-movers",
+        "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-digests.json",
-      "sha256": "09f2c72621a900f7b8ad542438b8d567f378790ef99439c1906bbbefb0aaa31a"
+      "sha256": "9f624c2f8631faa20a9c6a4e8f944f3b60f36a6a8a9031dc8b1198a18207c677"
     },
     {
       "id": "ai-recipes-images",
@@ -1100,11 +1126,12 @@
         "recipe-icon-packs",
         "recipe-image-prompt-packs",
         "recipe-recipes-update",
+        "recipe-viewer-rebuild",
         "recipe-wallpaper-packs",
         "recipe-weekend-yearly-collections"
       ],
       "path": "packs/ai-recipes-images.json",
-      "sha256": "f03c874b93e768d35b015885ad08b731269b17f0dd796a447f5d7ed5a54bef23"
+      "sha256": "1da87f269b5a891ca750961a2cfca70297000f457dd132a01d53af99c72dffc5"
     },
     {
       "id": "ai-recipes-audio",
@@ -1114,11 +1141,12 @@
         "recipe-podcast-script-generator",
         "recipe-recipes-update",
         "recipe-song-generator",
+        "recipe-viewer-rebuild",
         "recipe-voiceover-script-generator",
         "recipe-weekly-audio-podcast"
       ],
       "path": "packs/ai-recipes-audio.json",
-      "sha256": "e9ff5578ae7830fcd00137d9aded6ba7b5047ebb3c6ea4970efa8f00652265d7"
+      "sha256": "542514d60add93ac27c6903e3fcaa3fa9330e42a9c24638dd5384773c73ace54"
     }
   ]
 }

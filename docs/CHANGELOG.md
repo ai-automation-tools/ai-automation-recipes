@@ -2,6 +2,30 @@
 
 [← README](../README.md)
 
+## 0.5.0 — 2026-10-14
+
+- **Browser smoke test** (`core.web.browser_smoke`): game and app recipes load their page in a
+  headless browser (Playwright with Chromium, or the system Chrome or Edge), click and press keys,
+  and reject the run on any uncaught error. Catches the dead-title-screen class `node --check`
+  can't. Skipped when no browser is available or `RECIPES_BROWSER_CHECK=off`.
+- **Webhook delivery** (`core/deliver.py`): `RECIPES_WEBHOOK_URL` announces each published
+  artifact; Discord and Slack get native messages, anything else JSON. Best-effort.
+- 49 tests.
+
+## 0.4.0 — 2026-10-14
+
+- **Viewer**: `scripts/build_viewer.py` turns any output folder into a browsable page
+  (`index.html` + `catalog.js`): collections in a sidebar, cover grid, search, rendered Markdown,
+  games and apps in a sandboxed iframe, galleries, audio and video. Works from `file://`. House
+  style (fuchsia accent, light/dark, phone drawer). Model-written HTML in documents is escaped and
+  the catalog can't close its own `<script>` tag.
+- **Cronsole**: new `AI Recipes: Rebuild Viewer` template, shipped in every pack.
+- **icon-packs**: 35 brand-named themes rewritten as generic functional sets, and the prompt now
+  forbids naming or echoing any product, company or brand — a live run had echoed real browser
+  logos. Other theme lists reviewed: clean.
+- **Docs**: live samples in nine recipe READMEs.
+- 46 tests.
+
 ## 0.3.0 — 2026-10-14
 
 Batch 2: media support and 12 image and audio recipes, 38 in all.

@@ -22,14 +22,14 @@ twelve concrete, nameable members that suit it.
 --------------------------------------------------
 ## WHAT A PACK IS
 
-**One category of similar, nameable things, in one shared visual system.** "Chrome, Firefox, Edge,
-Safari…" — twelve members of one family, each instantly identifiable, all cut from the same cloth.
+**One family of similar, nameable things, in one shared visual system.** "Back, forward, reload, new
+tab…" — twelve members of one family, each instantly identifiable, all cut from the same cloth.
 
-- **Name the real things**, plainly ("Firefox", "Google Drive", "Checkout").
-- **Draw an original mark for each.** Never reproduce a trademarked logo. Take the product's idea —
-  what it does, its colour, its silhouette — and design a fresh symbol in the pack's style.
-- If the theme has no real-world members (page icons, a style study), the members are the concrete
-  pages or functions themselves.
+- **Name the members by what they are or do**, plainly ("Reload", "Share link", "Checkout").
+- **No brands, ever.** Never name or depict a real product, company, app, service, programming
+  language or operating system, and never echo one's logo — not its shape, not its signature colour,
+  not a "stylized" version. If the theme seems to call for a brand, draw the function instead.
+- If the theme is a style study, the members are concrete everyday functions drawn in that style.
 
 **One container for the whole pack.** The runner draws it, identically on all twelve:
 

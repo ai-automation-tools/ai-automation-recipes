@@ -39,6 +39,12 @@ novel. `--genre` picks the genre of that next one.
 The runner rejects a chapter under 1,200 words, or one whose JSON names the wrong novel or chapter
 number, and trims an over-long synopsis to 150 words.
 
+## Sample
+
+> ***No Speech Detected*, chapter 1: "False Wake"** — On the night shift, a half-deaf annotator who labels accidental smart-speaker recordings gets a clip from her own locked kitchen in which her dead brother's voice says her name.
+>
+> *First live pilot run, 2026-10-14 · Opus, about 6 minutes · seed run: story bible plus chapter 1, 2,344 words*
+
 ## Run it
 
 ```bash

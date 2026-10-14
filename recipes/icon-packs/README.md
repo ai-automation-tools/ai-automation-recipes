@@ -3,9 +3,9 @@
 [← All recipes](../../README.md)
 
 Twelve cohesive icons in one shared visual system, shipped as SVG, transparent 1024 px PNG and a
-multi-size Windows `.ico`. No image model is involved: Claude designs the pack (twelve real,
-nameable members of one family — browsers, databases, page icons — with an original mark for each,
-never a copied logo) and draws each icon's **symbol** as an SVG fragment. Code owns everything
+multi-size Windows `.ico`. No image model is involved: Claude designs the pack (twelve nameable
+members of one family — browser actions, database objects, page icons — never a product, brand or
+logo) and draws each icon's **symbol** as an SVG fragment. Code owns everything
 else: the container (squircle tile, circle badge, folder, drive block…), identical on all twelve by
 construction; the tile gradient; and every PNG and ICO size, each rasterized from the vector at its
 own size so the 16 px entry stays crisp.

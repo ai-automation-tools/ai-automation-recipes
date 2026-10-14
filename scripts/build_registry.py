@@ -35,8 +35,9 @@ ALL_PACK = {
 }
 
 # Category packs. Membership is declared, never derived from tags, so a pack only changes when
-# this list does. Every pack also carries the clone updater the recipes depend on.
-UPDATER = "recipe-recipes-update"
+# this list does. Every pack also carries the support templates: the clone updater the recipes
+# depend on and the viewer rebuild.
+SUPPORT = ["recipe-recipes-update", "recipe-viewer-rebuild"]
 CATEGORY_PACKS = [
     ("ai-recipes-apps-games", "AI Recipes: Apps & Games",
      "Idea cards, runnable app and extension prototypes, playable games, game and 3D-print concepts.",
@@ -145,7 +146,7 @@ def build() -> dict[Path, bytes]:
     packs = [(ALL_PACK, sorted(by_id))]
     for pid, name, desc, members in CATEGORY_PACKS:
         packs.append(({"id": pid, "name": name, "description": desc},
-                      sorted([f"recipe-{m}" for m in members] + [UPDATER])))
+                      sorted([f"recipe-{m}" for m in members] + SUPPORT)))
 
     pack_entries = []
     for meta, ids in packs:

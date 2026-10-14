@@ -14,7 +14,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RunContext, run  # noqa: E402
 from core.artifacts import existing_digest, load_existing  # noqa: E402
-from core.web import check_json, check_mv3, check_refs, node_check  # noqa: E402
+from core.web import browser_smoke, check_json, check_mv3, check_refs, node_check  # noqa: E402
 
 
 def prepare(ctx: RunContext) -> dict[str, str]:
@@ -26,6 +26,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
     check_json(staging, "sample-data.json")
     check_refs(staging, "index.html")
     node_check(staging, pages=("index.html",), scripts=("script.js",))
+    browser_smoke(staging, "index.html")  # loads it in a real browser; fails on uncaught errors
 
 
 RECIPE = Recipe(

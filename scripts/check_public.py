@@ -37,12 +37,15 @@ BUILTIN = {
     "windows home path": r"[A-Za-z]:[\\/]+Users[\\/]+(?!<|\{|Public|you|USER)[A-Za-z0-9._-]+",
     "unix home path": r"/(?:home|Users)/(?!<|\{|you\b|user\b|runner\b|ubuntu\b)[a-z][a-z0-9._-]+/",
     "email": r"[A-Za-z0-9._%+-]+@(?!example\.|users\.noreply\.github\.com)[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-    "ipv4": r"\b(?!127\.0\.0\.1\b|0\.0\.0\.0\b)(?:\d{1,3}\.){3}\d{1,3}\b",
+    # Valid octets only, not inside a longer run of digits and dots (SVG path data looks like IPs).
+    "ipv4": r"(?<![\d.])(?!127\.0\.0\.1(?![\d.])|0\.0\.0\.0(?![\d.]))"
+            r"(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?![\d.])",
 }
 # Lines that legitimately match a built-in pattern.
 ALLOW = [
     re.compile(r"noreply@anthropic\.com"),
     re.compile(r"\bp5@\d"),  # jsdelivr version pins look like emails
+    re.compile(r'<path\b[^>]*\bd="'),  # SVG path data is runs of numbers that look like IPs
 ]
 
 

@@ -14,7 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from core.web import check_refs, node_check  # noqa: E402
+from core.web import browser_smoke, check_refs, node_check  # noqa: E402
 from core import Recipe, RecipeError, RunContext, run  # noqa: E402
 
 log = logging.getLogger("recipes")
@@ -54,6 +54,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
         raise RecipeError("index.html has no <script>")
     check_refs(staging, "index.html", https_prefixes=ALLOWED_CDN)
     node_check(staging, pages=("index.html",))
+    browser_smoke(staging, "index.html")  # loads it in a real browser; fails on uncaught errors
 
 
 RECIPE = Recipe(

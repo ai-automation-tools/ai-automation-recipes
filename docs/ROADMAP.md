@@ -5,6 +5,54 @@
 Everything left before this repo goes public. The repo stays **private** in its `Custom/` folder
 until the publish checklist at the bottom is done and the maintainer says go.
 
+## Live-test status
+
+Every recipe passes dry runs, unit tests and faked-engine runs in CI. This table tracks the
+**real** runs — a real agent and real image, speech or music engines — which are being done over the
+coming weeks. **13 of 38 live-tested** as of 2026-10-14. Tick a row when a live run publishes and its
+output has been read (or played, or listened to) by a person.
+
+| Group | Recipe | Live run | Notes |
+|:---|:---|:---|:---|
+| Apps & Games | `daily-app-card` | ✅ TapCheck | Also scheduled in Cronsole (daily, no cover) |
+| Apps & Games | `weekly-app-prototype` | ⬜ not yet |  |
+| Apps & Games | `weekly-browser-extension` | ✅ Exit Ramp |  |
+| Apps & Games | `weekly-financial-idea` | ⬜ not yet |  |
+| Apps & Games | `weekly-browser-game` | ✅ Plumb Line (played in a browser) |  |
+| Apps & Games | `weekly-mobile-game` | ⬜ not yet |  |
+| Apps & Games | `weekly-pc-game-concept` | ⬜ not yet |  |
+| Apps & Games | `weekly-3d-print-ideas` | ⬜ not yet |  |
+| Writing | `weekly-short-story` | ✅ The Blue Words |  |
+| Writing | `serialized-novella` | ✅ No Speech Detected, ch. 1 (seed run only) | Next: a second run, to prove chapter 2 picks up the bible |
+| Writing | `alternate-history` | ⬜ not yet |  |
+| Writing | `agent-persona-original` | ⬜ not yet |  |
+| Writing | `content-idea-gen` | ⬜ not yet |  |
+| Writing | `weekly-funny-ai-content` | ⬜ not yet | Scheduled in Cronsole — first real run Fri 2026-10-16 |
+| Food & Maps | `recipe-of-the-week` | ✅ Minnesota Tater Tot Hotdish |  |
+| Food & Maps | `weekly-regional-recipe` | ⬜ not yet |  |
+| Food & Maps | `weekly-ai-map` | ⬜ not yet |  |
+| Research Digests | `agent-toolkit` | ⬜ not yet |  |
+| Research Digests | `ai-stack-radar` | ⬜ not yet |  |
+| Research Digests | `oss-spotlight` | ⬜ not yet |  |
+| Research Digests | `cool-websites` | ⬜ not yet |  |
+| Research Digests | `top-10-github-repos` | ⬜ not yet |  |
+| Research Digests | `trending-movers` | ✅ Trending Movers 2026-10-14 |  |
+| Research Digests | `signal-sources` | ⬜ not yet |  |
+| Research Digests | `security-toolkit` | ⬜ not yet |  |
+| Research Digests | `finance-toolkit` | ⬜ not yet |  |
+| Images | `comics` | ✅ Circular Dependency |  |
+| Images | `ai-meme-generator` | ⬜ not yet |  |
+| Images | `daily-poster` | ⬜ not yet |  |
+| Images | `future-cities` | ⬜ not yet |  |
+| Images | `image-prompt-packs` | ⬜ not yet |  |
+| Images | `wallpaper-packs` | ⬜ not yet | Heaviest: three 4K renders per run |
+| Images | `icon-packs` | ✅ Browser Actions (re-run after de-branding) |  |
+| Images | `weekend-yearly-collections` | ⬜ not yet | Needs research; check the seeded collections file |
+| Audio | `song-generator` | ✅ Every Stone I Set (`folk` only) | Other song types untested |
+| Audio | `podcast-script-generator` | ✅ Should We Text the Aliens First? |  |
+| Audio | `weekly-audio-podcast` | ✅ Should We Text the Aliens First? (13.5 min) |  |
+| Audio | `voiceover-script-generator` | ✅ The Spacecraft Lost to a Unit Label |  |
+
 ## 1. Pilot ✅
 
 - [x] Shared runner, Claude engine, Gemini/OpenAI cover step, `artifact.json` contract
@@ -67,8 +115,7 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
       (seed run), `recipe-of-the-week`, `trending-movers`
 - [x] Split the registry into per-category packs alongside the all-in-one pack (5 packs, 27 templates)
 - [x] README recipe table and CHANGELOG updated
-- [ ] Live samples in every new recipe's README (the four Batch 1 live runs: Exit Ramp, No Speech
-      Detected, Minnesota Tater Tot Hotdish, the 2026-10-14 Trending Movers)
+- [x] Live samples in the READMEs of the four Batch 1 live runs
 
 ## 2b. Consolidate after Batch 1 ✅
 
@@ -113,10 +160,14 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 **Batch 2 follow-ups**
 
-- [ ] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
-      real browser marks) — required before publishing
-- [ ] Review the other theme lists (posters, comics, memes) for brand, artist and real-person risk
-- [ ] Live samples in the Batch 2 READMEs
+- [x] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
+      real browser marks): 35 branded themes rewritten as generic functional sets; prompt forbids
+      naming or echoing any product, company or brand
+- [x] Review the other theme lists (posters, comics, memes, wallpapers, prompt packs) for brand,
+      artist and real-person risk: clean (art movements only, no named artists or people)
+- [x] Live samples in the READMEs of every recipe with a live run (Batches 1 and 2)
+- [ ] Live runs, and samples, for the recipes that have only had faked-engine runs — tracked in
+      [Live-test status](#live-test-status)
 
 ## Not porting
 
@@ -128,17 +179,22 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 ## 4. Viewer
 
-- [ ] `viewer/`: a static site that renders any `<output-dir>` from its `artifact.json` files —
+- [x] `viewer/`: a static site that renders any `<output-dir>` from its `artifact.json` files —
       cards, playable games and apps in an iframe, stories, maps, image packs, audio players
+      (`scripts/build_viewer.py`; Cronsole template `recipe-viewer-rebuild`)
 - [ ] Demo feed of curated output for a future public site on `ai-automation-tools.dev`
 - [ ] "Import into Cronsole" link on each recipe in the demo
 
 ## 5. Hardening
 
-- [ ] Browser smoke test for game and app recipes (Playwright: load, input, check state changes)
-- [ ] Optional delivery step: email or webhook with the new artifact
-- [ ] Drift check that flags when a public prompt falls behind its private original
-- [ ] Import the pack through the Cronsole UI and let templates fire on schedule
+- [x] Browser smoke test for game and app recipes: loads the page in headless Chrome/Edge/Chromium,
+      clicks and presses keys, fails the run on any uncaught error (six recipes)
+- [x] Optional delivery step: `RECIPES_WEBHOOK_URL` (Discord, Slack or generic JSON)
+- [ ] Drift check that flags when a public prompt falls behind its private original — belongs in the
+      private routines repo, since it reads private paths this repo must never contain
+- [x] Import templates into Cronsole through its import API and run one as a Cronsole-native task
+      (2026-10-14: app card, funny AI content and viewer rebuild imported; viewer rebuild ran, exit 0)
+- [ ] Let the scheduled Cronsole tasks fire on their own and check the run history
 - [ ] A week of scheduled runs across every recipe without intervention
 
 ## 6. Engines

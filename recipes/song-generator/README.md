@@ -39,6 +39,12 @@ The song is rejected, and no credits are spent, if:
 
 `--direction "..."` steers the song toward a topic.
 
+## Sample
+
+> **Every Stone I Set** — A dry-stone waller looks back on a life of building walls on the hill, until the first wall he ever built is the one holding him up.
+>
+> *First live pilot run, 2026-10-14 · `--type folk`, Opus · 3:00 MP3 from ElevenLabs Music*
+
 ## Run it
 
 ```bash
