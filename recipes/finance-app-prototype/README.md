@@ -45,5 +45,5 @@ python recipes/finance-app-prototype/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../browser-game/README.md">Next: Browser Game →</a>
+  <a href="../iam-prototype/README.md">Next: IAM App Prototype →</a>
 </p>

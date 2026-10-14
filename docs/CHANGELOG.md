@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.8.0-2ea44f?style=for-the-badge" alt="Version 0.8.0">
+  <img src="https://img.shields.io/badge/version-0.9.0-2ea44f?style=for-the-badge" alt="Version 0.9.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,45 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.9.0 — 2026-10-14
+
+**Added**
+- Every remaining automation in the private fleet, 48 recipes in all. Seven of these were held back
+  earlier the same day; the maintainer chose to port everything first and decide what the public
+  set keeps later. The roadmap's *Build* list carries that decision.
+- `news-collage` (Images): the major U.S. stories of a day, a week or a month, rotating, researched
+  by Claude and rendered as one cartoon-editorial image. A day or a month is a six-panel grid, a
+  week is one newsroom scene. Captions are 3 to 8 words drawn into the scene, and no real person's
+  likeness is drawn. Ports the fleet's daily, weekly and monthly news images.
+- `agent-persona` (Writing): the known-figure half of the persona pair. A debate card for a real
+  person or an established character, researched from their public record, rotating across ten
+  subcategories. It shares the `agent-personas` collection and refuses a figure who already has a
+  card.
+- `satirical-news` (Writing): *The Overcorrect*. One deadpan article across twelve rotating beats,
+  optionally bent from a real story recorded as `inspired_by`, with a sidecar and up to four
+  pictures when an image key is set.
+- `iam-prototype` (Apps & Games): a runnable identity-and-access tool on synthetic data, rotating
+  ten pain areas. Vendor-neutral by rule; standards like SCIM, OIDC and SAML are fair game.
+- `finance-digest` (Research Digests): the eight finance and rewards newsletters as one
+  topic-driven recipe. The rewards topics write from five points-and-miles feeds; the market topics
+  read levels off public pages and cite them. The runner refuses an edition without the closing
+  *Not Financial Advice* section, and Trade Ideas also needs its paper-only line and a Risk column.
+- `news-digest`: a tenth topic, `iam-security`, from six security newsrooms read through an
+  access-management lens.
+- A seventh group, **Repo Ops**, with its own pack. `pr-review` reviews every open pull request in
+  a repo you name and, only in `comment` or `merge` mode, posts reviews or squash-merges the PRs
+  that pass every gate; in `report` mode the runner rejects a run that called a mutating `gh`
+  command. `app-enhancement` makes one small additive change to a static app in a folder you name
+  and publishes it as a patch; `--apply` writes it back.
+- Tests for all of the above: 99 in the suite, all passing.
+
+**Changed**
+- The feed-window helper moved from `news-digest` into `core.digest`, so both digests share it.
+
+**Docs**
+- Recipe index, registry packs, counts and the footer chain updated for 48 recipes in seven groups.
+  The roadmap's *Not ported* table now lists only what has nothing to port.
 
 ## 0.8.0 — 2026-10-14
 

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "recipe-news-digest",
   "name": "AI Recipe: News Digest",
-  "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+  "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
   "runtime": "python",
   "os": "cross-platform",
   "category": "ai-agent",

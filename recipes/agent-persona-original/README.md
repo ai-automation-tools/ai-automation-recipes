@@ -49,5 +49,5 @@ python recipes/agent-persona-original/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../content-idea-gen/README.md">Next: Content Idea →</a>
+  <a href="../satirical-news/README.md">Next: Satirical News →</a>
 </p>

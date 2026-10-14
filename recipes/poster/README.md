@@ -45,5 +45,5 @@ python recipes/poster/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../future-cities/README.md">Next: Future Cities 2500 →</a>
+  <a href="../news-collage/README.md">Next: News Collage →</a>
 </p>

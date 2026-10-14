@@ -3,7 +3,7 @@
 
     python recipes/news-digest/run.py --output-dir ~/ai-output [--topic energy] [--days 7]
 
-Nine topics live in topics.json beside this file, each with its feed list, sections, palette and
+Ten topics live in topics.json beside this file, each with its feed list, sections, palette and
 cover motif; a run takes the least-covered one unless --topic says otherwise. The runner fetches the
 feeds, keeps the last `--days` of items (capped per source so one loud feed can't crowd the rest),
 and hands the agent that candidate list. The agent reads, groups and writes; it never invents a
@@ -16,9 +16,7 @@ import argparse
 import json
 import re
 import sys
-from collections import Counter
-from datetime import datetime, timedelta, timezone
-from email.utils import parsedate_to_datetime
+from datetime import timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -26,7 +24,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RecipeError, RunContext, run  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
-from core.digest import candidates_block, fetch_candidates  # noqa: E402
+from core.digest import candidates_block, fetch_candidates, window_items  # noqa: E402
 
 MAIN = "digest.md"
 TOPICS: dict[str, dict] = json.loads((HERE / "topics.json").read_text(encoding="utf-8"))
@@ -41,48 +39,11 @@ def add_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--days", type=int, default=7, help="How many days back the feed window reaches (default 7).")
 
 
-def parse_when(value: str) -> datetime | None:
-    value = (value or "").strip()
-    if not value:
-        return None
-    try:
-        dt = parsedate_to_datetime(value)
-    except (TypeError, ValueError, IndexError):
-        try:
-            dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-        except ValueError:
-            return None
-    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
-
-
-def window_items(items: list[dict], days: int, now: datetime | None = None) -> list[dict]:
-    """Items from the last `days` days (undated items kept), newest first, capped per source and overall."""
-    now = now or datetime.now(timezone.utc)
-    start = now - timedelta(days=days)
-    dated = []
-    for it in items:
-        when = parse_when(it.get("published", ""))
-        if when and when < start:
-            continue
-        dated.append((when or start, it))
-    dated.sort(key=lambda t: t[0], reverse=True)
-    per_source: Counter = Counter()
-    kept = []
-    for when, it in dated:
-        if per_source[it["source"]] >= PER_SOURCE_CAP:
-            continue
-        per_source[it["source"]] += 1
-        kept.append({**it, "published": when.strftime("%Y-%m-%d")})
-        if len(kept) >= GLOBAL_CAP:
-            break
-    return kept
-
-
 def prepare(ctx: RunContext) -> dict[str, str]:
     topic = ctx.args.topic or least_used(sorted(TOPICS), ctx.existing, "topic")
     spec = TOPICS[topic]
     payload = fetch_candidates({"feeds": spec["feeds"], "limit": 10_000})
-    payload["candidates"] = window_items(payload["candidates"], ctx.args.days)
+    payload["candidates"] = window_items(payload["candidates"], ctx.args.days, PER_SOURCE_CAP, GLOBAL_CAP)
     if not payload["candidates"]:
         raise RecipeError(f"no feed items for {topic!r} in the last {ctx.args.days} days "
                           f"({len(payload['feeds_failed'])} of {len(spec['feeds'])} feeds failed)")

@@ -6,7 +6,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/model-sonnet-8B5CF6?style=for-the-badge" alt="Default model: sonnet">
-  <img src="https://img.shields.io/badge/topics-9-0078D4?style=for-the-badge" alt="9 topics">
+  <img src="https://img.shields.io/badge/topics-10-0078D4?style=for-the-badge" alt="10 topics">
   <img src="https://img.shields.io/badge/cover-optional_image_key-F59E0B?style=for-the-badge" alt="Cover needs an image key, optional">
   <a href="../README.md"><img src="https://img.shields.io/badge/↩-all_recipes-6B7280?style=for-the-badge" alt="All recipes"></a>
 </p>
@@ -29,9 +29,9 @@ forward, not a feed dump.
 
 ## 🗞️ Topics
 
-Nine, in [`topics.json`](topics.json), each with its feeds, five sections, a palette and a cover
+Ten, in [`topics.json`](topics.json), each with its feeds, five sections, a palette and a cover
 motif. A run takes the least-covered topic; `--topic energy` forces one. Three runs a week rotates
-through all nine every three weeks.
+through all ten in a little over three weeks.
 
 | Topic | Sections | Feeds |
 |:---|:---|:-:|
@@ -44,13 +44,16 @@ through all nine every three weeks.
 | `media` | Studios & Streaming · Advertising · Journalism · Music & Audio · Creators | 14 |
 | `emerging-tech` | Research Results · In Development · Pilots & Trials · Now Shipping · Coming to the Public | 18 |
 | `cybersecurity` | Exploited in the Wild · Patches · Breaches · Threat Actors · Advisories | 11 |
+| `iam-security` | Identity & Access · Authentication & Passkeys · Cloud & Non-Human Identity · Credential Attacks & Breaches · Vendor & Product News | 6 |
 
 Add a topic by adding an entry; nothing else changes. Feed lists are public RSS and Atom; a dead feed
 is skipped and reported in the prompt, never fatal. A window with no items at all fails the run
 before the agent starts. Every feed was fetched on 2026-10-14; three publishers that block
 non-browser clients outright (CISA's advisories, Fierce Biotech, StreamTV Insider) were swapped for
 Krebs on Security, Endpoints News and Next TV. CISA's exploited-vulnerabilities signal still arrives
-through the security newsrooms and the vendor blogs.
+through the security newsrooms and the vendor blogs. `iam-security` reads six of the same
+newsrooms as `cybersecurity` but through an access-management lens; the two overlap on a big breach
+week and that is fine, the sections differ.
 
 ## What the runner checks
 
@@ -68,5 +71,5 @@ python recipes/news-digest/run.py --output-dir ~/ai-output --topic cybersecurity
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../comics/README.md">Next: Comic →</a>
+  <a href="../finance-digest/README.md">Next: Finance Digest →</a>
 </p>

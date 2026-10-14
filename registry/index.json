@@ -27,6 +27,31 @@
       "sha256": "46fbce0c687136df3a9403cc0349b17a6a308720cffc99aa7454ccc0b0f8ca81"
     },
     {
+      "id": "recipe-agent-persona",
+      "name": "AI Recipe: Agent Persona (Known Figure)",
+      "description": "Claude researches one well-known real person or established fictional character and writes a debate-ready, second-person persona card any model can adopt, rotating across ten subcategories, with an illustrated portrait cover and a square chat avatar when an image key is set.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "agents",
+        "persona",
+        "characters"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-agent-persona.json",
+      "sha256": "5aefad5474b19b1948ced72ea0a34bf982843ca56c4e6ffe511669debcad503a"
+    },
+    {
       "id": "recipe-agent-persona-original",
       "name": "AI Recipe: Original Agent Persona",
       "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
@@ -176,6 +201,31 @@
       ],
       "path": "templates/recipe-alternate-history.json",
       "sha256": "b98a5a7b931ee974a0e523ffd8ad11ec6636fc9ecb42813cc8b096af343821a3"
+    },
+    {
+      "id": "recipe-app-enhancement",
+      "name": "AI Recipe: App Enhancement",
+      "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so.",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "web",
+        "apps",
+        "maintenance",
+        "dev-workflow"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-app-enhancement.json",
+      "sha256": "f9e753219316f2ce245ba4e46b2cf26f3373965b64d010cd3a30bbb580d2f0a2"
     },
     {
       "id": "recipe-app-idea-card",
@@ -400,6 +450,33 @@
       "sha256": "05ab7c3bafa35daff492cc7a008745afbb66d909dedf16d2b5df0dca78212842"
     },
     {
+      "id": "recipe-finance-digest",
+      "name": "AI Recipe: Finance Digest",
+      "description": "Claude writes one of eight money briefings: a stock-market recap, paper trade ideas, a strategy brief, Chase Ultimate Rewards news, card sign-up bonuses, live transfer bonuses, the shopping-portal stack, or a cashback-portal leaderboard. The runner fetches the topic's feeds and rotates topics; market levels come from public pages the agent reads and cites. Every edition ends with the same Not Financial Advice section.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "finance",
+        "investing",
+        "rewards",
+        "rss",
+        "briefing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-finance-digest.json",
+      "sha256": "ffdf22899ffa1e76a08a781bb726a671ddd35d5f9ba8081ea5260b3793c35024"
+    },
+    {
       "id": "recipe-finance-toolkit",
       "name": "AI Recipe: Finance Toolkit",
       "description": "Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps. Never investment advice. Exports browser-importable bookmarks.",
@@ -474,6 +551,33 @@
       ],
       "path": "templates/recipe-future-cities.json",
       "sha256": "3ba818732f4f051d5d8fe64b400e3edce86e6351e293e76b820abdec3621afab"
+    },
+    {
+      "id": "recipe-iam-prototype",
+      "name": "AI Recipe: IAM App Prototype",
+      "description": "Claude builds a runnable identity-and-access-management tool prototype (certification triage, lifecycle tracing, role mining, break-glass review, access-request UX…) on synthetic data, rotating ten IAM pain areas so the catalogue stays balanced. Vendor-neutral; speaks SCIM, OIDC and SAML, never one product.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "iam",
+        "identity",
+        "security",
+        "apps",
+        "prototype"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-iam-prototype.json",
+      "sha256": "4c6b94a3aa50c96d752b70d447fd400b9028a009d6a9b529e9a0422ebb108ae5"
     },
     {
       "id": "recipe-icon-packs",
@@ -600,9 +704,33 @@
       "sha256": "77bdf56b55dfa5d0d87a9eecc41a1c7dc59e6a864c5e3471c0092c5f8e0b7331"
     },
     {
+      "id": "recipe-news-collage",
+      "name": "AI Recipe: News Collage",
+      "description": "Claude researches the major U.S. news stories of a day, a week or a month (rotating) and writes the image prompt; the runner renders one cartoon-editorial image — a six-panel grid for a day or month, a single newsroom scene for a week — with short in-world captions and no likeness of any real person.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "news",
+        "images"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-news-collage.json",
+      "sha256": "b5cf36d416dad9858c903c7ce3803300e682c8734202f4609447ddd36afdb52e"
+    },
+    {
       "id": "recipe-news-digest",
       "name": "AI Recipe: News Digest",
-      "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+      "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -622,7 +750,7 @@
         "macos"
       ],
       "path": "templates/recipe-news-digest.json",
-      "sha256": "4a18d41b8c976c76eee7bb5aa25ef214c8765c2ed66bde022784a78b92673e7c"
+      "sha256": "f0a3fb31f362d55d1895e4c2b90e80217f27c96cca686255f2bae64eb3d38a36"
     },
     {
       "id": "recipe-oss-spotlight",
@@ -750,6 +878,31 @@
       "sha256": "ad1a5c332ee1d807ee39c6c840f6dbd3d79a45c6476af4ea0b28bc46b54b592d"
     },
     {
+      "id": "recipe-pr-review",
+      "name": "AI Recipe: PR Review",
+      "description": "Claude reviews every open pull request in one GitHub repo against a fixed set of gates (red or pending checks, conflicts, secrets, infra files, destructive migrations, unrelated changes, human markers) and writes a verdict per PR. Report mode is read-only; comment mode posts one comment per PR; merge mode squash-merges the ones that pass and holds the rest.",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "github",
+        "pull-requests",
+        "code-review",
+        "dev-workflow"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-pr-review.json",
+      "sha256": "8eb3d898f8ea7641ecfa013e17f6ef3e8e1deda5ee271e81beacc32122eb5f99"
+    },
+    {
       "id": "recipe-recipes-update",
       "name": "AI Recipes: Update Clone",
       "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
@@ -793,6 +946,31 @@
       ],
       "path": "templates/recipe-regional-recipe.json",
       "sha256": "0a6ad3aef2565b347b8675d536d47eb903f83d4899c3a81aea90258c9b0f2c64"
+    },
+    {
+      "id": "recipe-satirical-news",
+      "name": "AI Recipe: Satirical News",
+      "description": "Claude writes one deadpan, Onion-style article under the masthead The Overcorrect, rotating across twelve beats and optionally anchored on a real current story, with a metadata sidecar and, when an image key is set, a cover, a square thumbnail and two in-article illustrations.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "satire",
+        "news",
+        "writing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-satirical-news.json",
+      "sha256": "87afd78900f353d6e56b7d59b4d26645cd856681082766b4e4764993e70c2e88"
     },
     {
       "id": "recipe-security-toolkit",
@@ -1076,12 +1254,14 @@
       "description": "Every recipe: scheduled Claude Code automations that research, write, build and illustrate into a folder you can browse.",
       "templateIds": [
         "recipe-3d-print-design",
+        "recipe-agent-persona",
         "recipe-agent-persona-original",
         "recipe-agent-toolkit",
         "recipe-ai-map",
         "recipe-ai-meme-generator",
         "recipe-ai-stack-radar",
         "recipe-alternate-history",
+        "recipe-app-enhancement",
         "recipe-app-idea-card",
         "recipe-app-prototype",
         "recipe-browser-extension",
@@ -1091,22 +1271,27 @@
         "recipe-cool-websites",
         "recipe-family-recipe",
         "recipe-finance-app-prototype",
+        "recipe-finance-digest",
         "recipe-finance-toolkit",
         "recipe-funny-ai-content",
         "recipe-future-cities",
+        "recipe-iam-prototype",
         "recipe-icon-packs",
         "recipe-image-collections",
         "recipe-image-prompt-packs",
         "recipe-mobile-game",
         "recipe-model-benchmark-watch",
+        "recipe-news-collage",
         "recipe-news-digest",
         "recipe-oss-spotlight",
         "recipe-pc-game-concept",
         "recipe-podcast-episode",
         "recipe-podcast-script-generator",
         "recipe-poster",
+        "recipe-pr-review",
         "recipe-recipes-update",
         "recipe-regional-recipe",
+        "recipe-satirical-news",
         "recipe-security-toolkit",
         "recipe-serialized-novella",
         "recipe-short-story",
@@ -1120,7 +1305,7 @@
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "4cdd22fcb391f98beca9421d7a82fd4b82a924f205d47d727988ddb32286911f"
+      "sha256": "aafbc98500bb1aea0eeeab9b85e2d2e5e57042c0710dcf74a2bce6941a112f98"
     },
     {
       "id": "ai-recipes-apps-games",
@@ -1133,30 +1318,33 @@
         "recipe-browser-extension",
         "recipe-browser-game",
         "recipe-finance-app-prototype",
+        "recipe-iam-prototype",
         "recipe-mobile-game",
         "recipe-pc-game-concept",
         "recipe-recipes-update",
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-apps-games.json",
-      "sha256": "bade4d21a96abcd323947f20a9b754dceb90f0c882821c2486a8ca7bb07691f4"
+      "sha256": "d422472534d7bd958ed2f4ee48fd35653bdcab43755b9eb07a9ce5f684eb95bf"
     },
     {
       "id": "ai-recipes-writing",
       "name": "AI Recipes: Writing",
-      "description": "Short stories, a serialized novella, alternate histories, original characters and content ideas.",
+      "description": "Short stories, a serialized novella, alternate histories, persona cards for known figures and original characters, satirical news and content ideas.",
       "templateIds": [
+        "recipe-agent-persona",
         "recipe-agent-persona-original",
         "recipe-alternate-history",
         "recipe-content-idea-gen",
         "recipe-funny-ai-content",
         "recipe-recipes-update",
+        "recipe-satirical-news",
         "recipe-serialized-novella",
         "recipe-short-story",
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-writing.json",
-      "sha256": "49c3d722136122c3ec1bca0028b182e042fcb39c4333585d97db935496b69acd"
+      "sha256": "87a380c57409edf21fa7d79f246e1d4924bb3a1417f18b60cd94c70a7cd79961"
     },
     {
       "id": "ai-recipes-food-maps",
@@ -1176,11 +1364,12 @@
     {
       "id": "ai-recipes-digests",
       "name": "AI Recipes: Research Digests",
-      "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing and a nine-topic news digest written from RSS feeds.",
+      "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing, a ten-topic news digest written from RSS feeds and an eight-topic finance digest.",
       "templateIds": [
         "recipe-agent-toolkit",
         "recipe-ai-stack-radar",
         "recipe-cool-websites",
+        "recipe-finance-digest",
         "recipe-finance-toolkit",
         "recipe-model-benchmark-watch",
         "recipe-news-digest",
@@ -1193,12 +1382,12 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-digests.json",
-      "sha256": "723931955c200954689a87422e476775fbbfb6c828bc2475bff08a7a4885f02b"
+      "sha256": "d146f1bcf431f3338035895e1aac26335f51b76b60f82adeea7a8f4e37a8aba5"
     },
     {
       "id": "ai-recipes-images",
       "name": "AI Recipes: Images",
-      "description": "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon packs and long-running yearly image collections.",
+      "description": "Comics, memes, posters, news collages, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon packs and long-running yearly image collections.",
       "templateIds": [
         "recipe-ai-meme-generator",
         "recipe-comics",
@@ -1206,13 +1395,14 @@
         "recipe-icon-packs",
         "recipe-image-collections",
         "recipe-image-prompt-packs",
+        "recipe-news-collage",
         "recipe-poster",
         "recipe-recipes-update",
         "recipe-viewer-rebuild",
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes-images.json",
-      "sha256": "c7b6f437c8ab2710d92bd90ca5ec2ce010b00db85c49f8a217b7cc2f78b99ea4"
+      "sha256": "4adb2148abdde5e72fd7eff41e19b11d343ee2b286c315b6f782109e0ce3c22d"
     },
     {
       "id": "ai-recipes-audio",
@@ -1228,6 +1418,19 @@
       ],
       "path": "packs/ai-recipes-audio.json",
       "sha256": "5af72c9177a10a615476052be4842cbb9e661b3fb3050a5338d9ae8c44ba5e95"
+    },
+    {
+      "id": "ai-recipes-repo-ops",
+      "name": "AI Recipes: Repo Ops",
+      "description": "Automations that work on a repo you name: a pull-request review pass and one small additive enhancement to a static app, both report-only unless you turn the side effects on.",
+      "templateIds": [
+        "recipe-app-enhancement",
+        "recipe-pr-review",
+        "recipe-recipes-update",
+        "recipe-viewer-rebuild"
+      ],
+      "path": "packs/ai-recipes-repo-ops.json",
+      "sha256": "2d804a9495c452fd36e06c6c4ed43d4aa92dfa64e58a6b508a61fba2cae4beae"
     }
   ]
 }
