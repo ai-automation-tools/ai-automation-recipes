@@ -35,6 +35,12 @@ After the agent finishes, the runner runs the `recipe-validator` scanner on `rec
 The recipe is AI-adapted from the cited sources and **not kitchen-tested**, and the cover is an
 AI-generated illustration, not a photo of the dish. Both say so in the recipe's Credits.
 
+## Sample
+
+> **Minnesota Tater Tot Hotdish** — The classic Upper Midwest casserole: seasoned ground beef and vegetables in a creamy mushroom-soup sauce, topped with rows of crisp tater tots and melted cheddar. Families make it because it feeds a crowd cheaply, travels to potlucks, and can be assembled ahead.
+>
+> *First live pilot run, 2026-10-14 · Sonnet, under 2 minutes · the safety scanner added the fish allergen from the Worcestershire sauce*
+
 ## Run it
 
 ```bash

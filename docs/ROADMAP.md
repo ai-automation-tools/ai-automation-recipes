@@ -67,8 +67,7 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
       (seed run), `recipe-of-the-week`, `trending-movers`
 - [x] Split the registry into per-category packs alongside the all-in-one pack (5 packs, 27 templates)
 - [x] README recipe table and CHANGELOG updated
-- [ ] Live samples in every new recipe's README (the four Batch 1 live runs: Exit Ramp, No Speech
-      Detected, Minnesota Tater Tot Hotdish, the 2026-10-14 Trending Movers)
+- [x] Live samples in the READMEs of the four Batch 1 live runs
 
 ## 2b. Consolidate after Batch 1 ✅
 
@@ -113,10 +112,13 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 **Batch 2 follow-ups**
 
-- [ ] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
-      real browser marks) — required before publishing
-- [ ] Review the other theme lists (posters, comics, memes) for brand, artist and real-person risk
-- [ ] Live samples in the Batch 2 READMEs
+- [x] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
+      real browser marks): 35 branded themes rewritten as generic functional sets; prompt forbids
+      naming or echoing any product, company or brand
+- [x] Review the other theme lists (posters, comics, memes, wallpapers, prompt packs) for brand,
+      artist and real-person risk: clean (art movements only, no named artists or people)
+- [x] Live samples in the READMEs of every recipe with a live run (Batches 1 and 2)
+- [ ] Live runs, and samples, for the recipes that have only had faked-engine runs
 
 ## Not porting
 
@@ -128,8 +130,9 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 ## 4. Viewer
 
-- [ ] `viewer/`: a static site that renders any `<output-dir>` from its `artifact.json` files —
+- [x] `viewer/`: a static site that renders any `<output-dir>` from its `artifact.json` files —
       cards, playable games and apps in an iframe, stories, maps, image packs, audio players
+      (`scripts/build_viewer.py`; Cronsole template `recipe-viewer-rebuild`)
 - [ ] Demo feed of curated output for a future public site on `ai-automation-tools.dev`
 - [ ] "Import into Cronsole" link on each recipe in the demo
 

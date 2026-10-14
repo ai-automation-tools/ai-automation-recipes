@@ -35,6 +35,12 @@ The run is rejected, and nothing is published, if:
 
 It can't check that every permission is actually used — read the permissions table.
 
+## Sample
+
+> **Exit Ramp** — Marks the real cancel button on a subscription page, labels the retention tricks around it, and keeps a timestamped log you can paste into a complaint.
+>
+> *First live pilot run, 2026-10-14 · Opus, about 7 minutes · a loadable MV3 extension plus its demo page*
+
 ## Run it
 
 ```bash

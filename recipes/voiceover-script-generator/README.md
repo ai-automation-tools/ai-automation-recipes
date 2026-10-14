@@ -24,6 +24,12 @@ tone. No image shows a real person's likeness.
 240–480 words of narration (with a little slack), at least two linked sources, a `## Tone` section
 in the direction notes, and a narrator from the active engine's presets.
 
+## Sample
+
+> **The Spacecraft Lost to a Unit Label** — In 1999 NASA's Mars Climate Orbiter burned up at Mars because ground software reported thruster data in pound-seconds instead of newton-seconds.
+>
+> *First live pilot run, 2026-10-14 · Gemini voice Charon · 2:20 narration and a 1080×1920 short over five scene stills*
+
 ## Run it
 
 ```bash

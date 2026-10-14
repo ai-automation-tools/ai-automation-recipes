@@ -365,6 +365,54 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-viewer-rebuild",
+      "name": "AI Recipes: Rebuild Viewer",
+      "description": "Rebuild the browsable viewer (index.html + catalog.js) in your recipes output folder, so everything your recipes made shows up in one page you can open from disk or host anywhere.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "recipe",
+        "viewer",
+        "gallery"
+      ],
+      "icon": "LayoutGrid",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 23 * * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/scripts/build_viewer.py\" --output-dir \"{{outputDir}}\"",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "The same output folder your recipes write to."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 300,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-weekly-funny-ai-content",
       "name": "AI Recipe: Weekly Funny AI Content",
       "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag.",

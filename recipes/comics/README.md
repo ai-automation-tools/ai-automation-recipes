@@ -29,6 +29,12 @@ this image only; image models still garble long or small text, so balloons are c
 words and the full dialogue lives in `script.md`. No real, recognisable people — the image
 engines refuse them anyway.
 
+## Sample
+
+> **Circular Dependency** — Two AI agents are each blocked on the other, so they schedule a meeting about it. Many meetings later they're still blocked on each other.
+>
+> *First live pilot run, 2026-10-14 · Sonnet · one 2×2 lettered strip*
+
 ## Run it
 
 ```bash

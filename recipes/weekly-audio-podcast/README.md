@@ -22,6 +22,12 @@ Rachel, Adam, Antoni, Bella, Josh, Domi. No cloned or custom voices.
 A script counts as rendered once an episode's `artifact.json` names it. With nothing left to
 render, the run logs `NOTHING_TO_RENDER` and exits 0.
 
+## Sample
+
+> **Should We Text the Aliens First?** — A risk analyst, an allotment radio ham, a contrarian linguist and a cruise-ship crooner argue over whether humanity should transmit a hello to the stars or keep listening.
+>
+> *First live pilot run, 2026-10-14 · Gemini preset voices · 13.5-minute MP3 rendered from the script above*
+
 ## Run it
 
 ```bash

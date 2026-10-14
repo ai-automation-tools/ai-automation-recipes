@@ -21,6 +21,7 @@
 | `cronsole/` | Templates that aren't recipes (the clone updater) |
 | `registry/` | **Generated.** The Cronsole registry, built by `scripts/build_registry.py` |
 | `scripts/check_public.py` | Pre-publish scan for keys, personal paths and a private denylist |
+| `viewer/index.html` | The viewer page; `scripts/build_viewer.py` copies it into an output folder beside a generated `catalog.js` |
 | `tests/` | `unittest` coverage of the run loop with the engine faked |
 
 ## The run loop

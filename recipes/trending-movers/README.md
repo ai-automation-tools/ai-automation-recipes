@@ -25,6 +25,12 @@ Before each run, the runner reads every earlier digest in the collection and han
 
 The runner rejects a digest whose published `+N this week` figures differ from the measurements or whose leaderboard isn't in descending order. A repo that renamed is published under its new URL and logged as unchecked. Repeats are expected here — a repo that keeps surging stays on top.
 
+## Sample
+
+> **Trending Movers — 2026-10-14** — One reverse-engineering agent repo, morluto/rea, gained +183,758 stars, more than the other fourteen leaderboard entries combined, while the rest of the week's momentum went to agent skill packs, memory layers, browsers and test tooling.
+>
+> *First live pilot run, 2026-10-14 · Sonnet, under 2 minutes · 22 entries from live GitHub data, figures checked*
+
 ## Run it
 
 ```bash

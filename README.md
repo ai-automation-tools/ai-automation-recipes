@@ -161,6 +161,18 @@ Scheduler or launchd can run as-is.
 A run either publishes a complete folder or nothing. The agent works in a private staging folder,
 the runner checks every promised file, renders the cover, and only then moves it into place.
 
+## Browse what it made
+
+```bash
+python scripts/build_viewer.py --output-dir ~/ai-output
+```
+
+That writes `index.html` and `catalog.js` into the output folder: a single page that lists every
+artifact by collection, with covers, search, rendered Markdown, playable games and apps in a
+sandboxed frame, image galleries, and audio and video players. Open it straight from disk, or serve
+the folder from any static host. Schedule **AI Recipes: Rebuild Viewer** (in every pack) to keep it
+current.
+
 ## How it works
 
 ```text
