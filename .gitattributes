@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.png binary
+# Cronsole verifies registry files by sha256 over exact bytes.
+registry/** text eol=lf

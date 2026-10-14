@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Registry is up to date
+        run: python scripts/build_registry.py --check
+
+      - name: No keys, home paths or emails
+        run: python scripts/check_public.py
+
+      - name: Every recipe's prompt fills
+        run: |
+          for r in recipes/*/run.py; do
+            python "$r" --output-dir "$RUNNER_TEMP/out" --dry-run > /dev/null
+          done

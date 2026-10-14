@@ -1,0 +1,113 @@
+{
+  "registryVersion": "1.0",
+  "templates": [
+    {
+      "id": "recipe-daily-app-card",
+      "name": "AI Recipe: Daily App Idea Card",
+      "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "ideas",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-daily-app-card.json",
+      "sha256": "6ce89c4ea4a848c131c2119c52628726e42c57f507e247fbfad1f714be4f30e7"
+    },
+    {
+      "id": "recipe-recipes-update",
+      "name": "AI Recipes: Update Clone",
+      "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
+      "category": "dev-workflow",
+      "tags": [
+        "git",
+        "recipe",
+        "update"
+      ],
+      "runtime": "executable",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-recipes-update.json",
+      "sha256": "218364c4e00632f93ddcb3fb5658ab21d29977a22d06ce77f2c333dac4e60f29"
+    },
+    {
+      "id": "recipe-weekly-browser-game",
+      "name": "AI Recipe: Weekly Browser Game",
+      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "html"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-weekly-browser-game.json",
+      "sha256": "4904c476c9ac0babe7e702fef854a9873a293ed8cf957cd86cdc6affa82bc278"
+    },
+    {
+      "id": "recipe-weekly-short-story",
+      "name": "AI Recipe: Weekly Short Story",
+      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "fiction",
+        "writing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-weekly-short-story.json",
+      "sha256": "572cc4e63b388f4829d0e077efdf705c067db6b6a81050efae2e5ffc72d0fcda"
+    }
+  ],
+  "packs": [
+    {
+      "id": "ai-recipes",
+      "name": "AI Content Recipes",
+      "description": "Scheduled Claude Code automations that research, write, build and illustrate — app idea cards, playable browser games, short stories — into a folder you can browse.",
+      "templateIds": [
+        "recipe-daily-app-card",
+        "recipe-recipes-update",
+        "recipe-weekly-browser-game",
+        "recipe-weekly-short-story"
+      ],
+      "path": "packs/ai-recipes.json",
+      "sha256": "b8f471fe0c79e9fdc090634fd2f7e82faa2361219dd2685d941179091aa58e97"
+    }
+  ]
+}

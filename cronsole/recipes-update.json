@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-recipes-update",
+  "name": "AI Recipes: Update Clone",
+  "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
+  "runtime": "executable",
+  "os": "cross-platform",
+  "category": "dev-workflow",
+  "tags": [
+    "git",
+    "recipe",
+    "update"
+  ],
+  "icon": "GitPullRequest",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 10 * * *"
+  },
+  "commandTemplate": "git -C \"{{recipesPath}}\" pull --ff-only",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 300,
+    "retries": 1
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

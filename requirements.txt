@@ -1,0 +1,4 @@
+# Cover images — install the engine(s) you have a key for. The text side needs only the `claude` CLI.
+google-genai>=1.0
+openai>=1.50
+pillow>=10.0
