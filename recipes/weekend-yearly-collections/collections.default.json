@@ -1,0 +1,289 @@
+{
+  "_about": "Edit freely. Each active collection gains one image per run, in order. kind 'years' walks start..end ('last-complete' = last full calendar year); kind 'list' walks items. lettering: the exact short text to letter into the image, or 'none'. research: whether the agent should web-research each entry.",
+  "collections": [
+    {
+      "id": "science-breakthroughs",
+      "title": "Science Breakthroughs",
+      "active": true,
+      "kind": "years",
+      "start": 2000,
+      "end": "last-complete",
+      "aspect": "3:2",
+      "research": true,
+      "lettering": "the year, e.g. \"2003\", and optionally a short title such as \"BREAKTHROUGHS OF 2003\"",
+      "brief": "One illustrated popular-science-magazine montage per year: the 8–12 medicine, physics, astronomy, biology, genetics, energy, archaeology and materials-science breakthroughs that defined it, including that year's Nobel-level results. A single unified laboratory-and-discovery scene — lab benches, microscopes and telescopes, DNA and molecule models, a collider ring or star chart, a fossil dig, clean-energy rigs — with the two or three biggest breakthroughs most prominent and the rest worked in as chalkboard diagrams, screen readouts and specimen labels. Polished cartoon-editorial style, bright and curious, a field-aware palette. Short labels (1–5 words, e.g. \"CRISPR\", \"mRNA\") are fine. Balance the fields; depict medical topics symbolically, never graphically; generic researchers only, no likeness of real scientists; no institutional logos."
+    },
+    {
+      "id": "technology-milestones",
+      "title": "Technology Milestones",
+      "active": true,
+      "kind": "list",
+      "items": [
+        {
+          "key": "control-of-fire",
+          "label": "Early humans harnessing fire"
+        },
+        {
+          "key": "stone-tools",
+          "label": "Knapped stone tools of the Paleolithic"
+        },
+        {
+          "key": "agriculture",
+          "label": "The Neolithic farming revolution"
+        },
+        {
+          "key": "the-wheel",
+          "label": "Invention of the wheel and axle"
+        },
+        {
+          "key": "writing",
+          "label": "Cuneiform and the birth of writing"
+        },
+        {
+          "key": "bronze-metallurgy",
+          "label": "Bronze Age metalworking"
+        },
+        {
+          "key": "iron-working",
+          "label": "Iron smelting and tools"
+        },
+        {
+          "key": "roman-concrete",
+          "label": "Roman concrete, roads, and aqueduct engineering"
+        },
+        {
+          "key": "paper",
+          "label": "Invention of paper"
+        },
+        {
+          "key": "gunpowder",
+          "label": "Gunpowder and early firearms"
+        },
+        {
+          "key": "printing-press",
+          "label": "Gutenberg's movable-type printing press"
+        },
+        {
+          "key": "mechanical-clock",
+          "label": "Mechanical clocks and timekeeping"
+        },
+        {
+          "key": "optics",
+          "label": "Telescope and microscope optics"
+        },
+        {
+          "key": "steam-engine",
+          "label": "The steam engine and industrial power"
+        },
+        {
+          "key": "vaccination",
+          "label": "Vaccination and germ-theory medicine"
+        },
+        {
+          "key": "photography",
+          "label": "The first photographs"
+        },
+        {
+          "key": "telegraph",
+          "label": "The electric telegraph"
+        },
+        {
+          "key": "electricity",
+          "label": "Harnessing and generating electricity"
+        },
+        {
+          "key": "telephone",
+          "label": "The telephone"
+        },
+        {
+          "key": "light-bulb",
+          "label": "Practical electric lighting"
+        },
+        {
+          "key": "internal-combustion-engine",
+          "label": "The automobile and internal combustion"
+        },
+        {
+          "key": "powered-flight",
+          "label": "The first powered airplane"
+        },
+        {
+          "key": "radio",
+          "label": "Radio broadcasting"
+        },
+        {
+          "key": "television",
+          "label": "Television"
+        },
+        {
+          "key": "antibiotics",
+          "label": "Penicillin and antibiotics"
+        },
+        {
+          "key": "nuclear-energy",
+          "label": "Nuclear fission and atomic energy"
+        },
+        {
+          "key": "transistor",
+          "label": "The transistor"
+        },
+        {
+          "key": "first-computer",
+          "label": "The first electronic computers"
+        },
+        {
+          "key": "spaceflight",
+          "label": "Satellites, spaceflight, and the Moon landing"
+        },
+        {
+          "key": "microprocessor",
+          "label": "The microprocessor and personal computer"
+        },
+        {
+          "key": "internet",
+          "label": "The internet"
+        },
+        {
+          "key": "world-wide-web",
+          "label": "The World Wide Web"
+        },
+        {
+          "key": "mobile-phone",
+          "label": "The mobile phone"
+        },
+        {
+          "key": "gps",
+          "label": "Global Positioning System"
+        },
+        {
+          "key": "smartphone",
+          "label": "The smartphone"
+        },
+        {
+          "key": "social-media",
+          "label": "Social media and the cloud"
+        },
+        {
+          "key": "artificial-intelligence",
+          "label": "Modern artificial intelligence"
+        }
+      ],
+      "aspect": "3:2",
+      "research": true,
+      "lettering": "a short bold title naming the milestone, e.g. \"ELECTRICITY\"",
+      "brief": "One friendly cartoon editorial illustration per milestone, oldest to newest: people using, building or discovering the invention in an era-appropriate setting. Wide landscape with foreground human activity, the invention in the midground and era context behind. Bold outlines, soft cel shading, warm expressive characters, one unified scene rather than panels. Recognizable at thumbnail size; no modern signage out of era; no real-person likenesses or brand logos."
+    },
+    {
+      "id": "exoplanets",
+      "title": "Exoplanets",
+      "active": true,
+      "kind": "list",
+      "items": [
+        {
+          "key": "lhs-1140-b",
+          "label": "LHS 1140 b"
+        },
+        {
+          "key": "k2-18-b",
+          "label": "K2-18 b"
+        },
+        {
+          "key": "trappist-1-e",
+          "label": "TRAPPIST-1 e"
+        },
+        {
+          "key": "proxima-centauri-b",
+          "label": "Proxima Centauri b"
+        },
+        {
+          "key": "toi-700-d",
+          "label": "TOI-700 d"
+        },
+        {
+          "key": "kepler-186-f",
+          "label": "Kepler-186 f"
+        },
+        {
+          "key": "kepler-442-b",
+          "label": "Kepler-442 b"
+        },
+        {
+          "key": "gliese-12-b",
+          "label": "Gliese 12 b"
+        },
+        {
+          "key": "kepler-62-e",
+          "label": "Kepler-62 e"
+        },
+        {
+          "key": "kepler-62-f",
+          "label": "Kepler-62 f"
+        },
+        {
+          "key": "wolf-1069-b",
+          "label": "Wolf 1069 b"
+        },
+        {
+          "key": "55-cancri-e",
+          "label": "55 Cancri e"
+        },
+        {
+          "key": "trappist-1-d",
+          "label": "TRAPPIST-1 d"
+        },
+        {
+          "key": "trappist-1-g",
+          "label": "TRAPPIST-1 g"
+        },
+        {
+          "key": "gj-3378-b",
+          "label": "GJ 3378 b"
+        },
+        {
+          "key": "hd-40307-g",
+          "label": "HD 40307 g"
+        },
+        {
+          "key": "toi-715-b",
+          "label": "TOI-715 b"
+        },
+        {
+          "key": "lp-890-9-c",
+          "label": "LP 890-9 c"
+        },
+        {
+          "key": "ross-128-b",
+          "label": "Ross 128 b"
+        },
+        {
+          "key": "gj-1002-b",
+          "label": "GJ 1002 b"
+        },
+        {
+          "key": "gj-1002-c",
+          "label": "GJ 1002 c"
+        },
+        {
+          "key": "kepler-452-b",
+          "label": "Kepler-452 b"
+        },
+        {
+          "key": "kepler-1649-c",
+          "label": "Kepler-1649 c"
+        },
+        {
+          "key": "teegardens-star-b",
+          "label": "Teegarden's Star b"
+        },
+        {
+          "key": "toi-1452-b",
+          "label": "TOI-1452 b"
+        }
+      ],
+      "aspect": "3:2",
+      "research": true,
+      "lettering": "none",
+      "brief": "One scientifically plausible alien creature per real exoplanet, shaped by that world's gravity, star, atmosphere and temperature, shown in its habitat. Research the planet's known properties first (mass and radius, star type, orbit, likely climate) and let them drive the body plan, senses, skin and locomotion. Natural-history field-guide illustration with documentary lighting: a clear creature portrait balanced with a readable surface-level landscape or seascape, creature and environment physically connected (footprints, spray, wind posture). No humanoid anatomy unless justified, no planet sphere in the sky, no unexplained moons, no text."
+    }
+  ]
+}

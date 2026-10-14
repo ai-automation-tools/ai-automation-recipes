@@ -27,12 +27,44 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "registry"
 
-PACK = {
+ALL_PACK = {
     "id": "ai-recipes",
     "name": "AI Content Recipes",
-    "description": "Scheduled Claude Code automations that research, write, build and illustrate — "
-                   "app idea cards, playable browser games, short stories — into a folder you can browse.",
+    "description": "Every recipe: scheduled Claude Code automations that research, write, build and "
+                   "illustrate into a folder you can browse.",
 }
+
+# Category packs. Membership is declared, never derived from tags, so a pack only changes when
+# this list does. Every pack also carries the clone updater the recipes depend on.
+UPDATER = "recipe-recipes-update"
+CATEGORY_PACKS = [
+    ("ai-recipes-apps-games", "AI Recipes: Apps & Games",
+     "Idea cards, runnable app and extension prototypes, playable games, game and 3D-print concepts.",
+     ["daily-app-card", "weekly-app-prototype", "weekly-browser-extension", "weekly-financial-idea",
+      "weekly-browser-game", "weekly-mobile-game", "weekly-pc-game-concept", "weekly-3d-print-ideas"]),
+    ("ai-recipes-writing", "AI Recipes: Writing",
+     "Short stories, a serialized novella, alternate histories, original characters and content ideas.",
+     ["weekly-short-story", "serialized-novella", "alternate-history", "agent-persona-original",
+      "content-idea-gen", "weekly-funny-ai-content"]),
+    ("ai-recipes-food-maps", "AI Recipes: Food & Maps",
+     "Safety-checked recipes with a printable Cook's Card, and researched interactive maps.",
+     ["recipe-of-the-week", "weekly-regional-recipe", "weekly-ai-map"]),
+    ("ai-recipes-digests", "AI Recipes: Research Digests",
+     "Monthly researched roundups — AI tools, agent tooling, open source, security and finance "
+     "tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
+     ["agent-toolkit", "ai-stack-radar", "oss-spotlight", "cool-websites", "top-10-github-repos",
+      "trending-movers", "signal-sources", "security-toolkit", "finance-toolkit"]),
+    ("ai-recipes-images", "AI Recipes: Images",
+     "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon "
+     "packs and long-running yearly image collections.",
+     ["comics", "ai-meme-generator", "daily-poster", "future-cities", "image-prompt-packs",
+      "wallpaper-packs", "icon-packs", "weekend-yearly-collections"]),
+    ("ai-recipes-audio", "AI Recipes: Audio",
+     "Songs composed from AI-written lyrics, a two-step debate podcast, and narrated voiceover shorts — "
+     "preset voices only.",
+     ["song-generator", "podcast-script-generator", "weekly-audio-podcast", "voiceover-script-generator"]),
+]
+
 
 # Mirrors cronsole backend/src/catalog/schema.ts (Registry v1).
 RUNTIMES = {"powershell", "batch", "bash", "zsh", "python", "node", "applescript", "vbscript", "executable", "http", "ai-prompt"}
@@ -102,18 +134,33 @@ def build() -> dict[Path, bytes]:
         # Registry v1 optionals are absent-or-string; null fails Cronsole's parse.
         entries.append({k: v for k, v in entry.items() if v is not None})
 
-    pack_rel = f"packs/{PACK['id']}.json"
-    pack_body = dump({"cronsoleCatalogVersion": "1.0", "pack": PACK,
-                      "templates": sorted(templates, key=lambda t: t["id"])})
-    files[OUT / pack_rel] = pack_body
-    index = {
-        "registryVersion": "1.0",
-        "templates": entries,
-        "packs": [{**PACK, "templateIds": [e["id"] for e in entries], "path": pack_rel,
-                   "sha256": hashlib.sha256(pack_body).hexdigest()}],
-    }
+    by_id = {t["id"]: t for t in templates}
+    recipe_ids = {p.parent.name for p in ROOT.glob("recipes/*/cronsole.json")}
+    grouped = {r for _, _, _, members in CATEGORY_PACKS for r in members}
+    if recipe_ids - grouped:
+        raise SystemExit(f"Recipes in no category pack: {sorted(recipe_ids - grouped)}")
+    if grouped - recipe_ids:
+        raise SystemExit(f"Category packs name missing recipes: {sorted(grouped - recipe_ids)}")
+
+    packs = [(ALL_PACK, sorted(by_id))]
+    for pid, name, desc, members in CATEGORY_PACKS:
+        packs.append(({"id": pid, "name": name, "description": desc},
+                      sorted([f"recipe-{m}" for m in members] + [UPDATER])))
+
+    pack_entries = []
+    for meta, ids in packs:
+        rel = f"packs/{meta['id']}.json"
+        body = dump({"cronsoleCatalogVersion": "1.0", "pack": meta, "templates": [by_id[i] for i in ids]})
+        files[OUT / rel] = body
+        pack_entries.append({**meta, "templateIds": ids, "path": rel, "sha256": hashlib.sha256(body).hexdigest()})
+
+    index = {"registryVersion": "1.0", "templates": entries, "packs": pack_entries}
     files[OUT / "index.json"] = dump(index)
     return files
+
+
+def entries_of(files: dict[Path, bytes]) -> list[Path]:
+    return [p for p in files if p.parent.name == "templates"]
 
 
 def main() -> int:
@@ -136,7 +183,7 @@ def main() -> int:
     for p, body in files.items():
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_bytes(body)
-    print(f"registry: {len(files) - 2} templates, 1 pack -> {OUT.relative_to(ROOT)}/")
+    print(f"registry: {len(entries_of(files))} templates, {len(CATEGORY_PACKS) + 1} packs -> {OUT.relative_to(ROOT)}/")
     return 0
 
 
