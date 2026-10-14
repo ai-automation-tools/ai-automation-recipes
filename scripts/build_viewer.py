@@ -11,6 +11,10 @@ artifacts land (or schedule it after your recipes).
 
     python scripts/build_viewer.py --output-dir ~/ai-output [--title "My AI Library"]
 
+For a hosted copy, `--repo-url https://github.com/<owner>/ai-automation-recipes` gives every item a
+link to its recipe and its Cronsole template, and drops the "Open folder" button (static hosts don't
+list directories).
+
 Markdown is rendered with the `markdown` package. Raw HTML inside it is escaped first, because the
 documents are model-written: a stray <script> in a story should show as text, not run.
 """
@@ -130,10 +134,11 @@ def item(folder: Path, out_dir: Path) -> dict | None:
         "video": [link(f) for f in files if Path(f).suffix.lower() in VIDEO_EXT],
         "docs": docs,
         "files": [link(f) for f in files],
+        "template": (ROOT / "registry" / "templates" / f"recipe-{a.get('recipe', '')}.json").is_file(),
     }
 
 
-def build(out_dir: Path, title: str) -> int:
+def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
     items = []
     for manifest in out_dir.glob(f"*/*/*/{MANIFEST}"):
         if any(part.startswith(".") for part in manifest.relative_to(out_dir).parts):
@@ -149,7 +154,8 @@ def build(out_dir: Path, title: str) -> int:
     if extra:
         known.append({"name": "Other", "collections": [{"id": c, "label": c.replace("-", " ").title()} for c in extra]})
 
-    catalog = {"title": title, "generated": datetime.now().strftime("%Y-%m-%d %H:%M"), "groups": known, "items": items}
+    catalog = {"title": title, "generated": datetime.now().strftime("%Y-%m-%d %H:%M"), "groups": known, "items": items,
+               "repo": repo_url.rstrip("/") if repo_url else None}
     # </script>-safe: catalog.js is loaded as a script, so never let a string close the tag.
     payload = json.dumps(catalog, ensure_ascii=False).replace("</", "<\\/")
     (out_dir / "catalog.js").write_text(f"window.CATALOG = {payload};\n", encoding="utf-8")
@@ -161,11 +167,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--output-dir", default=os.environ.get("RECIPES_OUTPUT_DIR"), help="The recipes output folder.")
     ap.add_argument("--title", default="AI Recipes", help="Shown in the viewer's header and tab.")
+    ap.add_argument("--repo-url", help="Link each item to its recipe and Cronsole template in this repo (hosted copies).")
     args = ap.parse_args()
     if not args.output_dir:
         ap.error("--output-dir is required (or set RECIPES_OUTPUT_DIR)")
     out_dir = Path(args.output_dir).expanduser().resolve()
-    n = build(out_dir, args.title)
+    n = build(out_dir, args.title, args.repo_url)
     print(f"viewer: {n} artifacts -> {out_dir / 'index.html'}")
     return 0
 

@@ -17,6 +17,8 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-recipes-demo.ai-automation-tools.dev">See live samples</a>
+  ·
   <a href="recipes/README.md">Browse the recipes</a>
   ·
   <a href="https://github.com/ai-automation-tools/ai-automation-recipes/issues">Report Bug</a>
@@ -192,7 +194,7 @@ run.py ─▶ core/runner.py ─▶ claude --print, inside a staging folder
 | [**📚 Docs home**](docs/README.md) | The map of everything below |
 | [**🧱 Architecture**](docs/ARCHITECTURE.md) | The run loop, `artifact.json`, engines and skills |
 | [**🛠️ Adding a recipe**](docs/ADDING-A-RECIPE.md) | The four files a recipe needs and the checks before a PR |
-| [**🗺️ Roadmap**](docs/ROADMAP.md) | Live-test status and what's left before this goes public |
+| [**🗺️ Roadmap**](docs/ROADMAP.md) | Live-test status and what's left to build |
 | [**📋 Changelog**](docs/CHANGELOG.md) | Every change, newest first |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

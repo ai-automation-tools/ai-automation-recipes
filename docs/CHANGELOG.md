@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.9.0-2ea44f?style=for-the-badge" alt="Version 0.9.0">
+  <img src="https://img.shields.io/badge/version-0.10.0-2ea44f?style=for-the-badge" alt="Version 0.10.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,27 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.10.0 — 2026-10-14
+
+**Released** *(Publish & promote)*
+- The repo is public.
+- Live samples at [ai-automation-recipes-demo.ai-automation-tools.dev](https://ai-automation-recipes-demo.ai-automation-tools.dev),
+  from the separate `ai-automation-recipes-demo` repo: the 13 live runs so far, in the viewer.
+
+**Added**
+- `build_viewer.py --repo-url`: a hosted viewer links every item to its recipe and its Cronsole
+  template, and drops the "Open folder" button that static hosts can't serve.
+
+**Changed**
+- `CONTRIBUTING.md` no longer bars recipes about real people. `agent-persona` and `satirical-news`
+  ship as they are, with the guardrails their prompts carry *(Build: the real-people decision)*.
+- The viewer and the repo icon moved from fuchsia to indigo (`#818cf8`); fuchsia already belonged
+  to another app in the org's icon set.
+
+**Fixed**
+- CI's dry-run loop failed on `app-enhancement` and `pr-review`, the two recipes with required
+  arguments. It now passes each its arguments, and gives `gh` the workflow token.
 
 ## 0.9.0 — 2026-10-14
 

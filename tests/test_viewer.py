@@ -83,6 +83,16 @@ class BuildViewerTests(unittest.TestCase):
         self.assertNotIn("<img", doc)
         self.assertIn('href="https://example.com"', doc)  # autolinks still work
 
+    def test_repo_url_links_recipe_and_template(self):
+        artifact(self.out, "comics", "2026-10-14_c", {"recipe": "comics", "title": "C", "summary": "s",
+                 "date": "2026-10-14", "files": {"main": "comic.md"}}, {"comic.md": "# C"})
+        build_viewer.build(self.out, "T", "https://github.com/o/r/")
+        cat = load_catalog(self.out)
+        self.assertEqual(cat["repo"], "https://github.com/o/r")
+        self.assertTrue(cat["items"][0]["template"])  # registry/templates/recipe-comics.json exists
+        build_viewer.build(self.out, "T")
+        self.assertIsNone(load_catalog(self.out)["repo"])  # local builds keep "Open folder"
+
     def test_empty_folder(self):
         self.assertEqual(build_viewer.build(self.out, "T"), 0)
         self.assertEqual(load_catalog(self.out)["items"], [])

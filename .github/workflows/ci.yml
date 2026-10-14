@@ -39,7 +39,15 @@ jobs:
         run: python scripts/check_public.py --history
 
       - name: Every recipe's prompt fills
+        env:
+          GH_TOKEN: ${{ github.token }}  # pr-review lists a public repo's open PRs before it fills
         run: |
+          mkdir -p "$RUNNER_TEMP/apps/demo" && echo '<!doctype html>' > "$RUNNER_TEMP/apps/demo/index.html"
           for r in recipes/*/run.py; do
-            python "$r" --output-dir "$RUNNER_TEMP/out" --dry-run > /dev/null
+            extra=()
+            case "$r" in
+              */app-enhancement/*) extra=(--apps-dir "$RUNNER_TEMP/apps") ;;
+              */pr-review/*) extra=(--repo octocat/Hello-World) ;;
+            esac
+            python "$r" --output-dir "$RUNNER_TEMP/out" --dry-run "${extra[@]}" > /dev/null
           done
