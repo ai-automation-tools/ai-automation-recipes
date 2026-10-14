@@ -1,0 +1,268 @@
+{
+  "cronsoleCatalogVersion": "1.0",
+  "pack": {
+    "id": "ai-recipes-repo-ops",
+    "name": "AI Recipes: Repo Ops",
+    "description": "Automations that work on a repo you name: a pull-request review pass and one small additive enhancement to a static app, both report-only unless you turn the side effects on."
+  },
+  "templates": [
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-app-enhancement",
+      "name": "AI Recipe: App Enhancement",
+      "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "web",
+        "apps",
+        "maintenance",
+        "dev-workflow"
+      ],
+      "icon": "Wrench",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 16 * * 6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/app-enhancement/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --apps-dir \"{{appsDir}}\" --apply {{apply}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "appsDir",
+          "label": "Apps folder",
+          "type": "path",
+          "required": true,
+          "help": "A folder whose subfolders are static web apps, each with an index.html. The run picks the one with the fewest enhancements so far."
+        },
+        {
+          "key": "apply",
+          "label": "Apply the patch to the app",
+          "type": "select",
+          "default": "no",
+          "required": true,
+          "options": [
+            "no",
+            "yes"
+          ],
+          "help": "no publishes enhancement.md and enhancement.patch and leaves your app untouched. yes also writes the changed files back into the app folder after the run passes every check."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-pr-review",
+      "name": "AI Recipe: PR Review",
+      "description": "Claude reviews every open pull request in one GitHub repo against a fixed set of gates (red or pending checks, conflicts, secrets, infra files, destructive migrations, unrelated changes, human markers) and writes a verdict per PR. Report mode is read-only; comment mode posts one comment per PR; merge mode squash-merges the ones that pass and holds the rest.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "github",
+        "pull-requests",
+        "code-review",
+        "dev-workflow"
+      ],
+      "icon": "GitPullRequest",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 14 * * 1-5"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/pr-review/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --repo \"{{repo}}\" --mode {{mode}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "repo",
+          "label": "GitHub repository",
+          "type": "string",
+          "required": true,
+          "help": "owner/name of the repository to review. The GitHub CLI (gh) must be installed and logged in to an account that can read it, and write to it for comment or merge mode."
+        },
+        {
+          "key": "mode",
+          "label": "Mode",
+          "type": "select",
+          "default": "report",
+          "required": true,
+          "options": [
+            "report",
+            "comment",
+            "merge"
+          ],
+          "help": "report only writes the review. comment also posts one comment per PR. merge also squash-merges every PR that passes every gate and leaves a hold comment on the rest."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-recipes-update",
+      "name": "AI Recipes: Update Clone",
+      "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
+      "runtime": "executable",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "git",
+        "recipe",
+        "update"
+      ],
+      "icon": "GitPullRequest",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 10 * * *"
+      },
+      "commandTemplate": "git -C \"{{recipesPath}}\" pull --ff-only",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 300,
+        "retries": 1
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-viewer-rebuild",
+      "name": "AI Recipes: Rebuild Viewer",
+      "description": "Rebuild the browsable viewer (index.html + catalog.js) in your recipes output folder, so everything your recipes made shows up in one page you can open from disk or host anywhere.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "recipe",
+        "viewer",
+        "gallery"
+      ],
+      "icon": "LayoutGrid",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 23 * * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/scripts/build_viewer.py\" --output-dir \"{{outputDir}}\"",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "The same output folder your recipes write to."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 300,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    }
+  ]
+}

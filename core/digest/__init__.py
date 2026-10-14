@@ -341,6 +341,54 @@ def candidates_block(payload: dict, desc_chars: int = 280) -> str:
     return f"{report}\n\n```json\n{json.dumps(rows, indent=1, ensure_ascii=False)}\n```"
 
 
+def parse_when(value: str) -> datetime | None:
+    """A feed date (RFC 2822 or ISO 8601) as an aware datetime, or None."""
+    from email.utils import parsedate_to_datetime
+
+    value = (value or "").strip()
+    if not value:
+        return None
+    try:
+        dt = parsedate_to_datetime(value)
+    except (TypeError, ValueError, IndexError):
+        try:
+            dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def window_items(items: list[dict], days: int, per_source_cap: int = 16, global_cap: int = 150,
+                 now: datetime | None = None) -> list[dict]:
+    """Items from the last `days` days (undated items kept), newest first, capped per source and overall.
+
+    The briefing recipes (news-digest, finance-digest) use this on fetch_candidates() output so one
+    loud feed can't own a week; `published` comes back as YYYY-MM-DD.
+    """
+    from collections import Counter
+    from datetime import timedelta
+
+    now = now or datetime.now(timezone.utc)
+    start = now - timedelta(days=days)
+    dated = []
+    for it in items:
+        when = parse_when(it.get("published", ""))
+        if when and when < start:
+            continue
+        dated.append((when or start, it))
+    dated.sort(key=lambda t: t[0], reverse=True)
+    per_source: Counter = Counter()
+    kept = []
+    for when, it in dated:
+        if per_source[it["source"]] >= per_source_cap:
+            continue
+        per_source[it["source"]] += 1
+        kept.append({**it, "published": when.strftime("%Y-%m-%d")})
+        if len(kept) >= global_cap:
+            break
+    return kept
+
+
 # --- bookmark + OPML export ---------------------------------------------------
 
 def _epoch(date_str: str) -> int:

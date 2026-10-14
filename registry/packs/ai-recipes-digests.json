@@ -3,7 +3,7 @@
   "pack": {
     "id": "ai-recipes-digests",
     "name": "AI Recipes: Research Digests",
-    "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing and a nine-topic news digest written from RSS feeds."
+    "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing, a ten-topic news digest written from RSS feeds and an eight-topic finance digest."
   },
   "templates": [
     {
@@ -246,6 +246,87 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-finance-digest",
+      "name": "AI Recipe: Finance Digest",
+      "description": "Claude writes one of eight money briefings: a stock-market recap, paper trade ideas, a strategy brief, Chase Ultimate Rewards news, card sign-up bonuses, live transfer bonuses, the shopping-portal stack, or a cashback-portal leaderboard. The runner fetches the topic's feeds and rotates topics; market levels come from public pages the agent reads and cites. Every edition ends with the same Not Financial Advice section.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "finance",
+        "investing",
+        "rewards",
+        "rss",
+        "briefing"
+      ],
+      "icon": "ChartLine",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 12 * * 0"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/finance-digest/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 2400,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-finance-toolkit",
       "name": "AI Recipe: Finance Toolkit",
       "description": "Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps. Never investment advice. Exports browser-importable bookmarks.",
@@ -407,7 +488,7 @@
       "schemaVersion": "1.0",
       "id": "recipe-news-digest",
       "name": "AI Recipe: News Digest",
-      "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+      "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",

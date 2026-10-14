@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/live--tested-13_of_41-F59E0B?style=for-the-badge" alt="13 of 41 live-tested">
+  <img src="https://img.shields.io/badge/live--tested-13_of_48-F59E0B?style=for-the-badge" alt="13 of 48 live-tested">
   <img src="https://img.shields.io/badge/visibility-private-6B7280?style=for-the-badge" alt="Private">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
@@ -16,10 +16,13 @@ The repo stays private until the publish phase below is done and the maintainer 
 work moves out of this file and into the [changelog](CHANGELOG.md). There's no paid tier planned:
 this is the free companion to Cronsole.
 
-**Where things stand (2026-10-14).** 41 recipes in six groups, every one dry-run and faked-engine
+**Where things stand (2026-10-14).** 48 recipes in seven groups, every one dry-run and faked-engine
 tested in CI; 13 have had a real run. Three text engines are wired (Claude live, Codex and Gemini
-built but unrun). The private content fleet is fully ported; what stays out is listed at the bottom.
-Everything below is either a live run that hasn't happened yet or the publish checklist.
+built but unrun). Every automation in the private fleet now has a recipe, including the seven that
+were held back earlier in the day over real-people content and employer-domain work; the maintainer
+chose to port everything first and decide what stays in the public set later. What has nothing to
+port is listed at the bottom. Everything below is either a live run that hasn't happened yet or the
+publish checklist.
 
 ## 🧪 Live-test status
 
@@ -34,6 +37,7 @@ made.
 | [**App Prototype**](../recipes/app-prototype/README.md) | Apps & Games | ⬜ not yet |
 | [**Browser Extension**](../recipes/browser-extension/README.md) | Apps & Games | ✅ Exit Ramp |
 | [**Finance App Prototype**](../recipes/finance-app-prototype/README.md) | Apps & Games | ⬜ not yet |
+| [**IAM App Prototype**](../recipes/iam-prototype/README.md) | Apps & Games | ⬜ not yet · added 2026-10-14 |
 | [**Browser Game**](../recipes/browser-game/README.md) | Apps & Games | ✅ Plumb Line (played in a browser) |
 | [**Mobile Game**](../recipes/mobile-game/README.md) | Apps & Games | ⬜ not yet |
 | [**PC Game Concept**](../recipes/pc-game-concept/README.md) | Apps & Games | ⬜ not yet |
@@ -41,7 +45,9 @@ made.
 | [**Short Story**](../recipes/short-story/README.md) | Writing | ✅ The Blue Words |
 | [**Serialized Novella**](../recipes/serialized-novella/README.md) | Writing | ✅ No Speech Detected, ch. 1 (seed run only) · next: a second run, to prove chapter 2 picks up the bible |
 | [**Alternate History**](../recipes/alternate-history/README.md) | Writing | ⬜ not yet |
+| [**Agent Persona (Known Figure)**](../recipes/agent-persona/README.md) | Writing | ⬜ not yet · added 2026-10-14 |
 | [**Original Agent Persona**](../recipes/agent-persona-original/README.md) | Writing | ⬜ not yet |
+| [**Satirical News**](../recipes/satirical-news/README.md) | Writing | ⬜ not yet · added 2026-10-14 |
 | [**Content Idea**](../recipes/content-idea-gen/README.md) | Writing | ⬜ not yet |
 | [**Funny AI Content**](../recipes/funny-ai-content/README.md) | Writing | ⬜ not yet · Cronsole test task, first run Fri 2026-10-16 |
 | [**Family Recipe**](../recipes/family-recipe/README.md) | Food & Maps | ✅ Minnesota Tater Tot Hotdish |
@@ -58,10 +64,12 @@ made.
 | [**Security Toolkit**](../recipes/security-toolkit/README.md) | Research Digests | ⬜ not yet |
 | [**Finance Toolkit**](../recipes/finance-toolkit/README.md) | Research Digests | ⬜ not yet |
 | [**Model Benchmark Watch**](../recipes/model-benchmark-watch/README.md) | Research Digests | ⬜ not yet · added 2026-10-14 |
-| [**News Digest**](../recipes/news-digest/README.md) | Research Digests | ⬜ not yet · added 2026-10-14; nine topics, so one live run per topic before it counts as done |
+| [**News Digest**](../recipes/news-digest/README.md) | Research Digests | ⬜ not yet · added 2026-10-14; ten topics, so one live run per topic before it counts as done |
+| [**Finance Digest**](../recipes/finance-digest/README.md) | Research Digests | ⬜ not yet · added 2026-10-14; eight topics, one live run each |
 | [**Comic**](../recipes/comics/README.md) | Images | ✅ Circular Dependency |
 | [**AI Meme**](../recipes/ai-meme-generator/README.md) | Images | ⬜ not yet |
 | [**Poster**](../recipes/poster/README.md) | Images | ⬜ not yet |
+| [**News Collage**](../recipes/news-collage/README.md) | Images | ⬜ not yet · added 2026-10-14; three windows (day, week, month), one live run each |
 | [**Future Cities 2500**](../recipes/future-cities/README.md) | Images | ⬜ not yet |
 | [**Image Prompt Pack**](../recipes/image-prompt-packs/README.md) | Images | ⬜ not yet |
 | [**Wallpaper Pack**](../recipes/wallpaper-packs/README.md) | Images | ⬜ not yet · heaviest: three 4K renders per run |
@@ -71,8 +79,26 @@ made.
 | [**Podcast Script**](../recipes/podcast-script-generator/README.md) | Audio | ✅ Should We Text the Aliens First? |
 | [**Podcast Episode**](../recipes/podcast-episode/README.md) | Audio | ✅ Should We Text the Aliens First? (13.5 min) |
 | [**Voiceover Script**](../recipes/voiceover-script-generator/README.md) | Audio | ✅ The Spacecraft Lost to a Unit Label |
+| [**PR Review**](../recipes/pr-review/README.md) | Repo Ops | ⬜ not yet · added 2026-10-14; report mode first, then comment, then merge on a throwaway repo |
+| [**App Enhancement**](../recipes/app-enhancement/README.md) | Repo Ops | ⬜ not yet · added 2026-10-14; patch mode first, then `--apply` on a copy |
 
 ## 🔨 Build
+
+- [ ] Decide what the public set does about real people. Seven recipes ported on 2026-10-14 were
+      held back earlier that day: `agent-persona` writes cards for real public figures and
+      `satirical-news` riffs on real events, while `news-collage` keeps the fleet's own no-likeness
+      rule. `CONTRIBUTING.md` still says a recipe that depicts real people won't be merged, so
+      either that line changes or the two recipes get a parody carve-out spelled out there
+- [ ] A live `news-collage` run per window: day (the six-panel grid with a readable timestamp),
+      week (one scene, title and date range spelled right), month. The captions are the thing to
+      check; six garbled captions was the fleet's most common visible defect
+- [ ] A live `agent-persona` run and a live `satirical-news` run, read for the guardrails the
+      prompts carry (public persona only, no fabricated quotes presented as real, satire labelled)
+- [ ] A live `iam-prototype` run: it must stay vendor-neutral and run on synthetic data
+- [ ] A live `finance-digest` run per topic; the `trade-ideas` topic must carry its paper-only
+      line on every idea and the disclaimer at the end
+- [ ] A live `pr-review` run in `report` mode on a repo with open PRs, then `comment`, then `merge`
+      on a throwaway repo; a live `app-enhancement` run in patch mode, then `--apply` on a copy
 
 - [ ] A second `serialized-novella` run writes chapter 2 from the saved story bible, keeping names,
       places and the rolling synopsis consistent
@@ -92,7 +118,7 @@ made.
       working (the second should lead with movement, not restate the table)
 - [ ] A live `viral-recipe` run: does Claude find something genuinely current, and does the
       safety gate catch the kind of shortcut viral food carries
-- [ ] New automations that aren't ports (the private fleet is fully ported, see *Not ported*).
+- [ ] New automations that aren't ports (every fleet job now has a recipe, see *Not ported*).
       Candidates the current core already supports: a release-notes digest that watches a list of
       GitHub repos the user names, a weekly quiz built from the news digests, a "year in review"
       that reads a collection's artifacts and writes a retrospective
@@ -130,17 +156,18 @@ Changes to Cronsole itself, tracked here because these recipes would use them:
 
 ## 🚫 Not ported
 
-Jobs from the private fleet that stay out, and why.
+What's left of the private fleet with nothing to port. The content jobs that were on this list
+until 2026-10-14 (the three news images, both persona kinds, the satirical paper, the IAM prototype,
+the eight finance and rewards digests, the IAM briefing, the PR review and the tool-enhancement job)
+are recipes now; see the *Build* list for the decision they still owe.
 
 | Job | Reason |
 |:---|:---|
-| `agent-persona`, `ai-news-collage`, `weekly-news-montage`, `satirical-news` | Depict real people |
-| `weekly-iam-idea` | Employer-domain work |
-| `rock-` / `country-` / `psychedelic-` / `weekly-song-generator` | Covered by `song-generator` types |
-| `eleven-podcast`, `adhoc-eleven-podcast` | Legacy, replaced by the podcast pair |
-| `cosmic-wallpapers` | Sources images instead of generating them; needs a licensing check first |
-| `daily-pr-review`, `weekly-tool-enhancement`, `fleet-doctor`, `repo-pull` | Ops jobs on the private fleet itself, not content |
-| the finance and rewards newsletters (stock market, trade suggestions, investment insights, card bonuses, portals, transfer bonuses) | Personal finance, and the IAM briefing is employer-domain. The nine general-interest newsletters became `news-digest` topics |
+| `rock-` / `country-` / `psychedelic-` / `rap-` / `weekly-song` | Consolidated into the fleet's one song job in September; `song-generator` carries every type |
+| `weekly-podcast`, `weekly-audio-podcast` | Deprecated on the fleet in July; the podcast pair here is their replacement. The two ElevenLabs form front-ends are the same artifacts from a pasted script or a topic form, which `podcast-script-generator` + `podcast-episode` cover |
+| `cosmic-wallpapers`, `future-cities` (fleet job) | Retired on the fleet; `wallpaper-packs` and `future-cities` here are the successors |
+| `fleet-doctor`, `fleet-status`, `repo-pull`, `watchdog` | Health checks, a status feed and a git pull for one specific box. Nothing a recipe could carry to another machine |
+| the three data-sync workflows behind a retired rewards app | Retired with the app they fed |
 
 ---
 

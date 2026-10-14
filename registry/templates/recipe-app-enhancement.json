@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-app-enhancement",
+  "name": "AI Recipe: App Enhancement",
+  "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "dev-workflow",
+  "tags": [
+    "ai",
+    "claude-code",
+    "recipe",
+    "web",
+    "apps",
+    "maintenance",
+    "dev-workflow"
+  ],
+  "icon": "Wrench",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "30 16 * * 6"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/app-enhancement/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --apps-dir \"{{appsDir}}\" --apply {{apply}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "appsDir",
+      "label": "Apps folder",
+      "type": "path",
+      "required": true,
+      "help": "A folder whose subfolders are static web apps, each with an index.html. The run picks the one with the fewest enhancements so far."
+    },
+    {
+      "key": "apply",
+      "label": "Apply the patch to the app",
+      "type": "select",
+      "default": "no",
+      "required": true,
+      "options": [
+        "no",
+        "yes"
+      ],
+      "help": "no publishes enhancement.md and enhancement.patch and leaves your app untouched. yes also writes the changed files back into the app folder after the run passes every check."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "sonnet",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 1800,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

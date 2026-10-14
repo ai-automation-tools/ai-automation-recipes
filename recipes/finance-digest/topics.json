@@ -1,0 +1,135 @@
+{
+ "stock-market": {
+  "name": "Stock Market Summary",
+  "emoji": "📊",
+  "kind": "markets",
+  "focus": "A week-in-review and look-ahead for an ordinary retail investor: how the indices, volatility, yields, the dollar and gold moved; which sectors led and lagged; the large-cap names that moved most and why; the earnings that landed and the ones due next week; and the price levels that matter against the 50- and 200-day averages.",
+  "sections": ["Weekly Recap", "Indices, Vol & Yields", "Sector Rotation", "Top Movers of the Week", "Earnings Recap", "Macro & News Themes", "Stock of the Week", "Week Ahead", "Levels to Watch"],
+  "min_sections": 6,
+  "rules": "Every index level, percentage, yield and earnings figure comes from a page you fetched this run — a public quote page, an exchange summary, the Treasury's yield-curve table — and is cited next to the number or in the table's source line. Where a figure is not on a page you read, write `data unavailable`; never estimate. Derive Top Movers and the Stock of the Week from recognisable large caps, not penny-stock day movers.",
+  "palette": "midnight navy, teal, pale gold, off-white",
+  "motif": "a rising and falling ribbon of light over a city skyline at dusk",
+  "feeds": [
+   "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+   "https://www.investing.com/rss/news_25.rss",
+   "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+  ]
+ },
+ "trade-ideas": {
+  "name": "Trade Ideas",
+  "emoji": "🎯",
+  "kind": "markets",
+  "focus": "General, non-personalised study ideas for a retail investor who wants to think about the week ahead: a market pulse, a short list of dividend names, growth names and ETFs worth reading up on, a tactical read on sectors, cash and duration, and the catalysts due next week.",
+  "sections": ["Market Pulse", "Dividend Ideas", "Growth Ideas", "ETF Ideas", "Tactical Read", "Upcoming Catalysts"],
+  "min_sections": 5,
+  "rules": "These are **paper ideas to study, never orders**. Each idea table carries a `Risk` column (one short phrase: what breaks the thesis) and the file includes the exact line `Paper only: study ideas, not orders.` directly under the H1. Every price, yield, P/E and rating comes from a page you fetched and is cited; write `n/a` for a fundamental you could not read. Diversify across sectors; no leveraged or illiquid names; never tell the reader to buy or sell.",
+  "palette": "deep green, slate, amber, off-white",
+  "motif": "a compass rose laid over a topographic map of rolling hills",
+  "feeds": [
+   "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+   "https://www.investing.com/rss/news_25.rss",
+   "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+  ]
+ },
+ "strategy-insights": {
+  "name": "Investment Strategy Insights",
+  "emoji": "🧭",
+  "kind": "markets",
+  "focus": "A tactical asset-allocation brief for a retail investor: one regime read reused everywhere, a tactical allocation across equities, fixed income, commodities and cash, the ETFs working in each bucket, the risk signals (volatility, credit, safe havens), sector stances, a duration and credit-quality view, a geographic split, and the three to five moves that follow.",
+  "sections": ["Executive Summary", "Asset Allocation", "Top-Performing ETFs", "Risk Management Signals", "Sector Rotation Strategy", "Fixed Income Strategy", "Geographic Allocation", "Strategic Recommendations", "Risk Considerations", "Market Environment Assessment"],
+  "min_sections": 7,
+  "rules": "Every allocation table sums to exactly 100. Derive one regime read (bull / bear / sideways, early / mid / late cycle) and reuse it in every section; a brief that contradicts itself is a failed run. Every level and percentage comes from a page you fetched and is cited; where a signal is not on a page you read (put/call, breadth, credit spreads), write `data unavailable` under its heading rather than dropping the heading.",
+  "palette": "charcoal, steel blue, copper, cream",
+  "motif": "a balance scale holding a globe and a stack of coins under a slow tide",
+  "feeds": [
+   "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+   "https://www.investing.com/rss/news_25.rss",
+   "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+  ]
+ },
+ "chase-rewards": {
+  "name": "Chase Ultimate Rewards Digest",
+  "emoji": "💳",
+  "kind": "rewards",
+  "focus": "Everything this week that helps a points-and-miles reader get more out of Chase Ultimate Rewards: transfer bonuses to its airline and hotel partners, elevated sign-up offers on the cards that earn UR, category and portal earning promos, referral bumps, and product or valuation changes.",
+  "sections": ["Transfer Bonuses", "Sign-up Bonuses", "Earning & Accumulation", "Referral Bonuses", "Other Program News", "Honorable Mentions"],
+  "min_sections": 2,
+  "rules": "Drop items about other ecosystems unless they touch a partner Chase also transfers to. Headlines are factual (\"30% bonus to Virgin Atlantic through Aug 31\"), never marketing copy. Never invent a ratio, bonus amount, card name or end date: write `see source` when the item doesn't say.",
+  "palette": "deep sapphire, white, silver, a thread of gold",
+  "motif": "a fan of translucent cards arcing into a single bright point",
+  "feeds": [
+   "https://thepointsguy.com/feed/",
+   "https://upgradedpoints.com/feed/",
+   "https://frequentmiler.com/feed/",
+   "https://doctorofcredit.com/feed/",
+   "https://onemileatatime.com/feed/"
+  ]
+ },
+ "card-bonuses": {
+  "name": "Credit Card Sign-Up Bonuses",
+  "emoji": "🎁",
+  "kind": "rewards",
+  "focus": "The best current welcome offers across every major U.S. issuer, math first: the points or dollars, the spend required and the window, which ones just went up or are about to end, and the application rules that decide whether a reader can even get them.",
+  "sections": ["Top Picks This Week", "Personal Cards", "Business Cards", "Newly Elevated & Limited-Time", "Application Rules & Other News", "Honorable Mentions"],
+  "min_sections": 2,
+  "rules": "A card appears in one section only. Every item names the issuer and the annual fee (or `see source`). Lead with the bonus and the spend requirement, not the prose. A \"best cards\" roundup becomes its specific offers, never a bare link. Never invent a bonus, fee, deadline or rule.",
+  "palette": "emerald, charcoal, warm gold, ivory",
+  "motif": "a gift box opening into a flock of small bright squares",
+  "feeds": [
+   "https://thepointsguy.com/feed/",
+   "https://upgradedpoints.com/feed/",
+   "https://frequentmiler.com/feed/",
+   "https://doctorofcredit.com/feed/",
+   "https://onemileatatime.com/feed/"
+  ]
+ },
+ "transfer-bonuses": {
+  "name": "Live Transfer Bonuses",
+  "emoji": "🔁",
+  "kind": "rewards",
+  "focus": "Which transfer bonuses are live right now from the transferable currencies (Amex Membership Rewards, Chase Ultimate Rewards, Citi ThankYou, Capital One, Bilt, Wells Fargo, Marriott Bonvoy) to airline and hotel partners: the percentage, the effective ratio, the expiry, what each one unlocks, and the program changes a points holder should know about.",
+  "sections": ["At a Glance", "Ending Soon", "Just Launched", "Sweet Spots", "Transfer Program News", "Honorable Mentions"],
+  "min_sections": 2,
+  "rules": "Lead with an `## At a Glance` table — `From | To | Bonus | Effective Rate | Ends` — sorted soonest-expiry first, one row per program-partner pair. Effective Rate is the base ratio improved by the bonus (1:1 plus 30% is 1:1.3); write `see source` rather than guessing a base ratio or an end date. A card welcome offer is not a transfer bonus and does not belong here. Never present an expired bonus as live. An empty section is omitted, never explained.",
+  "palette": "plum, slate, bright coral, cream",
+  "motif": "two interlocking loops of light passing a glowing token between them",
+  "feeds": [
+   "https://thepointsguy.com/feed/",
+   "https://upgradedpoints.com/feed/",
+   "https://frequentmiler.com/feed/",
+   "https://doctorofcredit.com/feed/",
+   "https://onemileatatime.com/feed/"
+  ]
+ },
+ "shopping-portals": {
+  "name": "Shopping Portal & Extension Stack",
+  "emoji": "🛒",
+  "kind": "rewards",
+  "focus": "How to earn the most back on online purchases this week by stacking cashback portals, shopping browser extensions, cards and gift cards: elevated portal payouts, portal-versus-extension conflicts that stop cashback tracking, gift-card plays, and the dated shopping events that drive the bumps.",
+  "sections": ["Top Portal Bonuses This Week", "Cashback Portals", "Browser Extensions & Setup", "Stacking & Gift Card Plays", "Shopping Events & Deadlines", "Other Shopping News", "Honorable Mentions"],
+  "min_sections": 2,
+  "rules": "Math first: the rate or dollar value and what triggers it. For a setup or conflict item, the *Why it matters* line states the practical rule (which extension to disable so the portal cookie tracks). An item appears in one section only. Never invent a portal, rate, retailer or deadline: `see source`.",
+  "palette": "tangerine, deep teal, white, charcoal",
+  "motif": "nested shopping bags stacked like a staircase with a coin rolling down them",
+  "feeds": [
+   "https://thepointsguy.com/feed/",
+   "https://upgradedpoints.com/feed/",
+   "https://frequentmiler.com/feed/",
+   "https://doctorofcredit.com/feed/",
+   "https://onemileatatime.com/feed/"
+  ]
+ },
+ "cashback-leaderboard": {
+  "name": "Cashback Portal Leaderboard",
+  "emoji": "🏁",
+  "kind": "leaderboard",
+  "focus": "For a basket of popular retailers, which cashback portal pays the most right now. The reader is about to buy at one of these stores and wants to know which portal to click through first.",
+  "sections": ["This Week's Standouts", "Leaderboard by Store", "How to Use This", "Methodology"],
+  "min_sections": 4,
+  "rules": "There are no feeds for this topic: **WebFetch each store's comparison page** at `https://www.cashbackmonitor.com/cashback-store/<slug>/` for the stores listed below and read the live portal rates off it. Use only the portals and rate strings you read; copy rate strings verbatim (`2% (15%*)`, `Up to $8`). `Best cash back` per store is the highest straightforward percentage cash portal; flat-dollar, points and miles offers are noted separately. Omit a store whose page gave no rates. No hype.",
+  "stores": ["walmart", "best-buy", "nike", "expedia", "chewy", "sephora", "macys", "home-depot", "apple", "adidas", "kohls", "groupon"],
+  "palette": "racing green, white, chrome, a flash of red",
+  "motif": "a chequered flag unfurling over a row of podium steps",
+  "feeds": []
+ }
+}

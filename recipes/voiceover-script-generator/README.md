@@ -48,5 +48,6 @@ python recipes/voiceover-script-generator/run.py --output-dir ~/ai-output --spee
 ---
 
 <p align="center">
-  <a href="../README.md">← All recipes</a>
+  <a href="../README.md">← All recipes</a> ·
+  <a href="../pr-review/README.md">Next: PR Review →</a>
 </p>

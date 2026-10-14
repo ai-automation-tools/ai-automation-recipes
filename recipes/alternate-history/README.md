@@ -50,5 +50,5 @@ python recipes/alternate-history/run.py --output-dir ~/ai-output
 
 <p align="center">
   <a href="../README.md">← All recipes</a> ·
-  <a href="../agent-persona-original/README.md">Next: Original Agent Persona →</a>
+  <a href="../agent-persona/README.md">Next: Agent Persona (Known Figure) →</a>
 </p>

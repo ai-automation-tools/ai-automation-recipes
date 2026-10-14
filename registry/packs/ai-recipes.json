@@ -87,6 +87,85 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-agent-persona",
+      "name": "AI Recipe: Agent Persona (Known Figure)",
+      "description": "Claude researches one well-known real person or established fictional character and writes a debate-ready, second-person persona card any model can adopt, rotating across ten subcategories, with an illustrated portrait cover and a square chat avatar when an image key is set.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "agents",
+        "persona",
+        "characters"
+      ],
+      "icon": "UserRound",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 18 * * 2"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/agent-persona/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover and the avatar; the card still publishes. Engines may decline a real person's likeness."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-agent-persona-original",
       "name": "AI Recipe: Original Agent Persona",
       "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
@@ -554,6 +633,90 @@
       ],
       "execution": {
         "timeoutSec": 2400,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-app-enhancement",
+      "name": "AI Recipe: App Enhancement",
+      "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "web",
+        "apps",
+        "maintenance",
+        "dev-workflow"
+      ],
+      "icon": "Wrench",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 16 * * 6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/app-enhancement/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --apps-dir \"{{appsDir}}\" --apply {{apply}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "appsDir",
+          "label": "Apps folder",
+          "type": "path",
+          "required": true,
+          "help": "A folder whose subfolders are static web apps, each with an index.html. The run picks the one with the fewest enhancements so far."
+        },
+        {
+          "key": "apply",
+          "label": "Apply the patch to the app",
+          "type": "select",
+          "default": "no",
+          "required": true,
+          "options": [
+            "no",
+            "yes"
+          ],
+          "help": "no publishes enhancement.md and enhancement.patch and leaves your app untouched. yes also writes the changed files back into the app folder after the run passes every check."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
         "retries": 0
       },
       "author": "ai-automation-tools",
@@ -1268,6 +1431,87 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-finance-digest",
+      "name": "AI Recipe: Finance Digest",
+      "description": "Claude writes one of eight money briefings: a stock-market recap, paper trade ideas, a strategy brief, Chase Ultimate Rewards news, card sign-up bonuses, live transfer bonuses, the shopping-portal stack, or a cashback-portal leaderboard. The runner fetches the topic's feeds and rotates topics; market levels come from public pages the agent reads and cites. Every edition ends with the same Not Financial Advice section.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "finance",
+        "investing",
+        "rewards",
+        "rss",
+        "briefing"
+      ],
+      "icon": "ChartLine",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 12 * * 0"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/finance-digest/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 2400,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-finance-toolkit",
       "name": "AI Recipe: Finance Toolkit",
       "description": "Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps. Never investment advice. Exports browser-importable bookmarks.",
@@ -1498,6 +1742,87 @@
       ],
       "execution": {
         "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-iam-prototype",
+      "name": "AI Recipe: IAM App Prototype",
+      "description": "Claude builds a runnable identity-and-access-management tool prototype (certification triage, lifecycle tracing, role mining, break-glass review, access-request UX…) on synthetic data, rotating ten IAM pain areas so the catalogue stays balanced. Vendor-neutral; speaks SCIM, OIDC and SAML, never one product.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "iam",
+        "identity",
+        "security",
+        "apps",
+        "prototype"
+      ],
+      "icon": "KeyRound",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 18 5 * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/iam-prototype/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
         "retries": 0
       },
       "author": "ai-automation-tools",
@@ -1897,9 +2222,86 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-news-collage",
+      "name": "AI Recipe: News Collage",
+      "description": "Claude researches the major U.S. news stories of a day, a week or a month (rotating) and writes the image prompt; the runner renders one cartoon-editorial image — a six-panel grid for a day or month, a single newsroom scene for a week — with short in-world captions and no likeness of any real person.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "news",
+        "images"
+      ],
+      "icon": "Newspaper",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 13 * * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/news-collage/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai"
+          ],
+          "help": "The image IS this recipe's output, so it needs GEMINI_API_KEY or OPENAI_API_KEY (task secret or the clone's .env). auto uses the first one set."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-news-digest",
       "name": "AI Recipe: News Digest",
-      "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+      "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",
@@ -2369,6 +2771,91 @@
     },
     {
       "schemaVersion": "1.0",
+      "id": "recipe-pr-review",
+      "name": "AI Recipe: PR Review",
+      "description": "Claude reviews every open pull request in one GitHub repo against a fixed set of gates (red or pending checks, conflicts, secrets, infra files, destructive migrations, unrelated changes, human markers) and writes a verdict per PR. Report mode is read-only; comment mode posts one comment per PR; merge mode squash-merges the ones that pass and holds the rest.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "ai",
+        "claude-code",
+        "recipe",
+        "github",
+        "pull-requests",
+        "code-review",
+        "dev-workflow"
+      ],
+      "icon": "GitPullRequest",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 14 * * 1-5"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/pr-review/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --repo \"{{repo}}\" --mode {{mode}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "repo",
+          "label": "GitHub repository",
+          "type": "string",
+          "required": true,
+          "help": "owner/name of the repository to review. The GitHub CLI (gh) must be installed and logged in to an account that can read it, and write to it for comment or merge mode."
+        },
+        {
+          "key": "mode",
+          "label": "Mode",
+          "type": "select",
+          "default": "report",
+          "required": true,
+          "options": [
+            "report",
+            "comment",
+            "merge"
+          ],
+          "help": "report only writes the review. comment also posts one comment per PR. merge also squash-merges every PR that passes every gate and leaves a hold comment on the rest."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-recipes-update",
       "name": "AI Recipes: Update Clone",
       "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
@@ -2471,6 +2958,85 @@
             "none"
           ],
           "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-satirical-news",
+      "name": "AI Recipe: Satirical News",
+      "description": "Claude writes one deadpan, Onion-style article under the masthead The Overcorrect, rotating across twelve beats and optionally anchored on a real current story, with a metadata sidecar and, when an image key is set, a cover, a square thumbnail and two in-article illustrations.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "satire",
+        "news",
+        "writing"
+      ],
+      "icon": "Newspaper",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 20 * * 0,2,3,5"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/satirical-news/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips all four pictures; the article still publishes."
         }
       ],
       "compatibleTargets": [

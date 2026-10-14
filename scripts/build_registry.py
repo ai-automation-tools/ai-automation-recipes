@@ -41,31 +41,37 @@ SUPPORT = ["recipe-recipes-update", "recipe-viewer-rebuild"]
 CATEGORY_PACKS = [
     ("ai-recipes-apps-games", "AI Recipes: Apps & Games",
      "Idea cards, runnable app and extension prototypes, playable games, game and 3D-print concepts.",
-     ["app-idea-card", "app-prototype", "browser-extension", "finance-app-prototype",
+     ["app-idea-card", "app-prototype", "browser-extension", "finance-app-prototype", "iam-prototype",
       "browser-game", "mobile-game", "pc-game-concept", "3d-print-design"]),
     ("ai-recipes-writing", "AI Recipes: Writing",
-     "Short stories, a serialized novella, alternate histories, original characters and content ideas.",
-     ["short-story", "serialized-novella", "alternate-history", "agent-persona-original",
-      "content-idea-gen", "funny-ai-content"]),
+     "Short stories, a serialized novella, alternate histories, persona cards for known figures and "
+     "original characters, satirical news and content ideas.",
+     ["short-story", "serialized-novella", "alternate-history", "agent-persona", "agent-persona-original",
+      "satirical-news", "content-idea-gen", "funny-ai-content"]),
     ("ai-recipes-food-maps", "AI Recipes: Food & Maps",
      "Safety-checked recipes with a printable Cook's Card, a viral-recipe recreator, and researched interactive maps.",
      ["family-recipe", "regional-recipe", "viral-recipe", "ai-map"]),
     ("ai-recipes-digests", "AI Recipes: Research Digests",
      "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, "
      "trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI "
-     "model benchmark briefing and a nine-topic news digest written from RSS feeds.",
+     "model benchmark briefing, a ten-topic news digest written from RSS feeds and an eight-topic "
+     "finance digest.",
      ["agent-toolkit", "ai-stack-radar", "oss-spotlight", "cool-websites", "top-10-github-repos",
       "trending-movers", "signal-sources", "security-toolkit", "finance-toolkit",
-      "model-benchmark-watch", "news-digest"]),
+      "model-benchmark-watch", "news-digest", "finance-digest"]),
     ("ai-recipes-images", "AI Recipes: Images",
-     "Comics, memes, posters, cityscapes, prompt packs, paired desktop and phone wallpapers, SVG icon "
-     "packs and long-running yearly image collections.",
-     ["comics", "ai-meme-generator", "poster", "future-cities", "image-prompt-packs",
+     "Comics, memes, posters, news collages, cityscapes, prompt packs, paired desktop and phone "
+     "wallpapers, SVG icon packs and long-running yearly image collections.",
+     ["comics", "ai-meme-generator", "poster", "news-collage", "future-cities", "image-prompt-packs",
       "wallpaper-packs", "icon-packs", "image-collections"]),
     ("ai-recipes-audio", "AI Recipes: Audio",
      "Songs composed from AI-written lyrics, a two-step debate podcast, and narrated voiceover shorts — "
      "preset voices only.",
      ["song-generator", "podcast-script-generator", "podcast-episode", "voiceover-script-generator"]),
+    ("ai-recipes-repo-ops", "AI Recipes: Repo Ops",
+     "Automations that work on a repo you name: a pull-request review pass and one small additive "
+     "enhancement to a static app, both report-only unless you turn the side effects on.",
+     ["pr-review", "app-enhancement"]),
 ]
 
 
