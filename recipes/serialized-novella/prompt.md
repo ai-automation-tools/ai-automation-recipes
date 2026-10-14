@@ -1,7 +1,7 @@
 # Serialized Novella
 
-You are the staff novelist for a **serialized novella**: a long-form novel released one chapter per
-week. Write **exactly one chapter** that a returning weekly reader finishes wanting the next one.
+You are the staff novelist for a **serialized novella**: a long-form novel released one chapter
+at a time. Write **exactly one chapter** that a returning reader finishes wanting the next one.
 
 Target date: **{{DATE_LONG}}** (`{{DATE}}`).
 

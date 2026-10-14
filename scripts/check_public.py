@@ -11,9 +11,12 @@ Two layers:
   It lives outside the repo because the list itself is the private data.
 
 Scans every tracked file (`git ls-files`), or every file under the repo when
-it is not a git repo yet.
+it is not a git repo yet. With `--history`, also scans every blob in every
+commit reachable from any ref, so a secret that was committed and later
+removed still fails the check: a public repo's history is public too.
 
     python scripts/check_public.py
+    python scripts/check_public.py --history
 """
 
 from __future__ import annotations
@@ -71,7 +74,52 @@ def files() -> list[Path]:
         return [p for p in ROOT.rglob("*") if p.is_file() and not SKIP_DIRS & set(p.parts)]
 
 
+def scan_text(label: str, text: str, rules: dict[str, re.Pattern[str]]) -> int:
+    hits = 0
+    for n, line in enumerate(text.splitlines(), 1):
+        if any(a.search(line) for a in ALLOW):
+            continue
+        for name, rx in rules.items():
+            m = rx.search(line)
+            if m:
+                hits += 1
+                print(f"{label}:{n}: [{name}] {m.group(0)}")
+    return hits
+
+
+def history_blobs() -> dict[str, str]:
+    """Every blob hash in every commit on every ref, mapped to the first path it was seen at."""
+    revs = subprocess.run(["git", "rev-list", "--all"], cwd=ROOT, capture_output=True, text=True, check=True)
+    blobs: dict[str, str] = {}
+    for rev in revs.stdout.split():
+        tree = subprocess.run(["git", "ls-tree", "-r", rev], cwd=ROOT, capture_output=True, text=True, check=True)
+        for entry in tree.stdout.splitlines():
+            meta, _, path = entry.partition("\t")
+            parts = meta.split()
+            if len(parts) == 3 and parts[1] == "blob":
+                blobs.setdefault(parts[2], f"{rev[:7]}:{path}")
+    return blobs
+
+
+def scan_history(rules: dict[str, re.Pattern[str]]) -> int:
+    hits = 0
+    blobs = history_blobs()
+    for sha, label in blobs.items():
+        path = label.split(":", 1)[1]
+        if Path(path).suffix.lower() in SKIP_SUFFIXES or Path(path).name == ".env":
+            continue
+        raw = subprocess.run(["git", "cat-file", "-p", sha], cwd=ROOT, capture_output=True, check=True).stdout
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            continue
+        hits += scan_text(label, text, rules)
+    print(f"history: {len(blobs)} blob(s) scanned across every ref", file=sys.stderr)
+    return hits
+
+
 def main() -> int:
+    history = "--history" in sys.argv[1:]
     rules = {name: re.compile(rx, re.I) for name, rx in {**BUILTIN, **denylist()}.items()}
     hits = 0
     for path in files():
@@ -81,18 +129,13 @@ def main() -> int:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for n, line in enumerate(text.splitlines(), 1):
-            if any(a.search(line) for a in ALLOW):
-                continue
-            for name, rx in rules.items():
-                m = rx.search(line)
-                if m:
-                    hits += 1
-                    print(f"{path.relative_to(ROOT).as_posix()}:{n}: [{name}] {m.group(0)}")
+        hits += scan_text(path.relative_to(ROOT).as_posix(), text, rules)
+    if history:
+        hits += scan_history(rules)
     if hits:
         print(f"\n{hits} finding(s). Fix them, or narrow the rule, before publishing.", file=sys.stderr)
         return 1
-    print("check_public: clean")
+    print("check_public: clean" + (" (tree and full history)" if history else ""))
     return 0
 
 

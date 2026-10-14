@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-regional-recipe",
+  "name": "AI Recipe: Regional Recipe",
+  "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "claude-code",
+    "content",
+    "recipe",
+    "food",
+    "cooking"
+  ],
+  "icon": "Globe",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 19 * * 5"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/regional-recipe/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "sonnet",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    },
+    {
+      "key": "imageEngine",
+      "label": "Cover image engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "openai",
+        "none"
+      ],
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 1800,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

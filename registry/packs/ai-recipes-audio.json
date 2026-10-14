@@ -8,9 +8,87 @@
   "templates": [
     {
       "schemaVersion": "1.0",
+      "id": "recipe-podcast-episode",
+      "name": "AI Recipe: Podcast Episode",
+      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "podcast",
+        "audio",
+        "tts"
+      ],
+      "icon": "Headphones",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 18 * * 6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/podcast-episode/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --speech-engine {{speechEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "speechEngine",
+          "label": "Speech engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "elevenlabs"
+          ],
+          "help": "auto uses GEMINI_API_KEY if set, else ELEVENLABS_API_KEY. Preset voices only."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
       "id": "recipe-podcast-script-generator",
       "name": "AI Recipe: Podcast Script",
-      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Audio Podcast recipe.",
+      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Podcast Episode recipe.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",
@@ -129,7 +207,7 @@
       "schemaVersion": "1.0",
       "id": "recipe-song-generator",
       "name": "AI Recipe: Song",
-      "description": "Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
+      "description": "Claude writes an original song in the type you choose — news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",
@@ -170,9 +248,9 @@
           "default": "opus",
           "required": true,
           "options": [
-            "sonnet",
+            "haiku",
             "opus",
-            "haiku"
+            "sonnet"
           ],
           "help": "Claude model alias for the run."
         },
@@ -185,8 +263,8 @@
           "options": [
             "auto",
             "gemini",
-            "openai",
-            "none"
+            "none",
+            "openai"
           ],
           "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
         },
@@ -194,7 +272,7 @@
           "key": "songType",
           "label": "Song type",
           "type": "select",
-          "default": "weekly",
+          "default": "news",
           "required": true,
           "options": [
             "blues",
@@ -216,6 +294,7 @@
             "latin-comedy",
             "metal",
             "metal-comedy",
+            "news",
             "pop",
             "pop-comedy",
             "psychedelic",
@@ -232,10 +311,9 @@
             "ska",
             "ska-comedy",
             "synthwave",
-            "synthwave-comedy",
-            "weekly"
+            "synthwave-comedy"
           ],
-          "help": "Which creative brief to write against. weekly researches the week's news; the -comedy types are adults-only humour."
+          "help": "Which creative brief to write against. news researches the latest news; the -comedy types are adults-only humour."
         }
       ],
       "compatibleTargets": [
@@ -412,84 +490,6 @@
       ],
       "execution": {
         "timeoutSec": 2400,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-audio-podcast",
-      "name": "AI Recipe: Audio Podcast",
-      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "podcast",
-        "audio",
-        "tts"
-      ],
-      "icon": "Headphones",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "0 18 * * 6"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-audio-podcast/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --speech-engine {{speechEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "sonnet",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "speechEngine",
-          "label": "Speech engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "elevenlabs"
-          ],
-          "help": "auto uses GEMINI_API_KEY if set, else ELEVENLABS_API_KEY. Preset voices only."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
         "retries": 0
       },
       "author": "ai-automation-tools",

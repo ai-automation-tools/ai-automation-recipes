@@ -10,7 +10,7 @@
       "schemaVersion": "1.0",
       "id": "recipe-agent-persona-original",
       "name": "AI Recipe: Original Agent Persona",
-      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover.",
+      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",
@@ -69,7 +69,7 @@
             "openai",
             "none"
           ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover and the avatar; the card still publishes."
         }
       ],
       "compatibleTargets": [
@@ -88,8 +88,8 @@
     {
       "schemaVersion": "1.0",
       "id": "recipe-alternate-history",
-      "name": "AI Recipe: Weekly Alternate History",
-      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with scene-by-scene illustration prompts and a portrait cover. Optional premise queue via alt-history-ideas.md.",
+      "name": "AI Recipe: Alternate History",
+      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with a portrait cover and one rendered 16:9 scene per section when an image key is set. Optional premise queue via alt-history-ideas.md.",
       "runtime": "python",
       "os": "cross-platform",
       "category": "ai-agent",
@@ -148,7 +148,7 @@
             "openai",
             "none"
           ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover and the eight scene images; the piece still publishes as text."
         }
       ],
       "compatibleTargets": [
@@ -187,6 +187,85 @@
         "cron": "0 18 * * 3"
       },
       "commandTemplate": "python \"{{recipesPath}}/recipes/content-idea-gen/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-funny-ai-content",
+      "name": "AI Recipe: Funny AI Content",
+      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "humor",
+        "satire",
+        "social-media"
+      ],
+      "icon": "Laugh",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 14 * * 5"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/funny-ai-content/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
       "parameters": [
         {
           "key": "recipesPath",
@@ -365,135 +444,8 @@
     },
     {
       "schemaVersion": "1.0",
-      "id": "recipe-viewer-rebuild",
-      "name": "AI Recipes: Rebuild Viewer",
-      "description": "Rebuild the browsable viewer (index.html + catalog.js) in your recipes output folder, so everything your recipes made shows up in one page you can open from disk or host anywhere.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "recipe",
-        "viewer",
-        "gallery"
-      ],
-      "icon": "LayoutGrid",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "30 23 * * *"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/scripts/build_viewer.py\" --output-dir \"{{outputDir}}\"",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "The same output folder your recipes write to."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 300,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-funny-ai-content",
-      "name": "AI Recipe: Weekly Funny AI Content",
-      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "humor",
-        "satire",
-        "social-media"
-      ],
-      "icon": "Laugh",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "30 14 * * 5"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-funny-ai-content/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "sonnet",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 1800,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-short-story",
-      "name": "AI Recipe: Weekly Short Story",
+      "id": "recipe-short-story",
+      "name": "AI Recipe: Short Story",
       "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md.",
       "runtime": "python",
       "os": "cross-platform",
@@ -511,7 +463,7 @@
         "kind": "schedule",
         "cron": "0 13 * * 0"
       },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-short-story/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "commandTemplate": "python \"{{recipesPath}}/recipes/short-story/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
       "parameters": [
         {
           "key": "recipesPath",
@@ -563,6 +515,54 @@
       ],
       "execution": {
         "timeoutSec": 2400,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-viewer-rebuild",
+      "name": "AI Recipes: Rebuild Viewer",
+      "description": "Rebuild the browsable viewer (index.html + catalog.js) in your recipes output folder, so everything your recipes made shows up in one page you can open from disk or host anywhere.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "recipe",
+        "viewer",
+        "gallery"
+      ],
+      "icon": "LayoutGrid",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 23 * * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/scripts/build_viewer.py\" --output-dir \"{{outputDir}}\"",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "The same output folder your recipes write to."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 300,
         "retries": 0
       },
       "author": "ai-automation-tools",

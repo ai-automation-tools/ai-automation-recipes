@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "recipe-podcast-script-generator",
   "name": "AI Recipe: Podcast Script",
-  "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Audio Podcast recipe.",
+  "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Podcast Episode recipe.",
   "runtime": "python",
   "os": "cross-platform",
   "category": "ai-agent",

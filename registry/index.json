@@ -2,9 +2,34 @@
   "registryVersion": "1.0",
   "templates": [
     {
+      "id": "recipe-3d-print-design",
+      "name": "AI Recipe: 3D Print Design",
+      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "3d-printing",
+        "design",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-3d-print-design.json",
+      "sha256": "46fbce0c687136df3a9403cc0349b17a6a308720cffc99aa7454ccc0b0f8ca81"
+    },
+    {
       "id": "recipe-agent-persona-original",
       "name": "AI Recipe: Original Agent Persona",
-      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover.",
+      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -24,7 +49,7 @@
         "macos"
       ],
       "path": "templates/recipe-agent-persona-original.json",
-      "sha256": "16882cee88bc1a5e4132d71589561711b4286173098f53c68f6e0d52bd7b72a0"
+      "sha256": "1b4b5717c79c4af68391eb1eb21c8f04895abf5c331221152339ad00f16cc613"
     },
     {
       "id": "recipe-agent-toolkit",
@@ -51,6 +76,31 @@
       ],
       "path": "templates/recipe-agent-toolkit.json",
       "sha256": "20bd0f206acad1048d483da12202d9682ee9680d8d1bd0ab3fc30750d51f6ab4"
+    },
+    {
+      "id": "recipe-ai-map",
+      "name": "AI Recipe: AI Map",
+      "description": "Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "maps",
+        "travel",
+        "html"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-ai-map.json",
+      "sha256": "3b80c54a2baa5fb9e7c8ab2b087afa2648573dcef3eabdbd170cc81098aad5b1"
     },
     {
       "id": "recipe-ai-meme-generator",
@@ -104,8 +154,8 @@
     },
     {
       "id": "recipe-alternate-history",
-      "name": "AI Recipe: Weekly Alternate History",
-      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with scene-by-scene illustration prompts and a portrait cover. Optional premise queue via alt-history-ideas.md.",
+      "name": "AI Recipe: Alternate History",
+      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with a portrait cover and one rendered 16:9 scene per section when an image key is set. Optional premise queue via alt-history-ideas.md.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -125,11 +175,109 @@
         "macos"
       ],
       "path": "templates/recipe-alternate-history.json",
-      "sha256": "499c42b31d95d483ede8b8a7a0de74e11737b64b10b16a9863948d449b02f7b4"
+      "sha256": "b98a5a7b931ee974a0e523ffd8ad11ec6636fc9ecb42813cc8b096af343821a3"
+    },
+    {
+      "id": "recipe-app-idea-card",
+      "name": "AI Recipe: App Idea Card",
+      "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "ideas",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-app-idea-card.json",
+      "sha256": "7c787ffe003aace3a522afc2385b9c78c3a57600ca57c7701bd7d1a372529b3e"
+    },
+    {
+      "id": "recipe-app-prototype",
+      "name": "AI Recipe: App Prototype",
+      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "apps",
+        "prototype",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-app-prototype.json",
+      "sha256": "824f2256595695ff3d5c6411585b4fa86147255cf82d355f9acd4deac7dc5a17"
+    },
+    {
+      "id": "recipe-browser-extension",
+      "name": "AI Recipe: Browser Extension",
+      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "browser-extension",
+        "apps",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-browser-extension.json",
+      "sha256": "786df9d88cc7403a34df7233572b60e2dd5d4d1daabf051d6fafc3bbe73bf8d7"
+    },
+    {
+      "id": "recipe-browser-game",
+      "name": "AI Recipe: Browser Game",
+      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "html"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-browser-game.json",
+      "sha256": "b1a3906dffdc089e10627bf9de67125a27917465fcb5ead69838b4862d8c3f1f"
     },
     {
       "id": "recipe-comics",
-      "name": "AI Recipe: Weekly Comic",
+      "name": "AI Recipe: Comic",
       "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering.",
       "category": "ai-agent",
       "tags": [
@@ -150,7 +298,7 @@
         "macos"
       ],
       "path": "templates/recipe-comics.json",
-      "sha256": "d7c7e081cb9ad19f1626c5128780acc3518f05c7562cbb1bb46c4e62138fca0b"
+      "sha256": "68f6bddff13aec528a0b014614980595acf045ff13d10bd439ac6b9d2940fbae"
     },
     {
       "id": "recipe-content-idea-gen",
@@ -203,17 +351,17 @@
       "sha256": "e4273b19413f63680befcf19a40efacded4f06c39909da74aa1a5f66e35595fa"
     },
     {
-      "id": "recipe-daily-app-card",
-      "name": "AI Recipe: Daily App Idea Card",
-      "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced.",
+      "id": "recipe-family-recipe",
+      "name": "AI Recipe: Family Recipe",
+      "description": "Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page.",
       "category": "ai-agent",
       "tags": [
         "ai",
         "claude-code",
         "content",
         "recipe",
-        "ideas",
-        "research"
+        "food",
+        "cooking"
       ],
       "runtime": "python",
       "os": "cross-platform",
@@ -223,22 +371,22 @@
         "linux",
         "macos"
       ],
-      "path": "templates/recipe-daily-app-card.json",
-      "sha256": "6ce89c4ea4a848c131c2119c52628726e42c57f507e247fbfad1f714be4f30e7"
+      "path": "templates/recipe-family-recipe.json",
+      "sha256": "df11769318cae228fcc3aba5ea816f03aac20e3ddd56f7f85bea56435a08859a"
     },
     {
-      "id": "recipe-daily-poster",
-      "name": "AI Recipe: Daily Poster",
-      "description": "Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3.",
+      "id": "recipe-finance-app-prototype",
+      "name": "AI Recipe: Finance App Prototype",
+      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice.",
       "category": "ai-agent",
       "tags": [
         "ai",
         "claude-code",
         "content",
         "recipe",
-        "posters",
-        "art",
-        "images"
+        "finance",
+        "apps",
+        "prototype"
       ],
       "runtime": "python",
       "os": "cross-platform",
@@ -248,8 +396,8 @@
         "linux",
         "macos"
       ],
-      "path": "templates/recipe-daily-poster.json",
-      "sha256": "1226e26f83e7d17896bd07b8f9219bba60d2680ffc4c30c560624d5fad192cae"
+      "path": "templates/recipe-finance-app-prototype.json",
+      "sha256": "05ab7c3bafa35daff492cc7a008745afbb66d909dedf16d2b5df0dca78212842"
     },
     {
       "id": "recipe-finance-toolkit",
@@ -276,6 +424,31 @@
       ],
       "path": "templates/recipe-finance-toolkit.json",
       "sha256": "6ead3f5c6d7b69a1d3f13df1d8ddcbc59053ea7b9f965714a2626a7df0d08130"
+    },
+    {
+      "id": "recipe-funny-ai-content",
+      "name": "AI Recipe: Funny AI Content",
+      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "humor",
+        "satire",
+        "social-media"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-funny-ai-content.json",
+      "sha256": "cf34ed7e94cf49dd891875cd4f9a519dbf5cbd34d74e5c9d73c999f97fe2288e"
     },
     {
       "id": "recipe-future-cities",
@@ -328,8 +501,33 @@
       "sha256": "ec659383efbd17d056a78f619acf3bdf375cf5fd28efd3e20dbb7d4125815494"
     },
     {
+      "id": "recipe-image-collections",
+      "name": "AI Recipe: Image Collections",
+      "description": "Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "images",
+        "collections",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-image-collections.json",
+      "sha256": "e0499277e65eab10830e00d874bec93ef8f23f843eacb1de0af8921d17120058"
+    },
+    {
       "id": "recipe-image-prompt-packs",
-      "name": "AI Recipe: Weekly Image Prompt Pack",
+      "name": "AI Recipe: Image Prompt Pack",
       "description": "Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image.",
       "category": "ai-agent",
       "tags": [
@@ -349,7 +547,82 @@
         "macos"
       ],
       "path": "templates/recipe-image-prompt-packs.json",
-      "sha256": "8e7d5eb647a10d09108fbfee1e4fd04fd3168137cc3e04495ff426b27e1e1459"
+      "sha256": "048eda424372ad60c350063e4c2de5cf03e1a5a2ad08f1ff5951bad0789dc908"
+    },
+    {
+      "id": "recipe-mobile-game",
+      "name": "AI Recipe: Mobile Game",
+      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "html",
+        "mobile"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-mobile-game.json",
+      "sha256": "45327e79f1d5d866d59d082b35f55309cbbf9dbca785bb76b01ae36e801a7d2a"
+    },
+    {
+      "id": "recipe-model-benchmark-watch",
+      "name": "AI Recipe: Model Benchmark Watch",
+      "description": "Claude researches the week's AI model releases, commercial and open-weight, and writes a briefing with a sourced head-to-head benchmark table of the current frontier, leading with what changed since the previous edition. Every number traces to a cited source.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "research",
+        "models",
+        "benchmarks"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-model-benchmark-watch.json",
+      "sha256": "77bdf56b55dfa5d0d87a9eecc41a1c7dc59e6a864c5e3471c0092c5f8e0b7331"
+    },
+    {
+      "id": "recipe-news-digest",
+      "name": "AI Recipe: News Digest",
+      "description": "Claude writes a briefing on one of nine topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "news",
+        "rss",
+        "briefing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-news-digest.json",
+      "sha256": "4a18d41b8c976c76eee7bb5aa25ef214c8765c2ed66bde022784a78b92673e7c"
     },
     {
       "id": "recipe-oss-spotlight",
@@ -378,9 +651,59 @@
       "sha256": "e469d13b73d04573ccec75847e8e18299f740fe1c302f28f63e9fa71b40de82a"
     },
     {
+      "id": "recipe-pc-game-concept",
+      "name": "AI Recipe: PC Game Concept",
+      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "design",
+        "research"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-pc-game-concept.json",
+      "sha256": "6580328c86a14f8d52606c3537b2a9ac720a66dd58f9bd71b4dec7ebd019896b"
+    },
+    {
+      "id": "recipe-podcast-episode",
+      "name": "AI Recipe: Podcast Episode",
+      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "podcast",
+        "audio",
+        "tts"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-podcast-episode.json",
+      "sha256": "b9c0751a6a0b015473476588d1542a15a50c7681688db61172e35b35db6234fa"
+    },
+    {
       "id": "recipe-podcast-script-generator",
       "name": "AI Recipe: Podcast Script",
-      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Audio Podcast recipe.",
+      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Podcast Episode recipe.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -399,20 +722,21 @@
         "macos"
       ],
       "path": "templates/recipe-podcast-script-generator.json",
-      "sha256": "deec1eb60f321efdb24d6c93cf9c2570c65692460bf9176e415043bcb25f8618"
+      "sha256": "65dc872da9d9c69f22ab9f441cc22114831c2f953e2bd806bc330b01e53f8fca"
     },
     {
-      "id": "recipe-recipe-of-the-week",
-      "name": "AI Recipe: Recipe of the Week",
-      "description": "Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page.",
+      "id": "recipe-poster",
+      "name": "AI Recipe: Poster",
+      "description": "Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3.",
       "category": "ai-agent",
       "tags": [
         "ai",
         "claude-code",
         "content",
         "recipe",
-        "food",
-        "cooking"
+        "posters",
+        "art",
+        "images"
       ],
       "runtime": "python",
       "os": "cross-platform",
@@ -422,8 +746,8 @@
         "linux",
         "macos"
       ],
-      "path": "templates/recipe-recipe-of-the-week.json",
-      "sha256": "e16a3d33124ad3a449931fbdc58ffc5e20cfece4c7141e66888d2d6f31491d03"
+      "path": "templates/recipe-poster.json",
+      "sha256": "ad1a5c332ee1d807ee39c6c840f6dbd3d79a45c6476af4ea0b28bc46b54b592d"
     },
     {
       "id": "recipe-recipes-update",
@@ -445,6 +769,30 @@
       ],
       "path": "templates/recipe-recipes-update.json",
       "sha256": "218364c4e00632f93ddcb3fb5658ab21d29977a22d06ce77f2c333dac4e60f29"
+    },
+    {
+      "id": "recipe-regional-recipe",
+      "name": "AI Recipe: Regional Recipe",
+      "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "food",
+        "cooking"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-regional-recipe.json",
+      "sha256": "0a6ad3aef2565b347b8675d536d47eb903f83d4899c3a81aea90258c9b0f2c64"
     },
     {
       "id": "recipe-security-toolkit",
@@ -498,6 +846,30 @@
       "sha256": "39719b57aa0f61835ff5c82165e1ee05357067cfbe78e911780da559142b045c"
     },
     {
+      "id": "recipe-short-story",
+      "name": "AI Recipe: Short Story",
+      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "fiction",
+        "writing"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-short-story.json",
+      "sha256": "36c20973be718d90dd5e49e2baa360678ded6bf3e49aa82a568c48955c95f610"
+    },
+    {
       "id": "recipe-signal-sources",
       "name": "AI Recipe: Signal Sources",
       "description": "Claude adds 12+ blogs, newsletters, changelogs and channels worth following to a cumulative reading list, each with a verified feed. Regenerates an all-time bookmarks file and an OPML bundle.",
@@ -526,7 +898,7 @@
     {
       "id": "recipe-song-generator",
       "name": "AI Recipe: Song",
-      "description": "Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
+      "description": "Claude writes an original song in the type you choose — news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -546,7 +918,7 @@
         "macos"
       ],
       "path": "templates/recipe-song-generator.json",
-      "sha256": "11bb9bf2d93a24a2b6bee3723b1506e0d5ba87187ac19133bb272392003bb9fe"
+      "sha256": "10cb5595c596684aef8e40b90204d09d5db342780029435fc04fcb5d248233cb"
     },
     {
       "id": "recipe-top-10-github-repos",
@@ -622,6 +994,31 @@
       "sha256": "238d37e3f71e2815c5e82edf79f1e84d11fce1500dbb1ed766a19bf3f855c90a"
     },
     {
+      "id": "recipe-viral-recipe",
+      "name": "AI Recipe: Viral Recipe",
+      "description": "Claude finds the recipe currently blowing up on TikTok, Instagram, YouTube, Reddit or Facebook, recreates it as a cookable recipe that credits the originating creator and explains why it went viral, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page.",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "food",
+        "cooking",
+        "trends"
+      ],
+      "runtime": "python",
+      "os": "cross-platform",
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "path": "templates/recipe-viral-recipe.json",
+      "sha256": "eeabf5b31c8ba1f6566f2da514b5f51057717400d858c3fe71d4bc9b05c8be0e"
+    },
+    {
       "id": "recipe-voiceover-script-generator",
       "name": "AI Recipe: Voiceover Script",
       "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills.",
@@ -649,7 +1046,7 @@
     },
     {
       "id": "recipe-wallpaper-packs",
-      "name": "AI Recipe: Weekly Wallpaper Pack",
+      "name": "AI Recipe: Wallpaper Pack",
       "description": "Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render.",
       "category": "ai-agent",
       "tags": [
@@ -669,329 +1066,7 @@
         "macos"
       ],
       "path": "templates/recipe-wallpaper-packs.json",
-      "sha256": "00f8dbf43f149ff7c913474733c2882fb8f307660c84194bf4b26c11348ee1d4"
-    },
-    {
-      "id": "recipe-weekend-yearly-collections",
-      "name": "AI Recipe: Yearly Collections",
-      "description": "Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "images",
-        "collections",
-        "research"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekend-yearly-collections.json",
-      "sha256": "5fc405a683664f92d95bd773bfcd2aa426995cc44ced45d00c93366ef8076678"
-    },
-    {
-      "id": "recipe-weekly-3d-print-ideas",
-      "name": "AI Recipe: 3D Print Idea",
-      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "3d-printing",
-        "design",
-        "research"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-3d-print-ideas.json",
-      "sha256": "951add756d90b48a45ce789e1e044518d4ef0349fc7904ceeb5dff9548e502fd"
-    },
-    {
-      "id": "recipe-weekly-ai-map",
-      "name": "AI Recipe: Weekly AI Map",
-      "description": "Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "maps",
-        "travel",
-        "html"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-ai-map.json",
-      "sha256": "0fc61db4e2fd88d819afd534554412bf38ee6c23788c8c5f5a263ea91a0573b8"
-    },
-    {
-      "id": "recipe-weekly-app-prototype",
-      "name": "AI Recipe: Weekly App Prototype",
-      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "apps",
-        "prototype",
-        "research"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-app-prototype.json",
-      "sha256": "d61e8a3a2389771444975873ed974fa01a5bdec5a3f35f7e7f00270abac9cdf3"
-    },
-    {
-      "id": "recipe-weekly-audio-podcast",
-      "name": "AI Recipe: Audio Podcast",
-      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "podcast",
-        "audio",
-        "tts"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-audio-podcast.json",
-      "sha256": "533f15bc5a47f0e09de7907964fddb95e698ee18f30634b0ab7bac368f67cc46"
-    },
-    {
-      "id": "recipe-weekly-browser-extension",
-      "name": "AI Recipe: Weekly Browser Extension",
-      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "browser-extension",
-        "apps",
-        "research"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-browser-extension.json",
-      "sha256": "1d73ee2aaeba4f930053fe71c5d7f4009f360b81270df6565993af933cbb7838"
-    },
-    {
-      "id": "recipe-weekly-browser-game",
-      "name": "AI Recipe: Weekly Browser Game",
-      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "html"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-browser-game.json",
-      "sha256": "4904c476c9ac0babe7e702fef854a9873a293ed8cf957cd86cdc6affa82bc278"
-    },
-    {
-      "id": "recipe-weekly-financial-idea",
-      "name": "AI Recipe: Financial Idea",
-      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "finance",
-        "apps",
-        "prototype"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-financial-idea.json",
-      "sha256": "9942809f6ce3b17be329019962c67f9c6926a40d6e0f378decc73793966ccb57"
-    },
-    {
-      "id": "recipe-weekly-funny-ai-content",
-      "name": "AI Recipe: Weekly Funny AI Content",
-      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "humor",
-        "satire",
-        "social-media"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-funny-ai-content.json",
-      "sha256": "3eb184982f2c2826136d685fac3a7517ca4cf03c2075124f43cf1a5ea96eeb14"
-    },
-    {
-      "id": "recipe-weekly-mobile-game",
-      "name": "AI Recipe: Weekly Mobile Game",
-      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "html",
-        "mobile"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-mobile-game.json",
-      "sha256": "402f60217077da76f64b2944ae0e03df2f68031480cad6fa46ca6ae32f548dd5"
-    },
-    {
-      "id": "recipe-weekly-pc-game-concept",
-      "name": "AI Recipe: Weekly PC Game Concept",
-      "description": "Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "design",
-        "research"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-pc-game-concept.json",
-      "sha256": "c9e9c1047f3019681b2b18e0af6ae69df2002d91f4f1014d752675b8dcf62df9"
-    },
-    {
-      "id": "recipe-weekly-regional-recipe",
-      "name": "AI Recipe: Weekly Regional Recipe",
-      "description": "Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "food",
-        "cooking"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-regional-recipe.json",
-      "sha256": "91531f0ff852b0155a83dd92be5449b0f5f19a196da35424593329a8b382d14b"
-    },
-    {
-      "id": "recipe-weekly-short-story",
-      "name": "AI Recipe: Weekly Short Story",
-      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md.",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "fiction",
-        "writing"
-      ],
-      "runtime": "python",
-      "os": "cross-platform",
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "path": "templates/recipe-weekly-short-story.json",
-      "sha256": "572cc4e63b388f4829d0e077efdf705c067db6b6a81050efae2e5ffc72d0fcda"
+      "sha256": "018ec8a7f09bc7bf57fa2cf0721d3ead5b19ca4f28b7ff89e0782bcbd5bd5719"
     }
   ],
   "packs": [
@@ -1000,68 +1075,71 @@
       "name": "AI Content Recipes",
       "description": "Every recipe: scheduled Claude Code automations that research, write, build and illustrate into a folder you can browse.",
       "templateIds": [
+        "recipe-3d-print-design",
         "recipe-agent-persona-original",
         "recipe-agent-toolkit",
+        "recipe-ai-map",
         "recipe-ai-meme-generator",
         "recipe-ai-stack-radar",
         "recipe-alternate-history",
+        "recipe-app-idea-card",
+        "recipe-app-prototype",
+        "recipe-browser-extension",
+        "recipe-browser-game",
         "recipe-comics",
         "recipe-content-idea-gen",
         "recipe-cool-websites",
-        "recipe-daily-app-card",
-        "recipe-daily-poster",
+        "recipe-family-recipe",
+        "recipe-finance-app-prototype",
         "recipe-finance-toolkit",
+        "recipe-funny-ai-content",
         "recipe-future-cities",
         "recipe-icon-packs",
+        "recipe-image-collections",
         "recipe-image-prompt-packs",
+        "recipe-mobile-game",
+        "recipe-model-benchmark-watch",
+        "recipe-news-digest",
         "recipe-oss-spotlight",
+        "recipe-pc-game-concept",
+        "recipe-podcast-episode",
         "recipe-podcast-script-generator",
-        "recipe-recipe-of-the-week",
+        "recipe-poster",
         "recipe-recipes-update",
+        "recipe-regional-recipe",
         "recipe-security-toolkit",
         "recipe-serialized-novella",
+        "recipe-short-story",
         "recipe-signal-sources",
         "recipe-song-generator",
         "recipe-top-10-github-repos",
         "recipe-trending-movers",
         "recipe-viewer-rebuild",
+        "recipe-viral-recipe",
         "recipe-voiceover-script-generator",
-        "recipe-wallpaper-packs",
-        "recipe-weekend-yearly-collections",
-        "recipe-weekly-3d-print-ideas",
-        "recipe-weekly-ai-map",
-        "recipe-weekly-app-prototype",
-        "recipe-weekly-audio-podcast",
-        "recipe-weekly-browser-extension",
-        "recipe-weekly-browser-game",
-        "recipe-weekly-financial-idea",
-        "recipe-weekly-funny-ai-content",
-        "recipe-weekly-mobile-game",
-        "recipe-weekly-pc-game-concept",
-        "recipe-weekly-regional-recipe",
-        "recipe-weekly-short-story"
+        "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "baf7e480916f926eec364de0d5c5e5c946e94900d8c7d885c2da2b4b09996439"
+      "sha256": "4cdd22fcb391f98beca9421d7a82fd4b82a924f205d47d727988ddb32286911f"
     },
     {
       "id": "ai-recipes-apps-games",
       "name": "AI Recipes: Apps & Games",
       "description": "Idea cards, runnable app and extension prototypes, playable games, game and 3D-print concepts.",
       "templateIds": [
-        "recipe-daily-app-card",
+        "recipe-3d-print-design",
+        "recipe-app-idea-card",
+        "recipe-app-prototype",
+        "recipe-browser-extension",
+        "recipe-browser-game",
+        "recipe-finance-app-prototype",
+        "recipe-mobile-game",
+        "recipe-pc-game-concept",
         "recipe-recipes-update",
-        "recipe-viewer-rebuild",
-        "recipe-weekly-3d-print-ideas",
-        "recipe-weekly-app-prototype",
-        "recipe-weekly-browser-extension",
-        "recipe-weekly-browser-game",
-        "recipe-weekly-financial-idea",
-        "recipe-weekly-mobile-game",
-        "recipe-weekly-pc-game-concept"
+        "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-apps-games.json",
-      "sha256": "5ee0b7ef5233f50fcc511e3cf7b571f7a06b8a8caf56adbe5f4f7c70d4659750"
+      "sha256": "bade4d21a96abcd323947f20a9b754dceb90f0c882821c2486a8ca7bb07691f4"
     },
     {
       "id": "ai-recipes-writing",
@@ -1071,38 +1149,41 @@
         "recipe-agent-persona-original",
         "recipe-alternate-history",
         "recipe-content-idea-gen",
+        "recipe-funny-ai-content",
         "recipe-recipes-update",
         "recipe-serialized-novella",
-        "recipe-viewer-rebuild",
-        "recipe-weekly-funny-ai-content",
-        "recipe-weekly-short-story"
+        "recipe-short-story",
+        "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-writing.json",
-      "sha256": "9fc6f1473058334072d805f24ae80fc4b7e24f1ebd0989adb02e7f7496015d8c"
+      "sha256": "49c3d722136122c3ec1bca0028b182e042fcb39c4333585d97db935496b69acd"
     },
     {
       "id": "ai-recipes-food-maps",
       "name": "AI Recipes: Food & Maps",
-      "description": "Safety-checked recipes with a printable Cook's Card, and researched interactive maps.",
+      "description": "Safety-checked recipes with a printable Cook's Card, a viral-recipe recreator, and researched interactive maps.",
       "templateIds": [
-        "recipe-recipe-of-the-week",
+        "recipe-ai-map",
+        "recipe-family-recipe",
         "recipe-recipes-update",
+        "recipe-regional-recipe",
         "recipe-viewer-rebuild",
-        "recipe-weekly-ai-map",
-        "recipe-weekly-regional-recipe"
+        "recipe-viral-recipe"
       ],
       "path": "packs/ai-recipes-food-maps.json",
-      "sha256": "4a903d7a07f10db9291901c06fd02340ba2056d060ea098d812e9f8841857f9f"
+      "sha256": "c5cfc15a41f3d70542af5dbbb578c61a4cf5a96ecb82cc80073e1eda4c5278cb"
     },
     {
       "id": "ai-recipes-digests",
       "name": "AI Recipes: Research Digests",
-      "description": "Monthly researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists — with browser bookmarks.",
+      "description": "Researched roundups — AI tools, agent tooling, open source, security and finance tooling, trending repos, useful sites and reading lists, with browser bookmarks — plus a sourced AI model benchmark briefing and a nine-topic news digest written from RSS feeds.",
       "templateIds": [
         "recipe-agent-toolkit",
         "recipe-ai-stack-radar",
         "recipe-cool-websites",
         "recipe-finance-toolkit",
+        "recipe-model-benchmark-watch",
+        "recipe-news-digest",
         "recipe-oss-spotlight",
         "recipe-recipes-update",
         "recipe-security-toolkit",
@@ -1112,7 +1193,7 @@
         "recipe-viewer-rebuild"
       ],
       "path": "packs/ai-recipes-digests.json",
-      "sha256": "9f624c2f8631faa20a9c6a4e8f944f3b60f36a6a8a9031dc8b1198a18207c677"
+      "sha256": "723931955c200954689a87422e476775fbbfb6c828bc2475bff08a7a4885f02b"
     },
     {
       "id": "ai-recipes-images",
@@ -1121,32 +1202,32 @@
       "templateIds": [
         "recipe-ai-meme-generator",
         "recipe-comics",
-        "recipe-daily-poster",
         "recipe-future-cities",
         "recipe-icon-packs",
+        "recipe-image-collections",
         "recipe-image-prompt-packs",
+        "recipe-poster",
         "recipe-recipes-update",
         "recipe-viewer-rebuild",
-        "recipe-wallpaper-packs",
-        "recipe-weekend-yearly-collections"
+        "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes-images.json",
-      "sha256": "1da87f269b5a891ca750961a2cfca70297000f457dd132a01d53af99c72dffc5"
+      "sha256": "c7b6f437c8ab2710d92bd90ca5ec2ce010b00db85c49f8a217b7cc2f78b99ea4"
     },
     {
       "id": "ai-recipes-audio",
       "name": "AI Recipes: Audio",
       "description": "Songs composed from AI-written lyrics, a two-step debate podcast, and narrated voiceover shorts — preset voices only.",
       "templateIds": [
+        "recipe-podcast-episode",
         "recipe-podcast-script-generator",
         "recipe-recipes-update",
         "recipe-song-generator",
         "recipe-viewer-rebuild",
-        "recipe-voiceover-script-generator",
-        "recipe-weekly-audio-podcast"
+        "recipe-voiceover-script-generator"
       ],
       "path": "packs/ai-recipes-audio.json",
-      "sha256": "542514d60add93ac27c6903e3fcaa3fa9330e42a9c24638dd5384773c73ace54"
+      "sha256": "5af72c9177a10a615476052be4842cbb9e661b3fb3050a5338d9ae8c44ba5e95"
     }
   ]
 }

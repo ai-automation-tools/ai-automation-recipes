@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "id": "recipe-image-prompt-packs",
-  "name": "AI Recipe: Weekly Image Prompt Pack",
+  "name": "AI Recipe: Image Prompt Pack",
   "description": "Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image.",
   "runtime": "python",
   "os": "cross-platform",

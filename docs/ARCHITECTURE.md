@@ -1,31 +1,40 @@
-# Architecture
+<h1 align="center">🧱 Architecture</h1>
 
-[← README](../README.md)
+<p align="center">
+  <em>What happens between a recipe starting and its folder being published, and the contract a viewer can rely on.</em>
+</p>
 
-## Layout
+<p align="center">
+  <img src="https://img.shields.io/badge/artifact-schema_v1-0078D4?style=for-the-badge" alt="artifact.json schema v1">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
+</p>
+
+---
+
+## 🗂️ Layout
 
 | Path | Holds |
 |:---|:---|
-| `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md` |
+| `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md`, plus any data a user would edit (`themes.md`, `topics.json`) |
 | `core/runner.py` | The run loop every recipe shares |
 | `core/web.py` | Checks for HTML/JS output: references, `node --check`, Manifest V3, JSON, sources CSV, and a headless-browser smoke test |
 | `core/food/` | The recipe-validator safety gate, allergen fix-ups and the Cook's Card |
 | `core/digest/` | The research-digest toolkit: feed and GitHub Trending fetchers, digest parser, bookmark/OPML writers, shared rules |
 | `core/run-contract.md` | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
-| `core/engines/` | Text engines behind one interface (`claude` today) |
+| `core/engines/` | Text engines behind one interface: `claude`, `codex` and `gemini` |
 | `core/images/` | Image rendering (Gemini, then OpenAI) and `process.py`: crops, ICO, SVG → PNG |
 | `core/audio/` | Speech (Gemini or ElevenLabs, preset voices only) and ElevenLabs music |
 | `core/video.py` | Optional ffmpeg slideshow for vertical shorts |
 | `core/deliver.py` | Optional webhook announcement of each published artifact |
 | `core/artifacts.py` | Output layout, `artifact.json`, rotation and do-not-repeat helpers |
 | `.claude/skills/` | Skills the recipes load, copied into each run's staging folder |
-| `cronsole/` | Templates that aren't recipes (the clone updater) |
+| `cronsole/` | The two helper templates that aren't recipes: Update Clone and Rebuild Viewer |
 | `registry/` | **Generated.** The Cronsole registry, built by `scripts/build_registry.py` |
 | `scripts/check_public.py` | Pre-publish scan for keys, personal paths and a private denylist |
 | `viewer/index.html` | The viewer page; `scripts/build_viewer.py` copies it into an output folder beside a generated `catalog.js` |
-| `tests/` | `unittest` coverage of the run loop with the engine faked |
+| `tests/` | `unittest` coverage of the run loop, media steps, recipes and the viewer, with every engine faked |
 
-## The run loop
+## 🔁 The run loop
 
 1. **Read the collection.** `load_existing()` reads every `artifact.json` under the recipe's
    collection. Recipes use it to rotate categories and genres (`least_used`) and to show the agent
@@ -41,7 +50,8 @@
    (subfolder paths like `extension/manifest.json` are allowed; `optional_files` are kept when
    present); any other top-level entry is deleted. The recipe's `validate()` hook runs here (the game
    recipe syntax-checks its script); it may take the run context as a third argument.
-6. **Render media.** Any `images` the agent listed (for recipes with an `ImageSpec`), then the cover
+6. **Render media.** Any `images` the agent listed (for recipes with an `ImageSpec`; an `optional`
+   spec is skipped, not failed, when no image key is set), then the cover
    from `cover_prompt`, each with the no-text constraint (or lettering-only for `text_ok`). Then the
    recipe's `after_cover()` hook adds files that need them: the Cook's Card, wallpaper crops, icon
    PNG/ICO, rendered speech and music, the short video.
@@ -52,12 +62,14 @@ Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires
 `ImageSpec`) is checked against the keys that are set, so a missing key fails before the agent runs;
 `prepare()` can raise `NothingToDo` to skip the run with exit 0.
 
-## `artifact.json` (schema `ai-automation-recipes/artifact@1`)
+## 📄 `artifact.json`
+
+Schema `ai-automation-recipes/artifact@1`, written into every published folder.
 
 ```json
 {
   "schema": "ai-automation-recipes/artifact@1",
-  "recipe": "daily-app-card",
+  "recipe": "app-idea-card",
   "recipe_version": "0.1.0",
   "collection": "idea-cards",
   "title": "Receipt Radar",
@@ -77,17 +89,42 @@ Any failure before step 7 publishes nothing. Before step 3, a recipe's `requires
 
 This is the contract with any viewer. Add fields freely; bump the schema only for a breaking change.
 
-## Engines
+## 🤖 Engines
 
 An engine implements `preflight()` and `run(EngineRequest) -> EngineResult` (see
-`core/engines/base.py`). The request carries the prompt, the staging folder, the tool allowlist,
-model and timeout; the result is the agent's final message and the model that produced it.
+`core/engines/base.py`) and says where its agent looks for project skills (`skills_dir`). The
+request carries the prompt, the staging folder, the tool allowlist, model and timeout; the result
+is the agent's final message and the model that produced it. `--engine` picks one; a recipe never
+knows which it got.
 
-Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change — they
-already describe their tools by Claude Code's names, which an engine maps to its own.
+| Engine | Runs | Writes are confined by | Tool allowlist | Skills staged to |
+|:---|:---|:---|:---|:---|
+| `claude` (default) | `claude --print --output-format json` | `--permission-mode dontAsk` plus the recipe's `--allowedTools` | Enforced | `.claude/skills/` |
+| `codex` | `codex exec --json -s workspace-write -C <staging>` | the `workspace-write` sandbox | Advisory: Codex has none, the contract in the prompt is the rule | `.agents/skills/` |
+| `gemini` | `gemini -p -o json --approval-mode yolo` | nothing but the contract | Advisory | `.gemini/skills/` |
 
-## Skills
+A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Codex and Gemini treat an
+alias as "your own default" and pass a full model id through unchanged. The image, speech and music
+steps are the runner's, so they are identical whichever engine wrote the prompts.
 
-Recipes name skills; they never paste skill text into a prompt. The copy in `.claude/skills/` is
-the single source of truth. A skill that reads like it was written for an interactive session gets
+Codex and Gemini have had no live run yet: both are built against the CLIs' documented headless
+output (JSONL events for Codex, one JSON object for Gemini) and tested against recorded shapes.
+The Gemini CLI also needs an auth setup that works headless on your machine, which a Google login
+tied to the retired free Code Assist tier does not.
+
+Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change: they
+name their tools the way Claude Code does, and an engine maps those names to its own.
+
+## 🧠 Skills
+
+Recipes name skills; they never paste skill text into a prompt, so the copy in
+[`.claude/skills/`](../.claude/skills/README.md) is the only one. A skill that reads like it was written for an interactive session gets
 carve-outs in the prompt ("skip the audit, the output format wins"), not edits to the skill.
+
+---
+
+<p align="center">
+  <a href="README.md">← Docs home</a> ·
+  <a href="../core/README.md">Core</a> ·
+  <a href="ADDING-A-RECIPE.md">Next: Adding a recipe →</a>
+</p>

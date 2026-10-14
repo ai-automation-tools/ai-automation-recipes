@@ -1,0 +1,69 @@
+name: Recipe request
+description: Ask for a new scheduled automation, or a new mode for an existing one.
+title: "Recipe request: "
+labels: ["recipe-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A recipe is one scheduled Claude Code run that leaves a folder behind: a story, an app
+        prototype, a digest, an image set. Describe the folder you want to find in the morning.
+  - type: input
+    id: makes
+    attributes:
+      label: What it makes
+      description: One line. The thing in the output folder, not the process.
+      placeholder: A weekly two-page board-game rulebook for a game that doesn't exist yet
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: The output files
+      description: What a good run's folder holds. Markdown, HTML, images, audio? Which file is the main one?
+      placeholder: |
+        rulebook.md (the main file), components.md, cover.png (2:3 box art)
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: What it needs to know
+      description: A rotation (genres, themes, cuisines), a queue file, web research, an existing collection it must not repeat?
+  - type: dropdown
+    id: media
+    attributes:
+      label: Media beyond the cover
+      options:
+        - None, text only
+        - Several images
+        - Speech or music
+        - Video
+    validations:
+      required: true
+  - type: dropdown
+    id: group
+    attributes:
+      label: Closest existing group
+      options:
+        - Apps & Games
+        - Writing
+        - Food & Maps
+        - Research Digests
+        - Images
+        - Audio
+        - None of these
+  - type: textarea
+    id: skills
+    attributes:
+      label: Skills or sources it should lean on
+      description: A skill from `.claude/skills/`, a public API, a feed. Nothing that needs a login we can't document.
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: It fits the house rules
+      options:
+        - label: It doesn't depict, impersonate or name real living people
+          required: true
+        - label: Every external source it reads is public and allowed for this use
+          required: true

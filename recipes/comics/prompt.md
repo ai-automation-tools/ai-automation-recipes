@@ -1,4 +1,4 @@
-# Weekly Comic
+# Comic
 
 Goal: write ONE four-panel comic strip — a script with dialogue — and the image prompt for the
 finished full-page strip, which the runner renders.

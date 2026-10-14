@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cool Websites — a monthly roundup of 28+ genuinely useful, lesser-known websites by category.
+"""Cool Websites — a roundup of 28+ genuinely useful, lesser-known websites by category.
 
     python recipes/cool-websites/run.py --output-dir ~/ai-output
 """

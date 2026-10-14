@@ -3,9 +3,9 @@
 
     python recipes/agent-persona-original/run.py --output-dir ~/ai-output [--concept night-nurse-nia]
 
-The card is a portable second-person prompt any model can adopt. The square chat avatar the
-private original also rendered needs the runner's multi-image step (roadmap, batch 2); for now
-only the 2:3 cover portrait is rendered.
+The card is a portable second-person prompt any model can adopt. With an image key set, the run
+renders the 2:3 cover portrait and a square chat avatar (avatar.png) beside it; without one the
+card publishes on its own.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
-from core import Recipe, RecipeError, RunContext, run  # noqa: E402
+from core import ImageSpec, Recipe, RecipeError, RunContext, run  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
 
 GROUPS: dict[str, str] = {
@@ -74,6 +74,7 @@ RECIPE = Recipe(
     tools=("Read", "Write", "Edit", "Glob", "Grep", "Skill", "WebSearch", "WebFetch"),
     fields=("archetype_group", "subcategory"),
     cover_aspect="2:3",
+    images=ImageSpec(min=1, max=1, aspects=("1:1",), folder="", optional=True),
     default_model="sonnet",
     add_args=add_args,
     prepare=prepare,

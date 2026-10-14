@@ -71,6 +71,7 @@ class ImageSpec:
     folder: str = "images"  # "" puts them beside the main file
     text_ok: bool = False  # True swaps the no-text constraint for lettering-only (memes, comics)
     size: str | None = None  # resolution tier where supported: "1K", "2K", "4K"
+    optional: bool = False  # True: no image key is not an error; the run publishes without the images
 
 
 @dataclass
@@ -150,12 +151,17 @@ def extract_json(text: str) -> dict[str, object]:
     return last
 
 
-def stage_skills(staging: Path, names: tuple[str, ...]) -> None:
+def stage_skills(staging: Path, names: tuple[str, ...], skills_dir: str = ".claude/skills") -> None:
+    """Copy the recipe's skills to where this engine's agent looks for project skills."""
     for name in names:
         src = SKILLS_DIR / name
         if not (src / "SKILL.md").is_file():
             raise RecipeError(f"Skill {name!r} is missing from {SKILLS_DIR}")
-        shutil.copytree(src, staging / ".claude" / "skills" / name)
+        shutil.copytree(src, staging / Path(skills_dir) / name)
+
+
+def engine_skills_dir(engine: object) -> str:
+    return str(getattr(engine, "skills_dir", ".claude/skills")).strip("/")
 
 
 def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
@@ -164,9 +170,11 @@ def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
                    help="Root folder for all recipe output (or set RECIPES_OUTPUT_DIR).")
     p.add_argument("--date", type=date.fromisoformat, default=date.today(),
                    help="Target date, YYYY-MM-DD (default: today).")
-    p.add_argument("--engine", default=os.environ.get("RECIPES_ENGINE", "claude"), help="Text engine.")
+    p.add_argument("--engine", default=os.environ.get("RECIPES_ENGINE", "claude"),
+                   help="Text engine: claude (default), codex or gemini.")
     p.add_argument("--model", default=os.environ.get("RECIPES_MODEL", recipe.default_model),
-                   help="Model alias or id for the text engine.")
+                   help="Model alias or id for the text engine. A Claude alias (sonnet, opus, haiku) means "
+                        "'the engine's default' on codex and gemini.")
     p.add_argument("--image-engine", default=os.environ.get("RECIPES_IMAGE_ENGINE", "auto"),
                    choices=["auto", "gemini", "openai", "none"],
                    help="auto = first engine with a key set; skips the cover if none is set.")
@@ -198,11 +206,17 @@ def run(recipe: Recipe, argv: list[str] | None = None) -> int:
     collection_dir = output_dir / recipe.collection
     collection_dir.mkdir(parents=True, exist_ok=True)
     ctx = RunContext(output_dir, collection_dir, args.date, artifacts.load_existing(collection_dir), args)
+    try:
+        engine = get_engine(args.engine)
+    except EngineError as exc:
+        log.error("RECIPE_FAILED %s: %s", recipe.name, exc)
+        return 1
 
     tokens = {
         "DATE": ctx.day.isoformat(),
         "DATE_LONG": ctx.day.strftime("%A, %B %d, %Y").replace(" 0", " "),
         "RUN_CONTRACT": RUN_CONTRACT,
+        "SKILLS_DIR": engine_skills_dir(engine),  # after RUN_CONTRACT, which carries the token
         "EXISTING": artifacts.existing_digest(ctx.existing),
         "OUTPUT_FILES": "\n".join(f"- `{f}`" for f in recipe.files),
         "SKILLS": "\n".join(f"- `{s}`" for s in recipe.skills) or "- (none)",
@@ -223,7 +237,7 @@ def run(recipe: Recipe, argv: list[str] | None = None) -> int:
 
     staging = collection_dir / ".staging" / f"{ctx.day.isoformat()}_{datetime.now():%H%M%S}"
     try:
-        final = _run_staged(recipe, ctx, prompt, staging)
+        final = _run_staged(recipe, ctx, prompt, staging, engine)
     except (RecipeError, EngineError, images.ImageError, audio.AudioError) as exc:
         log.error("RECIPE_FAILED %s: %s", recipe.name, exc)
         if staging.exists() and not args.keep_staging:
@@ -236,21 +250,24 @@ def run(recipe: Recipe, argv: list[str] | None = None) -> int:
     return 0
 
 
-def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> Path:
+def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path, engine: object | None = None) -> Path:
     args = ctx.args
-    engine = get_engine(args.engine)
+    if engine is None:
+        engine = get_engine(args.engine)
     engine.preflight()
     _preflight_media(recipe, args)
 
     staging.mkdir(parents=True)
-    stage_skills(staging, recipe.skills)
+    skills_dir = engine_skills_dir(engine)
+    stage_skills(staging, recipe.skills, skills_dir)
 
     result = engine.run(EngineRequest(
         # prepare() may narrow the tool list for this run via ctx.state["tools"]
         prompt=prompt, workdir=staging, tools=tuple(ctx.state.get("tools") or recipe.tools), model=args.model,
         timeout_s=args.timeout,
     ))
-    shutil.rmtree(staging / ".claude", ignore_errors=True)
+    # The skills folder root (.claude, .agents or .gemini) is the engine's, never output.
+    shutil.rmtree(staging / Path(skills_dir).parts[0], ignore_errors=True)
 
     manifest = extract_json(result.text)
     if manifest.get("error"):
@@ -345,7 +362,7 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
 
 def _preflight_media(recipe: Recipe, args: argparse.Namespace) -> None:
     """Fail before the agent runs when a key the recipe can't do without is missing."""
-    needs = set(recipe.requires) | ({"images"} if recipe.images else set())
+    needs = set(recipe.requires) | ({"images"} if recipe.images and not recipe.images.optional else set())
     if "images" in needs and (args.image_engine == "none" or
                               (args.image_engine == "auto" and not images.available_engines())):
         raise RecipeError("this recipe makes images: set GEMINI_API_KEY or OPENAI_API_KEY")
@@ -360,6 +377,12 @@ def _render_images(recipe: Recipe, args: argparse.Namespace, staging: Path, mani
     spec = recipe.images
     assert spec is not None
     wanted = manifest.get("images")
+    can_render = args.image_engine != "none" and (args.image_engine != "auto" or bool(images.available_engines()))
+    if spec.optional and not can_render:
+        if wanted:
+            log.warning("no image key set (GEMINI_API_KEY / OPENAI_API_KEY) — publishing without the %d optional image(s)",
+                        len(wanted) if isinstance(wanted, list) else 1)
+        return []
     if not isinstance(wanted, list) or not spec.min <= len(wanted) <= spec.max:
         raise RecipeError(f"final JSON needs {spec.min}–{spec.max} entries in `images`")
     out, seen = [], set()

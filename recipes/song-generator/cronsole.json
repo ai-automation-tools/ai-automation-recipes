@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "recipe-song-generator",
   "name": "AI Recipe: Song",
-  "description": "Claude writes an original song in the type you choose — weekly news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
+  "description": "Claude writes an original song in the type you choose — news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits.",
   "runtime": "python",
   "os": "cross-platform",
   "category": "ai-agent",
@@ -43,9 +43,9 @@
       "default": "opus",
       "required": true,
       "options": [
-        "sonnet",
+        "haiku",
         "opus",
-        "haiku"
+        "sonnet"
       ],
       "help": "Claude model alias for the run."
     },
@@ -58,8 +58,8 @@
       "options": [
         "auto",
         "gemini",
-        "openai",
-        "none"
+        "none",
+        "openai"
       ],
       "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
     },
@@ -67,7 +67,7 @@
       "key": "songType",
       "label": "Song type",
       "type": "select",
-      "default": "weekly",
+      "default": "news",
       "required": true,
       "options": [
         "blues",
@@ -89,6 +89,7 @@
         "latin-comedy",
         "metal",
         "metal-comedy",
+        "news",
         "pop",
         "pop-comedy",
         "psychedelic",
@@ -105,10 +106,9 @@
         "ska",
         "ska-comedy",
         "synthwave",
-        "synthwave-comedy",
-        "weekly"
+        "synthwave-comedy"
       ],
-      "help": "Which creative brief to write against. weekly researches the week's news; the -comedy types are adults-only humour."
+      "help": "Which creative brief to write against. news researches the latest news; the -comedy types are adults-only humour."
     }
   ],
   "compatibleTargets": [

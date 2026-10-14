@@ -1,0 +1,73 @@
+name: Bug in a recipe
+description: A run failed, published something wrong, or the runner misbehaved.
+title: "<recipe>: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every run logs to stdout and appends a line to `<output-dir>/runs.jsonl`. A failed run that
+        was started with `--keep-staging` leaves its working folder under `<collection>/.staging/`.
+        Paste the log tail, not the whole thing. **Strip API keys and personal paths first.**
+  - type: input
+    id: recipe
+    attributes:
+      label: Recipe
+      placeholder: browser-game
+    validations:
+      required: true
+  - type: dropdown
+    id: how
+    attributes:
+      label: How it was run
+      options:
+        - Cronsole template
+        - python recipes/<name>/run.py by hand
+        - Another scheduler (cron, Task Scheduler, CI)
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: The exact command, with keys and paths redacted
+      placeholder: python recipes/browser-game/run.py --output-dir <out> --model sonnet --image-engine gemini
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What went wrong
+      options:
+        - The run failed (RECIPE_FAILED in the log)
+        - It published, but the output is wrong or broken
+        - It published something it shouldn't have
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log tail
+      description: The last 30 to 60 lines of the run's output, as a code block.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What a good run would have done instead
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: "`git rev-parse --short HEAD`, `python --version`, `claude --version` (or codex / gemini), OS"
+      placeholder: 1a2b3c4 · Python 3.12.6 · claude 2.x · Windows 11
+    validations:
+      required: true
+  - type: checkboxes
+    id: clean
+    attributes:
+      label: Before posting
+      options:
+        - label: No API key, home path, email address or private hostname is in this report
+          required: true

@@ -1,7 +1,8 @@
 """Shared pieces for the research-digest recipes (link lists, toolkits, repo digests).
 
-Not a recipe: it has no run.py or cronsole.json. The nine digest recipes import it
-for the parts that should behave identically across them:
+Not a recipe: it has no run.py or cronsole.json. The research-digest recipes import it
+for the parts that should behave identically across them (the nine link lists use all
+of it through digest_recipe(); news-digest uses only the feed fetcher):
 
 * parse_digest()   — read a digest's markdown back into categories of entries.
                      Four on-disk shapes: the `### [Name](url)` link list, the
@@ -41,8 +42,13 @@ from ..artifacts import MANIFEST
 
 MAIN = "digest.md"
 RULES = (HERE / "rules.md").read_text(encoding="utf-8")
-UA = "Mozilla/5.0 (compatible; ai-automation-recipes/0.1; +https://github.com/ai-automation-tools/ai-automation-recipes)"
+# A browser-shaped UA with the project named at the end: several publishers rate-limit or 403 the
+# "compatible; bot" shape outright (VentureBeat 429'd it, 2026-10-14) while serving browsers.
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 "
+      "ai-automation-recipes/0.1 (+https://github.com/ai-automation-tools/ai-automation-recipes)")
 TIMEOUT = 30
+_CONTROL_RE = re.compile(rb"[\x00-\x08\x0b\x0c\x0e-\x1f]")
+_BARE_AMP_RE = re.compile(rb"&(?!(?:[A-Za-z][A-Za-z0-9]*|#[0-9]+|#x[0-9A-Fa-f]+);)")
 
 Entry = dict  # {"name", "url", "desc", "cat"?}
 
@@ -224,7 +230,7 @@ def keyword_match(text: str, keywords: list[str]) -> bool:
 
 def parse_feed(data: bytes, source: str) -> list[dict]:
     items = []
-    for el in ET.fromstring(data).iter():
+    for el in _xml(data).iter():
         if _NS_RE.sub("", el.tag) not in ("item", "entry"):
             continue
         fields: dict[str, str] = {}
@@ -270,7 +276,26 @@ def parse_trending(data: bytes, source: str) -> list[dict]:
 def _fetch(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/xml, text/xml, */*"})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        return resp.read()
+        data = resp.read()
+    # Some feeds gzip regardless of Accept-Encoding (UN News, Tubefilter), and some lead with a
+    # newline or a BOM before the XML declaration (Nieman Lab), which ElementTree refuses.
+    if data[:2] == b"\x1f\x8b":
+        import gzip
+        data = gzip.decompress(data)
+    return data.lstrip(b"\xef\xbb\xbf \t\r\n")
+
+
+def _xml(data: bytes) -> ET.Element:
+    """Parse, and on a malformed-token error retry once with the two faults real feeds ship:
+    stray control bytes, and a bare `&` inside an attribute or text (PYMNTS puts raw image query
+    strings in its content). Both edits are no-ops on well-formed XML."""
+    try:
+        return ET.fromstring(data)
+    except ET.ParseError:
+        cleaned = _BARE_AMP_RE.sub(b"&amp;", _CONTROL_RE.sub(b"", data))
+        if cleaned == data:
+            raise
+        return ET.fromstring(cleaned)
 
 
 def fetch_candidates(cfg: dict) -> dict:

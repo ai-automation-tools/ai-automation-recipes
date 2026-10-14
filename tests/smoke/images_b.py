@@ -129,8 +129,8 @@ f = published(out, "icon-packs")
 assert code == 0 and len(list((f[0] / "svg").glob("*.svg"))) == 11
 results["icon-packs"] = "ok (12 SVG/PNG/ICO, transparent; 11-of-12 ships; 9-of-12 fails)"
 
-# --- weekend-yearly-collections ---------------------------------------------
-r = load("weekend-yearly-collections")
+# --- image-collections ---------------------------------------------
+r = load("image-collections")
 plan_files = ["science-breakthroughs-2000.png", "technology-milestones-control-of-fire.png", "exoplanets-lhs-1140-b.png"]
 entries = [{"collection": "science-breakthroughs", "key": "2000", "title": "2000"},
            {"collection": "technology-milestones", "key": "control-of-fire", "title": "Fire"},
@@ -175,7 +175,7 @@ for c in cfg["collections"]:
     c["active"] = False
 (out / "collections" / "collections.json").write_text(json.dumps(cfg), encoding="utf-8")
 assert runner.run(r, ["--output-dir", str(out)]) == 0  # NothingToDo: skipped, agent never called
-results["weekend-yearly-collections"] = "ok (seeds config, advances per collection, exits 0 when done)"
+results["image-collections"] = "ok (seeds config, advances per collection, exits 0 when done)"
 
 for k, v in results.items():
     print(f"{k}: {v}")

@@ -1,218 +1,151 @@
-# Roadmap
+<h1 align="center">🗺️ Roadmap</h1>
 
-[← README](../README.md)
+<p align="center">
+  <em>Which recipes have had a real run, and the work left before this repo goes public.</em>
+</p>
 
-Everything left before this repo goes public. The repo stays **private** in its `Custom/` folder
-until the publish checklist at the bottom is done and the maintainer says go.
+<p align="center">
+  <img src="https://img.shields.io/badge/live--tested-13_of_41-F59E0B?style=for-the-badge" alt="13 of 41 live-tested">
+  <img src="https://img.shields.io/badge/visibility-private-6B7280?style=for-the-badge" alt="Private">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
+</p>
 
-## Live-test status
+---
 
-Every recipe passes dry runs, unit tests and faked-engine runs in CI. This table tracks the
-**real** runs — a real agent and real image, speech or music engines — which are being done over the
-coming weeks. **13 of 38 live-tested** as of 2026-10-14. Tick a row when a live run publishes and its
-output has been read (or played, or listened to) by a person.
+The repo stays private until the publish phase below is done and the maintainer says go. Finished
+work moves out of this file and into the [changelog](CHANGELOG.md). There's no paid tier planned:
+this is the free companion to Cronsole.
 
-| Group | Recipe | Live run | Notes |
-|:---|:---|:---|:---|
-| Apps & Games | `daily-app-card` | ✅ TapCheck | Also scheduled in Cronsole (daily, no cover) |
-| Apps & Games | `weekly-app-prototype` | ⬜ not yet |  |
-| Apps & Games | `weekly-browser-extension` | ✅ Exit Ramp |  |
-| Apps & Games | `weekly-financial-idea` | ⬜ not yet |  |
-| Apps & Games | `weekly-browser-game` | ✅ Plumb Line (played in a browser) |  |
-| Apps & Games | `weekly-mobile-game` | ⬜ not yet |  |
-| Apps & Games | `weekly-pc-game-concept` | ⬜ not yet |  |
-| Apps & Games | `weekly-3d-print-ideas` | ⬜ not yet |  |
-| Writing | `weekly-short-story` | ✅ The Blue Words |  |
-| Writing | `serialized-novella` | ✅ No Speech Detected, ch. 1 (seed run only) | Next: a second run, to prove chapter 2 picks up the bible |
-| Writing | `alternate-history` | ⬜ not yet |  |
-| Writing | `agent-persona-original` | ⬜ not yet |  |
-| Writing | `content-idea-gen` | ⬜ not yet |  |
-| Writing | `weekly-funny-ai-content` | ⬜ not yet | Scheduled in Cronsole — first real run Fri 2026-10-16 |
-| Food & Maps | `recipe-of-the-week` | ✅ Minnesota Tater Tot Hotdish |  |
-| Food & Maps | `weekly-regional-recipe` | ⬜ not yet |  |
-| Food & Maps | `weekly-ai-map` | ⬜ not yet |  |
-| Research Digests | `agent-toolkit` | ⬜ not yet |  |
-| Research Digests | `ai-stack-radar` | ⬜ not yet |  |
-| Research Digests | `oss-spotlight` | ⬜ not yet |  |
-| Research Digests | `cool-websites` | ⬜ not yet |  |
-| Research Digests | `top-10-github-repos` | ⬜ not yet |  |
-| Research Digests | `trending-movers` | ✅ Trending Movers 2026-10-14 |  |
-| Research Digests | `signal-sources` | ⬜ not yet |  |
-| Research Digests | `security-toolkit` | ⬜ not yet |  |
-| Research Digests | `finance-toolkit` | ⬜ not yet |  |
-| Images | `comics` | ✅ Circular Dependency |  |
-| Images | `ai-meme-generator` | ⬜ not yet |  |
-| Images | `daily-poster` | ⬜ not yet |  |
-| Images | `future-cities` | ⬜ not yet |  |
-| Images | `image-prompt-packs` | ⬜ not yet |  |
-| Images | `wallpaper-packs` | ⬜ not yet | Heaviest: three 4K renders per run |
-| Images | `icon-packs` | ✅ Browser Actions (re-run after de-branding) |  |
-| Images | `weekend-yearly-collections` | ⬜ not yet | Needs research; check the seeded collections file |
-| Audio | `song-generator` | ✅ Every Stone I Set (`folk` only) | Other song types untested |
-| Audio | `podcast-script-generator` | ✅ Should We Text the Aliens First? |  |
-| Audio | `weekly-audio-podcast` | ✅ Should We Text the Aliens First? (13.5 min) |  |
-| Audio | `voiceover-script-generator` | ✅ The Spacecraft Lost to a Unit Label |  |
+**Where things stand (2026-10-14).** 41 recipes in six groups, every one dry-run and faked-engine
+tested in CI; 13 have had a real run. Three text engines are wired (Claude live, Codex and Gemini
+built but unrun). The private content fleet is fully ported; what stays out is listed at the bottom.
+Everything below is either a live run that hasn't happened yet or the publish checklist.
 
-## 1. Pilot ✅
+## 🧪 Live-test status
 
-- [x] Shared runner, Claude engine, Gemini/OpenAI cover step, `artifact.json` contract
-- [x] Three recipes: `daily-app-card`, `weekly-browser-game`, `weekly-short-story`
-- [x] Cronsole Registry v1 templates + `ai-recipes` pack, validated against Cronsole's own schema
-- [x] Pre-publish leak scan with an out-of-repo denylist
-- [x] One live run of each recipe, output read by a person (the game played in a browser)
-- [x] Pack passes Cronsole's import path (schema, normalizer, `{{placeholder}}` substitution) and
-      every resolved command runs
-- [x] CI: unit tests, `build_registry.py --check`, `check_public.py`, prompt dry runs on every push
-- [x] Sample output for each recipe in its README
-- [x] Private remote `ai-automation-tools/ai-automation-recipes` with a noreply commit identity
+Every recipe passes dry runs, unit tests and faked-engine runs in CI. This table tracks **real**
+runs, with a real agent and real image, speech or music engines. They're being done over the coming
+weeks. Tick a row once a live run has published and someone has read, played or listened to what it
+made.
 
-## 2. Batch 1 — recipes that fit the current runner (23) ✅
+| Recipe | Group | Live run |
+|:---|:---|:---|
+| [**App Idea Card**](../recipes/app-idea-card/README.md) | Apps & Games | ✅ TapCheck · Cronsole test task from Thu 2026-10-15 |
+| [**App Prototype**](../recipes/app-prototype/README.md) | Apps & Games | ⬜ not yet |
+| [**Browser Extension**](../recipes/browser-extension/README.md) | Apps & Games | ✅ Exit Ramp |
+| [**Finance App Prototype**](../recipes/finance-app-prototype/README.md) | Apps & Games | ⬜ not yet |
+| [**Browser Game**](../recipes/browser-game/README.md) | Apps & Games | ✅ Plumb Line (played in a browser) |
+| [**Mobile Game**](../recipes/mobile-game/README.md) | Apps & Games | ⬜ not yet |
+| [**PC Game Concept**](../recipes/pc-game-concept/README.md) | Apps & Games | ⬜ not yet |
+| [**3D Print Design**](../recipes/3d-print-design/README.md) | Apps & Games | ⬜ not yet |
+| [**Short Story**](../recipes/short-story/README.md) | Writing | ✅ The Blue Words |
+| [**Serialized Novella**](../recipes/serialized-novella/README.md) | Writing | ✅ No Speech Detected, ch. 1 (seed run only) · next: a second run, to prove chapter 2 picks up the bible |
+| [**Alternate History**](../recipes/alternate-history/README.md) | Writing | ⬜ not yet |
+| [**Original Agent Persona**](../recipes/agent-persona-original/README.md) | Writing | ⬜ not yet |
+| [**Content Idea**](../recipes/content-idea-gen/README.md) | Writing | ⬜ not yet |
+| [**Funny AI Content**](../recipes/funny-ai-content/README.md) | Writing | ⬜ not yet · Cronsole test task, first run Fri 2026-10-16 |
+| [**Family Recipe**](../recipes/family-recipe/README.md) | Food & Maps | ✅ Minnesota Tater Tot Hotdish |
+| [**Regional Recipe**](../recipes/regional-recipe/README.md) | Food & Maps | ⬜ not yet |
+| [**Viral Recipe**](../recipes/viral-recipe/README.md) | Food & Maps | ⬜ not yet · added 2026-10-14 |
+| [**AI Map**](../recipes/ai-map/README.md) | Food & Maps | ⬜ not yet |
+| [**Agent Toolkit**](../recipes/agent-toolkit/README.md) | Research Digests | ⬜ not yet |
+| [**AI Stack Radar**](../recipes/ai-stack-radar/README.md) | Research Digests | ⬜ not yet |
+| [**Open-Source Spotlight**](../recipes/oss-spotlight/README.md) | Research Digests | ⬜ not yet |
+| [**Cool Websites**](../recipes/cool-websites/README.md) | Research Digests | ⬜ not yet |
+| [**Top 10 GitHub Repos**](../recipes/top-10-github-repos/README.md) | Research Digests | ⬜ not yet |
+| [**Trending Movers**](../recipes/trending-movers/README.md) | Research Digests | ✅ Trending Movers 2026-10-14 |
+| [**Signal Sources**](../recipes/signal-sources/README.md) | Research Digests | ⬜ not yet |
+| [**Security Toolkit**](../recipes/security-toolkit/README.md) | Research Digests | ⬜ not yet |
+| [**Finance Toolkit**](../recipes/finance-toolkit/README.md) | Research Digests | ⬜ not yet |
+| [**Model Benchmark Watch**](../recipes/model-benchmark-watch/README.md) | Research Digests | ⬜ not yet · added 2026-10-14 |
+| [**News Digest**](../recipes/news-digest/README.md) | Research Digests | ⬜ not yet · added 2026-10-14; nine topics, so one live run per topic before it counts as done |
+| [**Comic**](../recipes/comics/README.md) | Images | ✅ Circular Dependency |
+| [**AI Meme**](../recipes/ai-meme-generator/README.md) | Images | ⬜ not yet |
+| [**Poster**](../recipes/poster/README.md) | Images | ⬜ not yet |
+| [**Future Cities 2500**](../recipes/future-cities/README.md) | Images | ⬜ not yet |
+| [**Image Prompt Pack**](../recipes/image-prompt-packs/README.md) | Images | ⬜ not yet |
+| [**Wallpaper Pack**](../recipes/wallpaper-packs/README.md) | Images | ⬜ not yet · heaviest: three 4K renders per run |
+| [**Icon Pack**](../recipes/icon-packs/README.md) | Images | ✅ Browser Actions (re-run after de-branding) |
+| [**Image Collections**](../recipes/image-collections/README.md) | Images | ⬜ not yet · needs research; check the seeded collections file |
+| [**Song**](../recipes/song-generator/README.md) | Audio | ✅ Every Stone I Set (`folk` only) · other song types untested |
+| [**Podcast Script**](../recipes/podcast-script-generator/README.md) | Audio | ✅ Should We Text the Aliens First? |
+| [**Podcast Episode**](../recipes/podcast-episode/README.md) | Audio | ✅ Should We Text the Aliens First? (13.5 min) |
+| [**Voiceover Script**](../recipes/voiceover-script-generator/README.md) | Audio | ✅ The Spacecraft Lost to a Unit Label |
 
-Each port: read the private job's prompt and wrapper, drop anything personal or fleet-specific,
-write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuild the registry.
+## 🔨 Build
 
-**Apps & games**
+- [ ] A second `serialized-novella` run writes chapter 2 from the saved story bible, keeping names,
+      places and the rolling synopsis consistent
+- [ ] A live `alternate-history` run with an image key: the eight scenes read as one illustrated
+      piece, and the shared style survives eight separate image calls
+- [ ] A live `agent-persona-original` run: the avatar and the cover are recognisably the same person
+- [ ] A live run on `--engine codex`, then on `--engine gemini` (the engines are built and
+      unit-tested against recorded CLI output; neither has written a real recipe yet). Gemini first
+      needs a headless auth that works on the maintainer's machine: the CLI's Google login is on the
+      retired free Code Assist tier, so it will be `GEMINI_API_KEY`
+- [ ] Decide whether the Cronsole templates expose `engine` as a parameter once Codex and Gemini
+      have each shipped a recipe. Until then every template runs Claude
+- [ ] A live `news-digest` run on one topic, then one per topic over three weeks of the Mon/Wed/Fri
+      default schedule; watch whether the 16-per-source cap keeps the loud feeds (Nature, Podnews,
+      Deadline) from owning a week, and whether five sections is the right number for every topic
+- [ ] A live `model-benchmark-watch` run, then a second so the previous-edition handover is seen
+      working (the second should lead with movement, not restate the table)
+- [ ] A live `viral-recipe` run: does Claude find something genuinely current, and does the
+      safety gate catch the kind of shortcut viral food carries
+- [ ] New automations that aren't ports (the private fleet is fully ported, see *Not ported*).
+      Candidates the current core already supports: a release-notes digest that watches a list of
+      GitHub repos the user names, a weekly quiz built from the news digests, a "year in review"
+      that reads a collection's artifacts and writes a retrospective
 
-- [x] `weekly-app-prototype` — runnable single-page app prototype + requirements + sample data
-- [x] `weekly-browser-extension` — loadable Manifest V3 extension folder
-- [x] `weekly-financial-idea` — consumer-finance app prototype
-- [x] `weekly-mobile-game` — single-file, portrait, touch-first game
-- [x] `weekly-pc-game-concept` — design brief, `pitch.html`, key art, sources
-- [x] `weekly-3d-print-ideas` — three printable product specs with `design-spec.json`
+## 🚦 Launch-ready
 
-**Books & writing**
+- [ ] Live runs for every ⬜ recipe in the table above, each sample added to its README
+- [ ] The Cronsole test tasks fire on their own and their run history shows a published artifact
+      (first runs Thu 2026-10-15 and Fri 2026-10-16)
+- [ ] One full pack scheduled through Cronsole for a week with no manual fixes
+- [ ] Re-run `check_public.py --history` the day before the flip (clean on 2026-10-14, 604 blobs;
+      CI runs it on every push)
+- [ ] Re-probe every `news-digest` feed the week before the flip (101 of 102 fetched and parsed on
+      2026-10-14 after the fetcher learned gzip, BOMs, control bytes and bare ampersands; three
+      publishers that 403 non-browsers were swapped out)
 
-- [x] `alternate-history` — illustrated "what if" timeline
-- [x] `serialized-novella` — one chapter a run against a story bible
-- [x] `agent-persona-original` — an invented, debate-ready character card
-- [x] `content-idea-gen` — one social-media content idea with a cover
-- [x] `weekly-funny-ai-content` — one funny AI-themed content idea
+## 📣 Publish & promote
 
-**Food & maps**
+Only on the maintainer's go.
 
-- [x] `recipe-of-the-week` — family recipe + Cook's Card HTML; **generated** hero image instead of a
-      downloaded photo; `recipe-validator` skill bundled
-- [x] `weekly-regional-recipe` — same, cycling through regions
-- [x] `weekly-ai-map` — researched interactive Leaflet map + companion markdown
+- [ ] Repo flipped to public
+- [ ] Packs shipped through Cronsole's registry and linked from the Cronsole site
+- [ ] A demo viewer of curated output on a subdomain of `ai-automation-tools.dev`, with an "Import
+      into Cronsole" link on each recipe
+- [ ] Repo added to the org PR sweep, the Dependabot fleet docs and the org landing page
+- [ ] Clone moved out of `Custom/` to its permanent folder, with the workspace docs updated
 
-**Research digests**
+## 🔭 Later
 
-- [x] `agent-toolkit` — skills, MCP servers, plugins and hooks worth installing
-- [x] `ai-stack-radar` — hosted AI products by job, with what they replace and cost
-- [x] `oss-spotlight` — editorial read on the open-source ecosystem
-- [x] `cool-websites` — lesser-known useful sites by category
-- [x] `top-10-github-repos` — weekly ranked AI / dev-tooling repos
-- [x] `trending-movers` — star-velocity leaderboard
-- [x] `signal-sources` — cumulative reading list with RSS feeds
-- [x] `security-toolkit` — monthly security tooling haul
-- [x] `finance-toolkit` — monthly financial tooling haul
-
-**Batch 1 wrap-up**
-
-- [x] Bundle any extra skills the ports need, scrubbed and license-checked (`recipe-validator`;
-      eight Apache-2.0 writing skills with attribution in `.claude/skills/_vendor/`)
-- [x] One live run per category, output reviewed: `weekly-browser-extension`, `serialized-novella`
-      (seed run), `recipe-of-the-week`, `trending-movers`
-- [x] Split the registry into per-category packs alongside the all-in-one pack (5 packs, 27 templates)
-- [x] README recipe table and CHANGELOG updated
-- [x] Live samples in the READMEs of the four Batch 1 live runs
-
-## 2b. Consolidate after Batch 1 ✅
-
-- [x] Runner: subfolder paths in `files`, `optional_files`, `0`/`false` no longer read as missing
-- [x] Inline JSON data blocks skipped by the JS syntax checks (a live run caught this)
-- [x] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `weekly-browser-game`
-      to the shared web checks
-- [x] Pass the run context to `validate()` (removes the novella's module-level state)
-- [x] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
-- [x] Unit tests for the shared modules and the new hooks (27 tests)
-
-## 3. Batch 2 — runner additions, then 12 more recipes ✅
-
-**`core/` additions**
-
-- [x] Multi-image output: `ImageSpec` — the agent lists `{file, prompt, aspect}`, the runner renders
-- [x] Image post-processing: aspect crops, multi-size ICO, SVG → PNG (`resvg-py`), `use_as_cover`
-- [x] Resolution tiers for image renders (`ImageSpec(size="4K")`, Gemini)
-- [x] Lettering-only constraint for images that carry words (`text_ok`)
-- [x] Audio: Gemini or ElevenLabs speech with **preset voices only** (30 Gemini, 6 ElevenLabs),
-      ElevenLabs Music from an agent-written composition plan, MP3 via ffmpeg
-- [x] Optional video step (`core.video.slideshow`), skipped when ffmpeg is missing
-- [x] `requires=` preflight: a missing key fails the run before the agent starts
-- [x] `NothingToDo` skip signal, `prepare()` errors fail cleanly, per-run tool lists via `ctx.state["tools"]`
-- [x] Tests for each addition with the engines faked, plus faked-engine smoke runs of every Batch 2 recipe
-
-**Recipes** (12, so 38 in all)
-
-- [x] `comics` — four-panel strip, lettered (live run ✅)
-- [x] `ai-meme-generator` — one AI-themed meme, optional idea queue
-- [x] `daily-poster` — 2:3 poster from 200 themes
-- [x] `future-cities` — speculative cityscapes of 68 real cities
-- [x] `image-prompt-packs` — 5–8 prompts with a rendered example each
-- [x] `wallpaper-packs` — three 4K masters, each cropped to desktop 16:9 + phone 9:16
-- [x] `icon-packs` — 12 icons as SVG + PNG + ICO, plus a contact sheet (live run ✅)
-- [x] `weekend-yearly-collections` — user-editable collections that each gain an image per run
-- [x] `song-generator` — 37 song types, lyrics + ElevenLabs composition plan → MP3 (live run ✅)
-- [x] `podcast-script-generator` — debate script with an invented cast (live run ✅)
-- [x] `weekly-audio-podcast` — renders the oldest unrendered script with preset voices (live run ✅,
-      13.5-minute episode)
-- [x] `voiceover-script-generator` — narrated script → audio → vertical short (live run ✅)
-
-**Batch 2 follow-ups**
-
-- [x] Prune or rework `icon-packs` themes that invite real brand logos (a live "Browsers" run echoed
-      real browser marks): 35 branded themes rewritten as generic functional sets; prompt forbids
-      naming or echoing any product, company or brand
-- [x] Review the other theme lists (posters, comics, memes, wallpapers, prompt packs) for brand,
-      artist and real-person risk: clean (art movements only, no named artists or people)
-- [x] Live samples in the READMEs of every recipe with a live run (Batches 1 and 2)
-- [ ] Live runs, and samples, for the recipes that have only had faked-engine runs — tracked in
-      [Live-test status](#live-test-status)
-
-## Not porting
-
-- **Skipped for now (content risk):** `agent-persona` (real public figures), `ai-news-collage`,
-  `weekly-news-montage`, `satirical-news` (all depict real people), `weekly-iam-idea` (employer-domain).
-- **Superseded or legacy:** `rock-` / `country-` / `psychedelic-` / `weekly-song-generator` (covered
-  by `song-generator`), `eleven-podcast`, `adhoc-eleven-podcast`.
-- **Needs a licensing check first:** `cosmic-wallpapers` (sources images rather than generating them).
-
-## 4. Viewer
-
-- [x] `viewer/`: a static site that renders any `<output-dir>` from its `artifact.json` files —
-      cards, playable games and apps in an iframe, stories, maps, image packs, audio players
-      (`scripts/build_viewer.py`; Cronsole template `recipe-viewer-rebuild`)
-- [ ] Demo feed of curated output for a future public site on `ai-automation-tools.dev`
-- [ ] "Import into Cronsole" link on each recipe in the demo
-
-## 5. Hardening
-
-- [x] Browser smoke test for game and app recipes: loads the page in headless Chrome/Edge/Chromium,
-      clicks and presses keys, fails the run on any uncaught error (six recipes)
-- [x] Optional delivery step: `RECIPES_WEBHOOK_URL` (Discord, Slack or generic JSON)
-- [ ] Drift check that flags when a public prompt falls behind its private original — belongs in the
-      private routines repo, since it reads private paths this repo must never contain
-- [x] Import templates into Cronsole through its import API and run one as a Cronsole-native task
-      (2026-10-14: app card, funny AI content and viewer rebuild imported; viewer rebuild ran, exit 0)
-- [ ] Let the scheduled Cronsole tasks fire on their own and check the run history
-- [ ] A week of scheduled runs across every recipe without intervention
-
-## 6. Engines
-
-- [ ] Pluggable text engines beyond Claude (Codex CLI, Gemini CLI) behind `core/engines/`, so every
-      recipe has a Claude version and a pluggable version
-
-## 7. Cronsole asks
+Changes to Cronsole itself, tracked here because these recipes would use them:
 
 - [ ] Multiple registry sources, so this repo can publish its own catalog
 - [ ] A crontab compiler for the `linux` target
 - [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`)
 
-## 8. Publish checklist (only on the maintainer's go)
+## 🚫 Not ported
 
-- [ ] Every batch above done, or explicitly deferred
-- [ ] Full-history leak scan (`check_public.py` plus a history scan) clean
-- [ ] Flip the repo public
-- [ ] Ship the pack through Cronsole's registry and link it from the Cronsole site
-- [ ] Add the repo to the org PR sweep, the Dependabot fleet docs and the org landing page
-- [ ] Move the clone from `Custom/` to its permanent bucket and update the workspace docs
+Jobs from the private fleet that stay out, and why.
+
+| Job | Reason |
+|:---|:---|
+| `agent-persona`, `ai-news-collage`, `weekly-news-montage`, `satirical-news` | Depict real people |
+| `weekly-iam-idea` | Employer-domain work |
+| `rock-` / `country-` / `psychedelic-` / `weekly-song-generator` | Covered by `song-generator` types |
+| `eleven-podcast`, `adhoc-eleven-podcast` | Legacy, replaced by the podcast pair |
+| `cosmic-wallpapers` | Sources images instead of generating them; needs a licensing check first |
+| `daily-pr-review`, `weekly-tool-enhancement`, `fleet-doctor`, `repo-pull` | Ops jobs on the private fleet itself, not content |
+| the finance and rewards newsletters (stock market, trade suggestions, investment insights, card bonuses, portals, transfer bonuses) | Personal finance, and the IAM briefing is employer-domain. The nine general-interest newsletters became `news-digest` topics |
+
+---
+
+<p align="center">
+  <a href="README.md">← Docs home</a> ·
+  <a href="ADDING-A-RECIPE.md">Adding a recipe</a> ·
+  <a href="CHANGELOG.md">Next: Changelog →</a>
+</p>

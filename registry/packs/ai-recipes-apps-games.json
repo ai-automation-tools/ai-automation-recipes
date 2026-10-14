@@ -8,8 +8,87 @@
   "templates": [
     {
       "schemaVersion": "1.0",
-      "id": "recipe-daily-app-card",
-      "name": "AI Recipe: Daily App Idea Card",
+      "id": "recipe-3d-print-design",
+      "name": "AI Recipe: 3D Print Design",
+      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "3d-printing",
+        "design",
+        "research"
+      ],
+      "icon": "Box",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 13 * * 2,4,6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/3d-print-design/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 2400,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-app-idea-card",
+      "name": "AI Recipe: App Idea Card",
       "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced.",
       "runtime": "python",
       "os": "cross-platform",
@@ -27,7 +106,7 @@
         "kind": "schedule",
         "cron": "0 11 * * *"
       },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/daily-app-card/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "commandTemplate": "python \"{{recipesPath}}/recipes/app-idea-card/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
       "parameters": [
         {
           "key": "recipesPath",
@@ -79,6 +158,479 @@
       ],
       "execution": {
         "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-app-prototype",
+      "name": "AI Recipe: App Prototype",
+      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "apps",
+        "prototype",
+        "research"
+      ],
+      "icon": "AppWindow",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 17 * * 4"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/app-prototype/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-browser-extension",
+      "name": "AI Recipe: Browser Extension",
+      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "browser-extension",
+        "apps",
+        "research"
+      ],
+      "icon": "Puzzle",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 16 * * 1"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/browser-extension/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-browser-game",
+      "name": "AI Recipe: Browser Game",
+      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "html"
+      ],
+      "icon": "Gamepad2",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 14 * * 6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/browser-game/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-finance-app-prototype",
+      "name": "AI Recipe: Finance App Prototype",
+      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "finance",
+        "apps",
+        "prototype"
+      ],
+      "icon": "PiggyBank",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 21 6 * *"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/finance-app-prototype/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-mobile-game",
+      "name": "AI Recipe: Mobile Game",
+      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "html",
+        "mobile"
+      ],
+      "icon": "Smartphone",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 16 * * 4"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/mobile-game/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-pc-game-concept",
+      "name": "AI Recipe: PC Game Concept",
+      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "games",
+        "design",
+        "research"
+      ],
+      "icon": "Gamepad2",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "15 14 * * 1"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/pc-game-concept/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 2400,
         "retries": 0
       },
       "author": "ai-automation-tools",
@@ -168,558 +720,6 @@
       ],
       "execution": {
         "timeoutSec": 300,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-3d-print-ideas",
-      "name": "AI Recipe: 3D Print Idea",
-      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "3d-printing",
-        "design",
-        "research"
-      ],
-      "icon": "Box",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "0 13 * * 2,4,6"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-3d-print-ideas/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 2400,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-app-prototype",
-      "name": "AI Recipe: Weekly App Prototype",
-      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "apps",
-        "prototype",
-        "research"
-      ],
-      "icon": "AppWindow",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "0 17 * * 4"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-app-prototype/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-browser-extension",
-      "name": "AI Recipe: Weekly Browser Extension",
-      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "browser-extension",
-        "apps",
-        "research"
-      ],
-      "icon": "Puzzle",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "0 16 * * 1"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-browser-extension/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-browser-game",
-      "name": "AI Recipe: Weekly Browser Game",
-      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "html"
-      ],
-      "icon": "Gamepad2",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "0 14 * * 6"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-browser-game/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-financial-idea",
-      "name": "AI Recipe: Financial Idea",
-      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "finance",
-        "apps",
-        "prototype"
-      ],
-      "icon": "PiggyBank",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "30 21 6 * *"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-financial-idea/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-mobile-game",
-      "name": "AI Recipe: Weekly Mobile Game",
-      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "html",
-        "mobile"
-      ],
-      "icon": "Smartphone",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "30 16 * * 4"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-mobile-game/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 3600,
-        "retries": 0
-      },
-      "author": "ai-automation-tools",
-      "version": "0.1.0"
-    },
-    {
-      "schemaVersion": "1.0",
-      "id": "recipe-weekly-pc-game-concept",
-      "name": "AI Recipe: Weekly PC Game Concept",
-      "description": "Claude researches this week's genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art.",
-      "runtime": "python",
-      "os": "cross-platform",
-      "category": "ai-agent",
-      "tags": [
-        "ai",
-        "claude-code",
-        "content",
-        "recipe",
-        "games",
-        "design",
-        "research"
-      ],
-      "icon": "Gamepad2",
-      "trigger": {
-        "kind": "schedule",
-        "cron": "15 14 * * 1"
-      },
-      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-pc-game-concept/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
-      "parameters": [
-        {
-          "key": "recipesPath",
-          "label": "ai-automation-recipes clone",
-          "type": "path",
-          "required": true,
-          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
-        },
-        {
-          "key": "outputDir",
-          "label": "Output folder",
-          "type": "path",
-          "required": true,
-          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
-        },
-        {
-          "key": "model",
-          "label": "Claude model",
-          "type": "select",
-          "default": "opus",
-          "required": true,
-          "options": [
-            "sonnet",
-            "opus",
-            "haiku"
-          ],
-          "help": "Claude model alias for the run."
-        },
-        {
-          "key": "imageEngine",
-          "label": "Cover image engine",
-          "type": "select",
-          "default": "auto",
-          "required": true,
-          "options": [
-            "auto",
-            "gemini",
-            "openai",
-            "none"
-          ],
-          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
-        }
-      ],
-      "compatibleTargets": [
-        "windows",
-        "cronsole-native",
-        "linux",
-        "macos"
-      ],
-      "execution": {
-        "timeoutSec": 2400,
         "retries": 0
       },
       "author": "ai-automation-tools",

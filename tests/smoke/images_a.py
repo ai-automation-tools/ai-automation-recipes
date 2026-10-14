@@ -34,7 +34,7 @@ CASES = {
         ("script.md", SCRIPT.replace("## Panel 4\nx\n", ""))),
     "ai-meme-generator": ("meme.md", "# m", {"title": "M", "summary": "a / b", "theme": "gaming", "images": [
         {"file": "meme.png", "aspect": "1:1", "prompt": "cat"}]}, "badaspect"),
-    "daily-poster": ("poster.md", "# p", {"title": "P", "summary": "c", "theme": "Art Nouveau", "style": "s", "images": [
+    "poster": ("poster.md", "# p", {"title": "P", "summary": "c", "theme": "Art Nouveau", "style": "s", "images": [
         {"file": "poster.png", "aspect": "2:3", "prompt": "poster"}]}, "badaspect"),
     "future-cities": ("city.md", "# c", {"title": "C", "summary": "c", "city": "Lisbon", "images": [
         {"file": "cityscape.png", "aspect": "16:9", "prompt": "city"}]}, "badaspect"),

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "id": "recipe-wallpaper-packs",
-  "name": "AI Recipe: Weekly Wallpaper Pack",
+  "name": "AI Recipe: Wallpaper Pack",
   "description": "Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render.",
   "runtime": "python",
   "os": "cross-platform",
