@@ -18,53 +18,67 @@ until the publish checklist at the bottom is done and the maintainer says go.
 - [x] Sample output for each recipe in its README
 - [x] Private remote `ai-automation-tools/ai-automation-recipes` with a noreply commit identity
 
-## 2. Batch 1 — recipes that fit the current runner (23)
+## 2. Batch 1 — recipes that fit the current runner (23) ✅
 
 Each port: read the private job's prompt and wrapper, drop anything personal or fleet-specific,
 write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuild the registry.
 
 **Apps & games**
 
-- [ ] `weekly-app-prototype` — runnable single-page app prototype + requirements + sample data
-- [ ] `weekly-browser-extension` — loadable Manifest V3 extension folder
-- [ ] `weekly-financial-idea` — consumer-finance app prototype
-- [ ] `weekly-mobile-game` — single-file, portrait, touch-first game
-- [ ] `weekly-pc-game-concept` — design brief, `pitch.html`, key art, sources
-- [ ] `weekly-3d-print-ideas` — three printable product specs with `design-spec.json`
+- [x] `weekly-app-prototype` — runnable single-page app prototype + requirements + sample data
+- [x] `weekly-browser-extension` — loadable Manifest V3 extension folder
+- [x] `weekly-financial-idea` — consumer-finance app prototype
+- [x] `weekly-mobile-game` — single-file, portrait, touch-first game
+- [x] `weekly-pc-game-concept` — design brief, `pitch.html`, key art, sources
+- [x] `weekly-3d-print-ideas` — three printable product specs with `design-spec.json`
 
 **Books & writing**
 
-- [ ] `alternate-history` — illustrated "what if" timeline
-- [ ] `serialized-novella` — one chapter a run against a story bible
-- [ ] `agent-persona-original` — an invented, debate-ready character card
-- [ ] `content-idea-gen` — one social-media content idea with a cover
-- [ ] `weekly-funny-ai-content` — one funny AI-themed content idea
+- [x] `alternate-history` — illustrated "what if" timeline
+- [x] `serialized-novella` — one chapter a run against a story bible
+- [x] `agent-persona-original` — an invented, debate-ready character card
+- [x] `content-idea-gen` — one social-media content idea with a cover
+- [x] `weekly-funny-ai-content` — one funny AI-themed content idea
 
 **Food & maps**
 
-- [ ] `recipe-of-the-week` — family recipe + Cook's Card HTML; **generated** hero image instead of a
+- [x] `recipe-of-the-week` — family recipe + Cook's Card HTML; **generated** hero image instead of a
       downloaded photo; `recipe-validator` skill bundled
-- [ ] `weekly-regional-recipe` — same, cycling through regions
-- [ ] `weekly-ai-map` — researched interactive Leaflet map + companion markdown
+- [x] `weekly-regional-recipe` — same, cycling through regions
+- [x] `weekly-ai-map` — researched interactive Leaflet map + companion markdown
 
 **Research digests**
 
-- [ ] `agent-toolkit` — skills, MCP servers, plugins and hooks worth installing
-- [ ] `ai-stack-radar` — hosted AI products by job, with what they replace and cost
-- [ ] `oss-spotlight` — editorial read on the open-source ecosystem
-- [ ] `cool-websites` — lesser-known useful sites by category
-- [ ] `top-10-github-repos` — weekly ranked AI / dev-tooling repos
-- [ ] `trending-movers` — star-velocity leaderboard
-- [ ] `signal-sources` — cumulative reading list with RSS feeds
-- [ ] `security-toolkit` — monthly security tooling haul
-- [ ] `finance-toolkit` — monthly financial tooling haul
+- [x] `agent-toolkit` — skills, MCP servers, plugins and hooks worth installing
+- [x] `ai-stack-radar` — hosted AI products by job, with what they replace and cost
+- [x] `oss-spotlight` — editorial read on the open-source ecosystem
+- [x] `cool-websites` — lesser-known useful sites by category
+- [x] `top-10-github-repos` — weekly ranked AI / dev-tooling repos
+- [x] `trending-movers` — star-velocity leaderboard
+- [x] `signal-sources` — cumulative reading list with RSS feeds
+- [x] `security-toolkit` — monthly security tooling haul
+- [x] `finance-toolkit` — monthly financial tooling haul
 
 **Batch 1 wrap-up**
 
-- [ ] Bundle any extra skills the ports need, scrubbed and license-checked
-- [ ] One live run per category (apps & games, writing, food & maps, digests), output reviewed
-- [ ] Split the registry into per-category packs alongside the all-in-one pack
-- [ ] README recipe table, CHANGELOG and samples updated
+- [x] Bundle any extra skills the ports need, scrubbed and license-checked (`recipe-validator`;
+      eight Apache-2.0 writing skills with attribution in `.claude/skills/_vendor/`)
+- [x] One live run per category, output reviewed: `weekly-browser-extension`, `serialized-novella`
+      (seed run), `recipe-of-the-week`, `trending-movers`
+- [x] Split the registry into per-category packs alongside the all-in-one pack (5 packs, 27 templates)
+- [x] README recipe table and CHANGELOG updated
+- [ ] Live samples in every new recipe's README (the four Batch 1 live runs: Exit Ramp, No Speech
+      Detected, Minnesota Tater Tot Hotdish, the 2026-10-14 Trending Movers)
+
+## 2b. Consolidate after Batch 1
+
+- [x] Runner: subfolder paths in `files`, `optional_files`, `0`/`false` no longer read as missing
+- [x] Inline JSON data blocks skipped by the JS syntax checks (a live run caught this)
+- [ ] Move `recipes/_shared/` and `recipes/_digest/` into `core/` and switch `weekly-browser-game`
+      to the shared web checks
+- [ ] Pass the run context to `validate()` (removes the novella's module-level state)
+- [ ] A post-cover hook, so recipes that embed the cover (Cook's Card) don't patch `artifact.json`
+- [ ] Unit tests for the shared modules (today they carry self-checks)
 
 ## 3. Batch 2 — runner additions, then 11 more recipes
 

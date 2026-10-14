@@ -2,3 +2,6 @@
 google-genai>=1.0
 openai>=1.50
 pillow>=10.0
+
+# Food recipes: renders the Cook's Card HTML (skipped with a warning if missing).
+markdown>=3.5

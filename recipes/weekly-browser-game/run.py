@@ -66,7 +66,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
     if not node:
         log.warning("node not on PATH — skipping the JS syntax check")
         return
-    inline = re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", html, re.S | re.I)
+    inline = re.findall(r'''<script(?![^>]*\bsrc\s*=)(?![^>]*\btype\s*=\s*["']?(?!(?:text|application)/javascript\b|module\b)[\w/+.-]+)[^>]*>(.*?)</script>''', html, re.S | re.I)
     with tempfile.TemporaryDirectory() as tmp:
         for i, body in enumerate(inline):
             js = Path(tmp) / f"inline-{i}.js"

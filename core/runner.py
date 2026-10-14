@@ -58,7 +58,8 @@ class Recipe:
     collection: str
     version: str
     prompt_path: Path
-    files: tuple[str, ...]
+    files: tuple[str, ...]  # required; relative paths, subfolders allowed; first is the main file
+    optional_files: tuple[str, ...] = ()  # published when present, never required
     skills: tuple[str, ...] = ()
     tools: tuple[str, ...] = ("Read", "Write", "Edit", "Glob", "Grep", "Skill")
     fields: tuple[str, ...] = ()
@@ -218,7 +219,8 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     manifest = extract_json(result.text)
     if manifest.get("error"):
         raise RecipeError(f"agent reported: {manifest['error']}")
-    missing = [k for k in ("title", "summary", *recipe.fields) if not manifest.get(k)]
+    # 0 and False are real values; only absent, null or blank strings count as missing.
+    missing = [k for k in ("title", "summary", *recipe.fields) if manifest.get(k) in (None, "") or (isinstance(manifest.get(k), str) and not manifest[k].strip())]
     if recipe.cover_aspect and args.image_engine != "none" and not manifest.get("cover_prompt"):
         missing.append("cover_prompt")
     if missing:
@@ -228,8 +230,11 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
         f = staging / name
         if not f.is_file() or f.stat().st_size == 0:
             raise RecipeError(f"agent did not write {name}")
+    # Keep each declared file's top-level entry (a subfolder like extension/ survives whole);
+    # anything else at the top level is a sidecar the agent wasn't asked for.
+    keep = {Path(f).parts[0] for f in (*recipe.files, *recipe.optional_files)}
     for stray in staging.iterdir():
-        if stray.name not in recipe.files:
+        if stray.name not in keep:
             log.warning("removing unexpected file from output: %s", stray.name)
             shutil.rmtree(stray) if stray.is_dir() else stray.unlink()
 
@@ -250,7 +255,8 @@ def _run_staged(recipe: Recipe, ctx: RunContext, prompt: str, staging: Path) -> 
     shutil.move(str(staging), str(final))
     _cleanup_staging_root(ctx.collection_dir)
 
-    files = {"main": recipe.files[0], **{Path(f).stem: f for f in recipe.files[1:]}}
+    published = [*recipe.files[1:], *(f for f in recipe.optional_files if (final / f).is_file())]
+    files = {"main": recipe.files[0], **{Path(f).with_suffix("").as_posix(): f for f in published}}
     if cover:
         files["cover"] = "cover.png"
     entry = {

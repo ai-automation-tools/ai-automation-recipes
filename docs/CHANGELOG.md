@@ -2,6 +2,35 @@
 
 [← README](../README.md)
 
+## 0.2.0 — 2026-10-14
+
+Batch 1: 23 more recipes, 26 in all.
+
+- **Apps & games**: `weekly-app-prototype`, `weekly-browser-extension` (loadable Manifest V3 folder,
+  checked for MV3, missing files, remote code and `eval`), `weekly-financial-idea`,
+  `weekly-mobile-game`, `weekly-pc-game-concept`, `weekly-3d-print-ideas` (one design per run,
+  three runs a week).
+- **Writing**: `serialized-novella` (story bible kept in the collection, chapter number and rolling
+  synopsis derived from published chapters, archived and reseeded at the target length),
+  `alternate-history` (optional premise queue), `agent-persona-original`, `content-idea-gen`,
+  `weekly-funny-ai-content`.
+- **Food & maps**: `recipe-of-the-week` and `weekly-regional-recipe` (generated covers instead of
+  downloaded photos, credits that say the recipe is AI-adapted and untested, the recipe-validator
+  scanner as a hard safety gate, a self-contained Cook's Card page), `weekly-ai-map` (Leaflet,
+  per-stop photo downloads dropped).
+- **Research digests** (monthly): `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`,
+  `cool-websites`, `top-10-github-repos`, `trending-movers` (published figures must match the
+  measured ones), `signal-sources` (cumulative, with OPML), `security-toolkit`, `finance-toolkit`.
+  Each writes browser bookmarks and never repeats an earlier entry.
+- **Shared helpers**: `recipes/_shared/` (web and MV3 checks, Cook's Card) and `recipes/_digest/`
+  (fetchers, parser, bookmark and OPML writers).
+- **Runner**: subfolder paths and `optional_files`; `0` and `false` are no longer treated as
+  missing fields; inline JSON data blocks are skipped by the JS syntax checks.
+- **Skills**: `recipe-validator`; eight Apache-2.0 writing skills from creative-writing-skills,
+  attributed in `.claude/skills/_vendor/` (which now also covers `llm-writing`).
+- **Registry**: 27 templates in five packs — everything, plus one per category.
+- `markdown` added to `requirements.txt` for the Cook's Card.
+
 ## 0.1.0 — 2026-10-14
 
 First pilot build.

@@ -94,6 +94,11 @@ class BrowserGameValidateTests(unittest.TestCase):
         self.write('<script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script><script>let a=1;</script>')
         self.mod.validate(self.dir, {})
 
+    def test_json_data_block_is_not_syntax_checked(self):
+        # A live run failed on this: inline sample data is JSON, not JavaScript.
+        self.write('<script type="application/json" id="data">{"page": {"a": 1}}</script><script>let a = 1;</script>')
+        self.mod.validate(self.dir, {})
+
     def test_rejects_syntax_error(self):
         if not self.mod.shutil.which("node"):
             self.skipTest("node not installed")
@@ -143,6 +148,34 @@ class EndToEndTests(unittest.TestCase):
                                     artifacts.load_existing(Path(tmp) / "idea-cards"),
                                     argparse.Namespace(category=None))
             self.assertNotEqual(mod.prepare(ctx)["CATEGORY"], "Browser Extension")
+
+    def test_subfolder_and_optional_files_survive(self):
+        mod = load_recipe("daily-app-card")
+        recipe = runner.Recipe(
+            name="t", collection="things", version="0", prompt_path=mod.RECIPE.prompt_path,
+            files=("index.html", "extension/manifest.json"), optional_files=("extension/background.js", "notes.md"),
+            cover_aspect=None, prepare=mod.RECIPE.prepare, add_args=mod.RECIPE.add_args,
+        )
+
+        class Engine:
+            name = "claude"
+            def preflight(self): pass
+            def run(self, req):
+                (req.workdir / "extension").mkdir()
+                (req.workdir / "extension" / "manifest.json").write_text("{}", encoding="utf-8")
+                (req.workdir / "extension" / "background.js").write_text("//", encoding="utf-8")
+                (req.workdir / "index.html").write_text("<p>", encoding="utf-8")
+                (req.workdir / "stray").mkdir()
+                return EngineResult(text='{"title": "T", "summary": "s", "category": "c", "form_factor": "f", "monetization": "m"}', model="m")
+
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(runner, "get_engine", return_value=Engine()):
+            self.assertEqual(runner.run(recipe, ["--output-dir", tmp, "--date", "2026-10-14"]), 0)
+            folder = Path(tmp) / "things" / "2026-10" / "2026-10-14_t"
+            self.assertTrue((folder / "extension" / "background.js").is_file())
+            self.assertFalse((folder / "stray").exists())
+            files = json.loads((folder / "artifact.json").read_text(encoding="utf-8"))["files"]
+            self.assertEqual(files, {"main": "index.html", "extension/manifest": "extension/manifest.json",
+                                     "extension/background": "extension/background.js"})
 
     def test_agent_error_publishes_nothing(self):
         mod = load_recipe("weekly-short-story")

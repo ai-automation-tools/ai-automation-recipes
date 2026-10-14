@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-security-toolkit",
+  "name": "AI Recipe: Security Toolkit",
+  "description": "Claude researches 24+ security tools across identity, detection, recon, AppSec, cloud and labs, with licences stated. Tools, never targets. Exports browser-importable bookmarks.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "claude-code",
+    "content",
+    "recipe",
+    "research",
+    "links",
+    "security",
+    "bookmarks"
+  ],
+  "icon": "ShieldCheck",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "30 12 28 * *"
+  },
+  "commandTemplate": "python \"{{recipesPath}}/recipes/security-toolkit/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+  "parameters": [
+    {
+      "key": "recipesPath",
+      "label": "ai-automation-recipes clone",
+      "type": "path",
+      "required": true,
+      "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+    },
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Claude model",
+      "type": "select",
+      "default": "sonnet",
+      "required": true,
+      "options": [
+        "sonnet",
+        "opus",
+        "haiku"
+      ],
+      "help": "Claude model alias for the run."
+    },
+    {
+      "key": "imageEngine",
+      "label": "Cover image engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "openai",
+        "none"
+      ],
+      "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+    }
+  ],
+  "compatibleTargets": [
+    "windows",
+    "cronsole-native",
+    "linux",
+    "macos"
+  ],
+  "execution": {
+    "timeoutSec": 2700,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.1.0"
+}

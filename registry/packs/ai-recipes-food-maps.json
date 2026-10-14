@@ -1,0 +1,286 @@
+{
+  "cronsoleCatalogVersion": "1.0",
+  "pack": {
+    "id": "ai-recipes-food-maps",
+    "name": "AI Recipes: Food & Maps",
+    "description": "Safety-checked recipes with a printable Cook's Card, and researched interactive maps."
+  },
+  "templates": [
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-recipe-of-the-week",
+      "name": "AI Recipe: Recipe of the Week",
+      "description": "Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "food",
+        "cooking"
+      ],
+      "icon": "ChefHat",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 19 * * 6"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/recipe-of-the-week/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-recipes-update",
+      "name": "AI Recipes: Update Clone",
+      "description": "Fast-forward your ai-automation-recipes clone daily so every scheduled recipe runs the latest prompts and skills. Pairs with any AI Recipe template.",
+      "runtime": "executable",
+      "os": "cross-platform",
+      "category": "dev-workflow",
+      "tags": [
+        "git",
+        "recipe",
+        "update"
+      ],
+      "icon": "GitPullRequest",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 10 * * *"
+      },
+      "commandTemplate": "git -C \"{{recipesPath}}\" pull --ff-only",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 300,
+        "retries": 1
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-weekly-ai-map",
+      "name": "AI Recipe: Weekly AI Map",
+      "description": "Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "maps",
+        "travel",
+        "html"
+      ],
+      "icon": "Map",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "30 12 * * 1"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-ai-map/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "opus",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 3600,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "recipe-weekly-regional-recipe",
+      "name": "AI Recipe: Weekly Regional Recipe",
+      "description": "Claude adds one authentic dish a week to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page.",
+      "runtime": "python",
+      "os": "cross-platform",
+      "category": "ai-agent",
+      "tags": [
+        "ai",
+        "claude-code",
+        "content",
+        "recipe",
+        "food",
+        "cooking"
+      ],
+      "icon": "Globe",
+      "trigger": {
+        "kind": "schedule",
+        "cron": "0 19 * * 5"
+      },
+      "commandTemplate": "python \"{{recipesPath}}/recipes/weekly-regional-recipe/run.py\" --output-dir \"{{outputDir}}\" --model {{model}} --image-engine {{imageEngine}}",
+      "parameters": [
+        {
+          "key": "recipesPath",
+          "label": "ai-automation-recipes clone",
+          "type": "path",
+          "required": true,
+          "help": "Absolute path to your local clone of ai-automation-tools/ai-automation-recipes."
+        },
+        {
+          "key": "outputDir",
+          "label": "Output folder",
+          "type": "path",
+          "required": true,
+          "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+        },
+        {
+          "key": "model",
+          "label": "Claude model",
+          "type": "select",
+          "default": "sonnet",
+          "required": true,
+          "options": [
+            "sonnet",
+            "opus",
+            "haiku"
+          ],
+          "help": "Claude model alias for the run."
+        },
+        {
+          "key": "imageEngine",
+          "label": "Cover image engine",
+          "type": "select",
+          "default": "auto",
+          "required": true,
+          "options": [
+            "auto",
+            "gemini",
+            "openai",
+            "none"
+          ],
+          "help": "auto uses the first of GEMINI_API_KEY / OPENAI_API_KEY that is set (add it as a task secret or in the clone's .env). none skips the cover."
+        }
+      ],
+      "compatibleTargets": [
+        "windows",
+        "cronsole-native",
+        "linux",
+        "macos"
+      ],
+      "execution": {
+        "timeoutSec": 1800,
+        "retries": 0
+      },
+      "author": "ai-automation-tools",
+      "version": "0.1.0"
+    }
+  ]
+}

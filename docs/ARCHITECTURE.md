@@ -8,6 +8,8 @@
 |:---|:---|
 | `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md` |
 | `core/runner.py` | The run loop every recipe shares |
+| `recipes/_shared/` | Helpers several recipes share: `webcheck.py` (HTML/JS/MV3 checks), `food.py` (Cook's Card, recipe scanner gate) |
+| `recipes/_digest/` | The research-digest toolkit: feed and GitHub Trending fetchers, digest parser, bookmark/OPML writers, shared rules |
 | `core/run-contract.md` | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
 | `core/engines/` | Text engines behind one interface (`claude` today) |
 | `core/images/` | Cover rendering: Gemini and OpenAI, tried in order |
@@ -30,8 +32,9 @@
    `.claude/skills/`.
 4. **Run the engine** with that folder as its working directory and the recipe's tool allowlist.
 5. **Check the result.** The agent's last JSON object must have `title`, `summary`, the recipe's
-   `fields` and a `cover_prompt`, or an `error`. Every file in `files` must exist and be non-empty;
-   anything else in the folder is deleted. The recipe's `validate()` hook runs here (the game
+   `fields` and a `cover_prompt`, or an `error`. Every file in `files` must exist and be non-empty
+   (subfolder paths like `extension/manifest.json` are allowed; `optional_files` are kept when
+   present); any other top-level entry is deleted. The recipe's `validate()` hook runs here (the game
    recipe syntax-checks its script).
 6. **Render the cover** from `cover_prompt`, with the no-text constraint appended.
 7. **Publish.** Move the folder to `<collection>/<YYYY-MM>/<date>_<slug>/`, write `artifact.json`,
