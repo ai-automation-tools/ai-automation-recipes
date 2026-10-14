@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[1]))
 
 from core import Recipe, RecipeError, RunContext, run  # noqa: E402
-from core.web import check_refs, node_check  # noqa: E402
+from core.web import browser_smoke, check_refs, node_check  # noqa: E402
 from core.artifacts import least_used  # noqa: E402
 
 log = logging.getLogger("recipes")
@@ -57,6 +57,7 @@ def validate(staging: Path, manifest: dict[str, object]) -> None:
         raise RecipeError("index.html has no `stops = [` array")
     check_refs(staging, "index.html", https_prefixes=tuple(a for a in ALLOWED if a.startswith("https://")))
     node_check(staging, pages=("index.html",))
+    browser_smoke(staging, "index.html")  # loads it in a real browser; fails on uncaught errors
 
 
 RECIPE = Recipe(

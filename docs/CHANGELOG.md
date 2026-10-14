@@ -2,6 +2,16 @@
 
 [← README](../README.md)
 
+## 0.5.0 — 2026-10-14
+
+- **Browser smoke test** (`core.web.browser_smoke`): game and app recipes load their page in a
+  headless browser (Playwright with Chromium, or the system Chrome or Edge), click and press keys,
+  and reject the run on any uncaught error. Catches the dead-title-screen class `node --check`
+  can't. Skipped when no browser is available or `RECIPES_BROWSER_CHECK=off`.
+- **Webhook delivery** (`core/deliver.py`): `RECIPES_WEBHOOK_URL` announces each published
+  artifact; Discord and Slack get native messages, anything else JSON. Best-effort.
+- 49 tests.
+
 ## 0.4.0 — 2026-10-14
 
 - **Viewer**: `scripts/build_viewer.py` turns any output folder into a browsable page

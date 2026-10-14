@@ -138,9 +138,11 @@ write `prompt.md` + `run.py` + `cronsole.json` + `README.md`, dry-run it, rebuil
 
 ## 5. Hardening
 
-- [ ] Browser smoke test for game and app recipes (Playwright: load, input, check state changes)
-- [ ] Optional delivery step: email or webhook with the new artifact
-- [ ] Drift check that flags when a public prompt falls behind its private original
+- [x] Browser smoke test for game and app recipes: loads the page in headless Chrome/Edge/Chromium,
+      clicks and presses keys, fails the run on any uncaught error (six recipes)
+- [x] Optional delivery step: `RECIPES_WEBHOOK_URL` (Discord, Slack or generic JSON)
+- [ ] Drift check that flags when a public prompt falls behind its private original — belongs in the
+      private routines repo, since it reads private paths this repo must never contain
 - [ ] Import the pack through the Cronsole UI and let templates fire on schedule
 - [ ] A week of scheduled runs across every recipe without intervention
 

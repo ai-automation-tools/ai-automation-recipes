@@ -135,3 +135,52 @@ def check_sources_csv(staging: Path, name: str = "sources.csv", lo: int = 3, hi:
             raise RecipeError(f"{name} has a malformed row: {r}")
 
 
+
+
+def browser_smoke(staging: Path, page: str, *, keys: tuple[str, ...] = ("Space", "ArrowLeft", "ArrowRight", "Enter"),
+                  settle_ms: int = 1500) -> None:
+    """Load `page` in a real headless browser, poke it, and reject it if any script throws.
+
+    Catches what `node --check` can't: a page that parses but dies on load or on first input
+    (a top-level reference to something assigned later leaves a title screen that responds to
+    nothing). Uses Playwright with its bundled Chromium, or the system Chrome or Edge. Skipped with
+    a warning when none is available, or when RECIPES_BROWSER_CHECK=off.
+    """
+    import os
+
+    if os.environ.get("RECIPES_BROWSER_CHECK", "").lower() in ("off", "0", "false"):
+        return
+    try:
+        from playwright.sync_api import Error as PlaywrightError
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        log.warning("playwright not installed — skipping the browser smoke test (pip install playwright)")
+        return
+
+    errors: list[str] = []
+    with sync_playwright() as p:
+        browser = None
+        for channel in (None, "chrome", "msedge"):
+            try:
+                browser = p.chromium.launch(channel=channel) if channel else p.chromium.launch()
+                break
+            except PlaywrightError:
+                continue
+        if browser is None:
+            log.warning("no browser for the smoke test (playwright install chromium, or install Chrome) — skipping")
+            return
+        try:
+            tab = browser.new_page(viewport={"width": 1024, "height": 768})
+            tab.on("pageerror", lambda exc: errors.append(str(exc)))
+            tab.goto((staging / page).resolve().as_uri(), wait_until="load", timeout=20000)
+            tab.wait_for_timeout(settle_ms)
+            tab.mouse.click(512, 384)
+            for key in keys:
+                tab.keyboard.press(key)
+                tab.wait_for_timeout(150)
+            tab.wait_for_timeout(settle_ms)
+        finally:
+            browser.close()
+    if errors:
+        raise RecipeError(f"{page} throws in a browser: " + " | ".join(e.splitlines()[0][:200] for e in errors[:3]))
+    log.info("%s passes the browser smoke test", page)

@@ -8,7 +8,7 @@
 |:---|:---|
 | `recipes/<name>/` | One automation: `prompt.md`, `run.py`, `cronsole.json`, `README.md` |
 | `core/runner.py` | The run loop every recipe shares |
-| `core/web.py` | Checks for HTML/JS output: references, `node --check`, Manifest V3, JSON, sources CSV |
+| `core/web.py` | Checks for HTML/JS output: references, `node --check`, Manifest V3, JSON, sources CSV, and a headless-browser smoke test |
 | `core/food/` | The recipe-validator safety gate, allergen fix-ups and the Cook's Card |
 | `core/digest/` | The research-digest toolkit: feed and GitHub Trending fetchers, digest parser, bookmark/OPML writers, shared rules |
 | `core/run-contract.md` | The headless rules spliced into every prompt as `{{RUN_CONTRACT}}` |
@@ -16,6 +16,7 @@
 | `core/images/` | Image rendering (Gemini, then OpenAI) and `process.py`: crops, ICO, SVG → PNG |
 | `core/audio/` | Speech (Gemini or ElevenLabs, preset voices only) and ElevenLabs music |
 | `core/video.py` | Optional ffmpeg slideshow for vertical shorts |
+| `core/deliver.py` | Optional webhook announcement of each published artifact |
 | `core/artifacts.py` | Output layout, `artifact.json`, rotation and do-not-repeat helpers |
 | `.claude/skills/` | Skills the recipes load, copied into each run's staging folder |
 | `cronsole/` | Templates that aren't recipes (the clone updater) |

@@ -5,7 +5,14 @@
 
 from __future__ import annotations
 
+
+import os
+
+# Validators open a real browser when one is available; tests opt in explicitly (BrowserSmokeTests).
+os.environ.setdefault("RECIPES_BROWSER_CHECK", "off")
+
 import json
+import unittest.mock
 import shutil
 import sys
 import tempfile
@@ -146,3 +153,59 @@ class NodeCheckTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def _browser_available() -> bool:
+    try:
+        from playwright.sync_api import Error, sync_playwright
+    except ImportError:
+        return False
+    with sync_playwright() as p:
+        for channel in (None, "chrome", "msedge"):
+            try:
+                (p.chromium.launch(channel=channel) if channel else p.chromium.launch()).close()
+                return True
+            except Error:
+                continue
+    return False
+
+
+@unittest.skipUnless(_browser_available(), "no Playwright browser available")
+class BrowserSmokeTests(unittest.TestCase):
+    def test_catches_dead_pages_and_passes_live_ones(self):
+        with tempfile.TemporaryDirectory() as tmp, unittest.mock.patch.dict("os.environ", {"RECIPES_BROWSER_CHECK": "on"}):
+            d = Path(tmp)
+            (d / "good.html").write_text("<canvas id=c></canvas><script>const c = document.getElementById('c');"
+                                         "addEventListener('keydown', () => { c.width = 10; });</script>", encoding="utf-8")
+            (d / "dead.html").write_text("<script>let canvas; canvas.addEventListener('click', () => {});"
+                                         "addEventListener('load', () => { canvas = document.body; });</script>", encoding="utf-8")
+            (d / "on-input.html").write_text("<script>addEventListener('keydown', () => { missing.go(); });</script>",
+                                             encoding="utf-8")
+            web.browser_smoke(d, "good.html", settle_ms=200)
+            for bad in ("dead.html", "on-input.html"):
+                with self.assertRaises(RecipeError):
+                    web.browser_smoke(d, bad, settle_ms=200)
+
+
+class DeliverTests(unittest.TestCase):
+    ENTRY = {"recipe": "comics", "title": "T", "summary": "S", "date": "2026-10-14", "path": "comics/x", "files": {}}
+
+    def test_payload_shapes(self):
+        from core import deliver
+
+        self.assertIn("content", deliver.payload_for("https://discord.com/api/webhooks/1/abc", self.ENTRY))
+        self.assertIn("text", deliver.payload_for("https://hooks.slack.com/services/x", self.ENTRY))
+        generic = deliver.payload_for("https://example.com/hook", self.ENTRY)
+        self.assertEqual(generic["event"], "artifact.published")
+        self.assertEqual(generic["title"], "T")
+
+    def test_announce_is_best_effort(self):
+        import urllib.error
+
+        from core import deliver
+
+        with unittest.mock.patch.dict("os.environ", {"RECIPES_WEBHOOK_URL": ""}):
+            self.assertFalse(deliver.announce(self.ENTRY))
+        with unittest.mock.patch.dict("os.environ", {"RECIPES_WEBHOOK_URL": "https://example.com/hook"}), \
+                unittest.mock.patch("urllib.request.urlopen", side_effect=urllib.error.URLError("down")):
+            self.assertFalse(deliver.announce(self.ENTRY))  # logged, never raised

@@ -3,6 +3,11 @@
     python test_audio_recipes.py <repo-root>
 """
 
+import os
+
+# Validators open a real browser when one is available; tests opt in explicitly (BrowserSmokeTests).
+os.environ.setdefault("RECIPES_BROWSER_CHECK", "off")
+
 import importlib.util
 import io
 import json
