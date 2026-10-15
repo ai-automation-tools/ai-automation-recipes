@@ -118,7 +118,11 @@ made.
       the maintainer's machine: its Google login is on the retired free Code Assist tier, so it
       will be `GEMINI_API_KEY`
 - [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
-      2026-10-14. Retry when its CLI changes
+      2026-10-14. Retry when its CLI changes, with `scripts/new_cli.py agy`
+- [x] Profiles stay current without an update: runs use the newest profile on `main`, cached a day,
+      bundled copy as the fallback (0.12.0)
+- [x] `scripts/new_cli.py <binary>` drafts a profile for any other CLI from its `--help`, checks the
+      flags and pings it (0.12.0; tried on OpenCode, which drafted and answered)
 - [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
       so more profiles can be `allowlist` instead of `advisory`
 - [ ] A live `news-digest` run on one topic, then one per topic over three weeks of the Mon/Wed/Fri

@@ -21,7 +21,8 @@ Each CLI is one profile in [`core/engines/clis/`](../core/engines/clis/README.md
 fact (a flag, the prompt mode, the output shape, the skills folder) lives **only** in that
 file; `python scripts/check_clis.py <name>` checks every flag against the installed CLI's
 `--help`. A changed profile changes the runtime bundle, so the same PR bumps `VERSION` and
-reruns `scripts/build_registry.py`.
+reruns `scripts/build_registry.py`. Installs read the profile from `main` at run time, so the fix is
+live for everyone within a day of the merge, before any release.
 
 | Upstream | What the profile assumes | Profile | Check at | Last checked |
 |:---|:---|:---|:---|:---|

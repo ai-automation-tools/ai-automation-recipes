@@ -11,6 +11,8 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      RECIPES_CLI_REMOTE: "0"  # test the profiles in this commit, not the ones on main
     steps:
       - uses: actions/checkout@v4
         with:

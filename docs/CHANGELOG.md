@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.11.1-2ea44f?style=for-the-badge" alt="Version 0.11.1">
+  <img src="https://img.shields.io/badge/version-0.12.0-2ea44f?style=for-the-badge" alt="Version 0.12.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,21 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.0 — 2026-10-15
+
+**Added**
+- **Live profiles.** `get_engine` uses the profile on this repo's `main`, fetched at most once a day
+  into the user's cache, so a CLI flag fix reaches every clone and Cronsole edition without an
+  update. The fetched copy must keep the bundled `binary` and be no older than it; offline or a bad
+  fetch falls back to the bundled profile. A `$RECIPES_CLI_DIR` file still wins;
+  `RECIPES_CLI_REMOTE=0` turns the fetch off and `RECIPES_CLI_URL` points it elsewhere.
+- `scripts/new_cli.py <binary>`: drafts a profile for an unknown CLI from its own `--help` with an
+  engine that already works, checks every flag against the help, pings the CLI through the draft,
+  and prints the unattended-run flags it chose for review.
+
+**Changed**
+- CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
 
 ## 0.11.1 — 2026-10-14
 
