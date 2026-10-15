@@ -14,6 +14,12 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased
+
+**Added**
+- README: pointer to the `automated-dev-pipeline` and `task-router` skills in agent-skills, for
+  scheduling a whole pipeline rather than one recipe.
+
 ## 0.11.1 — 2026-10-14
 
 **Changed**
