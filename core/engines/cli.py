@@ -5,6 +5,10 @@ to launch the CLI headless, how the prompt gets in, and where the final message,
 model name sit in what it prints. `CliEngine` reads that and does the rest. Adding a CLI is
 adding a file; the profile format is documented in `core/engines/clis/README.md`.
 
+At run time `get_engine` prefers the copy of a profile on the repo's `main` (cached for a day), so
+a CLI that renames a flag is fixed for every install by one merged PR. A local `$RECIPES_CLI_DIR`
+file still wins, and `RECIPES_CLI_REMOTE=0` turns the fetch off.
+
 argv tokens:
     {workdir} {model} {tools} {prompt} {promptFile}   substituted in place
     "@model"   splices `modelArgs` when there is a model to pass, else nothing
@@ -18,6 +22,9 @@ import logging
 import os
 import shutil
 import subprocess
+import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -26,6 +33,8 @@ from .base import CLAUDE_ALIASES, EngineError, EngineRequest, EngineResult
 log = logging.getLogger(__name__)
 
 PROFILE_DIR = Path(__file__).resolve().parent / "clis"
+REMOTE_URL = "https://raw.githubusercontent.com/ai-automation-tools/ai-automation-recipes/main/core/engines/clis/"
+REMOTE_TTL = 24 * 3600
 MISSING = object()
 
 
@@ -248,3 +257,57 @@ def load_profiles() -> dict[str, dict[str, Any]]:
             if isinstance(data, dict) and data.get("name") and data.get("binary"):
                 profiles[data["name"]] = data
     return profiles
+
+
+def local_override(name: str) -> bool:
+    """True when a $RECIPES_CLI_DIR folder has this profile: the user's own file always wins."""
+    return any((d / f"{name}.json").is_file() for d in profile_dirs()[:-1])
+
+
+def cache_dir() -> Path:
+    base = os.environ.get("LOCALAPPDATA") or os.environ.get("XDG_CACHE_HOME") or str(Path.home() / ".cache")
+    return Path(base) / "ai-automation-recipes" / "clis"
+
+
+def acceptable(data: Any, name: str, bundled: dict[str, Any] | None) -> bool:
+    """A fetched profile is used only if it is well formed and can't swap the executable.
+
+    The remote copy may change flags and output parsing, which is the point; it may not point a
+    bundled engine at a different binary, and it may not be older than what shipped.
+    """
+    if not (isinstance(data, dict) and data.get("name") == name and data.get("binary")
+            and isinstance(data.get("argv"), list) and isinstance(data.get("output", {}), dict)):
+        return False
+    if bundled is None:
+        return True
+    if (data["binary"], data.get("binaryEnv")) != (bundled["binary"], bundled.get("binaryEnv")):
+        return False
+    return str(data.get("verified", {}).get("checked", "")) >= str(bundled.get("verified", {}).get("checked", ""))
+
+
+def remote_profile(name: str, bundled: dict[str, Any] | None) -> dict[str, Any] | None:
+    """The newest published profile for `name`, or None. Never raises: offline means bundled."""
+    if os.environ.get("RECIPES_CLI_REMOTE", "1") == "0" or local_override(name):
+        return None
+    cached = cache_dir() / f"{name}.json"
+    fetched = False
+    if not (cached.is_file() and time.time() - cached.stat().st_mtime < REMOTE_TTL):
+        url = os.environ.get("RECIPES_CLI_URL", REMOTE_URL).rstrip("/") + f"/{name}.json"
+        try:
+            with urllib.request.urlopen(url, timeout=5) as resp:
+                body = resp.read(256 * 1024)
+            if acceptable(json.loads(body), name, bundled):
+                cached.parent.mkdir(parents=True, exist_ok=True)
+                cached.write_bytes(body)
+                fetched = True
+        except (OSError, urllib.error.URLError, ValueError) as exc:
+            log.debug("no remote profile for %s: %s", name, exc)
+    try:
+        data = json.loads(cached.read_text(encoding="utf-8")) if cached.is_file() else None
+    except (OSError, ValueError):
+        return None
+    if not acceptable(data, name, bundled):
+        return None
+    log.info("engine %s: profile from %s (checked %s)", name, "upstream" if fetched else "cache",
+             data.get("verified", {}).get("checked", "?"))
+    return data

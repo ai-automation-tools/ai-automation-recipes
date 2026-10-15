@@ -16,9 +16,11 @@ from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+# These tests pin the bundled profiles; the upstream fetch has its own tests below.
+os.environ["RECIPES_CLI_REMOTE"] = "0"
 
 from core.engines import EngineError, EngineRequest, engine_names, get_engine, load_profiles, model_for  # noqa: E402
-from core.engines.cli import PROFILE_DIR  # noqa: E402
+from core.engines.cli import PROFILE_DIR, cache_dir  # noqa: E402
 
 REQUIRED = {"name", "label", "binary", "install", "docs", "skillsDir", "toolPolicy", "argv", "output", "check", "verified"}
 
@@ -201,6 +203,85 @@ class GenericPromptModes(unittest.TestCase):
             self.assertEqual(seen["text"], "from a file")
             self.assertIsNone(seen["input"])
             self.assertFalse(Path(d, "P.md").exists())  # cleaned up after the run
+
+
+class RemoteProfileTests(unittest.TestCase):
+    """get_engine prefers the newest published profile, and falls back quietly."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        env = {"RECIPES_CLI_REMOTE": "1", "LOCALAPPDATA": self.tmp.name, "RECIPES_CLI_DIR": ""}
+        self.env = mock.patch.dict(os.environ, env)
+        self.env.start()
+        self.bundled = load_profiles()["codex"]
+
+    def tearDown(self):
+        self.env.stop()
+        self.tmp.cleanup()
+
+    def published(self, **changes) -> mock.Mock:
+        body = json.dumps({**self.bundled, **changes}).encode()
+        resp = mock.MagicMock()
+        resp.__enter__.return_value.read.return_value = body
+        return mock.patch("urllib.request.urlopen", return_value=resp)
+
+    def test_newer_flags_are_used_and_cached(self):
+        argv = [*self.bundled["argv"], "--new-flag"]
+        with self.published(argv=argv) as fetch:
+            self.assertIn("--new-flag", get_engine("codex").profile["argv"])
+            get_engine("codex")  # second call is served from the cache
+        self.assertEqual(fetch.call_count, 1)
+        self.assertTrue((cache_dir() / "codex.json").is_file())
+
+    def test_a_different_binary_is_refused(self):
+        with self.published(binary="not-codex"):
+            self.assertEqual(get_engine("codex").binary, "codex")
+
+    def test_an_older_profile_is_refused(self):
+        with self.published(argv=["stale"], verified={"checked": "2000-01-01"}):
+            self.assertEqual(get_engine("codex").profile["argv"], self.bundled["argv"])
+
+    def test_offline_falls_back_to_bundled(self):
+        with mock.patch("urllib.request.urlopen", side_effect=OSError("offline")):
+            self.assertEqual(get_engine("codex").profile, self.bundled)
+
+    def test_a_new_cli_can_arrive_upstream(self):
+        new = {"name": "newcli", "binary": "newcli", "argv": ["{prompt}"], "prompt": "arg"}
+        resp = mock.MagicMock()
+        resp.__enter__.return_value.read.return_value = json.dumps(new).encode()
+        with mock.patch("urllib.request.urlopen", return_value=resp):
+            self.assertEqual(get_engine("newcli").binary, "newcli")
+
+    def test_local_file_and_off_switch_skip_the_fetch(self):
+        with tempfile.TemporaryDirectory() as d, self.published(argv=["x"]) as fetch:
+            Path(d, "codex.json").write_text(json.dumps(self.bundled), encoding="utf-8")
+            with mock.patch.dict(os.environ, {"RECIPES_CLI_DIR": d}):
+                get_engine("codex")
+            with mock.patch.dict(os.environ, {"RECIPES_CLI_REMOTE": "0"}):
+                get_engine("codex")
+        fetch.assert_not_called()
+
+
+class NewCliTests(unittest.TestCase):
+    """scripts/new_cli.py: the draft keeps the name and binary it was asked for, and records its help pages."""
+
+    def test_draft(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import new_cli
+
+        helps = {("--help",): "Usage: foo\n\nCommands:\n  run    run one prompt\n",
+                 ("run", "--help"): "  --yes  approve all\n",
+                 ("--version",): "foo 1.2.3\n"}
+        reply = '```json\n{"name": "wrong", "binary": "wrong", "argv": ["run", "--yes", "{prompt}"], "prompt": "arg"}\n```'
+        drafter = mock.Mock()
+        drafter.run.return_value = mock.Mock(text=reply)
+        with mock.patch.object(new_cli, "run", side_effect=lambda b, a: helps.get(tuple(a), "")), \
+                mock.patch.object(new_cli, "get_engine", return_value=drafter):
+            profile = new_cli.draft("foo", "foo", "claude")
+        self.assertEqual((profile["name"], profile["binary"]), ("foo", "foo"))
+        self.assertEqual(profile["check"]["help"], [["--help"], ["run", "--help"]])
+        self.assertEqual(profile["verified"]["version"], "foo 1.2.3")
+        self.assertIn("approve all", drafter.run.call_args.args[0].prompt)
 
 
 if __name__ == "__main__":

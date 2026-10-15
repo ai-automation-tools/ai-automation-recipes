@@ -115,13 +115,14 @@ A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Every 
 alias as "your own default" and passes a full model id through unchanged. The image, speech and music
 steps are the runner's, so they are identical whichever engine wrote the prompts.
 
-Only Claude has run a recipe for real. Codex and Gemini are tested against recorded output; OpenCode
+Claude and Codex have run recipes for real. Gemini is tested against recorded output; OpenCode
 and Kimi answered a smoke prompt; Grok's flags are checked against its `--help`. Each profile's
 `verified` block says which. `scripts/check_clis.py` checks every flag a profile passes against the
 installed CLI's `--help`, and the weekly upstream routine ([UPSTREAMS.md](UPSTREAMS.md)) keeps the
-profiles current.
+profiles current. At run time the engine uses the newest profile on `main` (cached a day, bundled
+copy as the fallback), so a fix reaches every install without an update.
 
-Adding one means a profile, no code. Recipes don't change: they name their tools the way Claude Code
+Adding one means a profile, no code; `scripts/new_cli.py <binary>` drafts it from the CLI's `--help`. Recipes don't change: they name their tools the way Claude Code
 does; a CLI with no per-tool allowlist gets them through the prompt's contract.
 
 ## 📦 The Cronsole edition

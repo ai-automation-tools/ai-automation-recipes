@@ -27,10 +27,36 @@ profile here was checked against the CLI's own `--help` on the date in its `veri
 reaches the agent through the prompt's contract. Run those CLIs somewhere the staging folder is
 the only thing worth protecting.
 
+## Staying current
+
+A CLI renames a flag and every install breaks the same day. So at run time the engine prefers
+the copy of its profile on this repo's `main`, fetched once a day into your cache
+(`%LOCALAPPDATA%` or `~/.cache`, under `ai-automation-recipes/clis/`). The upstream routine fixes a
+profile in one PR and every clone and Cronsole edition picks it up on its next run, with no update.
+
+- A fetched profile is used only if it parses, keeps the same `binary` as the bundled one, and
+  isn't older (`verified.checked`). It can change flags and output parsing; it can't swap the
+  executable.
+- Offline, or a bad fetch, means the bundled profile. A run never fails over this.
+- A profile in `RECIPES_CLI_DIR` always wins and is never fetched over.
+- `RECIPES_CLI_REMOTE=0` turns the fetch off (CI does); `RECIPES_CLI_URL` points it at a fork.
+
 ## Adding a CLI
 
-Drop a `<name>.json` here, or in any folder on `RECIPES_CLI_DIR` (it wins over a bundled file
-of the same name, so you can also override one locally). Then:
+Let an engine you already have draft it from the new CLI's own `--help`:
+
+```bash
+python scripts/new_cli.py <binary>                 # drafted by Claude into this folder
+python scripts/new_cli.py <binary> --with codex --out ~/my-clis
+```
+
+It checks every flag against the help, sends the CLI a one-line ping through the draft, and prints
+the flags it chose for unattended runs. **Read those before scheduling anything**: they decide what
+the agent may do with nobody watching. The draft prefers a sandbox or a tool allowlist over a flag
+that skips every check.
+
+Or write one by hand: drop a `<name>.json` here, or in any folder on `RECIPES_CLI_DIR` (it wins
+over a bundled file of the same name, so you can also override one locally). Then:
 
 ```bash
 python scripts/check_clis.py <name>          # every flag you pass is in its --help?
