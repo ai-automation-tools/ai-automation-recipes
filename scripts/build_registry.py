@@ -152,6 +152,10 @@ def native(t: dict, recipe: str, version: str, digest: str) -> dict:
                      help="A Claude alias (sonnet, opus, haiku) or the chosen CLI's own model id. On a CLI other "
                           "than Claude, a Claude alias means that CLI's default model.")
             p.pop("options", None)
+        elif p["key"] in KEY_ENVS:
+            # The clone edition's help points at a .env; this edition has none.
+            p["help"] = (p.get("help", "").replace("(add it as a task secret or in the clone's .env)", "(a task secret)")
+                         .replace("(task secret or the clone's .env)", "(a task secret)"))
     params.append({"key": "engine", "label": "Agent CLI", "type": "select", "default": "claude", "required": True,
                    "options": engine_names(),
                    "help": "Which agent CLI runs the recipe. It must be installed and signed in where Cronsole runs."})

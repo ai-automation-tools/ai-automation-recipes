@@ -19,8 +19,8 @@ this is the free companion to Cronsole.
 
 **Where things stand (2026-10-14).** 48 recipes in seven groups, every one dry-run and faked-engine
 tested in CI; 13 have had a real run. Any agent CLI can run them through a JSON profile; six are
-bundled (Claude live; Codex, Gemini, OpenCode, Kimi and Grok not yet run on a recipe). Three
-recipes have a pilot Cronsole edition. Every automation in the private fleet now has a recipe, including the seven that
+bundled (Claude and Codex have run recipes for real; Gemini, OpenCode, Kimi and Grok not yet).
+Three recipes have a pilot Cronsole edition, all three run from Cronsole. Every automation in the private fleet now has a recipe, including the seven that
 were held back earlier in the day over real-people content and employer-domain work; the maintainer
 chose to port everything first and decide what stays in the public set later. What has nothing to
 port is listed at the bottom. Everything below is either a live run that hasn't happened yet or the
@@ -104,11 +104,14 @@ made.
 - [ ] A live `agent-persona-original` run: the avatar and the cover are recognisably the same person
 - [ ] **Two-editions pilot** (0.11.0). Every recipe gets a Cronsole edition and runs on any CLI;
       three recipes go first:
-  - [ ] `short-story`, `comics` and `podcast-episode` imported from `ai-recipes-cronsole` into a
-        Cronsole running cronsole PR #323 (template timeouts, optional secrets), each run once from
-        Cronsole with a published artifact
-  - [ ] One pilot recipe run for real on a second CLI (`--engine codex` first); then set that
-        profile's `verified.liveRun`
+  - [x] `short-story`, `comics` and `podcast-episode` imported from `ai-recipes-cronsole` into a
+        Cronsole running cronsole PR #323 and run once each (2026-10-14): short-story published
+        with no image key (180 s including first-run setup), comics published with its key as a
+        task secret (44 s, cached runtime), podcast-episode exited cleanly with nothing to render
+  - [x] One pilot recipe run for real on a second CLI: `short-story --engine codex`, 2,835 words
+        in 4 minutes (2026-10-14); `codex` profile marked `liveRun`
+  - [ ] A real `podcast-episode` render from the Cronsole edition, after a `podcast-script-generator`
+        run leaves an unrendered script
   - [ ] Then add every other recipe to `NATIVE` in `scripts/build_registry.py`, and decide whether
         the clone edition stays a full set or shrinks to the editing path
 - [ ] A live run on `--engine gemini`. The Gemini CLI first needs a headless auth that works on
