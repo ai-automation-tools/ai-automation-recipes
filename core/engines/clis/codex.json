@@ -1,0 +1,25 @@
+{
+  "name": "codex",
+  "label": "Codex CLI",
+  "binary": "codex",
+  "binaryEnv": "CODEX_BIN",
+  "install": "Install the Codex CLI (npm i -g @openai/codex) and sign in",
+  "auth": "A ChatGPT login or OPENAI_API_KEY.",
+  "docs": ["https://developers.openai.com/codex/cli/reference", "https://github.com/openai/codex/releases"],
+  "skillsDir": ".agents/skills",
+  "toolPolicy": "advisory",
+  "_toolPolicy": "No per-tool allowlist: the workspace-write sandbox is the boundary, and the recipe's tool list lives only in the prompt's contract.",
+  "prompt": "stdin",
+  "argv": ["exec", "--json", "--ephemeral", "--skip-git-repo-check", "-s", "workspace-write", "-C", "{workdir}", "@model", "-"],
+  "modelArgs": ["-m", "{model}"],
+  "output": {
+    "format": "jsonl",
+    "text": {"match": {"type": "item.completed", "item.type": "agent_message"}, "path": "item.text"},
+    "fail": {"match": {"type": "turn.failed"}, "message": "error.message"},
+    "notice": {"match": {"type": "item.completed", "item.type": "error"}, "path": "item.message"},
+    "usage": {"match": {"type": "turn.completed"}, "path": "usage"},
+    "usageKeys": ["input_tokens", "output_tokens", "cached_input_tokens"]
+  },
+  "check": {"version": ["--version"], "help": [["exec", "--help"]]},
+  "verified": {"version": "0.162.1", "checked": "2026-10-14", "liveRun": false}
+}

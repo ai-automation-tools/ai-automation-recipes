@@ -1,0 +1,49 @@
+{
+  "name": "grok",
+  "label": "Grok Build",
+  "binary": "grok",
+  "binaryEnv": "GROK_BIN",
+  "install": "Install Grok Build and run `grok login` (or set XAI_API_KEY)",
+  "auth": "grok login or XAI_API_KEY.",
+  "docs": [
+    "https://docs.x.ai/"
+  ],
+  "skillsDir": ".grok/skills",
+  "toolPolicy": "advisory",
+  "prompt": "file",
+  "promptFile": ".prompt.md",
+  "argv": [
+    "--prompt-file",
+    "{promptFile}",
+    "--output-format",
+    "plain",
+    "--always-approve",
+    "--cwd",
+    "{workdir}",
+    "@model"
+  ],
+  "modelArgs": [
+    "-m",
+    "{model}"
+  ],
+  "output": {
+    "format": "text"
+  },
+  "check": {
+    "version": [
+      "--version"
+    ],
+    "help": [
+      [
+        "--help"
+      ]
+    ]
+  },
+  "verified": {
+    "version": "1.0.0",
+    "checked": "2026-10-14",
+    "liveRun": false,
+    "smoke": "flags checked against --help only; not logged in on the maintainer's machine"
+  },
+  "_toolPolicy": "--allow takes Grok permission rules, not a list of Claude tool names; --always-approve plus the prompt's contract until a mapping is verified."
+}

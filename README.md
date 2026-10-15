@@ -122,18 +122,24 @@ README lists them.
 
 ## 📅 Schedule them with Cronsole
 
-[Cronsole](https://cronsole.ai-automation-tools.dev) imports the recipes as templates. Take
-everything with the `ai-recipes` pack, one group pack (`ai-recipes-apps-games`, `-writing`,
-`-food-maps`, `-digests`, `-images`, `-audio`), or single templates. The [registry README](registry/README.md)
-has the details. Each template asks for the path to your clone and an output folder, and every pack
-also carries two helpers: **Update Clone** keeps the clone current and **Rebuild Viewer** refreshes
-the browsable page.
+[Cronsole](https://cronsole.ai-automation-tools.dev) imports the recipes as templates, in two
+editions:
 
-API keys go in Cronsole's task secrets or the clone's `.env`. A template never takes a key as a
+| Edition | Template id | Needs | Best for |
+|:---|:---|:---|:---|
+| **Cronsole edition** *(pilot: short-story, comics, podcast-episode)* | `recipe-<name>-cronsole`, pack `ai-recipes-cronsole` | Python and the agent CLI where Cronsole runs. Nothing else: the first run fetches a pinned, sha256-checked runtime into your cache | Importing and forgetting. Keys are optional task secrets (`${secret.GEMINI_API_KEY?}`) |
+| **Clone edition** | `recipe-<name>` | A clone of this repo and a `.env` | Editing prompts, or any scheduler: each command is a plain command line that cron, Task Scheduler or launchd can run as it is |
+
+Take everything with the `ai-recipes` pack, one group pack (`ai-recipes-apps-games`, `-writing`,
+`-food-maps`, `-digests`, `-images`, `-audio`), or single templates. The [registry README](registry/README.md)
+has the details. Clone-edition packs also carry two helpers: **Update Clone** keeps the clone
+current and **Rebuild Viewer** refreshes the browsable page. A template never takes a key as a
 parameter.
 
-Not using Cronsole? Every template's command is a plain command line that cron, Task Scheduler or
-launchd can run as it is.
+**Both editions run on any agent CLI.** Pick it with the template's *Agent CLI* parameter or
+`--engine`: Claude Code (the default), Codex, Gemini CLI, OpenCode, Kimi Code or Grok Build. Each
+CLI is one JSON profile in [`core/engines/clis/`](core/engines/clis/README.md); adding another is
+adding a file, and a weekly check keeps the profiles in step with each CLI's releases.
 
 ## 📂 What a run makes
 

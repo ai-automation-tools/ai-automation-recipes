@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Build the Cronsole registry for these recipes.
 
-Collects every `recipes/*/cronsole.json` plus `cronsole/*.json`, checks each
-against the Registry v1 rules Cronsole enforces, and writes:
+Collects every `recipes/*/cronsole.json` plus `cronsole/*.json`, generates the
+Cronsole edition of each recipe in NATIVE (a self-contained script template built
+from `cronsole/native-body.py` that fetches the pinned runtime bundle), checks
+each against the Registry v1 rules Cronsole enforces, and writes:
 
     registry/templates/<id>.json   one template per file
     registry/packs/ai-recipes.json the whole set as one importable bundle
@@ -21,11 +23,32 @@ import argparse
 import hashlib
 import json
 import re
+import shlex
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "registry"
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import build_bundle  # noqa: E402
+from core.engines import engine_names  # noqa: E402
+
+# Recipes with a Cronsole edition (`recipe-<name>-cronsole`). A pilot set for now; every recipe
+# joins once these three have run in Cronsole for real.
+NATIVE = ["short-story", "comics", "podcast-episode"]
+NATIVE_BODY = ROOT / "cronsole" / "native-body.py"
+NATIVE_TIMEOUT_MAX = 3600  # Cronsole caps a native job at 60 minutes
+# Keys a parameter can call for; each becomes an optional Cronsole secret on the task.
+KEY_ENVS = {"imageEngine": ["GEMINI_API_KEY", "OPENAI_API_KEY"],
+            "speechEngine": ["GEMINI_API_KEY", "ELEVENLABS_API_KEY"]}
+NATIVE_PACK = {
+    "id": "ai-recipes-cronsole",
+    "name": "AI Recipes: Cronsole editions",
+    "description": "Recipes as self-contained Cronsole script templates: no clone, no .env. Each run fetches "
+                   "a pinned, checksummed runtime once and reads its API keys from the task's secrets.",
+}
 
 ALL_PACK = {
     "id": "ai-recipes",
@@ -104,9 +127,62 @@ def validate(t: dict, src: Path) -> list[str]:
         keys.add(p.get("key"))
         for fld in ("default",):
             req(fld not in p or isinstance(p[fld], str), f"parameter {p.get('key')}: {fld} must be a string")
-    used = set(re.findall(r"\{\{(\w+)\}\}", t.get("commandTemplate", "")))
+    used = set(re.findall(r"\{\{(\w+)\}\}", t.get("commandTemplate", "") + (t.get("action") or {}).get("body", "")))
     req(used <= keys, f"placeholders without parameters: {sorted(used - keys)}")
     return errs
+
+
+def py_value(token: str) -> str:
+    """A command-line token as Python source. A {{param}} is pasted raw by Cronsole, so it goes in a
+    raw string with a sentinel: a Windows path ending in a backslash can't end the string early."""
+    if "{{" in token:
+        return f"r'''{token}|'''[:-1]"
+    return repr(token)
+
+
+def native(t: dict, recipe: str, version: str, digest: str) -> dict:
+    """The Cronsole edition of a recipe's clone-based template."""
+    tokens = shlex.split(t["commandTemplate"])
+    args = tokens[next(i for i, tok in enumerate(tokens) if tok.endswith("/run.py")) + 1:]
+    args += ["--engine", "{{engine}}"]
+    params = [dict(p) for p in t.get("parameters", []) if p["key"] != "recipesPath"]
+    for p in params:
+        if p["key"] == "model":
+            p.update(type="text", label="Model",
+                     help="A Claude alias (sonnet, opus, haiku) or the chosen CLI's own model id. On a CLI other "
+                          "than Claude, a Claude alias means that CLI's default model.")
+            p.pop("options", None)
+    params.append({"key": "engine", "label": "Agent CLI", "type": "select", "default": "claude", "required": True,
+                   "options": engine_names(),
+                   "help": "Which agent CLI runs the recipe. It must be installed and signed in where Cronsole runs."})
+    keys = sorted({k for p in params for k in KEY_ENVS.get(p["key"], [])})
+    body = NATIVE_BODY.read_text(encoding="utf-8")
+    for marker, value in {"__NAME__": t["name"], "__RECIPE__": recipe, "__VERSION__": version,
+                          "__BUNDLE_URL__": build_bundle.bundle_url(version), "__BUNDLE_SHA256__": digest,
+                          "__ARGS__": "[" + ", ".join(py_value(a) for a in args) + "]",
+                          "__KEYS__": "{" + ", ".join(f"{k!r}: \"${{secret.{k}?}}\"" for k in keys) + "}"}.items():
+        body = body.replace(marker, value)
+    timeout = min(int((t.get("execution") or {}).get("timeoutSec") or 1800), NATIVE_TIMEOUT_MAX)
+    secrets = f" Optional task secrets: {', '.join(keys)}." if keys else ""
+    return {
+        "schemaVersion": "1.0",
+        "id": f"recipe-{recipe}-cronsole",
+        "name": f"{t['name']} (Cronsole)",
+        "description": f"{t['description']} Cronsole edition: no clone or .env needed. The first run fetches "
+                       f"runtime {version} (sha256-pinned) into your cache; the agent CLI is swappable.{secrets}",
+        "runtime": "python",
+        "os": "cross-platform",
+        "category": t.get("category"),
+        "tags": sorted(set(t.get("tags", [])) | {"cronsole-native"}),
+        "icon": t.get("icon"),
+        "trigger": t["trigger"],
+        "action": {"kind": "script", "interpreter": "python", "body": body},
+        "parameters": params,
+        "compatibleTargets": ["cronsole-native"],
+        "execution": {"timeoutSec": timeout, "retries": 0},
+        "author": t.get("author", "ai-automation-tools"),
+        "version": version,
+    }
 
 
 def dump(obj: object) -> bytes:
@@ -120,6 +196,13 @@ def build() -> dict[Path, bytes]:
         t = json.loads(src.read_text(encoding="utf-8"))
         errors += validate(t, src)
         templates.append(t)
+    version, digest = build_bundle.version(), build_bundle.sha256()
+    for recipe in NATIVE:
+        src = ROOT / "recipes" / recipe / "cronsole.json"
+        n = native(json.loads(src.read_text(encoding="utf-8")), recipe, version, digest)
+        n = {k: v for k, v in n.items() if v is not None}
+        errors += validate(n, src)
+        templates.append(n)
     ids = [t["id"] for t in templates]
     dupes = {i for i in ids if ids.count(i) > 1}
     if dupes:
@@ -151,7 +234,7 @@ def build() -> dict[Path, bytes]:
     if grouped - recipe_ids:
         raise SystemExit(f"Category packs name missing recipes: {sorted(grouped - recipe_ids)}")
 
-    packs = [(ALL_PACK, sorted(by_id))]
+    packs = [(ALL_PACK, sorted(by_id)), (NATIVE_PACK, sorted(f"recipe-{r}-cronsole" for r in NATIVE))]
     for pid, name, desc, members in CATEGORY_PACKS:
         packs.append(({"id": pid, "name": name, "description": desc},
                       sorted([f"recipe-{m}" for m in members] + SUPPORT)))
@@ -192,7 +275,7 @@ def main() -> int:
     for p, body in files.items():
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_bytes(body)
-    print(f"registry: {len(entries_of(files))} templates, {len(CATEGORY_PACKS) + 1} packs -> {OUT.relative_to(ROOT)}/")
+    print(f"registry: {len(entries_of(files))} templates, {len(CATEGORY_PACKS) + 2} packs -> {OUT.relative_to(ROOT)}/")
     return 0
 
 

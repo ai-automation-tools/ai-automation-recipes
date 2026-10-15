@@ -3,7 +3,7 @@
 A recipe never talks to a CLI or an SDK directly. It hands an engine a prompt,
 a working directory the agent may write into, and the tools it may use; the
 engine runs the agent to completion and returns its final message. Swapping
-Claude for another agent means adding one module here, not touching a recipe.
+Claude for another agent means adding one JSON profile to `clis/`, not touching a recipe.
 """
 
 from __future__ import annotations

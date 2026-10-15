@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.10.0-2ea44f?style=for-the-badge" alt="Version 0.10.0">
+  <img src="https://img.shields.io/badge/version-0.11.0-2ea44f?style=for-the-badge" alt="Version 0.11.0">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,28 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.11.0 — 2026-10-14
+
+**Added**
+- **Any agent CLI.** Engines are JSON profiles in `core/engines/clis/`, read by one interpreter
+  (`core/engines/cli.py`). The three hand-written adapters became `claude`, `codex` and `gemini`
+  profiles that parse the same recorded output; `opencode`, `kimi` and `grok` are new. Adding a CLI
+  is adding a file, here or in `$RECIPES_CLI_DIR`.
+- `scripts/check_clis.py`: checks every profile's flags against the installed CLI's `--help`.
+- **Cronsole editions** *(pilot: `short-story`, `comics`, `podcast-episode`)*: `recipe-<name>-cronsole`
+  script templates in a new `ai-recipes-cronsole` pack. No clone or `.env`: the first run fetches a
+  sha256-pinned runtime bundle into the user's cache, builds a virtualenv, and reads keys from
+  optional task secrets. The template's *Agent CLI* parameter picks the engine.
+- `scripts/build_bundle.py` (reproducible runtime bundle), a `VERSION` file, and a release workflow
+  that publishes `v<VERSION>` only when the rebuilt bundle matches what `registry/` pins. CI fails
+  a changed bundle under a version that's already released.
+- `docs/UPSTREAMS.md`, the worklist for a new weekly CLI upstream routine that keeps the profiles
+  current.
+
+**Changed**
+- `--engine` accepts any profile name; the Claude-alias rule (an alias means "your default" on
+  any other CLI) moved into the profile as `claudeAliases`.
 
 ## 0.10.0 — 2026-10-14
 

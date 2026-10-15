@@ -1,0 +1,24 @@
+{
+  "name": "opencode",
+  "label": "OpenCode",
+  "binary": "opencode",
+  "binaryEnv": "OPENCODE_BIN",
+  "install": "Install OpenCode (npm i -g opencode-ai) and configure a provider",
+  "auth": "Whatever provider OpenCode is configured for (opencode auth login).",
+  "docs": ["https://opencode.ai/docs/cli/", "https://github.com/anomalyco/opencode/releases"],
+  "skillsDir": ".opencode/skills",
+  "toolPolicy": "advisory",
+  "_toolPolicy": "--auto approves everything not explicitly denied; the prompt's contract is the rule.",
+  "prompt": "file",
+  "promptFile": ".prompt.md",
+  "_prompt": "The prompt goes in as an attached file; the message tells the agent to follow it.",
+  "argv": ["run", "--auto", "--format", "json", "--dir", "{workdir}", "@model", "-f", "{promptFile}", "--", "Follow the instructions in the attached file."],
+  "modelArgs": ["-m", "{model}"],
+  "output": {
+    "format": "jsonl",
+    "text": {"match": {"type": "text"}, "path": "part.text"},
+    "fail": {"match": {"type": "error"}, "message": "error.message"}
+  },
+  "check": {"version": ["--version"], "help": [["run", "--help"]]},
+  "verified": {"version": "1.18.34", "checked": "2026-10-14", "liveRun": false, "smoke": "PONG prompt answered 2026-10-14"}
+}

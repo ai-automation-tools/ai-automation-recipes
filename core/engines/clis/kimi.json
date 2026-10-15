@@ -1,0 +1,21 @@
+{
+  "name": "kimi",
+  "label": "Kimi Code",
+  "binary": "kimi",
+  "binaryEnv": "KIMI_BIN",
+  "install": "Install Kimi Code and run `kimi login`",
+  "auth": "kimi login (device code) or a provider set with `kimi provider`.",
+  "docs": ["https://moonshotai.github.io/kimi-code/"],
+  "skillsDir": ".kimi/skills",
+  "toolPolicy": "advisory",
+  "_toolPolicy": "Prompt mode refuses --yolo and --auto, and runs to completion without asking.",
+  "prompt": "arg",
+  "argv": ["-p", "{prompt}", "--output-format", "stream-json", "@model"],
+  "modelArgs": ["-m", "{model}"],
+  "output": {
+    "format": "jsonl",
+    "text": {"match": {"role": "assistant"}, "path": "content"}
+  },
+  "check": {"version": ["--version"], "help": [["--help"]]},
+  "verified": {"version": "0.18.0", "checked": "2026-10-14", "liveRun": false, "smoke": "PONG prompt answered 2026-10-14"}
+}

@@ -1,0 +1,27 @@
+{
+  "name": "claude",
+  "label": "Claude Code",
+  "binary": "claude",
+  "binaryEnv": "CLAUDE_BIN",
+  "install": "Install Claude Code (npm i -g @anthropic-ai/claude-code) and sign in",
+  "auth": "A Claude subscription login or ANTHROPIC_API_KEY. --bare is deliberately not used: it ignores subscription logins.",
+  "docs": ["https://code.claude.com/docs/en/cli-reference", "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md"],
+  "skillsDir": ".claude/skills",
+  "toolPolicy": "allowlist",
+  "claudeAliases": true,
+  "prompt": "stdin",
+  "argv": ["--print", "--output-format", "json", "--permission-mode", "dontAsk", "@tools", "@model"],
+  "toolArgs": ["--allowedTools", "{tools}"],
+  "modelArgs": ["--model", "{model}"],
+  "exitCode": "ignore",
+  "output": {
+    "format": "json",
+    "text": "result",
+    "errors": [{"path": "is_error", "truthy": true}, {"path": "subtype", "not": "success"}],
+    "errorMessage": "result",
+    "model": {"map": "modelUsage", "tokens": ["outputTokens"]},
+    "meta": {"num_turns": "num_turns", "duration_ms": "duration_ms", "session_id": "session_id"}
+  },
+  "check": {"version": ["--version"], "help": [["--help"]]},
+  "verified": {"version": "2.1.300", "checked": "2026-10-14", "liveRun": true}
+}
