@@ -118,7 +118,13 @@ made.
       the maintainer's machine: its Google login is on the retired free Code Assist tier, so it
       will be `GEMINI_API_KEY`
 - [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
-      2026-10-14. Retry when its CLI changes, with `scripts/new_cli.py agy`
+      2026-10-14. Retried on 1.3.5 (2026-10-15), which now has `--output-format json|stream-json`
+      and `--print-timeout`: still stalls. The `init` event arrives, the model request goes out,
+      and no turn ever starts (`num_turns: 0`). It doesn't depend on the model (Gemini 3.8 Flash and
+      Claude Sonnet 4.6 both stall), the folder (temp folder or a known workspace),
+      `--dangerously-skip-permissions`, or MCP servers (`github` disabled made no difference).
+      Next: confirm an interactive `agy` session answers on the same login, then retry with
+      `scripts/new_cli.py agy`
 - [x] Profiles stay current without an update: runs use the newest profile on `main`, cached a day,
       bundled copy as the fallback (0.12.0)
 - [x] `scripts/new_cli.py <binary>` drafts a profile for any other CLI from its `--help`, checks the

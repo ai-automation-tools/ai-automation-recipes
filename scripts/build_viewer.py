@@ -39,9 +39,13 @@ from core.artifacts import MANIFEST  # noqa: E402
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
 AUDIO_EXT = {".mp3", ".wav", ".m4a", ".ogg"}
 VIDEO_EXT = {".mp4", ".webm"}
+COVERS = ("cover.png", "cover.jpg", "cover.webp")
 GALLERY_MAX = 60
+# Words .title() gets wrong in collection names.
+LABEL_FIX = {"Ai": "AI", "Iam": "IAM", "Pc": "PC", "Oss": "OSS", "Pr": "PR", "Github": "GitHub", "3D": "3D"}
 DOC_MAX_CHARS = 200_000
 FRONTMATTER = re.compile(r"\A﻿?---\r?\n.*?\r?\n---\r?\n", re.S)
+RELATIVE = re.compile(r'\b(src|href)="(?![a-z][a-z0-9+.-]*:|[#/])([^"]+)"', re.I)
 RAW_TAG = re.compile(r"<(?!https?://|mailto:)(?=[A-Za-z/!?])")
 
 
@@ -57,9 +61,13 @@ def groups() -> list[dict]:
         for recipe in members:
             col = _collection_of(recipe)
             if col and col not in {c["id"] for c in cols}:
-                cols.append({"id": col, "label": col.replace("-", " ").title()})
+                cols.append({"id": col, "label": label(col)})
         out.append({"name": name.split(": ", 1)[-1], "collections": cols})
     return out
+
+
+def label(collection: str) -> str:
+    return " ".join(LABEL_FIX.get(w, w) for w in collection.replace("-", " ").title().split())
 
 
 def _collection_of(recipe: str) -> str | None:
@@ -86,7 +94,7 @@ def item(folder: Path, out_dir: Path) -> dict | None:
                    if p.is_file() and p.name != MANIFEST and not any(part.startswith(".") for part in p.parts))
     declared = a.get("files") or {}
     main = declared.get("main") if isinstance(declared.get("main"), str) else None
-    cover = "cover.png" if "cover.png" in files else None
+    cover = next((c for c in COVERS if c in files), None)
 
     html = None
     if main and main.endswith(".html"):
@@ -107,7 +115,10 @@ def item(folder: Path, out_dir: Path) -> dict | None:
     md_files += [f for f in files if f.endswith(".md") and f not in md_files and "/" not in f]
     for name in md_files[:4]:
         try:
-            docs.append({"name": name, "html": render_markdown((folder / name).read_text(encoding="utf-8"))})
+            html_doc = render_markdown((folder / name).read_text(encoding="utf-8"))
+            # The doc renders inside the viewer page, so point its relative links at the item's folder.
+            html_doc = RELATIVE.sub(lambda m: f'{m.group(1)}="{rel}/{m.group(2)}"', html_doc)
+            docs.append({"name": name, "html": html_doc})
         except (OSError, UnicodeDecodeError, ImportError):
             continue
 
@@ -152,7 +163,7 @@ def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
     seen = {c["id"] for g in known for c in g["collections"]}
     extra = sorted({i["collection"] for i in items} - seen)
     if extra:
-        known.append({"name": "Other", "collections": [{"id": c, "label": c.replace("-", " ").title()} for c in extra]})
+        known.append({"name": "Other", "collections": [{"id": c, "label": label(c)} for c in extra]})
 
     catalog = {"title": title, "generated": datetime.now().strftime("%Y-%m-%d %H:%M"), "groups": known, "items": items,
                "repo": repo_url.rstrip("/") if repo_url else None}
