@@ -171,7 +171,8 @@ def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--date", type=date.fromisoformat, default=date.today(),
                    help="Target date, YYYY-MM-DD (default: today).")
     p.add_argument("--engine", default=os.environ.get("RECIPES_ENGINE", "claude"),
-                   help="Text engine: claude (default), codex or gemini.")
+                   help="Text engine: any CLI with a profile in core/engines/clis/ or $RECIPES_CLI_DIR "
+                        "(claude by default; see core/engines/clis/README.md).")
     p.add_argument("--model", default=os.environ.get("RECIPES_MODEL", recipe.default_model),
                    help="Model alias or id for the text engine. A Claude alias (sonnet, opus, haiku) means "
                         "'the engine's default' on codex and gemini.")

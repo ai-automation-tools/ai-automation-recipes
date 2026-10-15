@@ -18,9 +18,16 @@ Public recipes for scheduled Claude Code automations, importable into Cronsole. 
   catalog table and footer nav. A new recipe also goes into `recipes/README.md` and `CATEGORY_PACKS`.
 - **Agents get the narrowest tool list that works.** No `Bash` in a recipe without a reason in its
   README. Tool names are Claude Code's; Codex and Gemini treat the list as advisory.
-- **Three engines, one contract.** `core/engines/` has `claude` (default), `codex` and `gemini`. A
-  recipe never knows which it got; anything engine-specific goes in the engine module. Codex and
-  Gemini have had no live run; the templates expose Claude only until they do.
+- **Any CLI, one contract.** Every engine is a JSON profile in `core/engines/clis/` read by
+  `core/engines/cli.py`; a recipe never knows which it got, and a CLI fact lives only in its
+  profile. Add or fix a CLI by editing a profile, then `python scripts/check_clis.py <name>`.
+  Only Claude has run a recipe for real; each profile's `verified` block says how far the others got.
+- **Two editions per recipe.** The clone edition is `recipes/<name>/cronsole.json`. The Cronsole
+  edition (`recipe-<name>-cronsole`) is generated from it plus `cronsole/native-body.py` for every
+  recipe in `NATIVE` in `scripts/build_registry.py`; never hand-write one.
+- **The runtime bundle is pinned.** Anything under `core/`, `recipes/` or `.claude/skills/` changes
+  the bundle the Cronsole editions download, so it needs a new `VERSION` (patch bump) and a
+  `build_registry.py` run in the same change. CI fails a changed bundle under a released version.
 - **Recipe-local data lives beside the four files** (`themes.md`, `topics.json`) and is read by
   `run.py`, never pasted into a prompt. `ImageSpec(optional=True)` is for images that are a bonus:
   the run publishes text-only without an image key instead of failing.

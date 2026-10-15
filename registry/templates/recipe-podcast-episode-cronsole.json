@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "id": "recipe-podcast-episode-cronsole",
+  "name": "AI Recipe: Podcast Episode (Cronsole)",
+  "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.11.0 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY.",
+  "runtime": "python",
+  "os": "cross-platform",
+  "category": "ai-agent",
+  "tags": [
+    "ai",
+    "audio",
+    "claude-code",
+    "content",
+    "cronsole-native",
+    "podcast",
+    "recipe",
+    "tts"
+  ],
+  "icon": "Headphones",
+  "trigger": {
+    "kind": "schedule",
+    "cron": "0 18 * * 6"
+  },
+  "action": {
+    "kind": "script",
+    "interpreter": "python",
+    "body": "# AI Recipe: Podcast Episode: the Cronsole edition, generated from recipes/podcast-episode by scripts/build_registry.py.\n# Edit native-body.py or the recipe's cronsole.json in ai-automation-tools/ai-automation-recipes,\n# never this copy.\n#\n# Needs only Python 3.10+ and the agent CLI on the machine Cronsole runs on. The first run\n# downloads the pinned runtime release, checks its sha256, and builds a private virtualenv in\n# your cache folder; later runs reuse it. API keys come from this task's Cronsole secrets.\nimport hashlib\nimport io\nimport os\nimport shutil\nimport subprocess\nimport sys\nimport tarfile\nimport tempfile\nimport time\nimport urllib.request\nfrom pathlib import Path\n\nVERSION = \"0.11.0\"\nBUNDLE_URL = \"https://github.com/ai-automation-tools/ai-automation-recipes/releases/download/v0.11.0/ai-automation-recipes-runtime-0.11.0.tar\"\nBUNDLE_SHA256 = \"a49016362c0598fbc09a1c19e8f372ef0e3cea69ec2867a1c4ad5c11bb4df30a\"\nRECIPE = \"podcast-episode\"\nARGS = ['--output-dir', r'''{{outputDir}}|'''[:-1], '--model', r'''{{model}}|'''[:-1], '--speech-engine', r'''{{speechEngine}}|'''[:-1], '--engine', r'''{{engine}}|'''[:-1]]\n# Optional keys: an unset secret arrives empty (or as its own unfilled reference on an older\n# Cronsole) and is simply not passed on.\nKEYS = {'ELEVENLABS_API_KEY': \"${secret.ELEVENLABS_API_KEY?}\", 'GEMINI_API_KEY': \"${secret.GEMINI_API_KEY?}\"}\n\n\ndef cache_root() -> Path:\n    base = os.environ.get(\"LOCALAPPDATA\") or os.environ.get(\"XDG_CACHE_HOME\") or str(Path.home() / \".cache\")\n    return Path(base) / \"ai-automation-recipes\"\n\n\ndef venv_python(venv: Path) -> Path:\n    return venv / (\"Scripts/python.exe\" if os.name == \"nt\" else \"bin/python\")\n\n\ndef ensure_runtime() -> Path:\n    \"\"\"The unpacked runtime for VERSION, with its virtualenv, building it once.\"\"\"\n    home = cache_root() / VERSION\n    if (home / \".ready\").is_file():\n        return home\n    home.parent.mkdir(parents=True, exist_ok=True)\n    print(f\"setup: fetching runtime {VERSION}\", flush=True)\n    with urllib.request.urlopen(BUNDLE_URL, timeout=120) as resp:\n        data = resp.read()\n    got = hashlib.sha256(data).hexdigest()\n    if got != BUNDLE_SHA256:\n        raise SystemExit(f\"RECIPE_FAILED {RECIPE}: runtime bundle sha256 {got} != pinned {BUNDLE_SHA256}\")\n    work = Path(tempfile.mkdtemp(prefix=f\"{VERSION}-\", dir=home.parent))\n    try:\n        with tarfile.open(fileobj=io.BytesIO(data)) as tar:\n            for m in tar.getmembers():\n                if m.name.startswith((\"/\", \"..\")) or \"..\" in Path(m.name).parts or not (m.isfile() or m.isdir()):\n                    raise SystemExit(f\"RECIPE_FAILED {RECIPE}: unsafe path in runtime bundle: {m.name}\")\n            if hasattr(tarfile, \"data_filter\"):\n                tar.extractall(work / \"src\", filter=\"data\")\n            else:\n                tar.extractall(work / \"src\")\n        subprocess.run([sys.executable, \"-m\", \"venv\", str(work / \"venv\")], check=True)\n        subprocess.run([str(venv_python(work / \"venv\")), \"-m\", \"pip\", \"install\", \"--quiet\", \"--disable-pip-version-check\",\n                        \"-r\", str(work / \"src\" / \"requirements.txt\")], check=True)\n        (work / \".ready\").write_text(time.strftime(\"%Y-%m-%dT%H:%M:%S\"), encoding=\"utf-8\")\n        try:\n            os.replace(work, home)\n        except OSError:\n            if not (home / \".ready\").is_file():  # lost a race to a run that also failed\n                raise\n    finally:\n        shutil.rmtree(work, ignore_errors=True)\n    return home\n\n\ndef main() -> int:\n    home = ensure_runtime()\n    env = dict(os.environ, PYTHONUTF8=\"1\", PYTHONIOENCODING=\"utf-8\")\n    for name, value in KEYS.items():\n        if value and not value.startswith(\"${secret.\"):\n            env[name] = value\n    logs = cache_root() / \"logs\"\n    logs.mkdir(parents=True, exist_ok=True)\n    log_file = logs / f\"{RECIPE}-{time.strftime('%Y%m%d-%H%M%S')}.log\"\n    cmd = [str(venv_python(home / \"venv\")), str(home / \"src\" / \"recipes\" / RECIPE / \"run.py\"), *ARGS]\n    with log_file.open(\"w\", encoding=\"utf-8\") as fh:\n        code = subprocess.run(cmd, env=env, stdout=fh, stderr=subprocess.STDOUT).returncode\n    lines = log_file.read_text(encoding=\"utf-8\", errors=\"replace\").splitlines()\n    # Cronsole keeps the first 2,000 characters of a run's output: the verdict goes first.\n    verdict = [l for l in lines if \" RECIPE_OK \" in l or \" RECIPE_FAILED \" in l or \" RECIPE_SKIPPED \" in l]\n    print(verdict[-1].split(\" \", 3)[-1] if verdict else f\"{RECIPE} exited {code} with no verdict\")\n    print(f\"engine run log: {log_file}\")\n    print(\"\\n\".join(lines[-25:]))\n    return code\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n"
+  },
+  "parameters": [
+    {
+      "key": "outputDir",
+      "label": "Output folder",
+      "type": "path",
+      "required": true,
+      "help": "Root folder for all recipe output. Each recipe writes into its own collection under it."
+    },
+    {
+      "key": "model",
+      "label": "Model",
+      "type": "text",
+      "default": "sonnet",
+      "required": true,
+      "help": "A Claude alias (sonnet, opus, haiku) or the chosen CLI's own model id. On a CLI other than Claude, a Claude alias means that CLI's default model."
+    },
+    {
+      "key": "speechEngine",
+      "label": "Speech engine",
+      "type": "select",
+      "default": "auto",
+      "required": true,
+      "options": [
+        "auto",
+        "gemini",
+        "elevenlabs"
+      ],
+      "help": "auto uses GEMINI_API_KEY if set, else ELEVENLABS_API_KEY. Preset voices only."
+    },
+    {
+      "key": "engine",
+      "label": "Agent CLI",
+      "type": "select",
+      "default": "claude",
+      "required": true,
+      "options": [
+        "claude",
+        "codex",
+        "gemini",
+        "grok",
+        "kimi",
+        "opencode"
+      ],
+      "help": "Which agent CLI runs the recipe. It must be installed and signed in where Cronsole runs."
+    }
+  ],
+  "compatibleTargets": [
+    "cronsole-native"
+  ],
+  "execution": {
+    "timeoutSec": 3600,
+    "retries": 0
+  },
+  "author": "ai-automation-tools",
+  "version": "0.11.0"
+}

@@ -97,23 +97,47 @@ request carries the prompt, the staging folder, the tool allowlist, model and ti
 is the agent's final message and the model that produced it. `--engine` picks one; a recipe never
 knows which it got.
 
+Every engine is one CLI described by a JSON profile in
+[`core/engines/clis/`](../core/engines/clis/README.md), read by `core/engines/cli.py`. The profile
+says how to launch the CLI headless, how the prompt gets in, and where the final message, errors and
+model sit in what it prints.
+
 | Engine | Runs | Writes are confined by | Tool allowlist | Skills staged to |
 |:---|:---|:---|:---|:---|
 | `claude` (default) | `claude --print --output-format json` | `--permission-mode dontAsk` plus the recipe's `--allowedTools` | Enforced | `.claude/skills/` |
 | `codex` | `codex exec --json -s workspace-write -C <staging>` | the `workspace-write` sandbox | Advisory: Codex has none, the contract in the prompt is the rule | `.agents/skills/` |
 | `gemini` | `gemini -p -o json --approval-mode yolo` | nothing but the contract | Advisory | `.gemini/skills/` |
+| `opencode` | `opencode run --auto --format json -f <prompt file>` | nothing but the contract | Advisory | `.opencode/skills/` |
+| `kimi` | `kimi -p <prompt> --output-format stream-json` | nothing but the contract | Advisory | `.kimi/skills/` |
+| `grok` | `grok --prompt-file <file> --output-format plain --always-approve` | nothing but the contract | Advisory | `.grok/skills/` |
 
-A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Codex and Gemini treat an
-alias as "your own default" and pass a full model id through unchanged. The image, speech and music
+A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Every other CLI treats an
+alias as "your own default" and passes a full model id through unchanged. The image, speech and music
 steps are the runner's, so they are identical whichever engine wrote the prompts.
 
-Codex and Gemini have had no live run yet: both are built against the CLIs' documented headless
-output (JSONL events for Codex, one JSON object for Gemini) and tested against recorded shapes.
-The Gemini CLI also needs an auth setup that works headless on your machine, which a Google login
-tied to the retired free Code Assist tier does not.
+Only Claude has run a recipe for real. Codex and Gemini are tested against recorded output; OpenCode
+and Kimi answered a smoke prompt; Grok's flags are checked against its `--help`. Each profile's
+`verified` block says which. `scripts/check_clis.py` checks every flag a profile passes against the
+installed CLI's `--help`, and the weekly upstream routine ([UPSTREAMS.md](UPSTREAMS.md)) keeps the
+profiles current.
 
-Adding one means a module in `core/engines/` and a line in `ENGINES`. Recipes don't change: they
-name their tools the way Claude Code does, and an engine maps those names to its own.
+Adding one means a profile, no code. Recipes don't change: they name their tools the way Claude Code
+does; a CLI with no per-tool allowlist gets them through the prompt's contract.
+
+## 📦 The Cronsole edition
+
+`scripts/build_registry.py` turns each recipe in its `NATIVE` list into a second template,
+`recipe-<name>-cronsole`: a Cronsole `script` action built from [`cronsole/native-body.py`](../cronsole/native-body.py).
+It needs no clone. On its first run it downloads the runtime bundle for `VERSION` from the GitHub
+release, checks the sha256 the template pins, unpacks it with a private virtualenv into the user's
+cache, and runs the recipe from there. API keys come from optional task secrets
+(`${secret.NAME?}`), and the verdict line is printed first because Cronsole keeps only the first
+2,000 characters of a run.
+
+`scripts/build_bundle.py` builds that bundle reproducibly: the same tree gives the same bytes on any
+OS. Any change under `core/`, `recipes/` or `.claude/skills/` changes it, so it needs a new
+`VERSION`. CI refuses a changed bundle under a version that's already released, and the release
+workflow publishes `v<VERSION>` only when the rebuilt bundle hashes to what `registry/` pins.
 
 ## 🧠 Skills
 

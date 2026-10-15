@@ -35,6 +35,20 @@ jobs:
       - name: Registry is up to date
         run: python scripts/build_registry.py --check
 
+      - name: A released VERSION's bundle never changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          built=$(python scripts/build_bundle.py | awk '{print $NF}')
+          if gh release download "v${version}" -p '*.sha256' -O released.sha256 2> /dev/null; then
+            released=$(cut -d' ' -f1 released.sha256)
+            if [ "$built" != "$released" ]; then
+              echo "::error::v${version} is already released with a different runtime bundle. Bump VERSION, then run scripts/build_registry.py."
+              exit 1
+            fi
+          fi
+
       - name: No keys, home paths or emails, in the tree or in any commit
         run: python scripts/check_public.py --history
 

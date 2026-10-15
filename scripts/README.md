@@ -15,9 +15,12 @@
 | [**build_registry.py**](build_registry.py) | Rebuilds [`registry/`](../registry/README.md) from every `recipes/*/cronsole.json` and `cronsole/*.json`. Checks each template against Cronsole's rules first. `--check` exits 1 if the committed registry is stale |
 | [**build_viewer.py**](build_viewer.py) | Writes `index.html` and `catalog.js` into an output folder: the browsable page for everything the recipes made |
 | [**check_public.py**](check_public.py) | Fails on API-key shapes, personal home paths, emails, real IP addresses, and anything on a private denylist kept outside the repo |
+| [**build_bundle.py**](build_bundle.py) | Builds the reproducible runtime bundle the Cronsole editions download, and prints its sha256 |
+| [**check_clis.py**](check_clis.py) | Checks every CLI profile against the installed CLI: version, and every flag still in its `--help` |
 
 ```bash
-python scripts/build_registry.py            # after editing any cronsole.json
+python scripts/build_registry.py            # after editing any cronsole.json, or anything in the bundle
+python scripts/check_clis.py                # after editing a CLI profile
 python scripts/build_viewer.py --output-dir ~/ai-output
 python scripts/check_public.py              # before every commit
 ```

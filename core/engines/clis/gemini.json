@@ -1,0 +1,27 @@
+{
+  "name": "gemini",
+  "label": "Gemini CLI",
+  "binary": "gemini",
+  "binaryEnv": "GEMINI_BIN",
+  "install": "Install the Gemini CLI (npm i -g @google/gemini-cli) and set GEMINI_API_KEY or sign in",
+  "auth": "GEMINI_API_KEY (the same key the image step uses) or a Google login.",
+  "docs": ["https://geminicli.com/docs/cli/headless/", "https://github.com/google-gemini/gemini-cli/releases"],
+  "skillsDir": ".gemini/skills",
+  "toolPolicy": "advisory",
+  "_toolPolicy": "No per-tool allowlist and every call auto-approved (yolo): the prompt's contract is the only rule.",
+  "prompt": "stdin",
+  "_prompt": "-p with an empty value: the prompt on stdin is appended to it.",
+  "argv": ["-p", "", "-o", "json", "--approval-mode", "yolo", "--skip-trust", "@model"],
+  "modelArgs": ["-m", "{model}"],
+  "output": {
+    "format": "json",
+    "text": "response",
+    "errors": [{"path": "error", "truthy": true}],
+    "errorMessage": "error",
+    "warnings": "warnings",
+    "model": {"map": "stats.models", "tokens": ["tokens.candidates", "tokens.output"]},
+    "meta": {"session_id": "session_id"}
+  },
+  "check": {"version": ["--version"], "help": [["--help"]]},
+  "verified": {"version": "0.47.0", "checked": "2026-10-14", "liveRun": false}
+}

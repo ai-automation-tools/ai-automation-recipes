@@ -18,8 +18,9 @@ and into the [changelog](CHANGELOG.md). There's no paid tier planned:
 this is the free companion to Cronsole.
 
 **Where things stand (2026-10-14).** 48 recipes in seven groups, every one dry-run and faked-engine
-tested in CI; 13 have had a real run. Three text engines are wired (Claude live, Codex and Gemini
-built but unrun). Every automation in the private fleet now has a recipe, including the seven that
+tested in CI; 13 have had a real run. Any agent CLI can run them through a JSON profile; six are
+bundled (Claude live; Codex, Gemini, OpenCode, Kimi and Grok not yet run on a recipe). Three
+recipes have a pilot Cronsole edition. Every automation in the private fleet now has a recipe, including the seven that
 were held back earlier in the day over real-people content and employer-domain work; the maintainer
 chose to port everything first and decide what stays in the public set later. What has nothing to
 port is listed at the bottom. Everything below is either a live run that hasn't happened yet or the
@@ -101,12 +102,22 @@ made.
 - [ ] A live `alternate-history` run with an image key: the eight scenes read as one illustrated
       piece, and the shared style survives eight separate image calls
 - [ ] A live `agent-persona-original` run: the avatar and the cover are recognisably the same person
-- [ ] A live run on `--engine codex`, then on `--engine gemini` (the engines are built and
-      unit-tested against recorded CLI output; neither has written a real recipe yet). Gemini first
-      needs a headless auth that works on the maintainer's machine: the CLI's Google login is on the
-      retired free Code Assist tier, so it will be `GEMINI_API_KEY`
-- [ ] Decide whether the Cronsole templates expose `engine` as a parameter once Codex and Gemini
-      have each shipped a recipe. Until then every template runs Claude
+- [ ] **Two-editions pilot** (0.11.0). Every recipe gets a Cronsole edition and runs on any CLI;
+      three recipes go first:
+  - [ ] `short-story`, `comics` and `podcast-episode` imported from `ai-recipes-cronsole` into a
+        Cronsole running cronsole PR #323 (template timeouts, optional secrets), each run once from
+        Cronsole with a published artifact
+  - [ ] One pilot recipe run for real on a second CLI (`--engine codex` first); then set that
+        profile's `verified.liveRun`
+  - [ ] Then add every other recipe to `NATIVE` in `scripts/build_registry.py`, and decide whether
+        the clone edition stays a full set or shrinks to the editing path
+- [ ] A live run on `--engine gemini`. The Gemini CLI first needs a headless auth that works on
+      the maintainer's machine: its Google login is on the retired free Code Assist tier, so it
+      will be `GEMINI_API_KEY`
+- [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
+      2026-10-14. Retry when its CLI changes
+- [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
+      so more profiles can be `allowlist` instead of `advisory`
 - [ ] A live `news-digest` run on one topic, then one per topic over three weeks of the Mon/Wed/Fri
       default schedule; watch whether the 16-per-source cap keeps the loud feeds (Nature, Podnews,
       Deadline) from owning a week, and whether five sections is the right number for every topic
@@ -143,7 +154,11 @@ Changes to Cronsole itself, tracked here because these recipes would use them:
 
 - [ ] Multiple registry sources, so this repo can publish its own catalog
 - [ ] A crontab compiler for the `linux` target
-- [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`)
+- [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`). Partly covered by
+      cronsole PR #323: optional `${secret.NAME?}` references, and the apply response lists the
+      secrets a new task still needs
+- [ ] `execution.timeoutSec` for command-line (`exec`) native templates; PR #323 covers `script`
+      templates only, so the clone edition still gets Cronsole's 5-minute default
 
 ## 🚫 Not ported
 

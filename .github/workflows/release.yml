@@ -1,0 +1,57 @@
+name: Release
+
+# Publishes the runtime bundle the Cronsole editions download, as release v<VERSION>.
+# Runs when VERSION changes on main. The bundle is rebuilt from this commit and must hash to
+# exactly what registry/ pins, or nothing is published: a mismatch means the templates and
+# the code they'd fetch disagree.
+on:
+  push:
+    branches: [main]
+    paths: [VERSION]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the bundle and compare it with the pinned sha256
+        id: bundle
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          python scripts/build_bundle.py --out dist
+          built=$(cut -d' ' -f1 "dist/ai-automation-recipes-runtime-${version}.tar.sha256")
+          pinned=$(grep -ho 'BUNDLE_SHA256 = \\"[0-9a-f]*' registry/templates/*-cronsole.json | sort -u | sed 's/.*"//')
+          echo "built  $built"
+          echo "pinned $pinned"
+          if [ "$(echo "$pinned" | wc -l)" != "1" ] || [ "$built" != "$pinned" ]; then
+            echo "::error::bundle sha256 doesn't match registry/ — run scripts/build_registry.py and commit"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Publish the release (once per version)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.bundle.outputs.version }}
+        run: |
+          if gh release view "v${VERSION}" > /dev/null 2>&1; then
+            echo "v${VERSION} already released; a changed bundle needs a new VERSION"
+            exit 0
+          fi
+          gh release create "v${VERSION}" dist/* \
+            --target "${GITHUB_SHA}" \
+            --title "v${VERSION}" \
+            --notes "Runtime bundle for the Cronsole editions. See docs/CHANGELOG.md."
