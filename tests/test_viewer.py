@@ -93,6 +93,25 @@ class BuildViewerTests(unittest.TestCase):
         build_viewer.build(self.out, "T")
         self.assertIsNone(load_catalog(self.out)["repo"])  # local builds keep "Open folder"
 
+    def test_jpeg_cover_and_labels(self):
+        artifact(self.out, "ai-memes", "2026-10-14_m", {"title": "M", "summary": "s", "date": "2026-10-14"},
+                 {"cover.jpg": b"x", "meme.jpg": b"x"})
+        build_viewer.build(self.out, "T")
+        item = load_catalog(self.out)["items"][0]
+        self.assertTrue(item["cover"].endswith("/cover.jpg"))
+        self.assertEqual(len(item["gallery"]), 1)  # the cover isn't repeated in the gallery
+        self.assertEqual(build_viewer.label("pc-game-concepts"), "PC Game Concepts")
+        self.assertEqual(build_viewer.label("ai-memes"), "AI Memes")
+
+    def test_doc_links_point_into_the_item_folder(self):
+        artifact(self.out, "alternate-history", "2026-10-14_a", {"title": "A", "summary": "s", "date": "2026-10-14",
+                 "files": {"main": "story.md"}}, {"story.md": "![s](scene-01.jpg) [w](https://example.com) [t](#top)"})
+        build_viewer.build(self.out, "T")
+        doc = load_catalog(self.out)["items"][0]["docs"][0]["html"]
+        self.assertIn('src="alternate-history/2026-10/2026-10-14_a/scene-01.jpg"', doc)
+        self.assertIn('href="https://example.com"', doc)
+        self.assertIn('href="#top"', doc)
+
     def test_empty_folder(self):
         self.assertEqual(build_viewer.build(self.out, "T"), 0)
         self.assertEqual(load_catalog(self.out)["items"], [])
