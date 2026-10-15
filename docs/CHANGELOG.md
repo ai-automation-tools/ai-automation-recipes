@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.11.0-2ea44f?style=for-the-badge" alt="Version 0.11.0">
+  <img src="https://img.shields.io/badge/version-0.11.1-2ea44f?style=for-the-badge" alt="Version 0.11.1">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,20 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.11.1 — 2026-10-14
+
+**Changed**
+- `codex` profile: `verified.liveRun` is true after `short-story --engine codex` published a
+  2,835-word story; the first real recipe run on a CLI other than Claude *(Build: two-editions pilot)*.
+- Cronsole editions: key help text names a task secret instead of the clone's `.env`, which that
+  edition doesn't have.
+
+**Verified**
+- The three Cronsole editions ran from a local Cronsole on cronsole PR #323: template timeouts
+  applied (40, 30 and 60 minutes), optional key secrets reported as optional, short-story published
+  without a cover when no key was stored, comics rendered with its key as a task secret, and
+  podcast-episode exited cleanly with nothing to render.
 
 ## 0.11.0 — 2026-10-14
 

@@ -17,7 +17,7 @@ profile here was checked against the CLI's own `--help` on the date in its `veri
 | Profile | CLI | Tool list | Live recipe run |
 |:---|:---|:---|:---|
 | [`claude`](claude.json) | Claude Code | enforced (`--allowedTools`) | ✅ |
-| [`codex`](codex.json) | Codex CLI | advisory (sandbox is the boundary) | ⬜ |
+| [`codex`](codex.json) | Codex CLI | advisory (sandbox is the boundary) | ✅ short-story, 2026-10-14 |
 | [`gemini`](gemini.json) | Gemini CLI | advisory | ⬜ |
 | [`opencode`](opencode.json) | OpenCode | advisory | ⬜ (answers a smoke prompt) |
 | [`kimi`](kimi.json) | Kimi Code | advisory | ⬜ (answers a smoke prompt) |
