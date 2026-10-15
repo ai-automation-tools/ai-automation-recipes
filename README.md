@@ -141,6 +141,12 @@ parameter.
 CLI is one JSON profile in [`core/engines/clis/`](core/engines/clis/README.md); adding another is
 adding a file, and a weekly check keeps the profiles in step with each CLI's releases.
 
+Scheduling a whole pipeline rather than one recipe (ideas to plans, plans to PRs, one sweep to review
+them)? The [`automated-dev-pipeline`](https://github.com/ai-automation-tools/agent-skills/tree/main/Skills/Core/Automation/automated-dev-pipeline)
+skill in [agent-skills](https://github.com/ai-automation-tools/agent-skills) covers designing and
+operating one, and [`task-router`](https://github.com/ai-automation-tools/agent-skills/tree/main/Skills/Core/Automation/task-router)
+picks how much machinery a job needs.
+
 ## 📂 What a run makes
 
 ```text

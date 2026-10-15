@@ -28,6 +28,11 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 
 **Changed**
 - CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
+## Unreleased
+
+**Added**
+- README: pointer to the `automated-dev-pipeline` and `task-router` skills in agent-skills, for
+  scheduling a whole pipeline rather than one recipe.
 
 ## 0.11.1 — 2026-10-14
 
