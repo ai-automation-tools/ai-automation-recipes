@@ -17,5 +17,5 @@
     "text": {"match": {"role": "assistant"}, "path": "content"}
   },
   "check": {"version": ["--version"], "help": [["--help"]]},
-  "verified": {"version": "0.18.0", "checked": "2026-10-14", "liveRun": false, "smoke": "PONG prompt answered 2026-10-14"}
+  "verified": {"version": "0.18.0", "checked": "2026-10-17", "liveRun": false, "smoke": "PONG prompt answered 2026-10-17"}
 }
