@@ -23,5 +23,5 @@
     "meta": {"num_turns": "num_turns", "duration_ms": "duration_ms", "session_id": "session_id"}
   },
   "check": {"version": ["--version"], "help": [["--help"]]},
-  "verified": {"version": "2.1.300", "checked": "2026-10-14", "liveRun": true}
+  "verified": {"version": "2.1.301", "checked": "2026-10-17", "liveRun": true}
 }

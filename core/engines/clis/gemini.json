@@ -4,7 +4,7 @@
   "binary": "gemini",
   "binaryEnv": "GEMINI_BIN",
   "install": "Install the Gemini CLI (npm i -g @google/gemini-cli) and set GEMINI_API_KEY or sign in",
-  "auth": "GEMINI_API_KEY (the same key the image step uses) or a Google login.",
+  "auth": "GEMINI_API_KEY (the same key the image step uses). A Google login no longer works for unpaid-tier and Google One accounts: Google replaced the CLI with Antigravity for them on 2026-06-18.",
   "docs": ["https://geminicli.com/docs/cli/headless/", "https://github.com/google-gemini/gemini-cli/releases"],
   "skillsDir": ".gemini/skills",
   "toolPolicy": "advisory",
@@ -23,5 +23,5 @@
     "meta": {"session_id": "session_id"}
   },
   "check": {"version": ["--version"], "help": [["--help"]]},
-  "verified": {"version": "0.47.0", "checked": "2026-10-14", "liveRun": false}
+  "verified": {"version": "0.64.0", "checked": "2026-10-17", "liveRun": false, "smoke": "PONG failed 2026-10-17: the Google login is on the retired free Code Assist tier (IneligibleTierError); flags checked against --help only"}
 }

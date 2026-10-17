@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.0-2ea44f?style=for-the-badge" alt="Version 0.12.0">
+  <img src="https://img.shields.io/badge/version-0.12.1-2ea44f?style=for-the-badge" alt="Version 0.12.1">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,15 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.1 — 2026-10-17
+
+**Changed**
+- `gemini` profile: the auth note no longer offers a Google login. Google's headless reference says
+  the Gemini CLI was replaced by Antigravity for unpaid-tier and Google One users on 2026-06-18,
+  and a PONG run on 0.64.0 fails with `IneligibleTierError`. `GEMINI_API_KEY` is the way in.
+- Every profile's `verified` block moved to the versions seen on 2026-10-17 (claude 2.1.301, codex
+  0.163.0, gemini 0.64.0, opencode 1.19.3); no flag was missing from any `--help`.
 
 ## 0.12.0 — 2026-10-15
 
