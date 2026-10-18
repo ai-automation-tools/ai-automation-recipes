@@ -116,9 +116,24 @@ made.
         the clone edition stays a full set or shrinks to the editing path
 - [ ] A live run on `--engine gemini`. The Gemini CLI first needs a headless auth that works on
       the maintainer's machine: its Google login is on the retired free Code Assist tier, so it
-      will be `GEMINI_API_KEY`
+      will be `GEMINI_API_KEY`. Re-confirmed on 0.64.0 (2026-10-17): the PONG run fails with
+      `IneligibleTierError`, and Google's headless reference says the CLI was replaced by
+      Antigravity for unpaid-tier and Google One users on 2026-06-18
+      (<https://geminicli.com/docs/cli/headless/>)
+- [ ] Move the Gemini model defaults off models Google has retired or restricted, with a
+      `GEMINI_API_KEY` to prove each swap. Image: `gemini-3.1-flash-image` in
+      `core/images/__init__.py` is deprecated (no shutdown date), the replacement is
+      `gemini-nano-banana-2.1`. Speech: `gemini-2.5-flash-preview-tts` in
+      `core/audio/__init__.py` is now limited to accounts that already used it, so new keys can't
+      call it; the replacements are `gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`
+      (<https://ai.google.dev/gemini-api/docs/changelog>, 2026-09-18 and 2026-10-06). Also update
+      `.env.example`, `docs/ARCHITECTURE.md` and the `image-prompt-craft` engine notes. Done when a
+      dry run and one real image and one real speech call succeed on the new defaults
+- [ ] Python 3.10 reached end of life on 2026-10-01 (<https://devguide.python.org/versions/>). Raise
+      the floor to 3.11 in `CLAUDE.md`, the docs, CI and the Cronsole edition's interpreter notes,
+      and drop any 3.10-only workarounds. Done when CI runs 3.11 and newer only and the tests pass
 - [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
-      2026-10-14. Retried on 1.3.5 (2026-10-15), which now has `--output-format json|stream-json`
+      2026-10-14. Retried on 1.3.5 (2026-10-15) and 1.3.6 (2026-10-17), which now has `--output-format json|stream-json`
       and `--print-timeout`: still stalls. The `init` event arrives, the model request goes out,
       and no turn ever starts (`num_turns: 0`). It doesn't depend on the model (Gemini 3.8 Flash and
       Claude Sonnet 4.6 both stall), the folder (temp folder or a known workspace),
