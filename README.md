@@ -59,6 +59,7 @@ pitches, playable games, short stories, songs, research digests.
 | [**🧠 .claude/skills/**](.claude/skills/README.md) | The skills recipes load, with their licenses |
 | [**🧪 tests/**](tests/README.md) | Unit tests and faked-engine runs of every recipe |
 | [**🖼️ viewer/index.html**](viewer/index.html) | The page `build_viewer.py` copies into an output folder |
+| [**🏠 homepage/**](homepage/index.html) | The project homepage, published to GitHub Pages by `.github/workflows/homepage.yml` |
 
 ## 🍳 The recipes
 
