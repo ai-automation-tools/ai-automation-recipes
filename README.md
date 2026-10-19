@@ -182,6 +182,10 @@ run.py ─▶ core/runner.py ─▶ claude --print, inside a staging folder
                └─ moves the folder into place, writes artifact.json
 ```
 
+The [homepage](https://ai-automation-recipes.ai-automation-tools.dev/#how) shows the full run as an
+interactive diagram with every step linked to its code; [`docs/diagrams/`](docs/diagrams/README.md)
+holds its source and says how it stays current.
+
 - The agent can only write to its staging folder: Claude runs under `--permission-mode dontAsk`
   with an explicit tool allowlist, and anything else is denied. Codex runs in its `workspace-write`
   sandbox; Gemini relies on the contract in the prompt. The recipe never knows which engine it got.

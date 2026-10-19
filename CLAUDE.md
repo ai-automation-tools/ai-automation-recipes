@@ -34,6 +34,9 @@ Public recipes for scheduled Claude Code automations, importable into Cronsole. 
 - **Recipe-local data lives beside the four files** (`themes.md`, `topics.json`) and is read by
   `run.py`, never pasted into a prompt. `ImageSpec(optional=True)` is for images that are a bonus:
   the run publishes text-only without an image key instead of failing.
+- **The run diagram is pinned to code.** `docs/diagrams/recipe-run-flow.json` cites `core/runner.py`
+  and friends by line; edit only the JSON, then `node scripts/build-diagram.mjs --pin-head` (it also
+  refreshes `homepage/diagram/`). `--check` names cited files that changed; see `docs/diagrams/README.md`.
 - Python 3.10+, stdlib `unittest` (`python -m unittest discover -s tests`), `logging` not `print`
   (the dry-run prompt dump is the one exception).
 - Before a PR: dry-run the recipe you touched, run the tests, `build_registry.py --check`,

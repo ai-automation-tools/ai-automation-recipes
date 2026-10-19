@@ -156,7 +156,10 @@
     .note { margin: 18px 0 0; font-size: 13.5px; color: var(--fg-4); max-width: 70ch; }
 
     /* Flow diagram (the README's "How it works") */
-    .flow { margin: 24px 0 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); font: 12.5px/1.7 var(--mono); color: var(--fg-2); overflow-x: auto; }
+    .diagram { margin: 24px 0 0; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
+    .diagram iframe { display: block; width: 100%; height: clamp(420px, 62vw, 860px); border: 0; background: var(--bg); }
+    .diagram figcaption { padding: 10px 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--fg-3); }
+    .diagram figcaption a { color: color-mix(in srgb, var(--accent) var(--tint-k), var(--mix-ink)); }
 
     /* Terminal */
     .term { margin-top: 24px; border: 1px solid var(--term-line-2); border-radius: var(--r-lg); background: var(--term-bg); overflow: hidden; box-shadow: 0 30px 80px -40px var(--term-shadow); }
@@ -289,12 +292,9 @@
     <p class="note">13 of the 48 recipes have had a real run so far; the rest have only run with the engines faked. The <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener">roadmap</a> tracks which.</p>
   </section>
 
-  <section id="how">
-    <span class="eyebrow">How it works</span>
-    <h2>A complete folder or nothing</h2>
-    <p class="sub">The agent works in a private staging folder. The runner checks every file it promised, renders the media, and only then moves the folder into place.</p>
-<pre class="flow" aria-label="Run flow">run.py ─▶ core/runner.py ─▶ claude --print, inside a staging folder
-               │                └─ writes the files, returns JSON (title, summary, prompts)
+  <s<!-- The PNG and HTML are copies scripts/build-diagram.mjs writes from docs/diagrams/ (the source); never edit them here. -->
+    <figure class="diagram"><iframe id="diagram-frame" src="diagram/recipe-run-flow.html" loading="lazy" onload="syncDiagramTheme()" title="One recipe run, interactive: a Cronsole template starts run.py; core/runner.py fills the prompt, checks keys and stages skills; the agent CLI works in the staging folder; the runner checks its JSON and files, renders media, then publishes the folder with artifact.json for the viewer, or fails and publishes nothing"></iframe>
+      <figcaption>Every node links to the code it describes; Route and Lens trace paths. <a href="diagram/recipe-run-flow.html">Open full screen ↗</a></figcaption></figure>s, returns JSON (title, summary, prompts)
                ├─ checks the files, removes strays, runs the recipe's own checks
                ├─ renders images, speech and music from what the agent described
                └─ moves the folder into place, writes artifact.json</pre>
@@ -392,8 +392,13 @@
   // Theme switch. THEME_DEFAULT must equal the pre-paint default in <head>.
   const THEME_KEY = 'ai-automation-recipes.theme', THEME_DEFAULT = 'dark';
   const themeBtns = document.querySelectorAll('#themeSw button');
+  // The run diagram (same origin) starts Still unless localStorage says "live"; the homepage
+  // shows it Live (reduced-motion readers still get Still), in this page's theme.
+  try { localStorage.setItem('archify-motion', 'live'); } catch (e) {}
+  window.syncDiagramTheme = function () { const f = document.getElementById('diagram-frame'); try { if (f) f.contentDocument.documentElement.setAttribute('data-theme', document.documentElement.classList.contains('light') ? 'light' : 'dark'); } catch (e) {} };
   function setTheme(t) {
     const r = document.documentElement; r.classList.remove('light', 'dark'); r.classList.add(t);
+    syncDiagramTheme();
     themeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.theme === t)));
     document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'light' ? '#fafafa' : '#060606');
   }

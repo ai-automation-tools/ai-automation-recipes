@@ -54,6 +54,12 @@ jobs:
       - name: No keys, home paths or emails, in the tree or in any commit
         run: python scripts/check_public.py --history
 
+      # Warns, never fails: rebuilding needs Chrome + Archify, which CI doesn't have. A
+      # warning means code cited by docs/diagrams/recipe-run-flow.json changed since its
+      # pinned commit; docs/diagrams/README.md says how to update it.
+      - name: Diagram drift
+        run: node scripts/build-diagram.mjs --hook | sed 's/^ISSUE:/::warning title=Diagram drift::ISSUE:/'
+
       - name: Every recipe's prompt fills
         env:
           GH_TOKEN: ${{ github.token }}  # pr-review lists a public repo's open PRs before it fills

@@ -18,6 +18,7 @@
 | [**build_bundle.py**](build_bundle.py) | Builds the reproducible runtime bundle the Cronsole editions download, and prints its sha256 |
 | [**check_clis.py**](check_clis.py) | Checks every CLI profile against the installed CLI: version, and every flag still in its `--help` |
 | [**new_cli.py**](new_cli.py) | Drafts a profile for a CLI the repo doesn't know, from its own `--help`, then checks the flags and pings it |
+| [**build-diagram.mjs**](build-diagram.mjs) | Builds the [run diagram](../docs/diagrams/README.md) with Archify and copies it into `homepage/diagram/`. `--check` exits 1 when code it cites changed since its pinned commit |
 
 ```bash
 python scripts/build_registry.py            # after editing any cronsole.json, or anything in the bundle
