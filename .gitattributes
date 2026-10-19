@@ -2,3 +2,8 @@
 *.png binary
 # Cronsole verifies registry files by sha256 over exact bytes.
 registry/** text eol=lf
+# The diagram check hashes recipe-run-flow.json against its build receipt, and compares the
+# homepage copies byte for byte, so a CRLF checkout would read as drift. Pin LF.
+docs/diagrams/*.json text eol=lf
+docs/diagrams/*.html text eol=lf
+homepage/diagram/*.html text eol=lf

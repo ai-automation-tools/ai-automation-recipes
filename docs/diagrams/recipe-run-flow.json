@@ -1,0 +1,248 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "AI Automation Recipes: One Recipe Run",
+    "quality_profile": "showcase",
+    "output": "docs/diagrams/recipe-run-flow.html",
+    "repository": {
+      "url": "https://github.com/ai-automation-tools/ai-automation-recipes.git",
+      "revision": "a3d47cf1752f156311ac0cb5d9bbd77b02557013"
+    }
+  },
+  "lanes": [
+    { "id": "trigger", "label": "Cronsole templates" },
+    { "id": "runner", "label": "core/runner.py" },
+    { "id": "agent", "label": "Agent CLI in staging" },
+    { "id": "media", "label": "Media & delivery" },
+    { "id": "output", "label": "Output collection" }
+  ],
+  "phases": [
+    { "id": "phase_start", "label": "Start", "fromCol": 0, "toCol": 0 },
+    { "id": "phase_prompt", "label": "Prompt + stage", "fromCol": 1, "toCol": 2 },
+    { "id": "phase_check", "label": "Check", "fromCol": 3, "toCol": 3, "variant": "security" },
+    { "id": "phase_publish", "label": "Media + publish", "fromCol": 4, "toCol": 5, "variant": "emphasis" }
+  ],
+  "mainPath": ["clone_edition", "recipe_def", "fill_prompt", "stage", "engine_run", "check", "media", "publish"],
+  "nodes": [
+    {
+      "id": "clone_edition",
+      "lane": "trigger",
+      "col": 0,
+      "type": "external",
+      "label": "Clone edition",
+      "sublabel": "python recipes/<name>/run.py",
+      "sources": [
+        { "path": "recipes/app-idea-card/cronsole.json", "line": 22, "end_line": 22 }
+      ]
+    },
+    {
+      "id": "native_edition",
+      "lane": "trigger",
+      "col": 1,
+      "type": "cloud",
+      "label": "Cronsole edition",
+      "sublabel": "pinned bundle, sha256, venv",
+      "tag": "no clone",
+      "sources": [
+        { "path": "cronsole/native-body.py", "line": 39, "end_line": 72 },
+        { "path": "cronsole/native-body.py", "line": 75, "end_line": 93 },
+        { "path": "scripts/build_registry.py", "line": 143, "end_line": 168 }
+      ]
+    },
+    {
+      "id": "recipe_def",
+      "lane": "runner",
+      "col": 0,
+      "type": "backend",
+      "label": "Recipe",
+      "sublabel": "files, skills, tools, hooks",
+      "sources": [
+        { "path": "core/runner.py", "line": 77, "end_line": 98 },
+        { "path": "recipes/app-idea-card/run.py", "line": 51, "end_line": 67 }
+      ]
+    },
+    {
+      "id": "fill_prompt",
+      "lane": "runner",
+      "col": 1,
+      "type": "backend",
+      "label": "Fill prompt",
+      "sublabel": "tokens + prepare()",
+      "tag": "no leftover tokens",
+      "sources": [
+        { "path": "core/runner.py", "line": 216, "end_line": 233 },
+        { "path": "core/runner.py", "line": 115, "end_line": 122 }
+      ]
+    },
+    {
+      "id": "stage",
+      "lane": "runner",
+      "col": 2,
+      "type": "security",
+      "label": "Preflight + stage",
+      "sublabel": "keys checked, skills copied",
+      "sources": [
+        { "path": "core/runner.py", "line": 254, "end_line": 263 },
+        { "path": "core/runner.py", "line": 364, "end_line": 374 },
+        { "path": "core/runner.py", "line": 154, "end_line": 160 }
+      ]
+    },
+    {
+      "id": "check",
+      "lane": "runner",
+      "col": 3,
+      "type": "security",
+      "label": "Check result",
+      "sublabel": "JSON keys, files, validate()",
+      "tag": "strays removed",
+      "sources": [
+        { "path": "core/runner.py", "line": 273, "end_line": 302 },
+        { "path": "core/runner.py", "line": 125, "end_line": 151 }
+      ]
+    },
+    {
+      "id": "fail",
+      "lane": "runner",
+      "col": 4,
+      "type": "security",
+      "label": "RECIPE_FAILED",
+      "sublabel": "staging removed, nothing published",
+      "sources": [
+        { "path": "core/runner.py", "line": 239, "end_line": 249 }
+      ]
+    },
+    {
+      "id": "engine_run",
+      "lane": "agent",
+      "col": 2,
+      "type": "external",
+      "label": "Engine run",
+      "sublabel": "headless CLI, tool allowlist",
+      "tag": "staging = cwd",
+      "sources": [
+        { "path": "core/runner.py", "line": 265, "end_line": 271 },
+        { "path": "core/engines/cli.py", "line": 171, "end_line": 196 }
+      ]
+    },
+    {
+      "id": "profile",
+      "lane": "agent",
+      "col": 3,
+      "type": "database",
+      "label": "CLI profile",
+      "sublabel": "clis/<name>.json, main daily",
+      "sources": [
+        { "path": "core/engines/__init__.py", "line": 18, "end_line": 23 },
+        { "path": "core/engines/cli.py", "line": 288, "end_line": 313 }
+      ]
+    },
+    {
+      "id": "media",
+      "lane": "media",
+      "col": 4,
+      "type": "cloud",
+      "label": "Render media",
+      "sublabel": "images, cover, after_cover()",
+      "tag": "Gemini, then OpenAI",
+      "sources": [
+        { "path": "core/runner.py", "line": 304, "end_line": 319 },
+        { "path": "core/images/__init__.py", "line": 87, "end_line": 120 }
+      ]
+    },
+    {
+      "id": "announce",
+      "lane": "media",
+      "col": 5,
+      "type": "messagebus",
+      "label": "runs.jsonl + webhook",
+      "sublabel": "RECIPES_WEBHOOK_URL, optional",
+      "sources": [
+        { "path": "core/runner.py", "line": 356, "end_line": 360 },
+        { "path": "core/deliver.py", "line": 32, "end_line": 44 }
+      ]
+    },
+    {
+      "id": "existing",
+      "lane": "output",
+      "col": 1,
+      "type": "database",
+      "label": "Existing artifacts",
+      "sublabel": "every artifact.json",
+      "sources": [
+        { "path": "core/artifacts.py", "line": 56, "end_line": 74 },
+        { "path": "core/artifacts.py", "line": 84, "end_line": 89 }
+      ]
+    },
+    {
+      "id": "publish",
+      "lane": "output",
+      "col": 4,
+      "type": "database",
+      "label": "Publish folder",
+      "sublabel": "YYYY-MM/date_slug + artifact.json",
+      "sources": [
+        { "path": "core/runner.py", "line": 321, "end_line": 351 },
+        { "path": "core/artifacts.py", "line": 36, "end_line": 44 },
+        { "path": "core/artifacts.py", "line": 92, "end_line": 94 }
+      ]
+    },
+    {
+      "id": "viewer",
+      "lane": "output",
+      "col": 5,
+      "type": "frontend",
+      "label": "Viewer",
+      "sublabel": "catalog.js + index.html",
+      "tag": "Rebuild Viewer",
+      "sources": [
+        { "path": "scripts/build_viewer.py", "line": 152, "end_line": 174 },
+        { "path": "cronsole/viewer-rebuild.json", "line": 19, "end_line": 19 }
+      ]
+    }
+  ],
+  "edges": [
+    { "id": "clone-runs", "from": "clone_edition", "to": "recipe_def", "label": "run.py", "variant": "emphasis" },
+    { "id": "native-runs", "from": "native_edition", "to": "recipe_def", "label": "bundled run.py", "variant": "default", "role": "branch" },
+    { "id": "recipe-fill", "from": "recipe_def", "to": "fill_prompt", "variant": "emphasis" },
+    { "id": "existing-fill", "from": "existing", "to": "fill_prompt", "label": "do-not-repeat", "variant": "dashed", "role": "branch" },
+    { "id": "fill-stage", "from": "fill_prompt", "to": "stage", "label": "prompt", "variant": "emphasis" },
+    { "id": "stage-engine", "from": "stage", "to": "engine_run", "label": "staging folder", "variant": "emphasis" },
+    { "id": "profile-engine", "from": "profile", "to": "engine_run", "label": "argv", "variant": "default", "role": "branch" },
+    { "id": "engine-check", "from": "engine_run", "to": "check", "label": "final JSON", "variant": "emphasis" },
+    { "id": "check-fail", "from": "check", "to": "fail", "label": "missing", "variant": "security", "role": "error" },
+    { "id": "check-media", "from": "check", "to": "media", "label": "valid", "variant": "emphasis" },
+    { "id": "media-publish", "from": "media", "to": "publish", "variant": "emphasis" },
+    { "id": "publish-announce", "from": "publish", "to": "announce", "label": "announce", "variant": "dashed", "role": "async" },
+    { "id": "publish-viewer", "from": "publish", "to": "viewer", "label": "artifact.json", "variant": "dashed", "role": "async" }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "Fails closed",
+      "items": [
+        "Any error before the move publishes nothing and deletes staging",
+        "A missing image, speech or music key fails before the agent runs",
+        "prepare() can raise NothingToDo: RECIPE_SKIPPED, exit 0"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Any CLI, one contract",
+      "items": [
+        "claude, codex, gemini, opencode, kimi, grok: one JSON profile each",
+        "The newest profile on main is fetched, cached a day; RECIPES_CLI_REMOTE=0 turns it off",
+        "The skills folder is removed after the run, never published"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Two editions",
+      "items": [
+        "Clone edition runs run.py from your clone",
+        "Cronsole edition downloads the VERSION bundle and checks its pinned sha256",
+        "Both print RECIPE_OK, RECIPE_FAILED or RECIPE_SKIPPED"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "revision": "a3d47cf1752f156311ac0cb5d9bbd77b02557013",
+  "files": {
+    "core/artifacts.py": "c2779e65181f26463bd7570f2696746d7e43b795",
+    "core/deliver.py": "1985a8fae5e0ab64486c2ae665022d327db461ea",
+    "core/engines/__init__.py": "13a97309ce44a572e0e39b223baa4b5bc31b80b4",
+    "core/engines/cli.py": "010bba415904b157bb3f44ef58a86966b63feb93",
+    "core/images/__init__.py": "cf41073087557c7d0d10d21780edd001fdc0cd2f",
+    "core/runner.py": "f25290fe57602b0c563be227bac160a81fdc4978",
+    "cronsole/native-body.py": "c1f02b1eb6ab63bcda05b5a912f82df613e4e208",
+    "cronsole/viewer-rebuild.json": "90479acbc022ef8aecc3f4d767c14fac354ae40a",
+    "recipes/app-idea-card/cronsole.json": "b1267ff1e66139e9c60027704bea88e570ea6303",
+    "recipes/app-idea-card/run.py": "dd2dc8e3f96cc4b2987095a416106dd17fda7a03",
+    "scripts/build_registry.py": "93fc96ad186b62c1cdfecce611785f1f45bd9029",
+    "scripts/build_viewer.py": "2833f06db55a0f0f1dede262d9f8bd3e08987e28"
+  }
+}

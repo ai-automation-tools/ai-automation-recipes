@@ -40,6 +40,12 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 ## Unreleased
 
 **Added**
+- 2026-10-19: a code-pinned [run diagram](diagrams/README.md) (Archify workflow, source
+  `docs/diagrams/recipe-run-flow.json`): template → `core/runner.py` → agent CLI → checks → media →
+  published folder, every node linked to the lines it describes. `scripts/build-diagram.mjs` builds it
+  and copies it into `homepage/diagram/`, where it replaces the ASCII flow in the homepage's *How it
+  works* section, live; `--check` flags drift and CI warns on it. Outside the runtime bundle, so
+  `VERSION` is unchanged.
 - 2026-10-19: a project homepage in `homepage/` (one static house-style page, no build), published
   to GitHub Pages at `ai-automation-recipes.ai-automation-tools.dev` by `.github/workflows/homepage.yml`.
   The sample viewer stays on the demo site. Outside the runtime bundle, so `VERSION` is unchanged.

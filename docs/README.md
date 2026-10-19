@@ -23,6 +23,7 @@ changing how the recipes work or adding one of your own.
 |:---|:---|
 | [**🧱 Architecture**](ARCHITECTURE.md) | The run loop step by step, the `artifact.json` contract, engines and skills |
 | [**🛠️ Adding a recipe**](ADDING-A-RECIPE.md) | The four files a recipe needs, the hooks, and the checks before a PR |
+| [**🧭 Diagrams**](diagrams/README.md) | The run-loop diagram the homepage shows: template → runner → agent CLI → checks → media → published folder. Interactive, every node linked to its code, and drift-checked in CI |
 
 ## 🗺️ Planning
 

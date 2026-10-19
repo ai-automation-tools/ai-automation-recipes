@@ -5,3 +5,6 @@ __pycache__/
 output/
 .staging/
 .DS_Store
+
+# Archify build receipts and screenshots (scripts/build-diagram.mjs)
+docs/diagrams/.build/
