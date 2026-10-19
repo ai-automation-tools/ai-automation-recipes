@@ -39,6 +39,12 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
 ## Unreleased
 
+**Docs**
+- 2026-10-19: the roadmap moved onto the lab roadmap standard: centred header with stage badges,
+  the port as a done phase, the public-release gates ticked from 2026-10-14 (a missing `SECURITY.md`
+  added as the one open gate), and everything else under `## After public release`. The live-test
+  table became one checkbox line per recipe; no items added or dropped otherwise.
+
 **Added**
 - README: pointer to the `automated-dev-pipeline` and `task-router` skills in agent-skills, for
   scheduling a whole pipeline rather than one recipe.
