@@ -39,6 +39,11 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
 ## Unreleased
 
+**Added**
+- 2026-10-19: a project homepage in `homepage/` (one static house-style page, no build), published
+  to GitHub Pages at `ai-automation-recipes.ai-automation-tools.dev` by `.github/workflows/homepage.yml`.
+  The sample viewer stays on the demo site. Outside the runtime bundle, so `VERSION` is unchanged.
+
 **Docs**
 - 2026-10-19: the roadmap moved onto the lab roadmap standard: centred header with stage badges,
   the port as a done phase, the public-release gates ticked from 2026-10-14 (a missing `SECURITY.md`
