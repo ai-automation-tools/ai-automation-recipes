@@ -17,7 +17,7 @@ the new one does differently, and dry-run the recipe you touched.
 ## Before you open a PR
 
 ```bash
-python recipes/<name>/run.py --output-dir ./output --dry-run
+python recipes/<name>/run.py --dry-run
 python -m unittest discover -s tests
 python scripts/build_registry.py --check
 python scripts/check_public.py

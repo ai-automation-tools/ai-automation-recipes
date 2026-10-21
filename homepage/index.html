@@ -304,7 +304,7 @@
       <article class="card"><h3>Same run everywhere</h3><p>Skills ship in the repo and are copied into each run, so a run behaves the same on every machine.</p></article>
       <article class="card"><h3>Any agent CLI</h3><p>Claude Code is the default. Codex, Gemini CLI, OpenCode, Kimi Code and Grok Build each run through one JSON profile in <code>core/engines/clis/</code>.</p></article>
     </div>
-    <p class="note">Then <code>python scripts/build_viewer.py --output-dir ~/ai-output</code> gives you one page for everything the recipes made: collections, covers, search, rendered Markdown, playable games and apps, galleries and media players. It opens from disk; no server needed. <a href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">See it with sample runs.</a></p>
+    <p class="note">Then <code>python scripts/build_viewer.py --serve</code> gives you a local site at <code>localhost:8000</code> with one page for everything the recipes made: collections, covers, search, rendered Markdown, playable games and apps, galleries and media players. Skip <code>--serve</code> and it opens from disk. <a href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">See it with sample runs.</a></p>
   </section>
 
   <section id="start">
@@ -323,9 +323,10 @@
 <pre id="cmds" tabindex="0"><span class="p">$ </span>git clone https://github.com/ai-automation-tools/ai-automation-recipes
 <span class="p">$ </span>cd ai-automation-recipes
 <span class="p">$ </span>pip install -r requirements.txt
-<span class="p">$ </span>cp .env.example .env          <span class="c"># add your image key and RECIPES_OUTPUT_DIR</span>
-<span class="p">$ </span>python recipes/app-idea-card/run.py --output-dir ~/ai-output --dry-run   <span class="c"># print the prompt, no agent call</span>
-<span class="p">$ </span>python recipes/app-idea-card/run.py --output-dir ~/ai-output             <span class="c"># run it for real</span></pre>
+<span class="p">$ </span>cp .env.example .env          <span class="c"># add your image key</span>
+<span class="p">$ </span>python recipes/app-idea-card/run.py --dry-run   <span class="c"># print the prompt, no agent call</span>
+<span class="p">$ </span>python recipes/app-idea-card/run.py             <span class="c"># run it for real: lands in ./output</span>
+<span class="p">$ </span>python scripts/build_viewer.py --serve          <span class="c"># browse it at localhost:8000</span></pre>
     </div>
     <p class="sr-only" id="copyStatus" role="status" aria-live="polite"></p>
     <div class="tbl-wrap">

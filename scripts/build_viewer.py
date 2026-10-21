@@ -9,7 +9,11 @@ Reads every `artifact.json` under the folder and writes two files into it:
 Open index.html straight from disk, or serve the folder from any static host. Re-run after new
 artifacts land (or schedule it after your recipes).
 
-    python scripts/build_viewer.py --output-dir ~/ai-output [--title "My AI Library"]
+    python scripts/build_viewer.py [--output-dir DIR] [--title "My AI Library"] [--serve [PORT]]
+
+The folder defaults to the recipes' own: $RECIPES_OUTPUT_DIR (from the environment or .env), else
+./output in this repo. `--serve` rebuilds, then serves the folder on http://localhost:PORT (8000)
+until Ctrl+C; served, "Open folder" lists an item's files.
 
 For a hosted copy, `--repo-url https://github.com/<owner>/ai-automation-recipes` gives every item a
 link to its recipe and its Cronsole template, and drops the "Open folder" button (static hosts don't
@@ -35,6 +39,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from core.artifacts import MANIFEST  # noqa: E402
+from core.runner import DEFAULT_OUTPUT_DIR, load_dotenv  # noqa: E402
 
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
 AUDIO_EXT = {".mp3", ".wav", ".m4a", ".ogg"}
@@ -176,16 +181,39 @@ def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--output-dir", default=os.environ.get("RECIPES_OUTPUT_DIR"), help="The recipes output folder.")
+    load_dotenv(ROOT / ".env")
+    ap.add_argument("--output-dir", default=os.environ.get("RECIPES_OUTPUT_DIR") or str(DEFAULT_OUTPUT_DIR),
+                    help="The recipes output folder (default: $RECIPES_OUTPUT_DIR, else ./output in this repo).")
     ap.add_argument("--title", default="AI Recipes", help="Shown in the viewer's header and tab.")
     ap.add_argument("--repo-url", help="Link each item to its recipe and Cronsole template in this repo (hosted copies).")
+    ap.add_argument("--serve", nargs="?", type=int, const=8000, metavar="PORT",
+                    help="After building, serve the folder on localhost (default port 8000) until Ctrl+C.")
     args = ap.parse_args()
-    if not args.output_dir:
-        ap.error("--output-dir is required (or set RECIPES_OUTPUT_DIR)")
     out_dir = Path(args.output_dir).expanduser().resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
     n = build(out_dir, args.title, args.repo_url)
     print(f"viewer: {n} artifacts -> {out_dir / 'index.html'}")
+    if args.serve:
+        serve(out_dir, args.serve)
     return 0
+
+
+def serve(out_dir: Path, port: int) -> None:
+    from functools import partial
+    from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+    # Loopback only: the folder is private output, not something to share on the LAN.
+    handler = partial(SimpleHTTPRequestHandler, directory=str(out_dir))
+    try:
+        httpd = ThreadingHTTPServer(("127.0.0.1", port), handler)
+    except OSError as exc:
+        sys.exit(f"viewer: can't serve on port {port} ({exc.strerror}); try --serve <another port>")
+    with httpd:
+        print(f"viewer: serving http://localhost:{port}/  (Ctrl+C to stop)", flush=True)
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            pass
 
 
 if __name__ == "__main__":

@@ -33,6 +33,8 @@ from . import artifacts, audio, deliver, images
 from .engines import EngineError, EngineRequest, get_engine
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+# Git-ignored, so a clone keeps its output beside the code; --output-dir or RECIPES_OUTPUT_DIR moves it.
+DEFAULT_OUTPUT_DIR = REPO_ROOT / "output"
 SKILLS_DIR = REPO_ROOT / ".claude" / "skills"
 RUN_CONTRACT = (Path(__file__).parent / "run-contract.md").read_text(encoding="utf-8")
 RESERVED_KEYS = ("title", "slug", "summary", "cover_prompt", "images", "error")
@@ -166,8 +168,8 @@ def engine_skills_dir(engine: object) -> str:
 
 def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
     p = argparse.ArgumentParser(prog=recipe.name, description=f"Run the {recipe.name} recipe once.")
-    p.add_argument("--output-dir", default=os.environ.get("RECIPES_OUTPUT_DIR"),
-                   help="Root folder for all recipe output (or set RECIPES_OUTPUT_DIR).")
+    p.add_argument("--output-dir", default=os.environ.get("RECIPES_OUTPUT_DIR") or str(DEFAULT_OUTPUT_DIR),
+                   help="Root folder for all recipe output (default: $RECIPES_OUTPUT_DIR, else ./output in this repo).")
     p.add_argument("--date", type=date.fromisoformat, default=date.today(),
                    help="Target date, YYYY-MM-DD (default: today).")
     p.add_argument("--engine", default=os.environ.get("RECIPES_ENGINE", "claude"),
@@ -186,10 +188,7 @@ def parse_args(recipe: Recipe, argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--dry-run", action="store_true", help="Print the filled prompt and exit.")
     if recipe.add_args:
         recipe.add_args(p)
-    args = p.parse_args(argv)
-    if not args.output_dir:
-        p.error("--output-dir is required (or set RECIPES_OUTPUT_DIR)")
-    return args
+    return p.parse_args(argv)
 
 
 # --- the run ---------------------------------------------------------------

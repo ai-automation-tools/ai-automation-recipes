@@ -92,7 +92,7 @@ with the footer nav row. Leave the schedule out. Then add the recipe to its grou
 ## ✅ Before you open a PR
 
 ```bash
-python recipes/<name>/run.py --output-dir ./output --dry-run   # prompt fills, no {{ left
+python recipes/<name>/run.py --dry-run   # prompt fills, no {{ left
 python -m unittest discover -s tests
 python scripts/build_registry.py --check
 python scripts/check_public.py              # CI runs it with --history too
