@@ -85,10 +85,14 @@ real recipe yet, so Claude is the default and the only engine the Cronsole templ
 git clone https://github.com/ai-automation-tools/ai-automation-recipes
 cd ai-automation-recipes
 pip install -r requirements.txt
-cp .env.example .env          # add your image key and RECIPES_OUTPUT_DIR
-python recipes/app-idea-card/run.py --output-dir ~/ai-output --dry-run   # print the prompt, no agent call
-python recipes/app-idea-card/run.py --output-dir ~/ai-output             # run it for real
+cp .env.example .env          # add your image key
+python recipes/app-idea-card/run.py --dry-run   # print the prompt, no agent call
+python recipes/app-idea-card/run.py             # run it for real: lands in ./output
+python scripts/build_viewer.py --serve          # browse everything at http://localhost:8000
 ```
+
+Output goes to `output/` inside the clone, which git ignores. Set `RECIPES_OUTPUT_DIR` in `.env`
+(or pass `--output-dir`) to keep it somewhere else; the viewer follows the same setting.
 
 ### Keys
 
@@ -107,7 +111,7 @@ WAV and no video. Voices are always premade presets. Nothing here clones a voice
 
 | Flag | Default | Does |
 |:---|:---|:---|
-| `--output-dir` | `$RECIPES_OUTPUT_DIR` | Root for all output |
+| `--output-dir` | `$RECIPES_OUTPUT_DIR`, else `./output` | Root for all output (git-ignored by default) |
 | `--engine` | `claude` | The agent that writes: `claude`, `codex` or `gemini` (the last two have had no live run yet) |
 | `--model` | per recipe | Claude model alias (`sonnet`, `opus`, `haiku`) or a full model id. On `codex` and `gemini` an alias means that CLI's default |
 | `--image-engine` | `auto` | `auto`, `gemini`, `openai` or `none` |
@@ -151,7 +155,7 @@ picks how much machinery a job needs.
 ## 📂 What a run makes
 
 ```text
-<output-dir>/
+output/                              # or $RECIPES_OUTPUT_DIR / --output-dir
 ├── index.html · catalog.js          # the viewer, after build_viewer.py
 ├── runs.jsonl                       # one line per published run
 └── idea-cards/2026-10/2026-10-14_receipt-radar/
@@ -163,13 +167,20 @@ picks how much machinery a job needs.
 A run publishes a complete folder or nothing. The agent works in a private staging folder, the runner
 checks every file it promised, renders the media, and only then moves the folder into place.
 
+### 🖥️ Browse what you've made
+
 ```bash
-python scripts/build_viewer.py --output-dir ~/ai-output
+python scripts/build_viewer.py            # writes output/index.html + catalog.js
+python scripts/build_viewer.py --serve    # same, then serves it at http://localhost:8000 (Ctrl+C stops)
+python scripts/build_viewer.py --serve 9000 --title "My AI Library"
 ```
 
 That gives you one page for everything the recipes made: collections, covers, search, rendered
-Markdown, games and apps you can play in place, galleries, and audio and video players. It opens
-from disk; no server needed. Set `RECIPES_WEBHOOK_URL` to get a Discord or Slack message, or a JSON
+Markdown, games and apps you can play in place, galleries, and audio and video players. Open
+`output/index.html` straight from disk, or use `--serve` for a local site: it listens on
+`localhost` only, and served, each item's **Open folder** button lists its files. Re-run the build
+after new runs land (the **Rebuild Viewer** template schedules it); a running server picks up the
+new catalog on refresh. Set `RECIPES_WEBHOOK_URL` to get a Discord or Slack message, or a JSON
 POST, each time something new lands.
 
 ## 🧭 How it works

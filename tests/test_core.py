@@ -74,6 +74,13 @@ class HelperTests(unittest.TestCase):
             first.mkdir(parents=True)
             self.assertEqual(artifacts.artifact_dir(col, date(2026, 10, 14), "x").name, "2026-10-14_x-2")
 
+    def test_output_dir_defaults_to_repo_output(self):
+        recipe = runner.Recipe(name="x", collection="x", version="0", prompt_path=Path("p"), files=())
+        with mock.patch.dict(os.environ, {"RECIPES_OUTPUT_DIR": ""}):
+            self.assertEqual(runner.parse_args(recipe, []).output_dir, str(ROOT / "output"))
+        with mock.patch.dict(os.environ, {"RECIPES_OUTPUT_DIR": "/elsewhere"}):
+            self.assertEqual(runner.parse_args(recipe, []).output_dir, "/elsewhere")
+
     def test_constraints_appended_once(self):
         once = with_constraints("a red apple")
         self.assertTrue(once.endswith(NO_TEXT))

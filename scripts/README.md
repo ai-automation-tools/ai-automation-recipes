@@ -24,7 +24,7 @@
 python scripts/build_registry.py            # after editing any cronsole.json, or anything in the bundle
 python scripts/check_clis.py                # after editing a CLI profile
 python scripts/new_cli.py <binary>          # draft a profile for a new agent CLI
-python scripts/build_viewer.py --output-dir ~/ai-output
+python scripts/build_viewer.py --serve      # ./output (or $RECIPES_OUTPUT_DIR) at http://localhost:8000
 python scripts/check_public.py              # before every commit
 ```
 

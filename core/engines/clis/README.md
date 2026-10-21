@@ -60,7 +60,7 @@ over a bundled file of the same name, so you can also override one locally). The
 
 ```bash
 python scripts/check_clis.py <name>          # every flag you pass is in its --help?
-python recipes/short-story/run.py --output-dir ./output --engine <name> --dry-run
+python recipes/short-story/run.py --engine <name> --dry-run
 python -m unittest discover -s tests          # the profile is complete
 ```
 

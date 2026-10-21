@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.1-2ea44f?style=for-the-badge" alt="Version 0.12.1">
+  <img src="https://img.shields.io/badge/version-0.12.2-2ea44f?style=for-the-badge" alt="Version 0.12.2">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,18 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.2 — 2026-10-21
+
+**Changed**
+- `--output-dir` is optional: with no flag and no `RECIPES_OUTPUT_DIR`, runs land in `output/` inside
+  the clone, which git already ignores. `build_viewer.py` uses the same default and reads `.env`, so
+  the viewer finds the runs with no arguments.
+
+**Added**
+- `build_viewer.py --serve [PORT]`: rebuilds, then serves the output folder as a local site on
+  `http://localhost:8000` (loopback only) until Ctrl+C. Served, **Open folder** lists an item's files.
+- Run diagram re-pinned: the `core/runner.py` line ranges moved with the change above.
 
 ## 0.12.1 — 2026-10-17
 
