@@ -24,6 +24,7 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 **Added**
 - `build_viewer.py --serve [PORT]`: rebuilds, then serves the output folder as a local site on
   `http://localhost:8000` (loopback only) until Ctrl+C. Served, **Open folder** lists an item's files.
+- Run diagram re-pinned: the `core/runner.py` line ranges moved with the change above.
 
 ## 0.12.1 — 2026-10-17
 

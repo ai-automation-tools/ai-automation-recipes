@@ -7,23 +7,69 @@
     "output": "docs/diagrams/recipe-run-flow.html",
     "repository": {
       "url": "https://github.com/ai-automation-tools/ai-automation-recipes.git",
-      "revision": "a3d47cf1752f156311ac0cb5d9bbd77b02557013"
+      "revision": "225a873a7f4fe8fd3d4942a06198a18aeddb6f9c"
     }
   },
   "lanes": [
-    { "id": "trigger", "label": "Cronsole templates" },
-    { "id": "runner", "label": "core/runner.py" },
-    { "id": "agent", "label": "Agent CLI in staging" },
-    { "id": "media", "label": "Media & delivery" },
-    { "id": "output", "label": "Output collection" }
+    {
+      "id": "trigger",
+      "label": "Cronsole templates"
+    },
+    {
+      "id": "runner",
+      "label": "core/runner.py"
+    },
+    {
+      "id": "agent",
+      "label": "Agent CLI in staging"
+    },
+    {
+      "id": "media",
+      "label": "Media & delivery"
+    },
+    {
+      "id": "output",
+      "label": "Output collection"
+    }
   ],
   "phases": [
-    { "id": "phase_start", "label": "Start", "fromCol": 0, "toCol": 0 },
-    { "id": "phase_prompt", "label": "Prompt + stage", "fromCol": 1, "toCol": 2 },
-    { "id": "phase_check", "label": "Check", "fromCol": 3, "toCol": 3, "variant": "security" },
-    { "id": "phase_publish", "label": "Media + publish", "fromCol": 4, "toCol": 5, "variant": "emphasis" }
+    {
+      "id": "phase_start",
+      "label": "Start",
+      "fromCol": 0,
+      "toCol": 0
+    },
+    {
+      "id": "phase_prompt",
+      "label": "Prompt + stage",
+      "fromCol": 1,
+      "toCol": 2
+    },
+    {
+      "id": "phase_check",
+      "label": "Check",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "security"
+    },
+    {
+      "id": "phase_publish",
+      "label": "Media + publish",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "emphasis"
+    }
   ],
-  "mainPath": ["clone_edition", "recipe_def", "fill_prompt", "stage", "engine_run", "check", "media", "publish"],
+  "mainPath": [
+    "clone_edition",
+    "recipe_def",
+    "fill_prompt",
+    "stage",
+    "engine_run",
+    "check",
+    "media",
+    "publish"
+  ],
   "nodes": [
     {
       "id": "clone_edition",
@@ -33,7 +79,11 @@
       "label": "Clone edition",
       "sublabel": "python recipes/<name>/run.py",
       "sources": [
-        { "path": "recipes/app-idea-card/cronsole.json", "line": 22, "end_line": 22 }
+        {
+          "path": "recipes/app-idea-card/cronsole.json",
+          "line": 22,
+          "end_line": 22
+        }
       ]
     },
     {
@@ -45,9 +95,21 @@
       "sublabel": "pinned bundle, sha256, venv",
       "tag": "no clone",
       "sources": [
-        { "path": "cronsole/native-body.py", "line": 39, "end_line": 72 },
-        { "path": "cronsole/native-body.py", "line": 75, "end_line": 93 },
-        { "path": "scripts/build_registry.py", "line": 143, "end_line": 168 }
+        {
+          "path": "cronsole/native-body.py",
+          "line": 39,
+          "end_line": 72
+        },
+        {
+          "path": "cronsole/native-body.py",
+          "line": 75,
+          "end_line": 93
+        },
+        {
+          "path": "scripts/build_registry.py",
+          "line": 143,
+          "end_line": 168
+        }
       ]
     },
     {
@@ -58,8 +120,16 @@
       "label": "Recipe",
       "sublabel": "files, skills, tools, hooks",
       "sources": [
-        { "path": "core/runner.py", "line": 77, "end_line": 98 },
-        { "path": "recipes/app-idea-card/run.py", "line": 51, "end_line": 67 }
+        {
+          "path": "core/runner.py",
+          "line": 79,
+          "end_line": 100
+        },
+        {
+          "path": "recipes/app-idea-card/run.py",
+          "line": 51,
+          "end_line": 67
+        }
       ]
     },
     {
@@ -71,8 +141,16 @@
       "sublabel": "tokens + prepare()",
       "tag": "no leftover tokens",
       "sources": [
-        { "path": "core/runner.py", "line": 216, "end_line": 233 },
-        { "path": "core/runner.py", "line": 115, "end_line": 122 }
+        {
+          "path": "core/runner.py",
+          "line": 215,
+          "end_line": 232
+        },
+        {
+          "path": "core/runner.py",
+          "line": 117,
+          "end_line": 124
+        }
       ]
     },
     {
@@ -83,9 +161,21 @@
       "label": "Preflight + stage",
       "sublabel": "keys checked, skills copied",
       "sources": [
-        { "path": "core/runner.py", "line": 254, "end_line": 263 },
-        { "path": "core/runner.py", "line": 364, "end_line": 374 },
-        { "path": "core/runner.py", "line": 154, "end_line": 160 }
+        {
+          "path": "core/runner.py",
+          "line": 253,
+          "end_line": 262
+        },
+        {
+          "path": "core/runner.py",
+          "line": 363,
+          "end_line": 373
+        },
+        {
+          "path": "core/runner.py",
+          "line": 156,
+          "end_line": 162
+        }
       ]
     },
     {
@@ -97,8 +187,16 @@
       "sublabel": "JSON keys, files, validate()",
       "tag": "strays removed",
       "sources": [
-        { "path": "core/runner.py", "line": 273, "end_line": 302 },
-        { "path": "core/runner.py", "line": 125, "end_line": 151 }
+        {
+          "path": "core/runner.py",
+          "line": 272,
+          "end_line": 301
+        },
+        {
+          "path": "core/runner.py",
+          "line": 127,
+          "end_line": 153
+        }
       ]
     },
     {
@@ -109,7 +207,11 @@
       "label": "RECIPE_FAILED",
       "sublabel": "staging removed, nothing published",
       "sources": [
-        { "path": "core/runner.py", "line": 239, "end_line": 249 }
+        {
+          "path": "core/runner.py",
+          "line": 238,
+          "end_line": 248
+        }
       ]
     },
     {
@@ -121,8 +223,16 @@
       "sublabel": "headless CLI, tool allowlist",
       "tag": "staging = cwd",
       "sources": [
-        { "path": "core/runner.py", "line": 265, "end_line": 271 },
-        { "path": "core/engines/cli.py", "line": 171, "end_line": 196 }
+        {
+          "path": "core/runner.py",
+          "line": 264,
+          "end_line": 270
+        },
+        {
+          "path": "core/engines/cli.py",
+          "line": 171,
+          "end_line": 196
+        }
       ]
     },
     {
@@ -133,8 +243,16 @@
       "label": "CLI profile",
       "sublabel": "clis/<name>.json, main daily",
       "sources": [
-        { "path": "core/engines/__init__.py", "line": 18, "end_line": 23 },
-        { "path": "core/engines/cli.py", "line": 288, "end_line": 313 }
+        {
+          "path": "core/engines/__init__.py",
+          "line": 18,
+          "end_line": 23
+        },
+        {
+          "path": "core/engines/cli.py",
+          "line": 288,
+          "end_line": 313
+        }
       ]
     },
     {
@@ -146,8 +264,16 @@
       "sublabel": "images, cover, after_cover()",
       "tag": "Gemini, then OpenAI",
       "sources": [
-        { "path": "core/runner.py", "line": 304, "end_line": 319 },
-        { "path": "core/images/__init__.py", "line": 87, "end_line": 120 }
+        {
+          "path": "core/runner.py",
+          "line": 303,
+          "end_line": 318
+        },
+        {
+          "path": "core/images/__init__.py",
+          "line": 87,
+          "end_line": 120
+        }
       ]
     },
     {
@@ -158,8 +284,16 @@
       "label": "runs.jsonl + webhook",
       "sublabel": "RECIPES_WEBHOOK_URL, optional",
       "sources": [
-        { "path": "core/runner.py", "line": 356, "end_line": 360 },
-        { "path": "core/deliver.py", "line": 32, "end_line": 44 }
+        {
+          "path": "core/runner.py",
+          "line": 355,
+          "end_line": 359
+        },
+        {
+          "path": "core/deliver.py",
+          "line": 32,
+          "end_line": 44
+        }
       ]
     },
     {
@@ -170,8 +304,16 @@
       "label": "Existing artifacts",
       "sublabel": "every artifact.json",
       "sources": [
-        { "path": "core/artifacts.py", "line": 56, "end_line": 74 },
-        { "path": "core/artifacts.py", "line": 84, "end_line": 89 }
+        {
+          "path": "core/artifacts.py",
+          "line": 56,
+          "end_line": 74
+        },
+        {
+          "path": "core/artifacts.py",
+          "line": 84,
+          "end_line": 89
+        }
       ]
     },
     {
@@ -182,9 +324,21 @@
       "label": "Publish folder",
       "sublabel": "YYYY-MM/date_slug + artifact.json",
       "sources": [
-        { "path": "core/runner.py", "line": 321, "end_line": 351 },
-        { "path": "core/artifacts.py", "line": 36, "end_line": 44 },
-        { "path": "core/artifacts.py", "line": 92, "end_line": 94 }
+        {
+          "path": "core/runner.py",
+          "line": 320,
+          "end_line": 350
+        },
+        {
+          "path": "core/artifacts.py",
+          "line": 36,
+          "end_line": 44
+        },
+        {
+          "path": "core/artifacts.py",
+          "line": 92,
+          "end_line": 94
+        }
       ]
     },
     {
@@ -196,25 +350,115 @@
       "sublabel": "catalog.js + index.html",
       "tag": "Rebuild Viewer",
       "sources": [
-        { "path": "scripts/build_viewer.py", "line": 152, "end_line": 174 },
-        { "path": "cronsole/viewer-rebuild.json", "line": 19, "end_line": 19 }
+        {
+          "path": "scripts/build_viewer.py",
+          "line": 152,
+          "end_line": 174
+        },
+        {
+          "path": "cronsole/viewer-rebuild.json",
+          "line": 19,
+          "end_line": 19
+        }
       ]
     }
   ],
   "edges": [
-    { "id": "clone-runs", "from": "clone_edition", "to": "recipe_def", "label": "run.py", "variant": "emphasis" },
-    { "id": "native-runs", "from": "native_edition", "to": "recipe_def", "label": "bundled run.py", "variant": "default", "role": "branch" },
-    { "id": "recipe-fill", "from": "recipe_def", "to": "fill_prompt", "variant": "emphasis" },
-    { "id": "existing-fill", "from": "existing", "to": "fill_prompt", "label": "do-not-repeat", "variant": "dashed", "role": "branch" },
-    { "id": "fill-stage", "from": "fill_prompt", "to": "stage", "label": "prompt", "variant": "emphasis" },
-    { "id": "stage-engine", "from": "stage", "to": "engine_run", "label": "staging folder", "variant": "emphasis" },
-    { "id": "profile-engine", "from": "profile", "to": "engine_run", "label": "argv", "variant": "default", "role": "branch" },
-    { "id": "engine-check", "from": "engine_run", "to": "check", "label": "final JSON", "variant": "emphasis" },
-    { "id": "check-fail", "from": "check", "to": "fail", "label": "missing", "variant": "security", "role": "error" },
-    { "id": "check-media", "from": "check", "to": "media", "label": "valid", "variant": "emphasis" },
-    { "id": "media-publish", "from": "media", "to": "publish", "variant": "emphasis" },
-    { "id": "publish-announce", "from": "publish", "to": "announce", "label": "announce", "variant": "dashed", "role": "async" },
-    { "id": "publish-viewer", "from": "publish", "to": "viewer", "label": "artifact.json", "variant": "dashed", "role": "async" }
+    {
+      "id": "clone-runs",
+      "from": "clone_edition",
+      "to": "recipe_def",
+      "label": "run.py",
+      "variant": "emphasis"
+    },
+    {
+      "id": "native-runs",
+      "from": "native_edition",
+      "to": "recipe_def",
+      "label": "bundled run.py",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "recipe-fill",
+      "from": "recipe_def",
+      "to": "fill_prompt",
+      "variant": "emphasis"
+    },
+    {
+      "id": "existing-fill",
+      "from": "existing",
+      "to": "fill_prompt",
+      "label": "do-not-repeat",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "fill-stage",
+      "from": "fill_prompt",
+      "to": "stage",
+      "label": "prompt",
+      "variant": "emphasis"
+    },
+    {
+      "id": "stage-engine",
+      "from": "stage",
+      "to": "engine_run",
+      "label": "staging folder",
+      "variant": "emphasis"
+    },
+    {
+      "id": "profile-engine",
+      "from": "profile",
+      "to": "engine_run",
+      "label": "argv",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "engine-check",
+      "from": "engine_run",
+      "to": "check",
+      "label": "final JSON",
+      "variant": "emphasis"
+    },
+    {
+      "id": "check-fail",
+      "from": "check",
+      "to": "fail",
+      "label": "missing",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "check-media",
+      "from": "check",
+      "to": "media",
+      "label": "valid",
+      "variant": "emphasis"
+    },
+    {
+      "id": "media-publish",
+      "from": "media",
+      "to": "publish",
+      "variant": "emphasis"
+    },
+    {
+      "id": "publish-announce",
+      "from": "publish",
+      "to": "announce",
+      "label": "announce",
+      "variant": "dashed",
+      "role": "async"
+    },
+    {
+      "id": "publish-viewer",
+      "from": "publish",
+      "to": "viewer",
+      "label": "artifact.json",
+      "variant": "dashed",
+      "role": "async"
+    }
   ],
   "cards": [
     {
