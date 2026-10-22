@@ -140,7 +140,7 @@ listened to what it made.
       `.env.example`, `docs/ARCHITECTURE.md` and the `image-prompt-craft` engine notes. Done when a
       dry run and one real image and one real speech call succeed on the new defaults
 - [ ] Python 3.10 reached end of life on 2026-10-01 (<https://devguide.python.org/versions/>). Raise
-      the floor to 3.11 in `CLAUDE.md`, the docs, CI and the Cronsole edition's interpreter notes,
+      the floor to 3.11 in `AGENTS.md`, the docs, CI and the Cronsole edition's interpreter notes,
       and drop any 3.10-only workarounds. Done when CI runs 3.11 and newer only and the tests pass
 - [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
       2026-10-14. Retried on 1.3.5 (2026-10-15) and 1.3.6 (2026-10-17), which now has `--output-format json|stream-json`

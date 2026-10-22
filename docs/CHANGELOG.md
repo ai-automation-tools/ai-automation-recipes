@@ -51,6 +51,12 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
 ## Unreleased
 
+**Changed**
+- 2026-10-22: the org layout standard. The agent rules moved from `CLAUDE.md` to `AGENTS.md`, which
+  Codex, Gemini CLI and opencode read; `CLAUDE.md` now just imports it. The README icon moved from
+  `docs/images/` to a root `images/` folder. Links in the README, `CONTRIBUTING.md`, the docs hub and
+  the roadmap follow. Outside the runtime bundle, so `VERSION` is unchanged.
+
 **Added**
 - 2026-10-19: a code-pinned [run diagram](diagrams/README.md) (Archify workflow, source
   `docs/diagrams/recipe-run-flow.json`): template → `core/runner.py` → agent CLI → checks → media →

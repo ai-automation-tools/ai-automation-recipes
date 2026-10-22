@@ -40,7 +40,7 @@ changing how the recipes work or adding one of your own.
 | [**🍳 Recipes**](../recipes/README.md) | All 48 recipes, grouped, with what each needs |
 | [**⚙️ Core**](../core/README.md) | The modules behind the run loop |
 | [**📋 Registry**](../registry/README.md) | The Cronsole packs and how to import them |
-| [**🤖 CLAUDE.md**](../CLAUDE.md) | House rules for an AI agent editing this repo |
+| [**🤖 AGENTS.md**](../AGENTS.md) | House rules for an AI agent editing this repo (`CLAUDE.md` imports it) |
 
 <p align="right">(<a href="#docs-top">back to top</a>)</p>
 

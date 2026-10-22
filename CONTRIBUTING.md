@@ -28,7 +28,7 @@ for all of them and CI runs it over the whole history.
 
 ## House rules
 
-[CLAUDE.md](CLAUDE.md) is written for an AI agent editing this repo and holds the rules that aren't
+[AGENTS.md](AGENTS.md) is written for an AI agent editing this repo and holds the rules that aren't
 obvious from the code: the registry is generated, skills are named not pasted, recipe names say what
 they make and never how often, agents get the narrowest tool list that works. They apply to people
 too.
