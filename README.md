@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="recipes/README.md">
-    <img src="docs/images/icon.svg" alt="AI Automation Recipes: scheduled Claude Code automations that write, build, draw and compose into a folder you can browse" width="120">
+    <img src="images/icon.svg" alt="AI Automation Recipes: scheduled Claude Code automations that write, build, draw and compose into a folder you can browse" width="120">
   </a>
 </p>
 
