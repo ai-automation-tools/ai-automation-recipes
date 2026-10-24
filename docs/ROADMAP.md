@@ -45,7 +45,7 @@ marks one only Mike can do.
 - [x] Full-history secret and private-data scan that comes back clean — done 2026-10-14: `scripts/check_public.py --history`, run in CI
 - [x] Licence chosen and `LICENSE` added — done 2026-10-14: MIT
 - [x] Live samples at their URL — done 2026-10-14: the demo site, [ai-automation-recipes-demo.ai-automation-tools.dev](https://ai-automation-recipes-demo.ai-automation-tools.dev)
-- [ ] small `SECURITY.md` with how to report a vulnerability (the repo went public without one; the secret scan above is in CI)
+- [ ] `small` `SECURITY.md` with how to report a vulnerability (the repo went public without one; the secret scan above is in CI)
 
 ## After public release
 
