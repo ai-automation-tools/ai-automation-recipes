@@ -24,7 +24,7 @@ every coding agent (Codex, Gemini CLI, opencode; Claude Code imports this file f
   profile. Add or fix a CLI by editing a profile, then `python scripts/check_clis.py <name>`;
   `scripts/new_cli.py <binary>` drafts a profile for a new one. Runs use the profile on `main` when
   they can fetch it (`RECIPES_CLI_REMOTE=0` turns that off), so a merged profile fix is live for
-  everyone within a day. Claude and Codex have run recipes for real; each profile's `verified`
+  everyone within a day. Claude, Codex, Gemini and Antigravity have run recipes for real; each profile's `verified`
   block says how far the others got.
 - **Two editions per recipe.** The clone edition is `recipes/<name>/cronsole.json`. The Cronsole
   edition (`recipe-<name>-cronsole`) is generated from it plus `cronsole/native-body.py` for every

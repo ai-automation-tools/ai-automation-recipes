@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.3-2ea44f?style=for-the-badge" alt="Version 0.12.3">
+  <img src="https://img.shields.io/badge/version-0.12.4-2ea44f?style=for-the-badge" alt="Version 0.12.4">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,26 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.4 — 2026-10-26
+
+**Added**
+- `agy` profile: the Antigravity CLI, on `GEMINI_API_KEY` with `"modelProvider": "gemini"`, the
+  headless setup its docs give. `short-story` ran on it for real (2,074 words in 3 minutes).
+  *CLI coverage*
+- `isolatedHome` profile key: the engine writes the listed files into a throwaway home, points
+  `HOME` and `USERPROFILE` at it for the run, then deletes it. Antigravity needs it: with a user's
+  MCP servers configured, headless `agy` sends the message and never starts the turn. That, and no
+  API-key auth, was the earlier "stalls headless" note.
+
+**Changed**
+- `gemini` ran a recipe for real: `short-story`, 3,540 words in 5 minutes. Its `auth` note says a
+  cached Google login wins over `GEMINI_API_KEY` until `security.auth.selectedType` is
+  `gemini-api-key`. *CLI coverage*
+- `check_clis.py` reads `--flag=value` as `--flag`.
+- Roadmap: Gemini and Antigravity unblocked, the key-gated recipes no longer wait on the
+  maintainer, Grok needs `XAI_API_KEY`, and a new item for Kimi's prompts that pass Windows'
+  32,767-character command-line limit.
 
 ## 0.12.3 — 2026-10-26
 

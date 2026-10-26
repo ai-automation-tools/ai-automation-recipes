@@ -33,9 +33,9 @@ VERSION = re.compile(r"\d+\.\d+\.\d+")
 
 
 def flags(profile: dict) -> list[str]:
-    """Every option the profile passes: argv plus the spliced model and tool args."""
+    """Every option the profile passes: argv plus the spliced model and tool args (`--x=v` is `--x`)."""
     tokens = [*profile.get("argv", []), *profile.get("modelArgs", []), *profile.get("toolArgs", [])]
-    return sorted({t for t in tokens if t.startswith("-") and len(t) > 1 and t != "-"})
+    return sorted({t.split("=", 1)[0] for t in tokens if t.startswith("-") and len(t) > 1 and t != "-"})
 
 
 def run(binary: str, args: list[str]) -> str:

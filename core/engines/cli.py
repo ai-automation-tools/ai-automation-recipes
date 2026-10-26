@@ -22,6 +22,7 @@ import logging
 import os
 import shutil
 import subprocess
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -168,6 +169,19 @@ class CliEngine:
             argv += [p.format_map(values) for p in parts]
         return argv
 
+    def make_home(self) -> Path | None:
+        """A throwaway home holding only the profile's `isolatedHome` files, so the CLI starts
+        without the user's own config (MCP servers, logins, model overrides). None if unset."""
+        files = self.profile.get("isolatedHome")
+        if not files:
+            return None
+        home = Path(tempfile.mkdtemp(prefix=f"recipes-{self.name}-home-"))
+        for rel, content in files.items():
+            path = home / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content if isinstance(content, str) else json.dumps(content), encoding="utf-8")
+        return home
+
     def run(self, request: EngineRequest) -> EngineResult:
         via = self.profile.get("prompt", "stdin")
         prompt_file = None
@@ -177,6 +191,7 @@ class CliEngine:
         cmd = self.command(request, prompt_file)
         model = self.model(request.model)
         log.info("%s: running in %s (model=%s)", self.name, request.workdir, model or "default")
+        home = self.make_home()
         try:
             proc = subprocess.run(
                 cmd,
@@ -187,12 +202,15 @@ class CliEngine:
                 encoding="utf-8",
                 errors="replace",
                 timeout=request.timeout_s,
+                env={**os.environ, "HOME": str(home), "USERPROFILE": str(home)} if home else None,
             )
         except subprocess.TimeoutExpired as exc:
             raise EngineError(f"{self.name} timed out after {request.timeout_s}s") from exc
         finally:
             if prompt_file:
                 prompt_file.unlink(missing_ok=True)
+            if home:
+                shutil.rmtree(home, ignore_errors=True)
         return self.parse(proc.stdout or "", proc.stderr or "", proc.returncode, model or "default")
 
     def parse(self, stdout: str, stderr: str, code: int, fallback_model: str) -> EngineResult:

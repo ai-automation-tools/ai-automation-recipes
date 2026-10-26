@@ -115,8 +115,10 @@ A recipe's `default_model` is a Claude alias (`sonnet`, `opus`, `haiku`). Every 
 alias as "your own default" and passes a full model id through unchanged. The image, speech and music
 steps are the runner's, so they are identical whichever engine wrote the prompts.
 
-Claude and Codex have run recipes for real. Gemini is tested against recorded output; OpenCode
-and Kimi answered a smoke prompt; Grok's flags are checked against its `--help`. Each profile's
+Claude, Codex, Gemini and Antigravity have run recipes for real (Gemini and Antigravity on
+`GEMINI_API_KEY`); OpenCode and Kimi answered a smoke prompt; Grok's flags are checked against its
+`--help`. A profile can run its CLI from a throwaway home (`isolatedHome`) when the user's own
+config gets in the way of a headless run, as Antigravity's MCP servers do. Each profile's
 `verified` block says which. `scripts/check_clis.py` checks every flag a profile passes against the
 installed CLI's `--help`, and the weekly upstream routine ([UPSTREAMS.md](UPSTREAMS.md)) keeps the
 profiles current. At run time the engine uses the newest profile on `main` (cached a day, bundled

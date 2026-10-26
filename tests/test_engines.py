@@ -204,6 +204,32 @@ class GenericPromptModes(unittest.TestCase):
             self.assertIsNone(seen["input"])
             self.assertFalse(Path(d, "P.md").exists())  # cleaned up after the run
 
+    def test_isolated_home(self):
+        from core.engines.cli import CliEngine
+        eng = CliEngine({"name": "h", "binary": "h", "argv": [],
+                         "isolatedHome": {"a/settings.json": {"modelProvider": "gemini"}, "b.txt": "raw"}})
+        seen = {}
+
+        def fake_run(cmd, **kw):
+            home = Path(kw["env"]["HOME"])
+            seen["home"], seen["profile"] = home, kw["env"]["USERPROFILE"]
+            seen["settings"] = json.loads((home / "a/settings.json").read_text(encoding="utf-8"))
+            seen["raw"] = (home / "b.txt").read_text(encoding="utf-8")
+            return proc("ok")
+
+        with tempfile.TemporaryDirectory() as d:
+            with mock.patch("shutil.which", return_value="h"), mock.patch("subprocess.run", side_effect=fake_run):
+                eng.run(req(workdir=Path(d)))
+        self.assertEqual(seen["settings"], {"modelProvider": "gemini"})
+        self.assertEqual((seen["raw"], seen["profile"]), ("raw", str(seen["home"])))
+        self.assertFalse(seen["home"].exists())  # removed after the run
+
+        plain = CliEngine({"name": "p", "binary": "p", "argv": []})
+        with mock.patch("shutil.which", return_value="p"), \
+                mock.patch("subprocess.run", return_value=proc("ok")) as run:
+            plain.run(req())
+        self.assertIsNone(run.call_args.kwargs["env"])  # no isolatedHome: the user's own environment
+
 
 class RemoteProfileTests(unittest.TestCase):
     """get_engine prefers the newest published profile, and falls back quietly."""
