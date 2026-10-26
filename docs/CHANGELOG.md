@@ -38,6 +38,10 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - Homepage: *How it works* is a section again. Adding the run diagram (2026-10-19) cut
   its `<section id="how">` opening tag, heading and intro, and left the tail of the old ASCII flow
   after the diagram, so the nav's "How it works" link went nowhere (site checks, 2026-10-26).
+- Tests: `test_homepage.py` now fails on a cut like that. It parses `homepage/index.html` with
+  the standard library and rejects a mangled tag, a structural element left open or closed out
+  of order, and an in-page `#link` with no matching `id`. Checked against the broken 10-19 page:
+  it reports all three.
 
 ## 0.12.3 — 2026-10-26
 
