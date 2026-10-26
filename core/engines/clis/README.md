@@ -18,10 +18,11 @@ profile here was checked against the CLI's own `--help` on the date in its `veri
 |:---|:---|:---|:---|
 | [`claude`](claude.json) | Claude Code | enforced (`--allowedTools`) | ✅ |
 | [`codex`](codex.json) | Codex CLI | advisory (sandbox is the boundary) | ✅ short-story, 2026-10-14 |
-| [`gemini`](gemini.json) | Gemini CLI | advisory | ⬜ |
+| [`gemini`](gemini.json) | Gemini CLI | advisory | ✅ short-story, 2026-10-26 (`GEMINI_API_KEY`) |
 | [`opencode`](opencode.json) | OpenCode | advisory | ⬜ (answers a smoke prompt) |
 | [`kimi`](kimi.json) | Kimi Code | advisory | ⬜ (answers a smoke prompt) |
-| [`grok`](grok.json) | Grok Build | advisory | ⬜ (flags checked; needs `grok login`) |
+| [`grok`](grok.json) | Grok Build | advisory | ⬜ (flags checked; needs `XAI_API_KEY` or `grok login`) |
+| [`agy`](agy.json) | Antigravity CLI | advisory | ✅ short-story, 2026-10-26 (`GEMINI_API_KEY`) |
 
 **Advisory** means the CLI has no way to limit tools by name, so the recipe's tool list only
 reaches the agent through the prompt's contract. Run those CLIs somewhere the staging folder is
@@ -77,6 +78,7 @@ python -m unittest discover -s tests          # the profile is complete
 | `prompt` | `stdin`, `arg` (put `{prompt}` in `argv`) or `file` (written to `promptFile` in the staging folder, deleted after) |
 | `argv` | Arguments after the binary. `{workdir}` `{model}` `{tools}` `{prompt}` `{promptFile}` are filled in; `"@model"` and `"@tools"` splice `modelArgs` / `toolArgs` only when there's a model or tool list to pass |
 | `toolsJoin` | Separator for `{tools}` (default `,`) |
+| `isolatedHome` | Files (relative path → string or JSON) for a throwaway home the CLI runs in: `HOME` and `USERPROFILE` point there for the run, then it's deleted. For a CLI whose own config (MCP servers, a login, a model override) gets in the way of a headless run (Antigravity) |
 | `exitCode` | `ignore` if a non-zero exit with a valid result is still a result (Claude) |
 | `output` | How to read what it printed, below |
 | `check` | Commands `check_clis.py` runs: `version`, and the `help` pages to search for every flag |

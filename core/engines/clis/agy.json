@@ -1,0 +1,30 @@
+{
+  "name": "agy",
+  "label": "Antigravity CLI",
+  "binary": "agy",
+  "binaryEnv": "AGY_BIN",
+  "install": "Install the Antigravity CLI (https://antigravity.google/docs/install?tab=cli) and set GEMINI_API_KEY",
+  "auth": "GEMINI_API_KEY in the environment (the same key the image step uses). The profile's isolated home sets \"modelProvider\": \"gemini\", which headless use needs: the key alone has no effect, and agy never reads a .env file.",
+  "docs": ["https://antigravity.google/docs/install?tab=cli", "https://antigravity.google/docs/cli"],
+  "skillsDir": ".agents/skills",
+  "toolPolicy": "advisory",
+  "_toolPolicy": "No per-tool allowlist: --dangerously-skip-permissions auto-approves every call, so the prompt's contract is the only rule.",
+  "isolatedHome": {
+    ".gemini/antigravity-cli/settings.json": {"modelProvider": "gemini"}
+  },
+  "_isolatedHome": "Runs from a throwaway home, not yours: with a user's MCP servers configured, headless agy sends the message and never starts the turn (1.4.7, 2026-10-26), and a recipe run shouldn't see those servers anyway.",
+  "prompt": "file",
+  "promptFile": ".prompt.md",
+  "_prompt": "--print takes no stdin, and the longest recipe prompts pass Windows' 32k command-line limit, so the agent is told to read the prompt file.",
+  "argv": ["--print=Your full task is in the file .prompt.md in the current folder. Read it and do exactly what it says.", "--output-format", "json", "--dangerously-skip-permissions", "@model"],
+  "modelArgs": ["--model", "{model}"],
+  "output": {
+    "format": "json",
+    "text": "response",
+    "errors": [{"path": "status", "not": "SUCCESS"}, {"path": "error", "truthy": true}],
+    "errorMessage": "error",
+    "meta": {"conversation_id": "conversation_id", "num_turns": "num_turns"}
+  },
+  "check": {"version": ["--version"], "help": [["--help"]]},
+  "verified": {"version": "1.4.7", "checked": "2026-10-26", "liveRun": true, "liveRunNote": "short-story, 2026-10-26: 2,074 words in 3 min, default model, GEMINI_API_KEY"}
+}
