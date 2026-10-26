@@ -13,12 +13,13 @@
 
 ---
 
-Worked by hand; no roadmap routine reads this file. Ticking an item adds its line to the
+The weekly roadmap routine works this file top to bottom every Wednesday. **Every item above
+`## After public release` is a go-live gate.** Ticking an item adds its line to the
 [changelog](CHANGELOG.md) and updates any doc it made stale, in the same commit. There's no paid
-tier planned: this is the free companion to Cronsole.
+tier planned: this is the free companion to Cronsole, so there is no Revenue group.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked (the
-reason follows on the line). `small` marks an item a check verifies; `🔒 Maintainer` marks one only
+reason follows on the line). `small` marks an item a check verifies; `🔒 Needs Mike` marks one only
 the maintainer can do.
 
 > [!NOTE]
@@ -27,13 +28,22 @@ the maintainer can do.
 > What's left is portability: each recipe has to work on every agent CLI with a profile, not just
 > Claude. After that the work is making recipes better and adding new ones.
 
-## 🚦 Public release (done 2026-10-14)
+## 🔨 Phase 1: Port the fleet (done 2026-10-14)
+
+- [x] 48 recipes in seven groups, each with dry-run and faked-engine tests in CI — done 2026-10-14:
+      versions 0.1.0 to 0.10.0 in the [changelog](CHANGELOG.md)
+
+## 🚦 Public release
 
 - [x] CI, verified README, clean full-history secret scan, MIT licence, live demo site — done
       2026-10-14; see 0.1.0 to 0.10.0 in the [changelog](CHANGELOG.md)
-- [ ] small `SECURITY.md` with how to report a vulnerability
+- [ ] `small` `SECURITY.md` with how to report a vulnerability
 
-## 🔌 CLI coverage
+## After public release
+
+Nothing below blocks go-live.
+
+### 🔌 CLI coverage
 
 A recipe counts as working on a CLI when `run.py --engine <name>` publishes an artifact that passes
 the recipe's own output checks, with no change to the recipe. Recipe content is proven on Claude, so
@@ -43,16 +53,40 @@ staging folder, staged skills are found, and the tools the recipe needs exist on
 What a CLI has to provide depends on the **Tools** column: `files` is the default file tools only,
 `web` adds web search and fetch, `fetch` adds fetch only, `bash` adds a shell.
 
-### Per CLI
+Eleven recipes can't start without an image, speech or ElevenLabs key (the **Also needs** column
+of the [recipe index](../recipes/README.md)). A run with no key stops before the agent, so it proves
+nothing about the CLI; those cells wait for the key-gated item below. `pr-review` runs only in
+`report` mode and `app-enhancement` only in patch mode, never `--apply`.
 
-- [x] **Claude** (`claude`): every recipe, through the private fleet
-- [-] **Codex** (`codex`): `short-story` ran for real on 2026-10-14 (2,835 words in 4 minutes).
+#### Making the sweep cheap
+
+- [ ] A `scripts/cli_sweep.py --engine <name> [--recipe <name>…]` that runs recipes on one CLI,
+      records pass or fail with the failing check, and rewrites that CLI's column in the matrix
+      below. Done when a sweep of two `files` recipes on `claude` updates their cells and a unit test
+      covers the matrix rewrite. Without it, 288 runs is too much to do by hand
+- [ ] A `web` recipe on an advisory CLI that has no web tool fails before the agent starts, with a
+      message naming the missing tool, instead of publishing an unsourced artifact (unit test with a
+      faked profile)
+- [ ] Each profile's `verified` block records which recipes passed (`liveRuns: [...]`) instead of a
+      single `liveRun` flag, and the [CLI profiles](../core/engines/clis/README.md) table reads it
+- [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
+      so more profiles can be `allowlist` instead of `advisory`
+
+#### Per CLI
+
+Each item is done when every cell in that CLI's column that needs no key is ✅, or ❌ with its own
+item saying why. A run works through one CLI's cells in matrix order and notes its progress here.
+
+- [x] **Claude** (`claude`): every recipe, through the private fleet — done 2026-10-26
+- [ ] **Codex** (`codex`): `short-story` ran for real on 2026-10-14 (2,835 words in 4 minutes).
       Next: one recipe per tools class (`web`, `fetch`, `bash`), then the rest
 - [ ] **OpenCode** (`opencode`): answers a smoke prompt (1.19.3, 2026-10-17). Next: `short-story`,
       then one recipe per tools class, then the rest
 - [ ] **Kimi Code** (`kimi`): answers a smoke prompt (0.18.0, 2026-10-17). Same order as OpenCode
-- [ ] 🔒 Maintainer **Grok Build** (`grok`): flags checked against `--help` only. Needs `grok login`
-      on the maintainer's machine, then the smoke prompt and the same order
+- [ ] **Grok Build** (`grok`): flags checked against `--help` only. Needs `grok login` on the
+      maintainer's machine, then the smoke prompt and the same order 🔒 Needs Mike
+- [ ] The key-gated cells: the eleven recipes that need a key, on every CLI with a passing column,
+      with the keys in `.env` 🔒 Needs Mike
 - [!] **Gemini CLI** (`gemini`): blocked on auth. The Google login is on the retired free Code
       Assist tier (`IneligibleTierError` on 0.64.0, 2026-10-17), and Google's headless reference says
       the CLI was replaced by Antigravity for unpaid-tier and Google One users on 2026-06-18
@@ -62,19 +96,7 @@ What a CLI has to provide depends on the **Tools** column: `files` is the defaul
       model, folder, `--dangerously-skip-permissions` or MCP setting. Next: confirm an interactive
       session answers on the same login, then `scripts/new_cli.py agy` and `check_clis.py agy`
 
-### Making the sweep cheap
-
-- [ ] A `scripts/cli_sweep.py --engine <name> [--recipe <name>…]` that runs recipes on one CLI,
-      records pass or fail with the failing check, and rewrites that CLI's column in the matrix
-      below. Without it, 288 runs is too much to do by hand
-- [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
-      so more profiles can be `allowlist` instead of `advisory`
-- [ ] A `web` recipe on an advisory CLI that has no web tool fails before the agent starts, with a
-      message naming the missing tool, instead of publishing an unsourced artifact
-- [ ] Each profile's `verified` block records which recipes passed (`liveRuns: [...]`) instead of a
-      single `liveRun` flag, and the [CLI profiles](../core/engines/clis/README.md) table reads it
-
-### Matrix
+#### Matrix
 
 ✅ publishes on that CLI · ⬜ not run yet · ❌ fails (an item above says why) · 🚫 CLI blocked
 
@@ -129,7 +151,7 @@ What a CLI has to provide depends on the **Tools** column: `files` is the defaul
 | [pr-review](../recipes/pr-review/README.md) | bash | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
 | [app-enhancement](../recipes/app-enhancement/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
 
-## ✨ Enhance
+### ✨ Enhance
 
 - [ ] Move the Gemini model defaults off models Google has retired or restricted. Image:
       `gemini-3.1-flash-image` in `core/images/__init__.py` is deprecated; the replacement is
@@ -150,7 +172,7 @@ What a CLI has to provide depends on the **Tools** column: `files` is the defaul
       [demo site](https://ai-automation-recipes-demo.ai-automation-tools.dev), labelled with the CLI
       that made it
 
-## ➕ New recipes
+### ➕ New recipes
 
 Every private fleet job already has a recipe (see *Not ported*), so new ones are net-new. Each goes
 into `recipes/README.md`, `CATEGORY_PACKS` and the matrix above. Candidates the current core already
@@ -160,7 +182,7 @@ supports:
 - [ ] A weekly quiz built from the news digests
 - [ ] A "year in review" that reads a collection's artifacts and writes a retrospective
 
-## 🔭 Later
+### 🔭 Later
 
 Changes to Cronsole itself, tracked here because these recipes would use them:
 
@@ -174,7 +196,7 @@ Changes to Cronsole itself, tracked here because these recipes would use them:
 - [ ] `execution.timeoutSec` for command-line (`exec`) native templates; PR #323 covers `script`
       templates only, so the clone edition still gets Cronsole's 5-minute default
 
-## 🚫 Not ported
+### 🚫 Not ported
 
 What's left of the private fleet with nothing to port.
 
