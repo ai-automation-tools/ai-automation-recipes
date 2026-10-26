@@ -8,7 +8,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/recipes-48-8B5CF6?style=for-the-badge" alt="48 recipes">
-  <img src="https://img.shields.io/badge/live--tested-13-F59E0B?style=for-the-badge" alt="13 live-tested">
+  <img src="https://img.shields.io/badge/runs_on-claude_·_codex_·_more-F59E0B?style=for-the-badge" alt="Runs on Claude, Codex and more">
   <a href="../README.md"><img src="https://img.shields.io/badge/↩-repository_root-6B7280?style=for-the-badge" alt="Repository root"></a>
 </p>
 
@@ -20,8 +20,8 @@ recipe can't run without. A run that's missing one of those keys stops before th
 it costs nothing.
 
 When a recipe runs is up to you. Each Cronsole template ships with a default schedule you can change
-on import. Which recipes have had a real run so far is tracked in the
-[live-test status](../docs/ROADMAP.md#-live-test-status).
+on import. Which recipes run on which agent CLI is tracked in the
+[CLI coverage matrix](../docs/ROADMAP.md#-cli-coverage).
 
 ## 🧩 Apps & Games
 

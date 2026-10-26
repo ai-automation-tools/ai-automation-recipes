@@ -212,8 +212,8 @@ holds its source and says how it stays current.
   the most.
 - A song is one ElevenLabs Music generation. Podcasts and voiceovers bill per spoken line.
 - Research recipes cite real sources, but check a source before you act on it.
-- 13 of the 48 recipes have had a real run so far; the rest have only run with the engines faked.
-  The [roadmap](docs/ROADMAP.md#-live-test-status) tracks which.
+- Every recipe runs for real on Claude. Other CLIs are being proven recipe by recipe; the
+  [roadmap](docs/ROADMAP.md#-cli-coverage) tracks which.
 
 ## 📖 Documentation
 
