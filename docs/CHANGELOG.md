@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.2-2ea44f?style=for-the-badge" alt="Version 0.12.2">
+  <img src="https://img.shields.io/badge/version-0.12.3-2ea44f?style=for-the-badge" alt="Version 0.12.3">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,15 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.3 — 2026-10-26
+
+**Changed**
+- Roadmap rewritten around CLI coverage. Every recipe already runs for real on Claude in the private
+  fleet, so the per-recipe live-test list is gone; in its place is a matrix of all 48 recipes against
+  every CLI with a profile (plus Antigravity), each recipe's tools class, and the per-CLI order to
+  work through. Enhancements and new recipes follow it.
+- The recipe index, root README and recipe guide link to the matrix instead of the live-test list.
 
 ## 0.12.2 — 2026-10-21
 

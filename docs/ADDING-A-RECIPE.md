@@ -98,8 +98,8 @@ python scripts/build_registry.py --check
 python scripts/check_public.py              # CI runs it with --history too
 ```
 
-Then run it for real once and read what it made, and add its line to the roadmap's [live-test list](ROADMAP.md#-live-test-status)
-(`- [ ]` until that run has been read, played or listened to).
+Then run it for real once and read what it made, and add its row to the roadmap's [CLI matrix](ROADMAP.md#-cli-coverage)
+(⬜ on every CLI it hasn't published on yet).
 
 ---
 

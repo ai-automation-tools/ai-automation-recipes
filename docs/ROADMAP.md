@@ -1,211 +1,172 @@
 <h1 align="center">🗺️ Roadmap</h1>
 
 <p align="center">
-  <em>Public since 2026-10-14: which recipes have had a real run, and the work left to do.</em>
+  <em>Every recipe on every agent CLI, then better and more recipes.</em>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/now-after_public_release-F59E0B?style=for-the-badge" alt="Now: after public release">
   <img src="https://img.shields.io/badge/stage-public_since_2026--10--14-2ea44f?style=for-the-badge" alt="Stage: public since 2026-10-14">
-  <img src="https://img.shields.io/badge/live--tested-13_of_48-8B5CF6?style=for-the-badge" alt="13 of 48 live-tested">
+  <img src="https://img.shields.io/badge/claude-48_of_48-8B5CF6?style=for-the-badge" alt="Claude: 48 of 48">
+  <img src="https://img.shields.io/badge/other_CLIs-1_of_288-F59E0B?style=for-the-badge" alt="Other CLIs: 1 of 288">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
 
 ---
 
-Worked by hand; no roadmap routine reads this file. **Every item above `## After public release`
-is a go-live gate.** Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates any
-doc it made stale, in the same commit. The repo went public on 2026-10-14, with live samples at
-[ai-automation-recipes-demo.ai-automation-tools.dev](https://ai-automation-recipes-demo.ai-automation-tools.dev).
-There's no paid tier planned: this is the free companion to Cronsole, so there is no Revenue group.
+Worked by hand; no roadmap routine reads this file. Ticking an item adds its line to the
+[changelog](CHANGELOG.md) and updates any doc it made stale, in the same commit. There's no paid
+tier planned: this is the free companion to Cronsole.
 
-Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
-(the reason follows on the line). `small` marks an item a check verifies; `🔒 Needs Mike`
-marks one only Mike can do.
+Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked (the
+reason follows on the line). `small` marks an item a check verifies; `🔒 Maintainer` marks one only
+the maintainer can do.
 
 > [!NOTE]
-> **Where we are, 2026-10-14.** 48 recipes in seven groups, every one dry-run and faked-engine
-> tested in CI; 13 have had a real run. Any agent CLI can run them through a JSON profile; six are
-> bundled (Claude and Codex have run recipes for real; Gemini, OpenCode, Kimi and Grok not yet).
-> Three recipes have a pilot Cronsole edition, all three run from Cronsole. Every automation in the
-> private fleet now has a recipe, including the seven that were held back earlier in the day over
-> real-people content and employer-domain work; the maintainer chose to port everything first and
-> decide what stays in the public set later. What has nothing to port is listed at the bottom.
+> **Where we are, 2026-10-26.** 48 recipes in seven groups. Every one already runs for real on
+> Claude in the maintainer's private fleet, so this roadmap no longer tracks a live run per recipe.
+> What's left is portability: each recipe has to work on every agent CLI with a profile, not just
+> Claude. After that the work is making recipes better and adding new ones.
 
-## 🔨 Phase 1: Port the fleet (done 2026-10-14)
+## 🚦 Public release (done 2026-10-14)
 
-- [x] The pilot, Batch 1 and Batch 2, then the rest of the fleet: 48 recipes in seven groups, each
-      with dry-run and faked-engine tests in CI — done 2026-10-14: versions 0.1.0 to 0.10.0 in the
-      [changelog](CHANGELOG.md)
+- [x] CI, verified README, clean full-history secret scan, MIT licence, live demo site — done
+      2026-10-14; see 0.1.0 to 0.10.0 in the [changelog](CHANGELOG.md)
+- [ ] small `SECURITY.md` with how to report a vulnerability
 
-## 🚦 Public release
+## 🔌 CLI coverage
 
-- [x] CI green on push and PR: unit tests, registry check, dry runs — done 2026-10-14: `.github/workflows/ci.yml`
-- [x] README usage verified against the real code — done 2026-10-14: "Bring every doc up to date" (8b340cd)
-- [x] Full-history secret and private-data scan that comes back clean — done 2026-10-14: `scripts/check_public.py --history`, run in CI
-- [x] Licence chosen and `LICENSE` added — done 2026-10-14: MIT
-- [x] Live samples at their URL — done 2026-10-14: the demo site, [ai-automation-recipes-demo.ai-automation-tools.dev](https://ai-automation-recipes-demo.ai-automation-tools.dev)
-- [ ] small `SECURITY.md` with how to report a vulnerability (the repo went public without one; the secret scan above is in CI)
+A recipe counts as working on a CLI when `run.py --engine <name>` publishes an artifact that passes
+the recipe's own output checks, with no change to the recipe. Recipe content is proven on Claude, so
+a CLI run only has to show the contract holds: the prompt is followed, the right files land in the
+staging folder, staged skills are found, and the tools the recipe needs exist on that CLI.
 
-## After public release
+What a CLI has to provide depends on the **Tools** column: `files` is the default file tools only,
+`web` adds web search and fetch, `fetch` adds fetch only, `bash` adds a shell.
 
-Nothing below blocks go-live.
+### Per CLI
 
-### 🧪 Live-test status
+- [x] **Claude** (`claude`): every recipe, through the private fleet
+- [-] **Codex** (`codex`): `short-story` ran for real on 2026-10-14 (2,835 words in 4 minutes).
+      Next: one recipe per tools class (`web`, `fetch`, `bash`), then the rest
+- [ ] **OpenCode** (`opencode`): answers a smoke prompt (1.19.3, 2026-10-17). Next: `short-story`,
+      then one recipe per tools class, then the rest
+- [ ] **Kimi Code** (`kimi`): answers a smoke prompt (0.18.0, 2026-10-17). Same order as OpenCode
+- [ ] 🔒 Maintainer **Grok Build** (`grok`): flags checked against `--help` only. Needs `grok login`
+      on the maintainer's machine, then the smoke prompt and the same order
+- [!] **Gemini CLI** (`gemini`): blocked on auth. The Google login is on the retired free Code
+      Assist tier (`IneligibleTierError` on 0.64.0, 2026-10-17), and Google's headless reference says
+      the CLI was replaced by Antigravity for unpaid-tier and Google One users on 2026-06-18
+      (<https://geminicli.com/docs/cli/headless/>). Unblocks with a `GEMINI_API_KEY`
+- [!] **Antigravity** (`agy`): no profile. Headless `agy --print` stalls on 1.3.6 (2026-10-17): the
+      `init` event arrives, the model request goes out, no turn starts (`num_turns: 0`), whatever the
+      model, folder, `--dangerously-skip-permissions` or MCP setting. Next: confirm an interactive
+      session answers on the same login, then `scripts/new_cli.py agy` and `check_clis.py agy`
 
-Every recipe passes dry runs, unit tests and faked-engine runs in CI. This list tracks **real**
-runs, with a real agent and real image, speech or music engines. They're being done over the
-coming weeks. Tick a recipe once a live run has published and someone has read, played or
-listened to what it made.
+### Making the sweep cheap
 
-- [x] [**App Idea Card**](../recipes/app-idea-card/README.md) (Apps & Games): TapCheck · Cronsole test task from Thu 2026-10-15
-- [ ] [**App Prototype**](../recipes/app-prototype/README.md) (Apps & Games): not yet
-- [x] [**Browser Extension**](../recipes/browser-extension/README.md) (Apps & Games): Exit Ramp
-- [ ] [**Finance App Prototype**](../recipes/finance-app-prototype/README.md) (Apps & Games): not yet
-- [ ] [**IAM App Prototype**](../recipes/iam-prototype/README.md) (Apps & Games): not yet · added 2026-10-14
-- [x] [**Browser Game**](../recipes/browser-game/README.md) (Apps & Games): Plumb Line (played in a browser)
-- [ ] [**Mobile Game**](../recipes/mobile-game/README.md) (Apps & Games): not yet
-- [ ] [**PC Game Concept**](../recipes/pc-game-concept/README.md) (Apps & Games): not yet
-- [ ] [**3D Print Design**](../recipes/3d-print-design/README.md) (Apps & Games): not yet
-- [x] [**Short Story**](../recipes/short-story/README.md) (Writing): The Blue Words
-- [x] [**Serialized Novella**](../recipes/serialized-novella/README.md) (Writing): No Speech Detected, ch. 1 (seed run only) · next: a second run, to prove chapter 2 picks up the bible
-- [ ] [**Alternate History**](../recipes/alternate-history/README.md) (Writing): not yet
-- [ ] [**Agent Persona (Known Figure)**](../recipes/agent-persona/README.md) (Writing): not yet · added 2026-10-14
-- [ ] [**Original Agent Persona**](../recipes/agent-persona-original/README.md) (Writing): not yet
-- [ ] [**Satirical News**](../recipes/satirical-news/README.md) (Writing): not yet · added 2026-10-14
-- [ ] [**Content Idea**](../recipes/content-idea-gen/README.md) (Writing): not yet
-- [ ] [**Funny AI Content**](../recipes/funny-ai-content/README.md) (Writing): not yet · Cronsole test task, first run Fri 2026-10-16
-- [x] [**Family Recipe**](../recipes/family-recipe/README.md) (Food & Maps): Minnesota Tater Tot Hotdish
-- [ ] [**Regional Recipe**](../recipes/regional-recipe/README.md) (Food & Maps): not yet
-- [ ] [**Viral Recipe**](../recipes/viral-recipe/README.md) (Food & Maps): not yet · added 2026-10-14
-- [ ] [**AI Map**](../recipes/ai-map/README.md) (Food & Maps): not yet
-- [ ] [**Agent Toolkit**](../recipes/agent-toolkit/README.md) (Research Digests): not yet
-- [ ] [**AI Stack Radar**](../recipes/ai-stack-radar/README.md) (Research Digests): not yet
-- [ ] [**Open-Source Spotlight**](../recipes/oss-spotlight/README.md) (Research Digests): not yet
-- [ ] [**Cool Websites**](../recipes/cool-websites/README.md) (Research Digests): not yet
-- [ ] [**Top 10 GitHub Repos**](../recipes/top-10-github-repos/README.md) (Research Digests): not yet
-- [x] [**Trending Movers**](../recipes/trending-movers/README.md) (Research Digests): Trending Movers 2026-10-14
-- [ ] [**Signal Sources**](../recipes/signal-sources/README.md) (Research Digests): not yet
-- [ ] [**Security Toolkit**](../recipes/security-toolkit/README.md) (Research Digests): not yet
-- [ ] [**Finance Toolkit**](../recipes/finance-toolkit/README.md) (Research Digests): not yet
-- [ ] [**Model Benchmark Watch**](../recipes/model-benchmark-watch/README.md) (Research Digests): not yet · added 2026-10-14
-- [ ] [**News Digest**](../recipes/news-digest/README.md) (Research Digests): not yet · added 2026-10-14; ten topics, so one live run per topic before it counts as done
-- [ ] [**Finance Digest**](../recipes/finance-digest/README.md) (Research Digests): not yet · added 2026-10-14; eight topics, one live run each
-- [x] [**Comic**](../recipes/comics/README.md) (Images): Circular Dependency
-- [ ] [**AI Meme**](../recipes/ai-meme-generator/README.md) (Images): not yet
-- [ ] [**Poster**](../recipes/poster/README.md) (Images): not yet
-- [ ] [**News Collage**](../recipes/news-collage/README.md) (Images): not yet · added 2026-10-14; three windows (day, week, month), one live run each
-- [ ] [**Future Cities 2500**](../recipes/future-cities/README.md) (Images): not yet
-- [ ] [**Image Prompt Pack**](../recipes/image-prompt-packs/README.md) (Images): not yet
-- [ ] [**Wallpaper Pack**](../recipes/wallpaper-packs/README.md) (Images): not yet · heaviest: three 4K renders per run
-- [x] [**Icon Pack**](../recipes/icon-packs/README.md) (Images): Browser Actions (re-run after de-branding)
-- [ ] [**Image Collections**](../recipes/image-collections/README.md) (Images): not yet · needs research; check the seeded collections file
-- [x] [**Song**](../recipes/song-generator/README.md) (Audio): Every Stone I Set (`folk` only) · other song types untested
-- [x] [**Podcast Script**](../recipes/podcast-script-generator/README.md) (Audio): Should We Text the Aliens First?
-- [x] [**Podcast Episode**](../recipes/podcast-episode/README.md) (Audio): Should We Text the Aliens First? (13.5 min)
-- [x] [**Voiceover Script**](../recipes/voiceover-script-generator/README.md) (Audio): The Spacecraft Lost to a Unit Label
-- [ ] [**PR Review**](../recipes/pr-review/README.md) (Repo Ops): not yet · added 2026-10-14; report mode first, then comment, then merge on a throwaway repo
-- [ ] [**App Enhancement**](../recipes/app-enhancement/README.md) (Repo Ops): not yet · added 2026-10-14; patch mode first, then `--apply` on a copy
-
-### 🔨 Build
-
-- [ ] A live `news-collage` run per window: day (the six-panel grid with a readable timestamp),
-      week (one scene, title and date range spelled right), month. The captions are the thing to
-      check; six garbled captions was the fleet's most common visible defect
-- [ ] A live `agent-persona` run and a live `satirical-news` run, read for the guardrails the
-      prompts carry (public persona only, no fabricated quotes presented as real, satire labelled)
-- [ ] A live `iam-prototype` run: it must stay vendor-neutral and run on synthetic data
-- [ ] A live `finance-digest` run per topic; the `trade-ideas` topic must carry its paper-only
-      line on every idea and the disclaimer at the end
-- [ ] A live `pr-review` run in `report` mode on a repo with open PRs, then `comment`, then `merge`
-      on a throwaway repo; a live `app-enhancement` run in patch mode, then `--apply` on a copy
-- [ ] A second `serialized-novella` run writes chapter 2 from the saved story bible, keeping names,
-      places and the rolling synopsis consistent
-- [ ] A live `alternate-history` run with an image key: the eight scenes read as one illustrated
-      piece, and the shared style survives eight separate image calls
-- [ ] A live `agent-persona-original` run: the avatar and the cover are recognisably the same person
-- [ ] A live run on `--engine gemini`. The Gemini CLI first needs a headless auth that works on
-      the maintainer's machine: its Google login is on the retired free Code Assist tier, so it
-      will be `GEMINI_API_KEY`. Re-confirmed on 0.64.0 (2026-10-17): the PONG run fails with
-      `IneligibleTierError`, and Google's headless reference says the CLI was replaced by
-      Antigravity for unpaid-tier and Google One users on 2026-06-18
-      (<https://geminicli.com/docs/cli/headless/>)
-- [ ] Move the Gemini model defaults off models Google has retired or restricted, with a
-      `GEMINI_API_KEY` to prove each swap. Image: `gemini-3.1-flash-image` in
-      `core/images/__init__.py` is deprecated (no shutdown date), the replacement is
-      `gemini-nano-banana-2.1`. Speech: `gemini-2.5-flash-preview-tts` in
-      `core/audio/__init__.py` is now limited to accounts that already used it, so new keys can't
-      call it; the replacements are `gemini-3.8-flash-tts` and `gemini-3.8-flash-lite-tts`
-      (<https://ai.google.dev/gemini-api/docs/changelog>, 2026-09-18 and 2026-10-06). Also update
-      `.env.example`, `docs/ARCHITECTURE.md` and the `image-prompt-craft` engine notes. Done when a
-      dry run and one real image and one real speech call succeed on the new defaults
-- [ ] Python 3.10 reached end of life on 2026-10-01 (<https://devguide.python.org/versions/>). Raise
-      the floor to 3.11 in `AGENTS.md`, the docs, CI and the Cronsole edition's interpreter notes,
-      and drop any 3.10-only workarounds. Done when CI runs 3.11 and newer only and the tests pass
-- [ ] Antigravity (`agy`) has no profile: `agy --print=<prompt>` hung with no output headless on
-      2026-10-14. Retried on 1.3.5 (2026-10-15) and 1.3.6 (2026-10-17), which now has `--output-format json|stream-json`
-      and `--print-timeout`: still stalls. The `init` event arrives, the model request goes out,
-      and no turn ever starts (`num_turns: 0`). It doesn't depend on the model (Gemini 3.8 Flash and
-      Claude Sonnet 4.6 both stall), the folder (temp folder or a known workspace),
-      `--dangerously-skip-permissions`, or MCP servers (`github` disabled made no difference).
-      Next: confirm an interactive `agy` session answers on the same login, then retry with
-      `scripts/new_cli.py agy`
-- [x] Profiles stay current without an update: runs use the newest profile on `main`, cached a day,
-      bundled copy as the fallback (0.12.0)
-- [x] `scripts/new_cli.py <binary>` drafts a profile for any other CLI from its `--help`, checks the
-      flags and pings it (0.12.0; tried on OpenCode, which drafted and answered)
+- [ ] A `scripts/cli_sweep.py --engine <name> [--recipe <name>…]` that runs recipes on one CLI,
+      records pass or fail with the failing check, and rewrites that CLI's column in the matrix
+      below. Without it, 288 runs is too much to do by hand
 - [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
       so more profiles can be `allowlist` instead of `advisory`
-- [ ] A live `news-digest` run on one topic, then one per topic over three weeks of the Mon/Wed/Fri
-      default schedule; watch whether the 16-per-source cap keeps the loud feeds (Nature, Podnews,
-      Deadline) from owning a week, and whether five sections is the right number for every topic
-- [ ] A live `model-benchmark-watch` run, then a second so the previous-edition handover is seen
-      working (the second should lead with movement, not restate the table)
-- [ ] A live `viral-recipe` run: does Claude find something genuinely current, and does the
-      safety gate catch the kind of shortcut viral food carries
-- [ ] New automations that aren't ports (every fleet job now has a recipe, see *Not ported*).
-      Candidates the current core already supports: a release-notes digest that watches a list of
-      GitHub repos the user names, a weekly quiz built from the news digests, a "year in review"
-      that reads a collection's artifacts and writes a retrospective
+- [ ] A `web` recipe on an advisory CLI that has no web tool fails before the agent starts, with a
+      message naming the missing tool, instead of publishing an unsourced artifact
+- [ ] Each profile's `verified` block records which recipes passed (`liveRuns: [...]`) instead of a
+      single `liveRun` flag, and the [CLI profiles](../core/engines/clis/README.md) table reads it
 
-### 🎬 Two-editions pilot (0.11.0)
+### Matrix
 
-Every recipe gets a Cronsole edition and runs on any CLI; three recipes go first.
+✅ publishes on that CLI · ⬜ not run yet · ❌ fails (an item above says why) · 🚫 CLI blocked
 
-- [x] `short-story`, `comics` and `podcast-episode` imported from `ai-recipes-cronsole` into a
-      Cronsole running cronsole PR #323 and run once each (2026-10-14): short-story published
-      with no image key (180 s including first-run setup), comics published with its key as a
-      task secret (44 s, cached runtime), podcast-episode exited cleanly with nothing to render
-- [x] One pilot recipe run for real on a second CLI: `short-story --engine codex`, 2,835 words
-      in 4 minutes (2026-10-14); `codex` profile marked `liveRun`
-- [ ] A real `podcast-episode` render from the Cronsole edition, after a `podcast-script-generator`
-      run leaves an unrendered script
-- [ ] Then add every other recipe to `NATIVE` in `scripts/build_registry.py`, and decide whether
-      the clone edition stays a full set or shrinks to the editing path
+| Recipe | Tools | Claude | Codex | OpenCode | Kimi | Grok | Gemini | agy |
+|:---|:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| [app-idea-card](../recipes/app-idea-card/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [app-prototype](../recipes/app-prototype/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [browser-extension](../recipes/browser-extension/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [finance-app-prototype](../recipes/finance-app-prototype/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [iam-prototype](../recipes/iam-prototype/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [browser-game](../recipes/browser-game/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [mobile-game](../recipes/mobile-game/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [pc-game-concept](../recipes/pc-game-concept/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [3d-print-design](../recipes/3d-print-design/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [short-story](../recipes/short-story/README.md) | files | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [serialized-novella](../recipes/serialized-novella/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [alternate-history](../recipes/alternate-history/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [agent-persona](../recipes/agent-persona/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [agent-persona-original](../recipes/agent-persona-original/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [satirical-news](../recipes/satirical-news/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [content-idea-gen](../recipes/content-idea-gen/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [funny-ai-content](../recipes/funny-ai-content/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [family-recipe](../recipes/family-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [regional-recipe](../recipes/regional-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [viral-recipe](../recipes/viral-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [ai-map](../recipes/ai-map/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [agent-toolkit](../recipes/agent-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [ai-stack-radar](../recipes/ai-stack-radar/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [oss-spotlight](../recipes/oss-spotlight/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [cool-websites](../recipes/cool-websites/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [top-10-github-repos](../recipes/top-10-github-repos/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [trending-movers](../recipes/trending-movers/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [signal-sources](../recipes/signal-sources/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [security-toolkit](../recipes/security-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [finance-toolkit](../recipes/finance-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [model-benchmark-watch](../recipes/model-benchmark-watch/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [news-digest](../recipes/news-digest/README.md) | fetch | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [finance-digest](../recipes/finance-digest/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [comics](../recipes/comics/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [ai-meme-generator](../recipes/ai-meme-generator/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [poster](../recipes/poster/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [news-collage](../recipes/news-collage/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [future-cities](../recipes/future-cities/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [image-prompt-packs](../recipes/image-prompt-packs/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [wallpaper-packs](../recipes/wallpaper-packs/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [icon-packs](../recipes/icon-packs/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [image-collections](../recipes/image-collections/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [song-generator](../recipes/song-generator/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [podcast-script-generator](../recipes/podcast-script-generator/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [podcast-episode](../recipes/podcast-episode/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [voiceover-script-generator](../recipes/voiceover-script-generator/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [pr-review](../recipes/pr-review/README.md) | bash | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
+| [app-enhancement](../recipes/app-enhancement/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | 🚫 | 🚫 |
 
-### ✅ Proving it
+## ✨ Enhance
 
-- [ ] Live runs for every open recipe in the live-test list above, each sample added to its README
-- [ ] The Cronsole test tasks fire on their own and their run history shows a published artifact
-      (first runs Thu 2026-10-15 and Fri 2026-10-16)
-- [ ] One full pack scheduled through Cronsole for a week with no manual fixes
-- [ ] Re-probe every `news-digest` feed monthly (101 of 102 fetched and parsed on 2026-10-14 after
-      the fetcher learned gzip, BOMs, control bytes and bare ampersands; three publishers that 403
-      non-browsers were swapped out)
-- [ ] Add each new live run's folder to the demo site
+- [ ] Move the Gemini model defaults off models Google has retired or restricted. Image:
+      `gemini-3.1-flash-image` in `core/images/__init__.py` is deprecated; the replacement is
+      `gemini-nano-banana-2.1`. Speech: `gemini-2.5-flash-preview-tts` in `core/audio/__init__.py`
+      is limited to accounts that already used it; the replacements are `gemini-3.8-flash-tts` and
+      `gemini-3.8-flash-lite-tts` (<https://ai.google.dev/gemini-api/docs/changelog>, 2026-09-18 and
+      2026-10-06). Also update `.env.example`, `docs/ARCHITECTURE.md` and the `image-prompt-craft`
+      engine notes. Done when one real image call and one real speech call succeed on the new defaults
+- [ ] Python 3.10 reached end of life on 2026-10-01 (<https://devguide.python.org/versions/>). Raise
+      the floor to 3.11 in `AGENTS.md`, the docs, CI and the Cronsole edition's interpreter notes.
+      Done when CI runs 3.11 and newer only and the tests pass
+- [ ] Cronsole editions for every recipe: add the rest to `NATIVE` in `scripts/build_registry.py`
+      (three are there now: `short-story`, `comics`, `podcast-episode`), then decide whether the
+      clone edition stays a full set or shrinks to the editing path
+- [ ] The Cronsole template's *Agent CLI* parameter lists only CLIs whose matrix column has at least
+      one ✅, so nobody schedules a recipe on a CLI nothing has run on
+- [ ] Add a sample from each new CLI's first passing run to the
+      [demo site](https://ai-automation-recipes-demo.ai-automation-tools.dev), labelled with the CLI
+      that made it
 
-### 📣 Publish and promote
+## ➕ New recipes
 
-- [ ] Packs shipped through Cronsole's registry and linked from the Cronsole site (needs Cronsole's
-      multiple-registry-sources work, under *Later*)
-- [ ] A one-click "Import into Cronsole" on the demo, once Cronsole can import a template by URL;
-      today each sample links to its recipe and its template file
+Every private fleet job already has a recipe (see *Not ported*), so new ones are net-new. Each goes
+into `recipes/README.md`, `CATEGORY_PACKS` and the matrix above. Candidates the current core already
+supports:
 
-### 🔭 Later
+- [ ] A release-notes digest that watches a list of GitHub repos the user names
+- [ ] A weekly quiz built from the news digests
+- [ ] A "year in review" that reads a collection's artifacts and writes a retrospective
+
+## 🔭 Later
 
 Changes to Cronsole itself, tracked here because these recipes would use them:
 
-- [ ] Multiple registry sources, so this repo can publish its own catalog
+- [ ] Multiple registry sources, so this repo can publish its own catalog and the packs can be
+      linked from the Cronsole site
+- [ ] Import a template by URL, for a one-click "Import into Cronsole" on the demo
 - [ ] A crontab compiler for the `linux` target
 - [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`). Partly covered by
       cronsole PR #323: optional `${secret.NAME?}` references, and the apply response lists the
@@ -213,17 +174,14 @@ Changes to Cronsole itself, tracked here because these recipes would use them:
 - [ ] `execution.timeoutSec` for command-line (`exec`) native templates; PR #323 covers `script`
       templates only, so the clone edition still gets Cronsole's 5-minute default
 
-### 🚫 Not ported
+## 🚫 Not ported
 
-What's left of the private fleet with nothing to port. The content jobs that were on this list
-until 2026-10-14 (the three news images, both persona kinds, the satirical paper, the IAM prototype,
-the eight finance and rewards digests, the IAM briefing, the PR review and the tool-enhancement job)
-are recipes now; see the *Build* list for the decision they still owe.
+What's left of the private fleet with nothing to port.
 
 | Job | Reason |
 |:---|:---|
 | `rock-` / `country-` / `psychedelic-` / `rap-` / `weekly-song` | Consolidated into the fleet's one song job in September; `song-generator` carries every type |
-| `weekly-podcast`, `weekly-audio-podcast` | Deprecated on the fleet in July; the podcast pair here is their replacement. The two ElevenLabs form front-ends are the same artifacts from a pasted script or a topic form, which `podcast-script-generator` + `podcast-episode` cover |
+| `weekly-podcast`, `weekly-audio-podcast` | Deprecated on the fleet in July; `podcast-script-generator` + `podcast-episode` replace them |
 | `cosmic-wallpapers`, `future-cities` (fleet job) | Retired on the fleet; `wallpaper-packs` and `future-cities` here are the successors |
 | `fleet-doctor`, `fleet-status`, `repo-pull`, `watchdog` | Health checks, a status feed and a git pull for one specific box. Nothing a recipe could carry to another machine |
 | the three data-sync workflows behind a retired rewards app | Retired with the app they fed |
