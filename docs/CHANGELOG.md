@@ -34,6 +34,11 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   maintainer, Grok needs `XAI_API_KEY`, and a new item for Kimi's prompts that pass Windows'
   32,767-character command-line limit.
 
+**Fixed**
+- Homepage: *How it works* is a section again. Adding the run diagram (2026-10-19) cut
+  its `<section id="how">` opening tag, heading and intro, and left the tail of the old ASCII flow
+  after the diagram, so the nav's "How it works" link went nowhere (site checks, 2026-10-26).
+
 ## 0.12.3 — 2026-10-26
 
 **Changed**
