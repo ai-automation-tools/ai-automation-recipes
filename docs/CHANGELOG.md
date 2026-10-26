@@ -22,6 +22,10 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   every CLI with a profile (plus Antigravity), each recipe's tools class, and the per-CLI order to
   work through. Enhancements and new recipes follow it.
 - The recipe index, root README and recipe guide link to the matrix instead of the live-test list.
+- Roadmap back on the lab standard (a Phase 1 line and the `## After public release` split), so the
+  new weekly roadmap routine can work it: Codex is `[ ]` with a progress note instead of `[-]`, the
+  sweep tooling comes before the per-CLI runs, and the eleven key-gated recipes have their own
+  `Needs Mike` item.
 
 ## 0.12.2 — 2026-10-21
 
