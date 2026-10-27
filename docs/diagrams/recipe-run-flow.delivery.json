@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "receiptId": "30424a89-f920-44d5-b3ab-bcdf764770f0",
+  "receiptId": "7659b94b-b664-4dc2-9e56-8d0f46303d03",
   "status": "current",
   "command": "deliver",
   "type": "workflow",
   "input": "docs/diagrams/recipe-run-flow.json",
   "output": "docs/diagrams/recipe-run-flow.html",
   "specification": {
-    "sha256": "efb4547d21390c07c1e8ecdfdb6d065e514cb45c1539d5f8accdb821f17032ae",
+    "sha256": "2e212c030bdb0af336a3ff0a07302b92126afda60e9035fa7b2ad7131a039886",
     "bytes": 10685
   },
   "artifact": {
-    "sha256": "6676863562c3c620977f1876578e5ea54f5510c1c7505cdd764d6242b8dc3efa",
+    "sha256": "dba1e79bca68dda8af59946d283f6e0f272ea09c331c8e1b9808e127a47b3091",
     "bytes": 843893
   }
 }
