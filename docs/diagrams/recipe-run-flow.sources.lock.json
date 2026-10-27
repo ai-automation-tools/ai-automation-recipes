@@ -1,10 +1,10 @@
 {
-  "revision": "225a873a7f4fe8fd3d4942a06198a18aeddb6f9c",
+  "revision": "e178dd7369d2d2c4ed90448f64c2833505a3839b",
   "files": {
     "core/artifacts.py": "c2779e65181f26463bd7570f2696746d7e43b795",
     "core/deliver.py": "1985a8fae5e0ab64486c2ae665022d327db461ea",
     "core/engines/__init__.py": "13a97309ce44a572e0e39b223baa4b5bc31b80b4",
-    "core/engines/cli.py": "010bba415904b157bb3f44ef58a86966b63feb93",
+    "core/engines/cli.py": "43de79c779f05db7aed2f3dacc61d203a7692707",
     "core/images/__init__.py": "cf41073087557c7d0d10d21780edd001fdc0cd2f",
     "core/runner.py": "0ea096f0efebadebd54f57ed2e215893eab24527",
     "cronsole/native-body.py": "c1f02b1eb6ab63bcda05b5a912f82df613e4e208",
