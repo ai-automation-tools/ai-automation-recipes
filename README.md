@@ -232,5 +232,5 @@ holds its source and says how it stays current.
 <p align="center">
   Built with <a href="https://docs.claude.com/claude-code">Claude Code</a> ·
   scheduled with <a href="https://cronsole.ai-automation-tools.dev">Cronsole</a> ·
-  <a href="LICENSE">MIT</a> code; bundled skills keep <a href=".claude/skills/README.md">their own licenses</a>
+  <a href="SECURITY.md">Security</a> · <a href="LICENSE">MIT</a> code; bundled skills keep <a href=".claude/skills/README.md">their own licenses</a>
 </p>

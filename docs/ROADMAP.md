@@ -37,7 +37,9 @@ the maintainer can do.
 
 - [x] CI, verified README, clean full-history secret scan, MIT licence, live demo site — done
       2026-10-14; see 0.1.0 to 0.10.0 in the [changelog](CHANGELOG.md)
-- [ ] `small` `SECURITY.md` with how to report a vulnerability
+- [x] `small` `SECURITY.md` with how to report a vulnerability — done 2026-10-28: `SECURITY.md` at the
+      root, linked from the README footer. It points at GitHub private vulnerability reporting, which
+      is still switched off on the repo (see [open questions](OPEN-QUESTIONS.md))
 
 ## After public release
 
