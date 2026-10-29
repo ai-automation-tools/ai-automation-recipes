@@ -31,6 +31,7 @@ changing how the recipes work or adding one of your own.
 |:---|:---|
 | [**🗺️ Roadmap**](ROADMAP.md) | Which recipes have had a real run, and the work left to do |
 | [**📋 Changelog**](CHANGELOG.md) | Every change since the pilot, newest first |
+| [**❓ Open questions**](OPEN-QUESTIONS.md) | What the weekly routine needs the maintainer to decide |
 | [**🌐 Upstreams**](UPSTREAMS.md) | Every agent CLI, API and runtime the recipes depend on, and where to check it |
 
 ## 🔗 Elsewhere in the repo

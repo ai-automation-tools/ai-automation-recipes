@@ -14,6 +14,12 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-10-28
+
+**Added**
+- `SECURITY.md`: how to report a vulnerability privately, what counts, and which versions are
+  supported. *Public release*
+
 ## 0.12.4 — 2026-10-26
 
 **Added**
