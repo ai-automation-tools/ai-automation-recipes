@@ -23,5 +23,5 @@
     "meta": {"session_id": "session_id"}
   },
   "check": {"version": ["--version"], "help": [["--help"]]},
-  "verified": {"version": "0.64.0", "checked": "2026-10-26", "liveRun": true, "liveRunNote": "short-story, 2026-10-26: 3,540 words in 5 min, default model, GEMINI_API_KEY"}
+  "verified": {"version": "0.66.0", "checked": "2026-10-31", "liveRun": true, "liveRunNote": "short-story, 2026-10-26: 3,540 words in 5 min, default model, GEMINI_API_KEY"}
 }
