@@ -26,5 +26,5 @@
     "meta": {"conversation_id": "conversation_id", "num_turns": "num_turns"}
   },
   "check": {"version": ["--version"], "help": [["--help"]]},
-  "verified": {"version": "1.4.7", "checked": "2026-10-26", "liveRun": true, "liveRunNote": "short-story, 2026-10-26: 2,074 words in 3 min, default model, GEMINI_API_KEY"}
+  "verified": {"version": "1.4.8", "checked": "2026-10-31", "liveRun": true, "liveRunNote": "short-story, 2026-10-26: 2,074 words in 3 min, default model, GEMINI_API_KEY"}
 }

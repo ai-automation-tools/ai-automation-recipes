@@ -40,8 +40,8 @@
     ]
   },
   "verified": {
-    "version": "1.0.0",
-    "checked": "2026-10-17",
+    "version": "1.0.70",
+    "checked": "2026-10-31",
     "liveRun": false,
     "smoke": "flags checked against --help only; not logged in on the maintainer's machine"
   },

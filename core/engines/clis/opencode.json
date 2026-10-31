@@ -20,5 +20,5 @@
     "fail": {"match": {"type": "error"}, "message": "error.message"}
   },
   "check": {"version": ["--version"], "help": [["run", "--help"]]},
-  "verified": {"version": "1.19.3", "checked": "2026-10-17", "liveRun": false, "smoke": "PONG prompt answered 2026-10-17"}
+  "verified": {"version": "1.19.5", "checked": "2026-10-31", "liveRun": false, "smoke": "PONG prompt answered 2026-10-17"}
 }
