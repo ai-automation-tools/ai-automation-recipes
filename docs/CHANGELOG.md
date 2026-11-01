@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.4-2ea44f?style=for-the-badge" alt="Version 0.12.4">
+  <img src="https://img.shields.io/badge/version-0.12.5-2ea44f?style=for-the-badge" alt="Version 0.12.5">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,17 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.5 — 2026-10-31
+
+**Changed**
+- CLI profiles re-checked against the installed CLIs (Claude Code 2.1.314, Codex 0.166.0, Gemini 0.66.0,
+  OpenCode 1.19.5, Kimi 2.3.3, Grok 1.0.70, Antigravity 1.4.8): every flag still in `--help`, no
+  release note touches headless mode, output shape, skills folders or auth. Kimi's `verified` version
+  said 0.18.0; its PONG prompt answered again on 2.3.3.
+- Upstreams: the Antigravity row described the old no-profile state and now matches `agy.json`. The
+  OpenCode row notes that OpenCode 2 is out and unverified; the question is in
+  [open questions](OPEN-QUESTIONS.md).
 
 ## 0.12.4 — 2026-10-26
 

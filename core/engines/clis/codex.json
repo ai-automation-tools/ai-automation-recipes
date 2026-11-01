@@ -75,8 +75,8 @@
     ]
   },
   "verified": {
-    "version": "0.163.0",
-    "checked": "2026-10-17",
+    "version": "0.166.0",
+    "checked": "2026-10-31",
     "liveRun": true,
     "liveRunNote": "short-story, 2026-10-14: 2,835 words in 4 min, default model"
   }
