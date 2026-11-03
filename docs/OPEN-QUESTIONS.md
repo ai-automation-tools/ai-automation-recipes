@@ -26,7 +26,7 @@ in `- Answer:`; the next run applies it and moves the entry under **Answered**.
   The API says private vulnerability reporting is disabled, so the button doesn't exist yet. Settings →
   Code security → Private vulnerability reporting → Enable. The file has a fallback (an issue asking
   for a private channel) until then.
-- Answer:
+- Answer: Done 2026-11-03: private vulnerability reporting is enabled, so the Security tab shows "Report a vulnerability".
 
 ## Answered
 
