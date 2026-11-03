@@ -17,7 +17,7 @@ in `- Answer:`; the next run applies it and moves the entry under **Answered**.
   `opencode-ai@latest` moves to 2.x, then install it, run `python scripts/check_clis.py opencode`
   and a PONG prompt, and fix the profile from what that prints. Decide whether you want that done
   before `latest` moves.
-- Answer:
+- Answer: Stay on 1.x, as recommended. (Mike, 2026-11-03)
 
 ### Can you switch on private vulnerability reporting for the repo?
 
