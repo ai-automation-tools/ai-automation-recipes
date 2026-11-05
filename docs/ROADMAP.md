@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/stage-public_since_2026--10--14-2ea44f?style=for-the-badge" alt="Stage: public since 2026-10-14">
   <img src="https://img.shields.io/badge/claude-48_of_48-8B5CF6?style=for-the-badge" alt="Claude: 48 of 48">
-  <img src="https://img.shields.io/badge/other_CLIs-3_of_288-F59E0B?style=for-the-badge" alt="Other CLIs: 3 of 288">
+  <img src="https://img.shields.io/badge/other_CLIs-5_of_288-F59E0B?style=for-the-badge" alt="Other CLIs: 5 of 288">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
 
@@ -39,7 +39,7 @@ the maintainer can do.
       2026-10-14; see 0.1.0 to 0.10.0 in the [changelog](CHANGELOG.md)
 - [x] `small` `SECURITY.md` with how to report a vulnerability — done 2026-10-28: `SECURITY.md` at the
       root, linked from the README footer. It points at GitHub private vulnerability reporting, which
-      is still switched off on the repo (see [open questions](OPEN-QUESTIONS.md))
+      the maintainer switched on 2026-11-03
 
 ## After public release
 
@@ -62,10 +62,13 @@ run takes at most two of those recipes. `pr-review` runs only in `report` mode a
 
 #### Making the sweep cheap
 
-- [ ] A `scripts/cli_sweep.py --engine <name> [--recipe <name>…]` that runs recipes on one CLI,
+- [x] A `scripts/cli_sweep.py --engine <name> [recipe…]` that runs recipes on one CLI,
       records pass or fail with the failing check, and rewrites that CLI's column in the matrix
       below. Done when a sweep of two `files` recipes on `claude` updates their cells and a unit test
-      covers the matrix rewrite. Without it, 288 runs is too much to do by hand
+      covers the matrix rewrite. Without it, 288 runs is too much to do by hand — done 2026-11-04:
+      `scripts/cli_sweep.py` (default: the engine's next six ⬜ cells; `--no-write` to report only), tested in
+      `tests/test_cli_sweep.py`; a live sweep of `funny-ai-content` and `agent-toolkit` on `codex` set
+      their cells. Claude's column was left alone: it is proven in the private fleet
 - [ ] A `web` recipe on an advisory CLI that has no web tool fails before the agent starts, with a
       message naming the missing tool, instead of publishing an unsourced artifact (unit test with a
       faked profile)
@@ -85,7 +88,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 
 - [x] **Claude** (`claude`): every recipe, through the private fleet — done 2026-10-26
 - [ ] **Codex** (`codex`): `short-story` ran for real on 2026-10-14 (2,835 words in 4 minutes).
-      Next: one recipe per tools class (`web`, `fetch`, `bash`), then the rest
+      `funny-ai-content` (2.4 min) and `agent-toolkit` (5.9 min) passed on 0.166.0 on 2026-11-04. Next: one recipe per tools class (`web`, `fetch`, `bash`), then the rest
 - [ ] **OpenCode** (`opencode`): answers a smoke prompt (1.19.3, 2026-10-17). Next: `short-story`,
       then one recipe per tools class, then the rest
 - [ ] **Kimi Code** (`kimi`): answers a smoke prompt (0.18.0, 2026-10-17). Same order as OpenCode
@@ -124,12 +127,12 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 | [agent-persona-original](../recipes/agent-persona-original/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [satirical-news](../recipes/satirical-news/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [content-idea-gen](../recipes/content-idea-gen/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| [funny-ai-content](../recipes/funny-ai-content/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| [funny-ai-content](../recipes/funny-ai-content/README.md) | files | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [family-recipe](../recipes/family-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [regional-recipe](../recipes/regional-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [viral-recipe](../recipes/viral-recipe/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [ai-map](../recipes/ai-map/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| [agent-toolkit](../recipes/agent-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| [agent-toolkit](../recipes/agent-toolkit/README.md) | files | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [ai-stack-radar](../recipes/ai-stack-radar/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [oss-spotlight](../recipes/oss-spotlight/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [cool-websites](../recipes/cool-websites/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |

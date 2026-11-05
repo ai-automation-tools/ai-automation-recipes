@@ -17,12 +17,14 @@
 | [**check_public.py**](check_public.py) | Fails on API-key shapes, personal home paths, emails, real IP addresses, and anything on a private denylist kept outside the repo |
 | [**build_bundle.py**](build_bundle.py) | Builds the reproducible runtime bundle the Cronsole editions download, and prints its sha256 |
 | [**check_clis.py**](check_clis.py) | Checks every CLI profile against the installed CLI: version, and every flag still in its `--help` |
+| [**cli_sweep.py**](cli_sweep.py) | Runs recipes on one agent CLI for real (`--engine <cli> [recipe…]`, default the ⬜ cells of its column) and rewrites that column of the roadmap matrix: ✅ on exit 0, ❌ with the error line printed. `--no-write` reports only |
 | [**new_cli.py**](new_cli.py) | Drafts a profile for a CLI the repo doesn't know, from its own `--help`, then checks the flags and pings it |
 | [**build-diagram.mjs**](build-diagram.mjs) | Builds the [run diagram](../docs/diagrams/README.md) with Archify and copies it into `homepage/diagram/`. `--check` exits 1 when code it cites changed since its pinned commit |
 
 ```bash
 python scripts/build_registry.py            # after editing any cronsole.json, or anything in the bundle
 python scripts/check_clis.py                # after editing a CLI profile
+python scripts/cli_sweep.py --engine codex   # run a CLI's next ⬜ recipes, update the matrix
 python scripts/new_cli.py <binary>          # draft a profile for a new agent CLI
 python scripts/build_viewer.py --serve      # ./output (or $RECIPES_OUTPUT_DIR) at http://localhost:8000
 python scripts/check_public.py              # before every commit
