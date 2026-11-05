@@ -71,7 +71,7 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - Roadmap back on the lab standard (a Phase 1 line and the `## After public release` split), so the
   new weekly roadmap routine can work it: Codex is `[ ]` with a progress note instead of `[-]`, the
   sweep tooling comes before the per-CLI runs, and the eleven key-gated recipes have their own
-  `Needs Mike` item.
+  `Needs owner` item.
 
 ## 0.12.2 — 2026-10-21
 

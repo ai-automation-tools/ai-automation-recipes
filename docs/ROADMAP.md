@@ -19,7 +19,7 @@ The weekly roadmap routine works this file top to bottom every Wednesday. **Ever
 tier planned: this is the free companion to Cronsole, so there is no Revenue group.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked (the
-reason follows on the line). `small` marks an item a check verifies; `🔒 Needs Mike` marks one only
+reason follows on the line). `small` marks an item a check verifies; `🔒 Needs owner` marks one only
 the maintainer can do.
 
 > [!NOTE]
@@ -100,7 +100,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
       3 minutes). Next: one recipe per tools class
 - [ ] **Grok Build** (`grok`): flags checked against `--help` only. Needs an `XAI_API_KEY` (the
       docs' headless path) or `grok login` on the maintainer's machine, then the smoke prompt and
-      the same order 🔒 Needs Mike
+      the same order 🔒 Needs owner
 
 #### Matrix
 
