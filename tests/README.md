@@ -26,6 +26,7 @@ smoke test, which drives a local headless browser and skips itself when none is 
 | [**test_media.py**](test_media.py) | Multi-image runs, key preflight, crops, ICO, SVG, speech, music, video length |
 | [**test_shared.py**](test_shared.py) | Web checks, the food safety gate, the Cook's Card, digests, the webhook, the browser smoke test |
 | [**test_audio_recipes.py**](test_audio_recipes.py) | The song, podcast and voiceover recipes end to end with every engine faked |
+| [**test_cli_sweep.py**](test_cli_sweep.py) | `scripts/cli_sweep.py`: the matrix column rewrite touches only the named cells, and the sweep loop with the recipe runs faked |
 | [**test_viewer.py**](test_viewer.py) | The viewer catalog, and that model-written HTML can't run in it |
 | [**test_homepage.py**](test_homepage.py) | The links and Pages files the static homepage in `homepage/` must keep |
 | [**test_recipe_smoke.py**](test_recipe_smoke.py) | Runs the scripts in [`smoke/`](smoke/): a good and a bad run of every image recipe, plus a keyless run of the two whose images are optional |

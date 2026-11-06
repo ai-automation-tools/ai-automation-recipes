@@ -5,6 +5,10 @@ in `- Answer:`; the next run applies it and moves the entry under **Answered**.
 
 ## Open
 
+Nothing open.
+
+## Answered
+
 ### Move the OpenCode profile to OpenCode 2, or stay on 1.x?
 
 - Asked: 2026-10-31 by ai-recipes-cli-upstream
@@ -18,6 +22,7 @@ in `- Answer:`; the next run applies it and moves the entry under **Answered**.
   and a PONG prompt, and fix the profile from what that prints. Decide whether you want that done
   before `latest` moves.
 - Answer: Stay on 1.x, as recommended. (Mike, 2026-11-03)
+- Applied: 2026-11-04 by ai-recipes-roadmap
 
 ### Can you switch on private vulnerability reporting for the repo?
 
@@ -27,6 +32,4 @@ in `- Answer:`; the next run applies it and moves the entry under **Answered**.
   Code security → Private vulnerability reporting → Enable. The file has a fallback (an issue asking
   for a private channel) until then.
 - Answer: Done 2026-11-03: private vulnerability reporting is enabled, so the Security tab shows "Report a vulnerability".
-
-## Answered
-
+- Applied: 2026-11-04 by ai-recipes-roadmap
