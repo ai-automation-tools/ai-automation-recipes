@@ -14,11 +14,18 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
-## Unreleased — 2026-10-28
+## Unreleased — 2026-11-04
 
 **Added**
+- `scripts/cli_sweep.py`: runs recipes on one agent CLI for real and rewrites that CLI's column of the
+  roadmap matrix (✅ on exit 0, ❌ with the error line printed). A live sweep set `funny-ai-content` and
+  `agent-toolkit` to ✅ on Codex 0.166.0. *CLI coverage*
 - `SECURITY.md`: how to report a vulnerability privately, what counts, and which versions are
   supported. *Public release*
+
+**Changed**
+- `SECURITY.md` drops its fallback paragraph: private vulnerability reporting is on for the repo.
+  Both questions in [open questions](OPEN-QUESTIONS.md) are answered and applied.
 
 ## 0.12.5 — 2026-10-31
 
