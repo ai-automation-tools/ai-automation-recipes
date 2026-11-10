@@ -14,6 +14,24 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-10
+
+**Added**
+- The homepage shows the sample runs itself. A new *Sample runs* section, right under the hero,
+  has one card per recipe with a sample: its newest run's picture (or the opening of its text),
+  title and summary, a **See the output** button that opens that run on the sample site, and a
+  **Get it for Cronsole** button that opens the recipe's Cronsole edition in the Cronsole gallery.
+  Filter chips by group; nine cards first, then *Show all*. The cards are read live from the sample
+  site's `catalog.js`, so its biweekly rotation never leaves a dead link, and a failed load says so
+  and links to both sites. The hero's main button now jumps to the section.
+
+**Fixed**
+- `scripts/build_viewer.py` dropped every file of every run when the output folder sat under a
+  folder whose name starts with a dot, because it checked the absolute path for hidden parts. The
+  demo refresh builds in `.ai-recipes-demo-refresh-run`, so since 2026-10-15 the hosted sample site
+  has shipped with no images, covers or galleries. It now checks the path inside each run only.
+  New test in `tests/test_viewer.py`.
+
 ## 0.12.7 — 2026-11-10
 
 **Added**
