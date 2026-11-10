@@ -231,8 +231,11 @@ supports:
 
 Changes to Cronsole itself, tracked here because these recipes would use them:
 
-- [ ] Multiple registry sources, so this repo can publish its own catalog and the packs can be
-      linked from the Cronsole site
+- [x] Publish this repo's catalog and list it on the Cronsole site — done 2026-11-10: the Homepage
+      workflow serves `registry/` at `/registry/`, the Cronsole gallery reads it as a second
+      catalog, and every recipe README links to its templates there
+- [ ] Multiple registry sources in the Cronsole *app* (`TEMPLATE_REGISTRY_URL` takes one), only if
+      auto-sync ever needs this catalog; importing from the gallery doesn't
 - [ ] Import a template by URL, for a one-click "Import into Cronsole" on the demo
 - [ ] A crontab compiler for the `linux` target
 - [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`). Partly covered by

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.6-2ea44f?style=for-the-badge" alt="Version 0.12.6">
+  <img src="https://img.shields.io/badge/version-0.12.7-2ea44f?style=for-the-badge" alt="Version 0.12.7">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -14,14 +14,21 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
-## Unreleased — 2026-11-10
+## 0.12.7 — 2026-11-10
 
 **Added**
+- The Cronsole catalog is published. The Homepage workflow now deploys `registry/` beside the
+  homepage at `ai-automation-recipes.ai-automation-tools.dev/registry/`, and the Cronsole gallery
+  lists it next to Cronsole's own templates. The deploy waits for the runtime release `VERSION` pins,
+  so a template's first run never 404s on a release that isn't out yet. A daily *Registry drift*
+  workflow (`scripts/check_registry_published.py`) fails when the hosted copy stops matching `main`.
+- Every recipe README has an *Import into Cronsole* section linking its templates and its pack in
+  the gallery. `build_registry.py` writes it and `--check` fails when it's stale.
 - Cronsole editions for every recipe: 45 more, 48 in all, in four batches: writing and files
   (`serialized-novella` to `icon-packs`), web (`app-idea-card` to `finance-digest`), image, speech and
   music (`ai-meme-generator` to `voiceover-script-generator`), and the two that act on something of
-  yours (`pr-review`, `app-enhancement`). The bundle didn't change, so they pin the released 0.12.6
-  runtime and need no new version. `funny-ai-content`, `app-idea-card`, `ai-meme-generator` and
+  yours (`pr-review`, `app-enhancement`). They were generated against the released 0.12.6
+  runtime and now pin 0.12.7 (see Changed). `funny-ai-content`, `app-idea-card`, `ai-meme-generator` and
   `pr-review` (report mode) ran for real through Cronsole from their generated templates.
   *Cronsole editions*
 - `REQUIRED_KEYS` in `build_registry.py`: a key a recipe can't run without and no parameter names
@@ -30,6 +37,13 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - `NATIVE_NEEDS` in `build_registry.py`: what a recipe needs on the machine Cronsole runs on goes
   into its Cronsole edition's description (`gh` for `pr-review`, the apps folder for
   `app-enhancement`). Both keep their safe defaults, `report` and `apply=no`.
+
+**Changed**
+- Recipe READMEs are no longer in the runtime bundle: nothing at runtime reads them, and leaving them
+  in would make every link change a release. That changes the bundle once, hence 0.12.7; the
+  Cronsole editions now pin it.
+- Homepage: dropped the note calling the Cronsole edition a three-recipe pilot (every recipe has
+  one), and the Cronsole links now go to the gallery.
 
 ## 0.12.6 — 2026-11-09
 

@@ -1,12 +1,15 @@
 name: Homepage
 
-# Publishes homepage/ to GitHub Pages at ai-automation-recipes.ai-automation-tools.dev.
-# Nothing is built — the folder is one static page and ships as-is.
+# Publishes homepage/ to GitHub Pages at ai-automation-recipes.ai-automation-tools.dev, with the
+# generated Cronsole catalog beside it at /registry/ (index.json, templates/, packs/). The Cronsole
+# gallery at cronsole.ai-automation-tools.dev reads that catalog from here, so a merge that changes
+# registry/ reaches the gallery with no Cronsole release. Nothing is built: both folders ship as-is.
 on:
   push:
     branches: [main]
     paths:
       - 'homepage/**'
+      - 'registry/**'
       - '.github/workflows/homepage.yml'
   workflow_dispatch:
 
@@ -28,8 +31,31 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+
+      # The Cronsole editions download the runtime release for VERSION on their first run. A catalog
+      # published before release.yml (started by the same merge) has made that release would hand out
+      # templates whose first run 404s, so wait for it, and publish nothing if it never appears.
+      - name: Wait for the runtime release the templates pin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          for i in $(seq 1 40); do
+            if gh release view "v${version}" > /dev/null 2>&1; then echo "v${version} is released"; exit 0; fi
+            echo "waiting for release v${version} ($i/40)"
+            sleep 15
+          done
+          echo "::error::release v${version} does not exist after 10 minutes, so the catalog was NOT published. Check the Release workflow."
+          exit 1
+
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/registry
+          cp -r homepage/. _site/
+          cp -r registry/index.json registry/templates registry/packs _site/registry/
+
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: homepage
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v5

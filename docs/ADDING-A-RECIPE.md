@@ -89,6 +89,11 @@ skills), the recipe-specific flags, a sample once it has had a live run, and the
 with the footer nav row. Leave the schedule out. Then add the recipe to its group in
 [`recipes/README.md`](../recipes/README.md) and to `CATEGORY_PACKS` in `scripts/build_registry.py`.
 
+Don't write an *Import into Cronsole* section. `build_registry.py` adds one above the footer nav,
+linking the recipe's templates and pack in the Cronsole gallery, and `--check` fails if it goes stale.
+Edit `links_block()` to change it, never the README. Recipe READMEs aren't in the runtime bundle,
+so changing one never needs a new `VERSION`.
+
 ## ✅ Before you open a PR
 
 ```bash

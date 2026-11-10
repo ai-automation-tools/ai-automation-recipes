@@ -48,7 +48,10 @@ def files() -> list[str]:
     """Tracked and new-but-not-ignored files, so a local build matches CI before a commit."""
     out = subprocess.run(["git", "ls-files", "-co", "--exclude-standard"], cwd=ROOT,
                          capture_output=True, text=True, check=True).stdout.splitlines()
+    # A recipe's README is for people, and build_registry.py rewrites its Cronsole links; left in,
+    # every link change would change the bundle and need a release.
     keep = [f for f in out if (f.startswith(INCLUDE) or f in TOP_FILES)
+            and not (f.startswith("recipes/") and f.endswith("README.md"))
             and "__pycache__" not in f and not f.endswith(".pyc") and (ROOT / f).is_file()]
     return sorted(set(keep))
 
