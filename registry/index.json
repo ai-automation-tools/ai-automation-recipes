@@ -353,7 +353,7 @@
     {
       "id": "recipe-comics-cronsole",
       "name": "AI Recipe: Comic (Cronsole)",
-      "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.5 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.6 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -371,7 +371,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-comics-cronsole.json",
-      "sha256": "d3cc9c012a94bea4c19226a9077f17b0a6787c8d7ef6a307f51c2c8b24edac2b"
+      "sha256": "0564d68aad1575cdef5902c6c7b133a7848b80c9d657d172b89a6744bb7188af"
     },
     {
       "id": "recipe-content-idea-gen",
@@ -854,7 +854,7 @@
     {
       "id": "recipe-podcast-episode-cronsole",
       "name": "AI Recipe: Podcast Episode (Cronsole)",
-      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.5 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY.",
+      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.6 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -872,7 +872,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-podcast-episode-cronsole.json",
-      "sha256": "c79f792d8c526f002e12a8567cb7d926a3c08c4aabdd93f1b7ceaa5186722cca"
+      "sha256": "b0beeddad7811150ed6239e441a8763a29f51d5df90753f2edb3fe2853ee43cd"
     },
     {
       "id": "recipe-podcast-script-generator",
@@ -1096,7 +1096,7 @@
     {
       "id": "recipe-short-story-cronsole",
       "name": "AI Recipe: Short Story (Cronsole)",
-      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.5 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.6 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1113,7 +1113,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-short-story-cronsole.json",
-      "sha256": "eeadad169234dce4b47da53a0e79b5fdeba5a192aaa7682d29728aa39e296c07"
+      "sha256": "e331b2338a67008c930603c0bce89e11a7e221a0ded1195c459d824075f70d18"
     },
     {
       "id": "recipe-signal-sources",
@@ -1376,7 +1376,7 @@
         "recipe-wallpaper-packs"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "df657df8be377e3a93e2d08bf19ea97374360114f42211308876ad12f3cf80b0"
+      "sha256": "87c172eb78f4ea9ee588fbdfa42f87f51e147efd8ac61c0665a9004c8a35296c"
     },
     {
       "id": "ai-recipes-cronsole",
@@ -1388,7 +1388,7 @@
         "recipe-short-story-cronsole"
       ],
       "path": "packs/ai-recipes-cronsole.json",
-      "sha256": "181306f23ab9c722638c6f0d1cf7f9f98279bc596560c996f7743dd79db2a181"
+      "sha256": "81581ee0062fff37ac01f38afa9d58ebee99de0355c7fa5417b0c8abd088d542"
     },
     {
       "id": "ai-recipes-apps-games",

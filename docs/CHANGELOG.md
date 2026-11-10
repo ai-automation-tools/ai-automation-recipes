@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.5-2ea44f?style=for-the-badge" alt="Version 0.12.5">
+  <img src="https://img.shields.io/badge/version-0.12.6-2ea44f?style=for-the-badge" alt="Version 0.12.6">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,21 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.6 — 2026-11-09
+
+**Fixed**
+- Codex profile: recipe runs on Windows failed on every shell command (Codex 0.167.0 treats the
+  `workspace-write` sandbox as read-only unless `windows.sandbox` is set), so skills couldn't be read,
+  files couldn't be saved and `gh` couldn't run. The profile now passes `windows.sandbox=unelevated`,
+  `approval_policy=never` and network access, and `--ignore-user-config` / `--ignore-rules` so a
+  user's own `~/.codex/config.toml` no longer changes a run (the login still applies).
+  `app-idea-card` (`web`), `news-digest` (`fetch`) and `pr-review` (`bash`) now pass on Codex 0.167.0.
+  *CLI coverage*
+
+**Changed**
+- Roadmap: Cronsole editions for every recipe are now the first priority after public release, split
+  into four batches (files, web, image/speech/music, and recipes that act on your repo or apps).
 
 ## Unreleased — 2026-11-04
 

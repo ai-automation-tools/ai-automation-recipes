@@ -12,14 +12,23 @@
   "skillsDir": ".agents/skills",
   "toolPolicy": "advisory",
   "_toolPolicy": "No per-tool allowlist: the workspace-write sandbox is the boundary, and the recipe's tool list lives only in the prompt's contract.",
+  "_argv": "--ignore-user-config and --ignore-rules keep the user's own config.toml and execpolicy rules (approval policy, writable roots, plugins, MCP servers) out of a recipe run; the login in CODEX_HOME still applies. approval_policy=never because nobody is there to approve, network access because web and bash recipes fetch, and windows.sandbox=unelevated because without a Windows sandbox mode every shell command fails (read-only on 0.167.0) while file edits still work. Ignored off Windows.",
   "prompt": "stdin",
   "argv": [
     "exec",
     "--json",
     "--ephemeral",
     "--skip-git-repo-check",
+    "--ignore-user-config",
+    "--ignore-rules",
     "-s",
     "workspace-write",
+    "-c",
+    "approval_policy=never",
+    "-c",
+    "sandbox_workspace_write.network_access=true",
+    "-c",
+    "windows.sandbox=unelevated",
     "-C",
     "{workdir}",
     "@model",
@@ -75,9 +84,9 @@
     ]
   },
   "verified": {
-    "version": "0.166.0",
-    "checked": "2026-10-31",
+    "version": "0.167.0",
+    "checked": "2026-11-09",
     "liveRun": true,
-    "liveRunNote": "short-story, 2026-10-14: 2,835 words in 4 min, default model"
+    "liveRunNote": "short-story 2026-10-14; app-idea-card, news-digest, pr-review (report) 2026-11-09 on 0.167.0, default model"
   }
 }
