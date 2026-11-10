@@ -90,7 +90,8 @@ class HomepageTests(unittest.TestCase):
         self.assertIn('<section id="samples">', html)
         self.assertIn("DEMO + 'catalog.js'", html)
         self.assertIn("${DEMO}#/a/${encodeURIComponent(it.id)}", html)
-        self.assertIn("${GALLERY}#/t/recipe-${encodeURIComponent(it.recipe)}-cronsole", html)
+        self.assertIn("${GALLERY}#/t/${encodeURIComponent(tid)}", html)
+        self.assertGreaterEqual(html.count('href="https://ai-automation-recipes-demo.ai-automation-tools.dev/"'), 3)
 
     def test_pages_files(self):
         self.assertEqual((HOME / "CNAME").read_text(encoding="utf-8").strip(),

@@ -466,12 +466,13 @@
           <span><b>${esc(c.label)}</b><small>${items.length} item${items.length === 1 ? '' : 's'}</small></span></a>`;
       }).join('')}</div></section>`).join('');
     const repo = CATALOG.repo ? `<a class="btn btn-ghost" href="${esc(CATALOG.repo)}" target="_blank" rel="noopener">${ICON.ext}Get the recipes</a>` : '';
+    const gallery = CATALOG.gallery ? `<a class="btn btn-ghost" href="${esc(CATALOG.gallery)}#/collection/ai-recipes" target="_blank" rel="noopener">${ICON.ext}Get them for Cronsole</a>` : '';
     $('#view').innerHTML = `<div class="hero"><div>
         <p class="eyebrow"><b>${CATALOG.items.length} items</b> · ${nCols} collections · ${groups.length} groups</p>
         <h1 class="grad-text">${esc(CATALOG.title)}</h1>
         <p class="lede">Stories, playable games, comics, songs, podcasts, maps and app prototypes, each one the folder a scheduled recipe published. Open any item to see exactly what came out.</p>
         <div class="hero-actions"><a class="btn btn-primary" href="#/c/${encodeURIComponent(groups[0].collections[0].id)}">Start browsing</a>
-          <button class="btn btn-ghost" type="button" id="heroRandom">Surprise me</button>${repo}</div></div>
+          <button class="btn btn-ghost" type="button" id="heroRandom">Surprise me</button>${gallery}${repo}</div></div>
         <div class="stats"><div class="stat"><b>${CATALOG.items.length}</b><span>Items</span></div><div class="stat"><b>${nCols}</b><span>Collections</span></div>
           <div class="stat"><b>${playable}</b><span>Playable</span></div><div class="stat"><b>${media}</b><span>Audio &amp; video</span></div></div>
       </div>
@@ -532,9 +533,12 @@
     if (it.html) actions.push(`<a class="btn btn-primary" href="${url(it.html)}" target="_blank" rel="noopener">${ICON.ext}Open full screen</a>`);
     (it.pages || []).forEach(p => actions.push(`<a class="btn btn-ghost" href="${url(p)}" target="_blank" rel="noopener">${esc(p.split('/').pop().replace(/\.html$/, '').replace(/[-_]/g, ' '))}</a>`));
     const links = [];
+    // Older catalogs said `template: true`; newer ones name the template id.
+    const tid = typeof it.template === 'string' ? it.template : it.template && it.recipe ? `recipe-${it.recipe}` : '';
+    if (CATALOG.gallery && tid) links.push(`<a class="btn btn-ghost" href="${esc(CATALOG.gallery)}#/t/${encodeURIComponent(tid)}" target="_blank" rel="noopener">${ICON.ext}Get it for Cronsole</a>`);
     if (CATALOG.repo && it.recipe) {
       links.push(`<a class="btn btn-ghost" href="${esc(CATALOG.repo)}/tree/main/recipes/${encodeURIComponent(it.recipe)}" target="_blank" rel="noopener">The recipe</a>`);
-      if (it.template) links.push(`<a class="btn btn-ghost" href="${esc(CATALOG.repo)}/blob/main/registry/templates/recipe-${encodeURIComponent(it.recipe)}.json" target="_blank" rel="noopener">Cronsole template</a>`);
+      if (tid && !CATALOG.gallery) links.push(`<a class="btn btn-ghost" href="${esc(CATALOG.repo)}/blob/main/registry/templates/${encodeURIComponent(tid)}.json" target="_blank" rel="noopener">Cronsole template</a>`);
     } else links.push(`<a class="btn btn-ghost" href="${url(it.folder)}/" target="_blank" rel="noopener">Open folder</a>`);
     const nav = (x, cls, lbl) => x ? `<a class="glass ${cls}" style="${cvar(col)}" href="#/a/${encodeURIComponent(x.id)}"><span>${lbl}</span><b>${esc(x.title)}</b></a>` : '<span></span>';
     $('#view').innerHTML = `<button class="back" type="button" id="back">&larr; Back</button>
