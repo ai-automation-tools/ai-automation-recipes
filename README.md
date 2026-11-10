@@ -132,7 +132,7 @@ editions:
 
 | Edition | Template id | Needs | Best for |
 |:---|:---|:---|:---|
-| **Cronsole edition** *(pilot: short-story, comics, podcast-episode)* | `recipe-<name>-cronsole`, pack `ai-recipes-cronsole` | Python and the agent CLI where Cronsole runs. Nothing else: the first run fetches a pinned, sha256-checked runtime into your cache | Importing and forgetting. Keys are optional task secrets (`${secret.GEMINI_API_KEY?}`) |
+| **Cronsole edition** *(every recipe)* | `recipe-<name>-cronsole`, pack `ai-recipes-cronsole` | Python and the agent CLI where Cronsole runs. Nothing else: the first run fetches a pinned, sha256-checked runtime into your cache | Importing and forgetting. Keys are optional task secrets (`${secret.GEMINI_API_KEY?}`) |
 | **Clone edition** | `recipe-<name>` | A clone of this repo and a `.env` | Editing prompts, or any scheduler: each command is a plain command line that cron, Task Scheduler or launchd can run as it is |
 
 Take everything with the `ai-recipes` pack, one group pack (`ai-recipes-apps-games`, `-writing`,

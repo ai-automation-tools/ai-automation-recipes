@@ -35,14 +35,38 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_bundle  # noqa: E402
 from core.engines import engine_names  # noqa: E402
 
-# Recipes with a Cronsole edition (`recipe-<name>-cronsole`). A pilot set for now; every recipe
-# joins once these three have run in Cronsole for real.
-NATIVE = ["short-story", "comics", "podcast-episode"]
+# Recipes with a Cronsole edition (`recipe-<name>-cronsole`), added in the roadmap's batches.
+NATIVE = ["short-story", "comics", "podcast-episode",
+          # Writing and files, no keys beyond the optional image engine
+          "serialized-novella", "alternate-history", "funny-ai-content", "agent-toolkit", "ai-stack-radar",
+          "oss-spotlight", "cool-websites", "top-10-github-repos", "trending-movers", "signal-sources",
+          "security-toolkit", "finance-toolkit", "podcast-script-generator", "icon-packs",
+          # Web recipes, no keys beyond the optional image engine
+          "app-idea-card", "app-prototype", "browser-extension", "finance-app-prototype", "iam-prototype",
+          "browser-game", "mobile-game", "pc-game-concept", "3d-print-design", "agent-persona",
+          "agent-persona-original", "satirical-news", "content-idea-gen", "family-recipe", "regional-recipe",
+          "viral-recipe", "ai-map", "model-benchmark-watch", "news-digest", "finance-digest",
+          # Image, speech and music recipes: keys through KEY_ENVS and REQUIRED_KEYS
+          "ai-meme-generator", "poster", "news-collage", "future-cities", "image-prompt-packs",
+          "wallpaper-packs", "image-collections", "song-generator", "voiceover-script-generator",
+          # Recipes that act on something of yours; the safe defaults stay in their templates
+          "pr-review", "app-enhancement"]
 NATIVE_BODY = ROOT / "cronsole" / "native-body.py"
 NATIVE_TIMEOUT_MAX = 3600  # Cronsole caps a native job at 60 minutes
 # Keys a parameter can call for; each becomes an optional Cronsole secret on the task.
 KEY_ENVS = {"imageEngine": ["GEMINI_API_KEY", "OPENAI_API_KEY"],
             "speechEngine": ["GEMINI_API_KEY", "ELEVENLABS_API_KEY"]}
+# Keys a recipe can't run without and no parameter names. A required secret makes Cronsole refuse to
+# start the task until it's set, instead of a run that fails on the missing key.
+REQUIRED_KEYS = {"song-generator": ["ELEVENLABS_API_KEY"]}
+# What a recipe needs on the machine Cronsole runs on beyond Python and the agent CLI. It goes in the
+# Cronsole edition's description, where the person importing it reads before scheduling.
+NATIVE_NEEDS = {
+    "pr-review": "Needs the GitHub CLI (gh) on the machine Cronsole runs on, logged in to an account that can "
+                 "read the repo, and write to it for comment or merge mode. Starts in report mode.",
+    "app-enhancement": "Needs the apps folder on the machine Cronsole runs on. Starts with apply=no, so your apps "
+                       "are only changed once you switch it to yes.",
+}
 NATIVE_PACK = {
     "id": "ai-recipes-cronsole",
     "name": "AI Recipes: Cronsole editions",
@@ -159,15 +183,19 @@ def native(t: dict, recipe: str, version: str, digest: str) -> dict:
     params.append({"key": "engine", "label": "Agent CLI", "type": "select", "default": "claude", "required": True,
                    "options": engine_names(),
                    "help": "Which agent CLI runs the recipe. It must be installed and signed in where Cronsole runs."})
-    keys = sorted({k for p in params for k in KEY_ENVS.get(p["key"], [])})
+    required = REQUIRED_KEYS.get(recipe, [])
+    keys = sorted({k for p in params for k in KEY_ENVS.get(p["key"], [])} - set(required))
+    refs = {**{k: f"${{secret.{k}?}}" for k in keys}, **{k: f"${{secret.{k}}}" for k in required}}
     body = NATIVE_BODY.read_text(encoding="utf-8")
     for marker, value in {"__NAME__": t["name"], "__RECIPE__": recipe, "__VERSION__": version,
                           "__BUNDLE_URL__": build_bundle.bundle_url(version), "__BUNDLE_SHA256__": digest,
                           "__ARGS__": "[" + ", ".join(py_value(a) for a in args) + "]",
-                          "__KEYS__": "{" + ", ".join(f"{k!r}: \"${{secret.{k}?}}\"" for k in keys) + "}"}.items():
+                          "__KEYS__": "{" + ", ".join(f"{k!r}: \"{v}\"" for k, v in sorted(refs.items())) + "}"}.items():
         body = body.replace(marker, value)
     timeout = min(int((t.get("execution") or {}).get("timeoutSec") or 1800), NATIVE_TIMEOUT_MAX)
-    secrets = f" Optional task secrets: {', '.join(keys)}." if keys else ""
+    secrets = f" Required task secret: {', '.join(required)}." if required else ""
+    secrets += f" Optional task secrets: {', '.join(keys)}." if keys else ""
+    secrets += f" {NATIVE_NEEDS[recipe]}" if recipe in NATIVE_NEEDS else ""
     return {
         "schemaVersion": "1.0",
         "id": f"recipe-{recipe}-cronsole",

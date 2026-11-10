@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.5-2ea44f?style=for-the-badge" alt="Version 0.12.5">
+  <img src="https://img.shields.io/badge/version-0.12.6-2ea44f?style=for-the-badge" alt="Version 0.12.6">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,38 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## Unreleased — 2026-11-10
+
+**Added**
+- Cronsole editions for every recipe: 45 more, 48 in all, in four batches: writing and files
+  (`serialized-novella` to `icon-packs`), web (`app-idea-card` to `finance-digest`), image, speech and
+  music (`ai-meme-generator` to `voiceover-script-generator`), and the two that act on something of
+  yours (`pr-review`, `app-enhancement`). The bundle didn't change, so they pin the released 0.12.6
+  runtime and need no new version. `funny-ai-content`, `app-idea-card`, `ai-meme-generator` and
+  `pr-review` (report mode) ran for real through Cronsole from their generated templates.
+  *Cronsole editions*
+- `REQUIRED_KEYS` in `build_registry.py`: a key a recipe can't run without and no parameter names
+  becomes a required task secret (`${secret.NAME}`), so Cronsole won't start the task until it's
+  set. `song-generator` uses it for `ELEVENLABS_API_KEY`.
+- `NATIVE_NEEDS` in `build_registry.py`: what a recipe needs on the machine Cronsole runs on goes
+  into its Cronsole edition's description (`gh` for `pr-review`, the apps folder for
+  `app-enhancement`). Both keep their safe defaults, `report` and `apply=no`.
+
+## 0.12.6 — 2026-11-09
+
+**Fixed**
+- Codex profile: recipe runs on Windows failed on every shell command (Codex 0.167.0 treats the
+  `workspace-write` sandbox as read-only unless `windows.sandbox` is set), so skills couldn't be read,
+  files couldn't be saved and `gh` couldn't run. The profile now passes `windows.sandbox=unelevated`,
+  `approval_policy=never` and network access, and `--ignore-user-config` / `--ignore-rules` so a
+  user's own `~/.codex/config.toml` no longer changes a run (the login still applies).
+  `app-idea-card` (`web`), `news-digest` (`fetch`) and `pr-review` (`bash`) now pass on Codex 0.167.0.
+  *CLI coverage*
+
+**Changed**
+- Roadmap: Cronsole editions for every recipe are now the first priority after public release, split
+  into four batches (files, web, image/speech/music, and recipes that act on your repo or apps).
 
 ## Unreleased — 2026-11-04
 

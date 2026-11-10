@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/stage-public_since_2026--10--14-2ea44f?style=for-the-badge" alt="Stage: public since 2026-10-14">
   <img src="https://img.shields.io/badge/claude-48_of_48-8B5CF6?style=for-the-badge" alt="Claude: 48 of 48">
-  <img src="https://img.shields.io/badge/other_CLIs-5_of_288-F59E0B?style=for-the-badge" alt="Other CLIs: 5 of 288">
+  <img src="https://img.shields.io/badge/other_CLIs-8_of_288-F59E0B?style=for-the-badge" alt="Other CLIs: 8 of 288">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
 
@@ -27,6 +27,9 @@ the maintainer can do.
 > Claude in the maintainer's private fleet, so this roadmap no longer tracks a live run per recipe.
 > What's left is portability: each recipe has to work on every agent CLI with a profile, not just
 > Claude. After that the work is making recipes better and adding new ones.
+>
+> **Priority from 2026-11-09:** Cronsole editions for every recipe come first (the section after
+> `## After public release`). CLI coverage continues alongside it.
 
 ## 🔨 Phase 1: Port the fleet (done 2026-10-14)
 
@@ -44,6 +47,44 @@ the maintainer can do.
 ## After public release
 
 Nothing below blocks go-live.
+
+### 🗓️ Cronsole editions (priority)
+
+Work this section first. A Cronsole edition (`recipe-<name>-cronsole`) is the version people can
+import without cloning: `build_registry.py` generates it from the recipe's `cronsole.json` plus
+`cronsole/native-body.py` for every name in `NATIVE`. The pilot three (`short-story`, `comics`,
+`podcast-episode`) and all four batches are there. Each batch is done when its names are in `NATIVE`,
+`build_registry.py --check` and the tests pass, and one recipe from the batch has run for real
+through Cronsole from the generated template. `VERSION` needs a patch bump only when the bundle
+changed: adding names to `NATIVE` doesn't, so the new templates pin the bundle already released.
+
+- [x] **Writing and files recipes, no keys:** `serialized-novella`, `alternate-history`,
+      `funny-ai-content`, `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`, `cool-websites`,
+      `top-10-github-repos`, `trending-movers`, `signal-sources`, `security-toolkit`,
+      `finance-toolkit`, `podcast-script-generator`, `icon-packs` — done 2026-11-10: `funny-ai-content`
+      ran through Cronsole from its generated template on the released 0.12.6 runtime
+- [x] **Web recipes, no keys:** `app-idea-card`, `app-prototype`, `browser-extension`,
+      `finance-app-prototype`, `iam-prototype`, `browser-game`, `mobile-game`, `pc-game-concept`,
+      `3d-print-design`, `agent-persona`, `agent-persona-original`, `satirical-news`,
+      `content-idea-gen`, `family-recipe`, `regional-recipe`, `viral-recipe`, `ai-map`,
+      `model-benchmark-watch`, `news-digest`, `finance-digest` — done 2026-11-10: `app-idea-card` ran
+      through Cronsole the same way
+- [x] **Image, speech and music recipes** (their keys become optional task secrets through
+      `KEY_ENVS`; add any key the generator doesn't know yet): `ai-meme-generator`, `poster`,
+      `news-collage`, `future-cities`, `image-prompt-packs`, `wallpaper-packs`,
+      `image-collections`, `song-generator`, `voiceover-script-generator` — done 2026-11-10:
+      `ai-meme-generator` ran through Cronsole with a Gemini image. `song-generator`'s
+      `ELEVENLABS_API_KEY` is a required secret through the new `REQUIRED_KEYS`, since no parameter
+      names it and the recipe can't run without it
+- [x] **Recipes that act on something of yours:** `pr-review` (needs `repo` and a logged-in
+      `gh`) and `app-enhancement` (needs `appsDir`). Keep the safe defaults (`report` mode, patch
+      only) in the template, and say in each template's description what it needs on the machine —
+      done 2026-11-10: the needs go in through `NATIVE_NEEDS`, and `pr-review` ran through Cronsole
+      in `report` mode against this repo without touching the PR it reviewed
+- [ ] With every recipe in `NATIVE`, decide whether the clone edition stays a full set or shrinks
+      to the editing path, and update the README quick start and `registry/README.md` to match
+- [ ] The *Agent CLI* parameter on Cronsole templates lists only CLIs whose matrix column has at
+      least one ✅, so nobody schedules a recipe on a CLI nothing has run on
 
 ### 🔌 CLI coverage
 
@@ -88,7 +129,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 
 - [x] **Claude** (`claude`): every recipe, through the private fleet — done 2026-10-26
 - [ ] **Codex** (`codex`): `short-story` ran for real on 2026-10-14 (2,835 words in 4 minutes).
-      `funny-ai-content` (2.4 min) and `agent-toolkit` (5.9 min) passed on 0.166.0 on 2026-11-04. Next: one recipe per tools class (`web`, `fetch`, `bash`), then the rest
+      `funny-ai-content` (2.4 min) and `agent-toolkit` (5.9 min) passed on 0.166.0 on 2026-11-04. On 0.167.0 (2026-11-09) one recipe per tools class failed until the profile was fixed: Windows needs `windows.sandbox` set or every shell command fails, and the user's own `config.toml` was leaking in. With 0.12.6's profile `app-idea-card` (`web`, 2.5 min), `news-digest` (`fetch`, 3.0 min) and `pr-review` (`bash`, report mode) pass. Next: the rest of the column
 - [ ] **OpenCode** (`opencode`): answers a smoke prompt (1.19.3, 2026-10-17). Next: `short-story`,
       then one recipe per tools class, then the rest
 - [ ] **Kimi Code** (`kimi`): answers a smoke prompt (0.18.0, 2026-10-17). Same order as OpenCode
@@ -111,7 +152,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 
 | Recipe | Tools | Claude | Codex | OpenCode | Kimi | Grok | Gemini | agy |
 |:---|:---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| [app-idea-card](../recipes/app-idea-card/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| [app-idea-card](../recipes/app-idea-card/README.md) | web | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [app-prototype](../recipes/app-prototype/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [browser-extension](../recipes/browser-extension/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [finance-app-prototype](../recipes/finance-app-prototype/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -142,7 +183,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 | [security-toolkit](../recipes/security-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [finance-toolkit](../recipes/finance-toolkit/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [model-benchmark-watch](../recipes/model-benchmark-watch/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| [news-digest](../recipes/news-digest/README.md) | fetch | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| [news-digest](../recipes/news-digest/README.md) | fetch | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [finance-digest](../recipes/finance-digest/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [comics](../recipes/comics/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [ai-meme-generator](../recipes/ai-meme-generator/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -157,7 +198,7 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 | [podcast-script-generator](../recipes/podcast-script-generator/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [podcast-episode](../recipes/podcast-episode/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [voiceover-script-generator](../recipes/voiceover-script-generator/README.md) | web | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| [pr-review](../recipes/pr-review/README.md) | bash | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| [pr-review](../recipes/pr-review/README.md) | bash | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | [app-enhancement](../recipes/app-enhancement/README.md) | files | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
 ### ✨ Enhance
@@ -172,11 +213,6 @@ item saying why. A run works through one CLI's cells in matrix order and notes i
 - [ ] Python 3.10 reached end of life on 2026-10-01 (<https://devguide.python.org/versions/>). Raise
       the floor to 3.11 in `AGENTS.md`, the docs, CI and the Cronsole edition's interpreter notes.
       Done when CI runs 3.11 and newer only and the tests pass
-- [ ] Cronsole editions for every recipe: add the rest to `NATIVE` in `scripts/build_registry.py`
-      (three are there now: `short-story`, `comics`, `podcast-episode`), then decide whether the
-      clone edition stays a full set or shrinks to the editing path
-- [ ] The Cronsole template's *Agent CLI* parameter lists only CLIs whose matrix column has at least
-      one ✅, so nobody schedules a recipe on a CLI nothing has run on
 - [ ] Add a sample from each new CLI's first passing run to the
       [demo site](https://ai-automation-recipes-demo.ai-automation-tools.dev), labelled with the CLI
       that made it
