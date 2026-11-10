@@ -14,6 +14,23 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-10
+
+**Added**
+- Cronsole editions for every recipe: 45 more, 48 in all, in four batches: writing and files
+  (`serialized-novella` to `icon-packs`), web (`app-idea-card` to `finance-digest`), image, speech and
+  music (`ai-meme-generator` to `voiceover-script-generator`), and the two that act on something of
+  yours (`pr-review`, `app-enhancement`). The bundle didn't change, so they pin the released 0.12.6
+  runtime and need no new version. `funny-ai-content`, `app-idea-card`, `ai-meme-generator` and
+  `pr-review` (report mode) ran for real through Cronsole from their generated templates.
+  *Cronsole editions*
+- `REQUIRED_KEYS` in `build_registry.py`: a key a recipe can't run without and no parameter names
+  becomes a required task secret (`${secret.NAME}`), so Cronsole won't start the task until it's
+  set. `song-generator` uses it for `ELEVENLABS_API_KEY`.
+- `NATIVE_NEEDS` in `build_registry.py`: what a recipe needs on the machine Cronsole runs on goes
+  into its Cronsole edition's description (`gh` for `pr-review`, the apps folder for
+  `app-enhancement`). Both keep their safe defaults, `report` and `apply=no`.
+
 ## 0.12.6 — 2026-11-09
 
 **Fixed**

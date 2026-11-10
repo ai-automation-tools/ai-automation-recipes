@@ -134,7 +134,7 @@ does; a CLI with no per-tool allowlist gets them through the prompt's contract.
 It needs no clone. On its first run it downloads the runtime bundle for `VERSION` from the GitHub
 release, checks the sha256 the template pins, unpacks it with a private virtualenv into the user's
 cache, and runs the recipe from there. API keys come from optional task secrets
-(`${secret.NAME?}`), and the verdict line is printed first because Cronsole keeps only the first
+(`${secret.NAME?}`), or a required one (`${secret.NAME}`) for a key in `REQUIRED_KEYS`, and the verdict line is printed first because Cronsole keeps only the first
 2,000 characters of a run.
 
 `scripts/build_bundle.py` builds that bundle reproducibly: the same tree gives the same bytes on any
