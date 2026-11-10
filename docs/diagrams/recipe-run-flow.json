@@ -7,7 +7,7 @@
     "output": "docs/diagrams/recipe-run-flow.html",
     "repository": {
       "url": "https://github.com/ai-automation-tools/ai-automation-recipes.git",
-      "revision": "e178dd7369d2d2c4ed90448f64c2833505a3839b"
+      "revision": "67d14ecad6223a3f65c36409c293b75e905cd21e"
     }
   },
   "lanes": [
@@ -107,8 +107,8 @@
         },
         {
           "path": "scripts/build_registry.py",
-          "line": 143,
-          "end_line": 168
+          "line": 167,
+          "end_line": 194
         }
       ]
     },

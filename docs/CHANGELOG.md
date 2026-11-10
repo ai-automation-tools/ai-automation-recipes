@@ -31,6 +31,10 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   into its Cronsole edition's description (`gh` for `pr-review`, the apps folder for
   `app-enhancement`). Both keep their safe defaults, `report` and `apply=no`.
 
+**Changed**
+- The code diagram is re-pinned to the current commit: the Cronsole edition node now cites the
+  moved `native()` in `build_registry.py` (lines 167 to 194).
+
 ## 0.12.6 — 2026-11-09
 
 **Fixed**
