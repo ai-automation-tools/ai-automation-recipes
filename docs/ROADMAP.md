@@ -52,27 +52,35 @@ Nothing below blocks go-live.
 
 Work this section first. A Cronsole edition (`recipe-<name>-cronsole`) is the version people can
 import without cloning: `build_registry.py` generates it from the recipe's `cronsole.json` plus
-`cronsole/native-body.py` for every name in `NATIVE`. Three are there (`short-story`, `comics`,
-`podcast-episode`). Each batch is done when its names are in `NATIVE`, `build_registry.py --check`
-and the tests pass, `VERSION` has a patch bump, and one recipe from the batch has run for real
-through Cronsole from the imported template.
+`cronsole/native-body.py` for every name in `NATIVE`. The pilot three (`short-story`, `comics`,
+`podcast-episode`) and all four batches are there. Each batch is done when its names are in `NATIVE`,
+`build_registry.py --check` and the tests pass, and one recipe from the batch has run for real
+through Cronsole from the generated template. `VERSION` needs a patch bump only when the bundle
+changed: adding names to `NATIVE` doesn't, so the new templates pin the bundle already released.
 
-- [ ] **Writing and files recipes, no keys:** `serialized-novella`, `alternate-history`,
+- [x] **Writing and files recipes, no keys:** `serialized-novella`, `alternate-history`,
       `funny-ai-content`, `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`, `cool-websites`,
       `top-10-github-repos`, `trending-movers`, `signal-sources`, `security-toolkit`,
-      `finance-toolkit`, `podcast-script-generator`, `icon-packs`
-- [ ] **Web recipes, no keys:** `app-idea-card`, `app-prototype`, `browser-extension`,
+      `finance-toolkit`, `podcast-script-generator`, `icon-packs` — done 2026-11-10: `funny-ai-content`
+      ran through Cronsole from its generated template on the released 0.12.6 runtime
+- [x] **Web recipes, no keys:** `app-idea-card`, `app-prototype`, `browser-extension`,
       `finance-app-prototype`, `iam-prototype`, `browser-game`, `mobile-game`, `pc-game-concept`,
       `3d-print-design`, `agent-persona`, `agent-persona-original`, `satirical-news`,
       `content-idea-gen`, `family-recipe`, `regional-recipe`, `viral-recipe`, `ai-map`,
-      `model-benchmark-watch`, `news-digest`, `finance-digest`
-- [ ] **Image, speech and music recipes** (their keys become optional task secrets through
+      `model-benchmark-watch`, `news-digest`, `finance-digest` — done 2026-11-10: `app-idea-card` ran
+      through Cronsole the same way
+- [x] **Image, speech and music recipes** (their keys become optional task secrets through
       `KEY_ENVS`; add any key the generator doesn't know yet): `ai-meme-generator`, `poster`,
       `news-collage`, `future-cities`, `image-prompt-packs`, `wallpaper-packs`,
-      `image-collections`, `song-generator`, `voiceover-script-generator`
-- [ ] **Recipes that act on something of yours:** `pr-review` (needs `repo` and a logged-in
+      `image-collections`, `song-generator`, `voiceover-script-generator` — done 2026-11-10:
+      `ai-meme-generator` ran through Cronsole with a Gemini image. `song-generator`'s
+      `ELEVENLABS_API_KEY` is a required secret through the new `REQUIRED_KEYS`, since no parameter
+      names it and the recipe can't run without it
+- [x] **Recipes that act on something of yours:** `pr-review` (needs `repo` and a logged-in
       `gh`) and `app-enhancement` (needs `appsDir`). Keep the safe defaults (`report` mode, patch
-      only) in the template, and say in each template's description what it needs on the machine
+      only) in the template, and say in each template's description what it needs on the machine —
+      done 2026-11-10: the needs go in through `NATIVE_NEEDS`, and `pr-review` ran through Cronsole
+      in `report` mode against this repo without touching the PR it reviewed
 - [ ] With every recipe in `NATIVE`, decide whether the clone edition stays a full set or shrinks
       to the editing path, and update the README quick start and `registry/README.md` to match
 - [ ] The *Agent CLI* parameter on Cronsole templates lists only CLIs whose matrix column has at

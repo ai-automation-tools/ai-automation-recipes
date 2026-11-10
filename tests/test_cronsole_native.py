@@ -72,6 +72,12 @@ class TemplateTests(unittest.TestCase):
         engine = next(p for p in template("short-story")["parameters"] if p["key"] == "engine")
         self.assertEqual(engine["options"], engine_names())
 
+    def test_required_key_blocks_and_optional_keys_dont(self):
+        body = template("song-generator")["action"]["body"]
+        self.assertIn('"${secret.ELEVENLABS_API_KEY}"', body)
+        self.assertIn('"${secret.GEMINI_API_KEY?}"', body)
+        self.assertNotIn("ELEVENLABS_API_KEY?", body)
+
     def test_body_compiles_with_awkward_values(self):
         t = template("short-story")
         body = fill(t["action"]["body"], {"outputDir": "C:\\Users\\you\\AI Output\\", "model": "opus",
