@@ -95,8 +95,10 @@ def item(folder: Path, out_dir: Path) -> dict | None:
     except (OSError, json.JSONDecodeError):
         return None
     rel = folder.relative_to(out_dir).as_posix()
-    files = sorted(p.relative_to(folder).as_posix() for p in folder.rglob("*")
-                   if p.is_file() and p.name != MANIFEST and not any(part.startswith(".") for part in p.parts))
+    # Skip hidden files by their path inside the item only: a dot-folder above it (a worktree such as
+    # `.ai-recipes-demo-refresh-run`) hid every file, so the hosted demo lost all its images.
+    files = sorted(r.as_posix() for r in (p.relative_to(folder) for p in folder.rglob("*") if p.is_file())
+                   if r.name != MANIFEST and not any(part.startswith(".") for part in r.parts))
     declared = a.get("files") or {}
     main = declared.get("main") if isinstance(declared.get("main"), str) else None
     cover = next((c for c in COVERS if c in files), None)
