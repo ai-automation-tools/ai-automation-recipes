@@ -12,7 +12,8 @@
 
 | Script | What it does |
 |:---|:---|
-| [**build_registry.py**](build_registry.py) | Rebuilds [`registry/`](../registry/README.md) from every `recipes/*/cronsole.json` and `cronsole/*.json`. Checks each template against Cronsole's rules first. `--check` exits 1 if the committed registry is stale |
+| [**build_registry.py**](build_registry.py) | Rebuilds [`registry/`](../registry/README.md) from every `recipes/*/cronsole.json` and `cronsole/*.json`. Checks each template against Cronsole's rules first, and writes each recipe README's *Import into Cronsole* links. `--check` exits 1 if the committed registry or a links block is stale |
+| [**check_registry_published.py**](check_registry_published.py) | Compares the catalog published at `ai-automation-recipes.ai-automation-tools.dev/registry/` with `registry/`, hashing every served file. Runs daily in the *Registry drift* workflow |
 | [**build_viewer.py**](build_viewer.py) | Writes `index.html` and `catalog.js` into an output folder: the browsable page for everything the recipes made |
 | [**check_public.py**](check_public.py) | Fails on API-key shapes, personal home paths, emails, real IP addresses, and anything on a private denylist kept outside the repo |
 | [**build_bundle.py**](build_bundle.py) | Builds the reproducible runtime bundle the Cronsole editions download, and prints its sha256 |

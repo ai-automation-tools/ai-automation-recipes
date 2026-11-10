@@ -8,7 +8,9 @@ every coding agent (Codex, Gemini CLI, opencode; Claude Code imports this file f
   private repo references. Run `python scripts/check_public.py` before every commit.
 - **`registry/` is generated.** Edit `recipes/*/cronsole.json` or `cronsole/*.json`, then
   `python scripts/build_registry.py`. Never hand-edit `registry/`: Cronsole verifies sha256 over
-  exact bytes, and the files must stay LF.
+  exact bytes, and the files must stay LF. It also writes each recipe README's *Import into Cronsole*
+  block; edit `links_block()`, not the README. `homepage.yml` publishes `registry/` at `/registry/`,
+  where the Cronsole gallery reads it.
 - **Templates never carry secrets.** No parameter may hold an API key; keys come from the
   environment (`.env` or Cronsole task secrets).
 - **Skills are named, not pasted.** `.claude/skills/` is the source of truth; a prompt carries only
@@ -29,8 +31,8 @@ every coding agent (Codex, Gemini CLI, opencode; Claude Code imports this file f
 - **Two editions per recipe.** The clone edition is `recipes/<name>/cronsole.json`. The Cronsole
   edition (`recipe-<name>-cronsole`) is generated from it plus `cronsole/native-body.py` for every
   recipe in `NATIVE` in `scripts/build_registry.py`; never hand-write one.
-- **The runtime bundle is pinned.** Anything under `core/`, `recipes/` or `.claude/skills/` changes
-  the bundle the Cronsole editions download, so it needs a new `VERSION` (patch bump) and a
+- **The runtime bundle is pinned.** Anything under `core/`, `recipes/` or `.claude/skills/` (except
+  a recipe's `README.md`) changes the bundle the Cronsole editions download, so it needs a new `VERSION` (patch bump) and a
   `build_registry.py` run in the same change. CI fails a changed bundle under a released version.
 - **Recipe-local data lives beside the four files** (`themes.md`, `topics.json`) and is read by
   `run.py`, never pasted into a prompt. `ImageSpec(optional=True)` is for images that are a bonus:
