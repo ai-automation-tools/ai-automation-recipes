@@ -100,7 +100,10 @@ class BuildViewerTests(unittest.TestCase):
         build_viewer.build(self.out, "T", "https://github.com/o/r/")
         cat = load_catalog(self.out)
         self.assertEqual(cat["repo"], "https://github.com/o/r")
-        self.assertTrue(cat["items"][0]["template"])  # registry/templates/recipe-comics.json exists
+        # The Cronsole edition when there is one (it needs no clone), and the gallery that serves it.
+        self.assertEqual(cat["items"][0]["template"], "recipe-comics-cronsole")
+        self.assertEqual(cat["gallery"], "https://cronsole.ai-automation-tools.dev/")
+        self.assertIsNone(build_viewer.template_id("no-such-recipe"))
         build_viewer.build(self.out, "T")
         self.assertIsNone(load_catalog(self.out)["repo"])  # local builds keep "Open folder"
 

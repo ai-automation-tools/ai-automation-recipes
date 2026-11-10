@@ -24,6 +24,12 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   Filter chips by group; nine cards first, then *Show all*. The cards are read live from the sample
   site's `catalog.js`, so its biweekly rotation never leaves a dead link, and a failed load says so
   and links to both sites. The hero's main button now jumps to the section.
+- The sample site links to the Cronsole gallery. Its home page has a **Get them for Cronsole**
+  button (the full `ai-recipes` pack), and every item's **Get it for Cronsole** opens that recipe's
+  template in the gallery rather than its raw JSON on GitHub. `build_viewer.py` now writes the
+  gallery URL into the catalog and names each item's template id (the Cronsole edition when it has
+  one) instead of `true`. The homepage gains a **Sample site** button in the hero and a *Browse every
+  run on the sample site* link under the samples, which had lost their only visible link.
 
 **Fixed**
 - `scripts/build_viewer.py` dropped every file of every run when the output folder sat under a
