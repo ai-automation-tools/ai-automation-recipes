@@ -20,6 +20,7 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - The web checks in `core/web.py` now read unquoted `src`/`href` values, so a generated page can't
   load a non-HTTPS or off-allowlist resource past `check_refs`, and `node --check` also sees inline
   scripts closed by `</script >`. Found by CodeQL (alert #1).
+
 ## Unreleased — 2026-11-10
 
 **Added**
@@ -191,7 +192,7 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 
 **Changed**
 - CI runs with `RECIPES_CLI_REMOTE=0`, so it tests the profiles in the commit.
-## 0.12.8 — 2026-11-10
+## Unreleased
 
 **Changed**
 - 2026-10-22: the org layout standard. The agent rules moved from `CLAUDE.md` to `AGENTS.md`, which
