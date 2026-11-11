@@ -66,6 +66,18 @@ class WebTests(unittest.TestCase):
         with self.assertRaises(RecipeError):
             web.check_refs(self.d, "q.html")
 
+    def test_check_refs_sees_unquoted_urls(self):
+        (self.d / "u.html").write_text("<script src=http://x/y.js></script>", encoding="utf-8")
+        with self.assertRaises(RecipeError):
+            web.check_refs(self.d, "u.html")
+        (self.d / "v.html").write_text("<script src=https://x/y.js></script>", encoding="utf-8")
+        with self.assertRaises(RecipeError):
+            web.check_refs(self.d, "v.html", allow_external_scripts=False)
+
+    def test_inline_script_regex_accepts_loose_end_tags(self):
+        html = "<script>a()</script ><script>b()</SCRIPT\tx>"
+        self.assertEqual(web.INLINE_SCRIPT_RE.findall(html), ["a()", "b()"])
+
     def test_sources_csv(self):
         (self.d / "s.csv").write_text('title,url,note\na,https://a,n\nb,https://b,"x, y"\nc,https://c,n\n',
                                       encoding="utf-8")

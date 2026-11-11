@@ -17,8 +17,10 @@ from .runner import RecipeError
 
 log = logging.getLogger("recipes")
 
-REF_RE = re.compile(r"""<(script|link|img|audio|source|iframe)\b[^>]*?\b(?:src|href)\s*=\s*["']([^"']+)""", re.I)
-INLINE_SCRIPT_RE = re.compile(r'''<script(?![^>]*\bsrc\s*=)(?![^>]*\btype\s*=\s*["']?(?!(?:text|application)/javascript\b|module\b)[\w/+.-]+)[^>]*>(.*?)</script>''', re.S | re.I)
+# Quoted or unquoted attribute values: browsers load `src=https://x/y.js` too.
+REF_RE = re.compile(r"""<(script|link|img|audio|source|iframe)\b[^>]*?\b(?:src|href)\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s"'>]+))""", re.I)
+# Browsers also close a script on `</script >` and `</script foo>`.
+INLINE_SCRIPT_RE = re.compile(r'''<script(?![^>]*\bsrc\s*=)(?![^>]*\btype\s*=\s*["']?(?!(?:text|application)/javascript\b|module\b)[\w/+.-]+)[^>]*>(.*?)</script\b[^>]*>''', re.S | re.I)
 
 
 def check_refs(
@@ -35,7 +37,8 @@ def check_refs(
     pending        — local names the runner writes later (e.g. "cover.png").
     """
     html = (staging / page).read_text(encoding="utf-8")
-    for tag, ref in REF_RE.findall(html):
+    for tag, *values in REF_RE.findall(html):
+        ref = next(v for v in values if v)
         if ref.startswith(("data:", "#", "mailto:")):
             continue
         if ref.startswith(("http://", "https://", "//")):

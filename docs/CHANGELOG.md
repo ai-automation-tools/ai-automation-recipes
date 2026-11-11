@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.7-2ea44f?style=for-the-badge" alt="Version 0.12.7">
+  <img src="https://img.shields.io/badge/version-0.12.8-2ea44f?style=for-the-badge" alt="Version 0.12.8">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -13,6 +13,13 @@
 
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
+
+## 0.12.8 — 2026-11-10
+
+**Security**
+- The web checks in `core/web.py` now read unquoted `src`/`href` values, so a generated page can't
+  load a non-HTTPS or off-allowlist resource past `check_refs`, and `node --check` also sees inline
+  scripts closed by `</script >`. Found by CodeQL (alert #1).
 
 ## Unreleased — 2026-11-10
 
