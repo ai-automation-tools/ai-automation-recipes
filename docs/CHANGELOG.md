@@ -20,6 +20,29 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - The web checks in `core/web.py` now read unquoted `src`/`href` values, so a generated page can't
   load a non-HTTPS or off-allowlist resource past `check_refs`, and `node --check` also sees inline
   scripts closed by `</script >`. Found by CodeQL (alert #1).
+## Unreleased — 2026-11-10
+
+**Added**
+- The homepage shows the sample runs itself. A new *Sample runs* section, right under the hero,
+  has one card per recipe with a sample: its newest run's picture (or the opening of its text),
+  title and summary, a **See the output** button that opens that run on the sample site, and a
+  **Get it for Cronsole** button that opens the recipe's Cronsole edition in the Cronsole gallery.
+  Filter chips by group; nine cards first, then *Show all*. The cards are read live from the sample
+  site's `catalog.js`, so its biweekly rotation never leaves a dead link, and a failed load says so
+  and links to both sites. The hero's main button now jumps to the section.
+- The sample site links to the Cronsole gallery. Its home page has a **Get them for Cronsole**
+  button (the full `ai-recipes` pack), and every item's **Get it for Cronsole** opens that recipe's
+  template in the gallery rather than its raw JSON on GitHub. `build_viewer.py` now writes the
+  gallery URL into the catalog and names each item's template id (the Cronsole edition when it has
+  one) instead of `true`. The homepage gains a **Sample site** button in the hero and a *Browse every
+  run on the sample site* link under the samples, which had lost their only visible link.
+
+**Fixed**
+- `scripts/build_viewer.py` dropped every file of every run when the output folder sat under a
+  folder whose name starts with a dot, because it checked the absolute path for hidden parts. The
+  demo refresh builds in `.ai-recipes-demo-refresh-run`, so since 2026-10-15 the hosted sample site
+  has shipped with no images, covers or galleries. It now checks the path inside each run only.
+  New test in `tests/test_viewer.py`.
 
 ## 0.12.7 — 2026-11-10
 

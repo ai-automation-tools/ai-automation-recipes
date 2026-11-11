@@ -83,6 +83,16 @@ class HomepageTests(unittest.TestCase):
         for target in sorted(set(re.findall(r'href="#([^"]+)"', html))):
             self.assertIn(target, p.ids, f'href="#{target}" has no element with id="{target}"')
 
+    def test_sample_cards_link_to_the_output_and_the_template(self):
+        # The cards are built from the demo's catalog.js, so these two link shapes are the contract:
+        # the demo viewer's artifact route, and the Cronsole gallery's template route.
+        html = (HOME / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<section id="samples">', html)
+        self.assertIn("DEMO + 'catalog.js'", html)
+        self.assertIn("${DEMO}#/a/${encodeURIComponent(it.id)}", html)
+        self.assertIn("${GALLERY}#/t/${encodeURIComponent(tid)}", html)
+        self.assertGreaterEqual(html.count('href="https://ai-automation-recipes-demo.ai-automation-tools.dev/"'), 3)
+
     def test_pages_files(self):
         self.assertEqual((HOME / "CNAME").read_text(encoding="utf-8").strip(),
                          "ai-automation-recipes.ai-automation-tools.dev")
