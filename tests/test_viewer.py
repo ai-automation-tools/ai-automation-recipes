@@ -48,6 +48,17 @@ class BuildViewerTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_a_dot_folder_above_the_output_hides_nothing(self):
+        # The demo refresh builds in a worktree named `.ai-recipes-demo-refresh-run`; checking the
+        # absolute path for dot-parts dropped every file, so the hosted demo shipped with no images.
+        out = self.out / ".worktree" / "site"
+        artifact(out, "posters", "2026-10-19_p", {"title": "P", "summary": "s", "date": "2026-10-19",
+                 "files": {"main": "caption.md"}}, {"caption.md": "# P", "cover.jpg": b"x", ".hidden.png": b"x"})
+        build_viewer.build(out, "T")
+        item = load_catalog(out)["items"][0]
+        self.assertTrue(item["cover"].endswith("/cover.jpg"))
+        self.assertEqual(item["gallery"], [])
+
     def test_catalog_classifies_media(self):
         artifact(self.out, "browser-games", "2026-10-14_g", {"title": "G", "summary": "s", "date": "2026-10-14",
                  "files": {"main": "index.html"}}, {"index.html": "<p>", "game-design-brief.md": "# Brief", "cover.png": b"x"})
@@ -89,7 +100,10 @@ class BuildViewerTests(unittest.TestCase):
         build_viewer.build(self.out, "T", "https://github.com/o/r/")
         cat = load_catalog(self.out)
         self.assertEqual(cat["repo"], "https://github.com/o/r")
-        self.assertTrue(cat["items"][0]["template"])  # registry/templates/recipe-comics.json exists
+        # The Cronsole edition when there is one (it needs no clone), and the gallery that serves it.
+        self.assertEqual(cat["items"][0]["template"], "recipe-comics-cronsole")
+        self.assertEqual(cat["gallery"], "https://cronsole.ai-automation-tools.dev/")
+        self.assertIsNone(build_viewer.template_id("no-such-recipe"))
         build_viewer.build(self.out, "T")
         self.assertIsNone(load_catalog(self.out)["repo"])  # local builds keep "Open folder"
 

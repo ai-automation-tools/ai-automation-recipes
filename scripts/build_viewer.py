@@ -40,6 +40,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from core.artifacts import MANIFEST  # noqa: E402
 from core.runner import DEFAULT_OUTPUT_DIR, load_dotenv  # noqa: E402
+from build_registry import GALLERY  # noqa: E402  the Cronsole gallery that lists these templates
 
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}
 AUDIO_EXT = {".mp3", ".wav", ".m4a", ".ogg"}
@@ -95,8 +96,10 @@ def item(folder: Path, out_dir: Path) -> dict | None:
     except (OSError, json.JSONDecodeError):
         return None
     rel = folder.relative_to(out_dir).as_posix()
-    files = sorted(p.relative_to(folder).as_posix() for p in folder.rglob("*")
-                   if p.is_file() and p.name != MANIFEST and not any(part.startswith(".") for part in p.parts))
+    # Skip hidden files by their path inside the item only: a dot-folder above it (a worktree such as
+    # `.ai-recipes-demo-refresh-run`) hid every file, so the hosted demo lost all its images.
+    files = sorted(r.as_posix() for r in (p.relative_to(folder) for p in folder.rglob("*") if p.is_file())
+                   if r.name != MANIFEST and not any(part.startswith(".") for part in r.parts))
     declared = a.get("files") or {}
     main = declared.get("main") if isinstance(declared.get("main"), str) else None
     cover = next((c for c in COVERS if c in files), None)
@@ -150,8 +153,16 @@ def item(folder: Path, out_dir: Path) -> dict | None:
         "video": [link(f) for f in files if Path(f).suffix.lower() in VIDEO_EXT],
         "docs": docs,
         "files": [link(f) for f in files],
-        "template": (ROOT / "registry" / "templates" / f"recipe-{a.get('recipe', '')}.json").is_file(),
+        "template": template_id(a.get("recipe", "")),
     }
+
+
+def template_id(recipe: str) -> str | None:
+    """The recipe's Cronsole template id: the Cronsole edition (no clone needed) if it has one."""
+    for tid in (f"recipe-{recipe}-cronsole", f"recipe-{recipe}"):
+        if recipe and (ROOT / "registry" / "templates" / f"{tid}.json").is_file():
+            return tid
+    return None
 
 
 def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
@@ -171,7 +182,7 @@ def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
         known.append({"name": "Other", "collections": [{"id": c, "label": label(c)} for c in extra]})
 
     catalog = {"title": title, "generated": datetime.now().strftime("%Y-%m-%d %H:%M"), "groups": known, "items": items,
-               "repo": repo_url.rstrip("/") if repo_url else None}
+               "repo": repo_url.rstrip("/") if repo_url else None, "gallery": GALLERY}
     # </script>-safe: catalog.js is loaded as a script, so never let a string close the tag.
     payload = json.dumps(catalog, ensure_ascii=False).replace("</", "<\\/")
     (out_dir / "catalog.js").write_text(f"window.CATALOG = {payload};\n", encoding="utf-8")

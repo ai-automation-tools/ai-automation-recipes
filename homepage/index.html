@@ -198,6 +198,27 @@
 
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
+    /* Sample runs: one card per recipe, read live from the demo site's catalog. */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .chip { height: 32px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--field); color: var(--fg-3); font: 500 13px var(--sans); cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
+    .chip:hover { border-color: var(--line-hover); color: var(--fg); }
+    .chip[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+    .chip .n { font-family: var(--mono); font-size: 11px; color: var(--fg-4); margin-left: 6px; }
+    .sample { padding: 0; display: flex; flex-direction: column; }
+    .sample .shot { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--surface-2); }
+    .sample .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease); }
+    .sample:hover .shot img { transform: scale(1.03); }
+    .sample .shot.text { display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; background: radial-gradient(120% 90% at 15% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%), var(--surface-2); }
+    .sample .shot.text q { quotes: none; color: var(--fg-2); font-size: 14px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .sample .body { position: relative; z-index: 1; display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
+    .sample .kind { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--fg-4); }
+    .sample h3 { margin-top: 6px; font-size: 16.5px; }
+    .sample p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .sample .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
+    .sample .btn { flex: 1 1 auto; justify-content: center; height: 36px; padding: 0 12px; font-size: 13px; }
+    .samples-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .chips[hidden], #sampleMore[hidden] { display: none; }
+
     /* Phone pass: scoped so desktop computes identically. */
     @media (max-width: 600px) {
       .theme-sw button { width: 36px; height: 32px; }
@@ -231,7 +252,7 @@
       AI Automation Recipes
     </a>
     <nav class="nav" aria-label="Sections">
-      <a href="#recipes">Recipes</a><a href="#how">How it works</a><a href="#start">Quick start</a><a href="#cronsole">Cronsole</a><a href="#resources">Resources</a>
+      <a href="#samples">Samples</a><a href="#recipes">Recipes</a><a href="#how">How it works</a><a href="#start">Quick start</a><a href="#cronsole">Cronsole</a><a href="#resources">Resources</a>
     </nav>
     <div class="topbar-right">
       <a class="org-link" href="https://ai-automation-tools.dev/">ai-automation-tools.dev</a>
@@ -245,7 +266,7 @@
     </div>
   </div>
   <nav class="mobile-nav" id="mobileNav" aria-label="Sections">
-    <a href="#recipes">Recipes</a><a href="#how">How it works</a><a href="#start">Quick start</a><a href="#cronsole">Cronsole</a><a href="#resources">Resources</a><a href="https://ai-automation-tools.dev/">ai-automation-tools.dev</a>
+    <a href="#samples">Samples</a><a href="#recipes">Recipes</a><a href="#how">How it works</a><a href="#start">Quick start</a><a href="#cronsole">Cronsole</a><a href="#resources">Resources</a><a href="https://ai-automation-tools.dev/">ai-automation-tools.dev</a>
   </nav>
 </header>
 
@@ -257,13 +278,17 @@
     <h1>Scheduled automations that <em>make things</em>.</h1>
     <p class="lede">Claude Code automations that research, write, build, draw and compose, packaged as templates you can import into Cronsole. Run one by hand to see what it makes, or schedule it and let a collection build up.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">
-        Browse sample runs
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg>
+      <a class="btn btn-primary" href="#samples">
+        See what they make
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
       </a>
       <a class="btn btn-gh" href="https://github.com/ai-automation-tools/ai-automation-recipes" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
+      </a>
+      <a class="btn btn-ghost" href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">
+        Sample site
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg>
       </a>
       <a class="btn btn-ghost" href="#start">Quick start</a>
     </div>
@@ -275,6 +300,22 @@
       <li>Cronsole <b>Registry v1</b></li>
     </ul>
   </div>
+
+  <section id="samples">
+    <span class="eyebrow">Sample runs</span>
+    <h2>What the recipes make</h2>
+    <p class="sub">Real, unedited output: the newest sample from each recipe. Open one to see the whole run, or take the recipe's template and schedule it in your own <a href="https://cronsole.ai-automation-tools.dev/" target="_blank" rel="noopener">Cronsole</a>.</p>
+    <div class="chips" id="sampleChips" role="group" aria-label="Filter samples by group" hidden></div>
+    <div class="grid" id="sampleGrid"></div>
+    <div class="samples-foot">
+      <button class="btn btn-ghost" id="sampleMore" type="button" hidden></button>
+      <a class="btn btn-ghost" href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">
+        Browse every run on the sample site
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg>
+      </a>
+    </div>
+    <p class="note" id="sampleNote" aria-live="polite">Loading samples from the <a href="https://ai-automation-recipes-demo.ai-automation-tools.dev/" target="_blank" rel="noopener">sample site</a>&hellip;</p>
+  </section>
 
   <section id="recipes">
     <span class="eyebrow">The recipes</span>
@@ -352,7 +393,7 @@
       <article class="card"><h3>Cronsole edition</h3><p>Needs Python and the agent CLI where Cronsole runs, nothing else: the first run fetches a pinned, sha256-checked runtime into your cache. Keys are optional task secrets. Best for importing and forgetting.</p><span class="tag">recipe-&lt;name&gt;-cronsole</span></article>
       <article class="card"><h3>Clone edition</h3><p>Needs a clone of this repo and a <code>.env</code>. Each command is a plain command line that cron, Task Scheduler or launchd can run as it is. Best for editing prompts, or any scheduler.</p><span class="tag">recipe-&lt;name&gt;</span></article>
     </div>
-    <p class="note">The Cronsole edition is a pilot covering short-story, comics and podcast-episode. The <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/registry/README.md" target="_blank" rel="noopener">registry README</a> has the details.</p>
+    <p class="note">Every recipe has both editions. Browse and download them in the <a href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes" target="_blank" rel="noopener">Cronsole gallery</a>, or take the <a href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes-cronsole" target="_blank" rel="noopener">Cronsole editions pack</a>, then import the file in Cronsole under Templates. The <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/registry/README.md" target="_blank" rel="noopener">registry README</a> has the details.</p>
   </section>
 
   <section id="resources">
@@ -365,7 +406,7 @@
       <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/README.md" target="_blank" rel="noopener"><b>Docs home</b><span>The map of every document</span></a>
       <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener"><b>Architecture</b><span>The run loop, artifact.json, engines and skills</span></a>
       <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/ADDING-A-RECIPE.md" target="_blank" rel="noopener"><b>Adding a recipe</b><span>The four files and the checks before a PR</span></a>
-      <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/registry/README.md" target="_blank" rel="noopener"><b>Cronsole registry</b><span>Templates and packs</span></a>
+      <a href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes" target="_blank" rel="noopener"><b>Cronsole templates</b><span>Every recipe, ready to download and import</span></a>
       <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener"><b>Roadmap</b><span>Live-test status and what's left</span></a>
       <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/docs/CHANGELOG.md" target="_blank" rel="noopener"><b>Changelog</b><span>Every change, newest first</span></a>
       <a href="https://cronsole.ai-automation-tools.dev/" target="_blank" rel="noopener"><b>Cronsole</b><span>Imports these recipes as templates</span></a>
@@ -430,6 +471,87 @@
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(cmds).then(() => copied(true), () => copied(false));
     else copied(false);
   });
+
+  // Sample runs. The demo site publishes its catalog as catalog.js (window.CATALOG); it is read live,
+  // so its biweekly rotation never leaves a dead link here. One card per recipe: its newest sample.
+  (function () {
+    const DEMO = 'https://ai-automation-recipes-demo.ai-automation-tools.dev/';
+    const GALLERY = 'https://cronsole.ai-automation-tools.dev/';
+    const FIRST = 9;
+    const grid = document.getElementById('sampleGrid'), chips = document.getElementById('sampleChips');
+    const more = document.getElementById('sampleMore'), note = document.getElementById('sampleNote');
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const asset = p => DEMO + p.split('/').map(encodeURIComponent).join('/');
+    const arrow = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 12L12 4M6 4h6v6"/></svg>';
+    // A run with no picture shows the opening of its own output, not a placeholder.
+    function excerpt(it) {
+      const doc = it.docs && it.docs[0]; if (!doc) return it.summary || '';
+      const d = new DOMParser().parseFromString(doc.html, 'text/html');
+      d.querySelectorAll('h1, h2, h3, table, pre, blockquote').forEach(n => n.remove());
+      return d.body.textContent.replace(/\s+/g, ' ').trim().slice(0, 320) || it.summary || '';
+    }
+    function card(s) {
+      const it = s.item;
+      const shot = it.thumb
+        ? `<span class="shot"><img src="${esc(asset(it.thumb))}" alt="" loading="lazy" decoding="async"></span>`
+        : `<span class="shot text"><q>${esc(excerpt(it))}</q></span>`;
+      // The catalog names the template id; older catalogs only said `template: true`.
+      const tid = typeof it.template === 'string' ? it.template : `recipe-${it.recipe}-cronsole`;
+      const get = it.template
+        ? `<a class="btn btn-primary" href="${GALLERY}#/t/${encodeURIComponent(tid)}" target="_blank" rel="noopener" aria-label="Get the ${esc(s.label)} template for Cronsole">Get it for Cronsole</a>`
+        : '';
+      return `<article class="card sample">${shot}<div class="body"><span class="kind">${esc(s.label)}</span><h3>${esc(it.title)}</h3><p>${esc(it.summary)}</p>`
+        + `<div class="acts"><a class="btn btn-ghost" href="${DEMO}#/a/${encodeURIComponent(it.id)}" target="_blank" rel="noopener" aria-label="See the output: ${esc(it.title)}">See the output ${arrow}</a>${get}</div></div></article>`;
+    }
+    function render(C) {
+      const label = {}, group = {};
+      C.groups.forEach(g => g.collections.forEach(c => { label[c.id] = c.label; group[c.id] = g.name; }));
+      const newest = {};
+      C.items.forEach(it => { if (!newest[it.recipe] || it.date > newest[it.recipe].date) newest[it.recipe] = it; });
+      // Pictures first, then newest; a filter keeps that order.
+      const samples = Object.values(newest)
+        .map(item => ({ item, label: label[item.collection] || item.collection, group: group[item.collection] || 'Other' }))
+        .sort((a, b) => (Number(!!b.item.thumb) - Number(!!a.item.thumb)) || String(b.item.date).localeCompare(String(a.item.date)));
+      const groups = C.groups.map(g => g.name).filter(n => samples.some(s => s.group === n));
+      let current = 'All', open = false;
+      function draw() {
+        const list = samples.filter(s => current === 'All' || s.group === current);
+        const shown = open || current !== 'All' ? list : list.slice(0, FIRST);
+        grid.innerHTML = shown.map(card).join('');
+        more.hidden = shown.length === list.length;
+        more.textContent = `Show all ${list.length}`;
+      }
+      chips.innerHTML = ['All', ...groups].map(n => {
+        const k = n === 'All' ? samples.length : samples.filter(s => s.group === n).length;
+        return `<button class="chip" type="button" data-g="${esc(n)}" aria-pressed="${n === current}">${esc(n)}<span class="n">${k}</span></button>`;
+      }).join('');
+      chips.hidden = false;
+      chips.addEventListener('click', e => {
+        const b = e.target.closest('.chip'); if (!b) return;
+        current = b.dataset.g;
+        chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+        draw();
+      });
+      more.addEventListener('click', () => { open = true; draw(); });
+      draw();
+      note.innerHTML = `${samples.length} recipes have a sample here; every recipe is in the <a href="${GALLERY}#/collection/ai-recipes" target="_blank" rel="noopener">Cronsole gallery</a>. Every run, with search and media players, is on the <a href="${DEMO}" target="_blank" rel="noopener">sample site</a>.`;
+    }
+    function failed() {
+      note.innerHTML = `The samples couldn't be loaded here. Browse them on the <a href="${DEMO}" target="_blank" rel="noopener">sample site</a>, and get the templates from the <a href="${GALLERY}#/collection/ai-recipes" target="_blank" rel="noopener">Cronsole gallery</a>.`;
+    }
+    function load() {
+      const sc = document.createElement('script');
+      sc.src = DEMO + 'catalog.js'; sc.async = true;
+      sc.onload = () => { try { if (window.CATALOG && window.CATALOG.items && window.CATALOG.items.length) render(window.CATALOG); else failed(); } catch (e) { failed(); } };
+      sc.onerror = failed;
+      document.head.appendChild(sc);
+    }
+    // The catalog is about 200 KB gzipped, so fetch it only once the section is near.
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '600px 0px' });
+      io.observe(document.getElementById('samples'));
+    } else load();
+  })();
 
   // Scroll-spy: mark the nav link for the section in view.
   const links = document.querySelectorAll('.nav a');
