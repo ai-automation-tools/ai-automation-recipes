@@ -14,6 +14,16 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-11
+
+**Changed**
+- The roadmap was rechecked against the org's 2026-11 requirements. The intro names the Recipes
+  roadmap routine instead of a weekday, and the *Where we are* note reflects the finished Cronsole
+  batches and the live catalog. Two items open the Cronsole editions section: the homepage's
+  Cronsole section reading `registry/index.json` live, and the demo viewer loading `consent.js`
+  with a build stamp. The five open *Later* items are changes to Cronsole itself, which this repo's
+  routine can't build, so they're marked blocked.
+
 ## 0.12.8 — 2026-11-10
 
 **Security**

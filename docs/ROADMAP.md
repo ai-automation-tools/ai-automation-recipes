@@ -13,7 +13,8 @@
 
 ---
 
-The weekly roadmap routine works this file top to bottom every Wednesday. **Every item above
+The Recipes roadmap routine (`ai-recipes-roadmap`) works this file top to bottom, one item per
+run, as `roadmap/auto-` PRs. **Every item above
 `## After public release` is a go-live gate.** Ticking an item adds its line to the
 [changelog](CHANGELOG.md) and updates any doc it made stale, in the same commit. There's no paid
 tier planned: this is the free companion to Cronsole, so there is no Revenue group.
@@ -23,13 +24,11 @@ reason follows on the line). `small` marks an item a check verifies; `🔒 Needs
 the maintainer can do.
 
 > [!NOTE]
-> **Where we are, 2026-10-26.** 48 recipes in seven groups. Every one already runs for real on
-> Claude in the maintainer's private fleet, so this roadmap no longer tracks a live run per recipe.
-> What's left is portability: each recipe has to work on every agent CLI with a profile, not just
-> Claude. After that the work is making recipes better and adding new ones.
->
-> **Priority from 2026-11-09:** Cronsole editions for every recipe come first (the section after
-> `## After public release`). CLI coverage continues alongside it.
+> **Where we are, 2026-11-11.** 48 recipes in seven groups, each proven on Claude in the
+> maintainer's private fleet. All four Cronsole edition batches finished on 2026-11-10 and the
+> catalog is live at `/registry/`, so what's left in that section is the homepage reading it live,
+> two follow-up decisions and the demo's consent and build stamp. Then portability: each recipe has
+> to work on every agent CLI with a profile, not just Claude. After that, better and more recipes.
 
 ## 🔨 Phase 1: Port the fleet (done 2026-10-14)
 
@@ -58,6 +57,15 @@ import without cloning: `build_registry.py` generates it from the recipe's `cron
 through Cronsole from the generated template. `VERSION` needs a patch bump only when the bundle
 changed: adding names to `NATIVE` doesn't, so the new templates pin the bundle already released.
 
+- [ ] The homepage's Cronsole section reads `registry/index.json` live (the *Sample runs* cards read
+      the sample site's `catalog.js`, which covers only recipes with a sample): one card per template
+      (or per recipe with both editions) with **Get it for Cronsole** →
+      `https://cronsole.ai-automation-tools.dev/#/t/<id>`, the `ai-recipes` pack link, and a fallback
+      link when the fetch fails; `tests/test_homepage.py` covers the markup
+- [ ] `viewer/index.html` loads `https://ai-automation-tools.dev/consent.js` (or self-hosts its
+      fonts; today it loads Google Fonts with no consent helper) and carries
+      `<meta name="build" content="<sha>">` set when the demo is rebuilt; `Get-SurfaceDrift.py` shows
+      the recipes demo current
 - [x] **Writing and files recipes, no keys:** `serialized-novella`, `alternate-history`,
       `funny-ai-content`, `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`, `cool-websites`,
       `top-10-github-repos`, `trending-movers`, `signal-sources`, `security-toolkit`,
@@ -229,20 +237,23 @@ supports:
 
 ### 🔭 Later
 
-Changes to Cronsole itself, tracked here because these recipes would use them:
+Changes to Cronsole itself, tracked here because these recipes would use them. This repo's routine
+can't build them, so the open ones are marked blocked until cronsole takes them:
 
 - [x] Publish this repo's catalog and list it on the Cronsole site — done 2026-11-10: the Homepage
       workflow serves `registry/` at `/registry/`, the Cronsole gallery reads it as a second
       catalog, and every recipe README links to its templates there
-- [ ] Multiple registry sources in the Cronsole *app* (`TEMPLATE_REGISTRY_URL` takes one), only if
-      auto-sync ever needs this catalog; importing from the gallery doesn't
-- [ ] Import a template by URL, for a one-click "Import into Cronsole" on the demo
-- [ ] A crontab compiler for the `linux` target
-- [ ] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`). Partly covered by
+- [!] Multiple registry sources in the Cronsole *app* (`TEMPLATE_REGISTRY_URL` takes one), only if
+      auto-sync ever needs this catalog; importing from the gallery doesn't — blocked: lives in cronsole
+- [!] Import a template by URL, for a one-click "Import into Cronsole" on the demo — blocked: lives
+      in cronsole
+- [!] A crontab compiler for the `linux` target — blocked: lives in cronsole
+- [!] Template-level secret requirements (`requiresSecrets: ["GEMINI_API_KEY"]`). Partly covered by
       cronsole PR #323: optional `${secret.NAME?}` references, and the apply response lists the
-      secrets a new task still needs
-- [ ] `execution.timeoutSec` for command-line (`exec`) native templates; PR #323 covers `script`
-      templates only, so the clone edition still gets Cronsole's 5-minute default
+      secrets a new task still needs — blocked: lives in cronsole
+- [!] `execution.timeoutSec` for command-line (`exec`) native templates; PR #323 covers `script`
+      templates only, so the clone edition still gets Cronsole's 5-minute default — blocked: lives in
+      cronsole
 
 ### 🚫 Not ported
 
