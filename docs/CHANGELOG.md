@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.12.8-2ea44f?style=for-the-badge" alt="Version 0.12.8">
+  <img src="https://img.shields.io/badge/version-0.12.9-2ea44f?style=for-the-badge" alt="Version 0.12.9">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Docs home"></a>
 </p>
 
@@ -23,6 +23,15 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   Cronsole section reading `registry/index.json` live, and the demo viewer loading `consent.js`
   with a build stamp. The five open *Later* items are changes to Cronsole itself, which this repo's
   routine can't build, so they're marked blocked.
+
+## 0.12.9 — 2026-11-14
+
+**Changed**
+- The agent CLI profiles were rechecked against the installed CLIs (Claude Code 2.1.325, Codex
+  0.169.0, Gemini CLI 0.68.0, Antigravity 1.5.9, Kimi 2.4.1, Grok Build 1.0.77, OpenCode 1.19.5):
+  every flag still present, no profile edit needed. A Claude PONG run and a Codex skill run on
+  0.169.0 (which now keeps project config off in untrusted folders) both parsed with the profile
+  unchanged. Only each profile's `verified` block moved.
 
 ## 0.12.8 — 2026-11-10
 

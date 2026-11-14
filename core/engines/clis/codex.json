@@ -84,8 +84,8 @@
     ]
   },
   "verified": {
-    "version": "0.167.0",
-    "checked": "2026-11-09",
+    "version": "0.169.0",
+    "checked": "2026-11-14",
     "liveRun": true,
     "liveRunNote": "short-story 2026-10-14; app-idea-card, news-digest, pr-review (report) 2026-11-09 on 0.167.0, default model"
   }
