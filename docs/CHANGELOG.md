@@ -14,6 +14,12 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-14
+
+**Changed**
+- The recipe-run diagram was re-pinned after `build_registry.py` and `build_viewer.py` changed: the
+  Cronsole edition and Viewer nodes cite the new line ranges, and the homepage copies were rebuilt.
+
 ## Unreleased — 2026-11-11
 
 **Changed**
