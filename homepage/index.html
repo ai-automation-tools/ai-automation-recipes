@@ -217,7 +217,11 @@
     .sample .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
     .sample .btn { flex: 1 1 auto; justify-content: center; height: 36px; padding: 0 12px; font-size: 13px; }
     .samples-foot { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .chips[hidden], #sampleMore[hidden] { display: none; }
+    .chips[hidden], #sampleMore[hidden], #tplMore[hidden] { display: none; }
+    .tpl { display: flex; flex-direction: column; }
+    .tpl p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .tpl .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; }
+    .tpl .btn { height: 34px; padding: 0 12px; font-size: 13px; }
 
     /* Phone pass: scoped so desktop computes identically. */
     @media (max-width: 600px) {
@@ -394,6 +398,12 @@
       <article class="card"><h3>Clone edition</h3><p>Needs a clone of this repo and a <code>.env</code>. Each command is a plain command line that cron, Task Scheduler or launchd can run as it is. Best for editing prompts, or any scheduler.</p><span class="tag">recipe-&lt;name&gt;</span></article>
     </div>
     <p class="note">Every recipe has both editions. Browse and download them in the <a href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes" target="_blank" rel="noopener">Cronsole gallery</a>, or take the <a href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes-cronsole" target="_blank" rel="noopener">Cronsole editions pack</a>, then import the file in Cronsole under Templates. The <a href="https://github.com/ai-automation-tools/ai-automation-recipes/blob/main/registry/README.md" target="_blank" rel="noopener">registry README</a> has the details.</p>
+    <div class="grid" id="tplGrid"></div>
+    <div class="samples-foot">
+      <button class="btn btn-ghost" id="tplMore" type="button" hidden></button>
+      <a class="btn btn-ghost" href="https://cronsole.ai-automation-tools.dev/#/collection/ai-recipes" target="_blank" rel="noopener">Get the whole <code>ai-recipes</code> pack</a>
+    </div>
+    <p class="note" id="tplNote" aria-live="polite">Loading the template list&hellip;</p>
   </section>
 
   <section id="resources">
@@ -550,6 +560,46 @@
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '600px 0px' });
       io.observe(document.getElementById('samples'));
+    } else load();
+  })();
+
+  // Cronsole templates: registry/index.json is read live (published beside this page), so a new
+  // recipe shows up here without editing the page. One card per recipe; both editions when it has them.
+  (function () {
+    const GALLERY = 'https://cronsole.ai-automation-tools.dev/', FIRST = 12;
+    const grid = document.getElementById('tplGrid'), more = document.getElementById('tplMore'), note = document.getElementById('tplNote');
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const link = id => `${GALLERY}#/t/${encodeURIComponent(id)}`;
+    function render(R) {
+      const byId = {}; R.templates.forEach(t => { byId[t.id] = t; });
+      const recipes = R.templates.filter(t => !t.id.endsWith('-cronsole')).map(clone => ({ clone, native: byId[clone.id + '-cronsole'] }));
+      const card = ({ clone, native }) => {
+        const main = native || clone, name = clone.name.replace(/^AI Recipe:\s*/, '');
+        const second = native ? `<a class="btn btn-ghost" href="${link(clone.id)}" target="_blank" rel="noopener" aria-label="Clone edition of ${esc(name)}">Clone edition</a>` : '';
+        return `<article class="card tpl"><h3>${esc(name)}</h3><p>${esc(clone.description)}</p><div class="acts">`
+          + `<a class="btn btn-primary" href="${link(main.id)}" target="_blank" rel="noopener" aria-label="Get ${esc(name)} for Cronsole">Get it for Cronsole</a>${second}</div></article>`;
+      };
+      let open = false;
+      function draw() {
+        const shown = open ? recipes : recipes.slice(0, FIRST);
+        grid.innerHTML = shown.map(card).join('');
+        more.hidden = shown.length === recipes.length;
+        more.textContent = `Show all ${recipes.length} templates`;
+      }
+      more.addEventListener('click', () => { open = true; draw(); });
+      draw();
+      note.innerHTML = `${R.templates.length} templates in ${R.packs.length} packs, read from this site's <a href="registry/index.json">registry</a>.`;
+    }
+    function failed() {
+      note.innerHTML = `The template list couldn't be loaded here. Browse it in the <a href="${GALLERY}#/collection/ai-recipes" target="_blank" rel="noopener">Cronsole gallery</a>.`;
+    }
+    function load() {
+      fetch('registry/index.json').then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(R => { if (!R.templates || !R.templates.length) throw 0; render(R); }).catch(failed);
+    }
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '600px 0px' });
+      io.observe(document.getElementById('cronsole'));
     } else load();
   })();
 
