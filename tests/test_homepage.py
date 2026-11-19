@@ -93,6 +93,13 @@ class HomepageTests(unittest.TestCase):
         self.assertIn("${GALLERY}#/t/${encodeURIComponent(tid)}", html)
         self.assertGreaterEqual(html.count('href="https://ai-automation-recipes-demo.ai-automation-tools.dev/"'), 3)
 
+    def test_template_cards_read_the_registry_live(self):
+        html = (HOME / "index.html").read_text(encoding="utf-8")
+        for needle in ("fetch('registry/index.json')", 'id="tplGrid"', 'id="tplNote"',
+                       "${GALLERY}#/t/${encodeURIComponent(id)}", "#/collection/ai-recipes\""):
+            self.assertIn(needle, html)
+        self.assertIn("couldn't be loaded", html)   # the fallback when the fetch fails
+
     def test_pages_files(self):
         self.assertEqual((HOME / "CNAME").read_text(encoding="utf-8").strip(),
                          "ai-automation-recipes.ai-automation-tools.dev")
