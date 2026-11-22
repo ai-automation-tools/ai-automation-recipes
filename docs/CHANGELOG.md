@@ -27,6 +27,15 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - The recipe-run diagram was re-pinned after `build_registry.py` and `build_viewer.py` changed: the
   Cronsole edition and Viewer nodes cite the new line ranges, and the homepage copies were rebuilt.
 
+## 0.12.9 — 2026-11-14
+
+**Changed**
+- The agent CLI profiles were rechecked against the installed CLIs (Claude Code 2.1.325, Codex
+  0.169.0, Gemini CLI 0.68.0, Antigravity 1.5.9, Kimi 2.4.1, Grok Build 1.0.77, OpenCode 1.19.5):
+  every flag still present, no profile edit needed. A Claude PONG run and a Codex skill run on
+  0.169.0 (which now keeps project config off in untrusted folders) both parsed with the profile
+  unchanged. Only each profile's `verified` block moved.
+
 ## Unreleased — 2026-11-11
 
 **Changed**
@@ -36,15 +45,6 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   Cronsole section reading `registry/index.json` live, and the demo viewer loading `consent.js`
   with a build stamp. The five open *Later* items are changes to Cronsole itself, which this repo's
   routine can't build, so they're marked blocked.
-
-## 0.12.9 — 2026-11-14
-
-**Changed**
-- The agent CLI profiles were rechecked against the installed CLIs (Claude Code 2.1.325, Codex
-  0.169.0, Gemini CLI 0.68.0, Antigravity 1.5.9, Kimi 2.4.1, Grok Build 1.0.77, OpenCode 1.19.5):
-  every flag still present, no profile edit needed. A Claude PONG run and a Codex skill run on
-  0.169.0 (which now keeps project config off in untrusted folders) both parsed with the profile
-  unchanged. Only each profile's `verified` block moved.
 
 ## 0.12.8 — 2026-11-10
 
