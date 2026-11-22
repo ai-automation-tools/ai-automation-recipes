@@ -14,6 +14,13 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-18
+
+**Added**
+- *Cronsole editions:* the homepage's Cronsole section reads `registry/index.json` live and shows one
+  card per recipe with **Get it for Cronsole** (the Cronsole edition when there is one, plus a
+  clone-edition link), a link to the `ai-recipes` pack, and a gallery link when the fetch fails.
+
 ## Unreleased — 2026-11-14
 
 **Changed**

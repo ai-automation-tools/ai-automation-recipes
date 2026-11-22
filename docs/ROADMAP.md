@@ -24,10 +24,10 @@ reason follows on the line). `small` marks an item a check verifies; `🔒 Needs
 the maintainer can do.
 
 > [!NOTE]
-> **Where we are, 2026-11-11.** 48 recipes in seven groups, each proven on Claude in the
+> **Where we are, 2026-11-18.** 48 recipes in seven groups, each proven on Claude in the
 > maintainer's private fleet. All four Cronsole edition batches finished on 2026-11-10 and the
-> catalog is live at `/registry/`, so what's left in that section is the homepage reading it live,
-> two follow-up decisions and the demo's consent and build stamp. Then portability: each recipe has
+> catalog is live at `/registry/`, so what's left in that section is two follow-up decisions and the
+> demo's consent and build stamp. Then portability: each recipe has
 > to work on every agent CLI with a profile, not just Claude. After that, better and more recipes.
 
 ## 🔨 Phase 1: Port the fleet (done 2026-10-14)
@@ -57,11 +57,13 @@ import without cloning: `build_registry.py` generates it from the recipe's `cron
 through Cronsole from the generated template. `VERSION` needs a patch bump only when the bundle
 changed: adding names to `NATIVE` doesn't, so the new templates pin the bundle already released.
 
-- [ ] The homepage's Cronsole section reads `registry/index.json` live (the *Sample runs* cards read
+- [x] The homepage's Cronsole section reads `registry/index.json` live (the *Sample runs* cards read
       the sample site's `catalog.js`, which covers only recipes with a sample): one card per template
       (or per recipe with both editions) with **Get it for Cronsole** →
       `https://cronsole.ai-automation-tools.dev/#/t/<id>`, the `ai-recipes` pack link, and a fallback
-      link when the fetch fails; `tests/test_homepage.py` covers the markup
+      link when the fetch fails; `tests/test_homepage.py` covers the markup — done 2026-11-18:
+      `homepage/index.html` fetches `registry/index.json` and draws one card per recipe, 12 first and
+      the rest on *Show all*
 - [ ] `viewer/index.html` loads `https://ai-automation-tools.dev/consent.js` (or self-hosts its
       fonts; today it loads Google Fonts with no consent helper) and carries
       `<meta name="build" content="<sha>">` set when the demo is rebuilt; `Get-SurfaceDrift.py` shows
