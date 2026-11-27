@@ -14,6 +14,15 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## Unreleased — 2026-11-27
+
+**Added**
+- *CLI coverage:* a roadmap item to keep the importer's own Claude Code hooks, plugins and MCP
+  servers out of recipe runs (`--strict-mcp-config`, `--setting-sources project,local` in the
+  `claude` profile). Claude Code's headless docs say `claude -p` without `--bare` loads them from
+  `~/.claude`, and recipes now run on other people's machines through the Cronsole editions
+  (monthly roadmap refresh).
+
 ## 0.12.10 — 2026-11-27
 
 **Changed**
