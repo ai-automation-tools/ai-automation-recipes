@@ -131,6 +131,16 @@ run takes at most two of those recipes. `pr-review` runs only in `report` mode a
       does, and prove it on `news-digest`
 - [ ] Map recipe tool names to per-CLI permission rules where a CLI has them (Grok's `--allow`),
       so more profiles can be `allowlist` instead of `advisory`
+- [ ] Keep the importer's own Claude Code setup out of a recipe run. Claude Code's headless docs
+      say a `claude -p` run without `--bare` loads the hooks, plugins and MCP servers configured in
+      `~/.claude`, so a run on someone else's machine isn't the run the README promises (the `agy`
+      profile already isolates its home for the same reason). `--bare` is out (it ignores
+      subscription logins), so add `--strict-mcp-config` and `--setting-sources project,local` to
+      `core/engines/clis/claude.json` (both are in `claude --help` on 2.1.332), with the patch bump
+      and registry rebuild a profile change needs. Done when `python scripts/check_clis.py claude`
+      passes, a test in `tests/` asserts both flags in the built argv, and a PONG through the
+      profile still parses on a subscription login (source:
+      https://code.claude.com/docs/en/headless.md, 2026-11-27)
 
 #### Per CLI
 
