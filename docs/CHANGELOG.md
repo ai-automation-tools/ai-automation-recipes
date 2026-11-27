@@ -16,6 +16,9 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 
 ## Unreleased — 2026-11-27
 
+**Changed**
+- `CLAUDE.md` is gone: Claude Code reads `AGENTS.md` directly, and the import held nothing Claude-only.
+
 **Added**
 - *CLI coverage:* a roadmap item to keep the importer's own Claude Code hooks, plugins and MCP
   servers out of recipe runs (`--strict-mcp-config`, `--setting-sources project,local` in the
