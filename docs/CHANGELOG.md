@@ -14,6 +14,11 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
+## 0.12.10 — 2026-11-27
+
+**Changed**
+- `recipe-validator` brought level with its source, agent-skills' Core skill: the `SKILL.md` and `references/nutrition-and-quality.md` updates it had missed, plus its `evals/`. The scanner script is unchanged, so the food safety gate behaves as before. agent-skills now checks this copy weekly (`check-copies.py`). The bundle changed, so the patch bump and a rebuilt registry.
+
 ## Unreleased — 2026-11-18
 
 **Added**
