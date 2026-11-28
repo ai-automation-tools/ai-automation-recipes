@@ -29,7 +29,7 @@
     {
       "id": "recipe-3d-print-design-cronsole",
       "name": "AI Recipe: 3D Print Design (Cronsole)",
-      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches what sells and writes one original FDM-printable product design — README spec, machine-readable design-spec.json, sources and a product mockup — precise enough to model in CAD. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "3d-printing",
@@ -47,7 +47,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-3d-print-design-cronsole.json",
-      "sha256": "2a316bbba45fb1b3728e59ac88498dde8fffd5f06ff6ce031f0bf490fb65c299"
+      "sha256": "016b9b5a8f28373df66c9a2cf7df658ebe0f654727730505278167d7a842c8f7"
     },
     {
       "id": "recipe-agent-persona",
@@ -77,7 +77,7 @@
     {
       "id": "recipe-agent-persona-cronsole",
       "name": "AI Recipe: Agent Persona (Known Figure) (Cronsole)",
-      "description": "Claude researches one well-known real person or established fictional character and writes a debate-ready, second-person persona card any model can adopt, rotating across ten subcategories, with an illustrated portrait cover and a square chat avatar when an image key is set. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches one well-known real person or established fictional character and writes a debate-ready, second-person persona card any model can adopt, rotating across ten subcategories, with an illustrated portrait cover and a square chat avatar when an image key is set. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "agents",
@@ -95,7 +95,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-agent-persona-cronsole.json",
-      "sha256": "2dc320e1b58b6e729752ee67e0aac4b0eec1ebcf54a83a4e5c20b46eb5ec77b4"
+      "sha256": "b3e529f8e474ea50ad509871898d30acff8a127a83417bb4053952e5c32d5c78"
     },
     {
       "id": "recipe-agent-persona-original",
@@ -125,7 +125,7 @@
     {
       "id": "recipe-agent-persona-original-cronsole",
       "name": "AI Recipe: Original Agent Persona (Cronsole)",
-      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude invents one original, debate-ready character in a rotating archetype group and writes a portable second-person persona card any model can adopt, with an illustrated portrait cover and a square chat avatar when an image key is set. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "agents",
@@ -143,7 +143,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-agent-persona-original-cronsole.json",
-      "sha256": "93af35d71f6ad9196d81a353d108edd13328ea38546774469775bbbcd8feaf35"
+      "sha256": "f2e8fa246395448e2ed0a19a23d811d31f41ea455fc07ba9d42b9a71c6ca02b3"
     },
     {
       "id": "recipe-agent-toolkit",
@@ -174,7 +174,7 @@
     {
       "id": "recipe-agent-toolkit-cronsole",
       "name": "AI Recipe: Agent Toolkit (Cronsole)",
-      "description": "Claude researches 24+ things to install into an LLM or coding agent — skills, commands, MCP servers, plugins, hooks, harnesses — half proven, half new. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches 24+ things to install into an LLM or coding agent — skills, commands, MCP servers, plugins, hooks, harnesses — half proven, half new. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -193,7 +193,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-agent-toolkit-cronsole.json",
-      "sha256": "b4f700f0e8a06ab42a32ff1e881be33e95947acf6dc38688c5aaa4f35851302b"
+      "sha256": "23fa446335c2268f6b57a0a26393eb2cae251d57fa864ff52e620f0c12a981b3"
     },
     {
       "id": "recipe-ai-map",
@@ -223,7 +223,7 @@
     {
       "id": "recipe-ai-map-cronsole",
       "name": "AI Recipe: AI Map (Cronsole)",
-      "description": "Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches 8–20 real places on a rotating theme and builds a standalone interactive Leaflet map with categories, popups and directions links, plus a companion guide, sources, and a cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -241,7 +241,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-ai-map-cronsole.json",
-      "sha256": "d05fedfdde1181e528a4667470e2cc67833e0e537086eff35763932253685cb9"
+      "sha256": "77923e8a84c5e8a3249a71f237afec8e5f673e4564f449843b855bd9e9a092ca"
     },
     {
       "id": "recipe-ai-meme-generator",
@@ -271,7 +271,7 @@
     {
       "id": "recipe-ai-meme-generator-cronsole",
       "name": "AI Recipe: AI Meme (Cronsole)",
-      "description": "Claude invents one original AI-and-tech-themed meme in a rotating theme, never a copied template or a real person, and the runner renders it square with the caption baked in. Optional idea queue via meme-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude invents one original AI-and-tech-themed meme in a rotating theme, never a copied template or a real person, and the runner renders it square with the caption baked in. Optional idea queue via meme-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -289,7 +289,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-ai-meme-generator-cronsole.json",
-      "sha256": "bf9c06eaf430f7b041a0cf2b9af298ce542b7e0127a159cfb430b4be356328e2"
+      "sha256": "3508254b06a4fdc6b47f5f870304a639a1ce124f5da780b6fa14fcda032f3b56"
     },
     {
       "id": "recipe-ai-stack-radar",
@@ -319,7 +319,7 @@
     {
       "id": "recipe-ai-stack-radar-cronsole",
       "name": "AI Recipe: AI Stack Radar (Cronsole)",
-      "description": "Claude researches 24+ hosted AI products, sorted into buckets by the job they do, each with what it replaces and what it costs. Dedups against every earlier run; exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches 24+ hosted AI products, sorted into buckets by the job they do, each with what it replaces and what it costs. Dedups against every earlier run; exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -337,7 +337,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-ai-stack-radar-cronsole.json",
-      "sha256": "1a6dac03d5d7285578849dc911ad45b7ceb88e798b71be21ee76a42efbdb97e0"
+      "sha256": "3013814d7c53fc81562127f5e36fbd4ad5f61357efdcd2434609ead8c6b23673"
     },
     {
       "id": "recipe-alternate-history",
@@ -367,7 +367,7 @@
     {
       "id": "recipe-alternate-history-cronsole",
       "name": "AI Recipe: Alternate History (Cronsole)",
-      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with a portrait cover and one rendered 16:9 scene per section when an image key is set. Optional premise queue via alt-history-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes an eight-section \"what if\" timeline from one real historical divergence, with a portrait cover and one rendered 16:9 scene per section when an image key is set. Optional premise queue via alt-history-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -385,7 +385,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-alternate-history-cronsole.json",
-      "sha256": "e0bb5b753493894971dbeae9e003df1201487edfe179bfc38a3dcdc593ba1abc"
+      "sha256": "a6f418e2b32cb773981c8aac6e6fc33509b5a3fb1b7da71230d704facf766879"
     },
     {
       "id": "recipe-app-enhancement",
@@ -415,7 +415,7 @@
     {
       "id": "recipe-app-enhancement-cronsole",
       "name": "AI Recipe: App Enhancement (Cronsole)",
-      "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Needs the apps folder on the machine Cronsole runs on. Starts with apply=no, so your apps are only changed once you switch it to yes.",
+      "description": "Claude ships one small additive enhancement to one static web app in a folder you name (the least-enhanced app each run): a filter, a shortcut, an export, an empty state, an accessibility fix. It edits a copy, the runner diffs it into a patch and checks the page still loads clean; the patch is only applied to your app when you say so. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Needs the apps folder on the machine Cronsole runs on. Starts with apply=no, so your apps are only changed once you switch it to yes.",
       "category": "dev-workflow",
       "tags": [
         "ai",
@@ -433,7 +433,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-app-enhancement-cronsole.json",
-      "sha256": "6044df8859846ca213ab27e1eafd261e323fc78092f26b1758e7df922acca8a0"
+      "sha256": "b1221a9a035d85177b324eff94684c9cd9c344ad2a8d32b656f8088f77bae9c7"
     },
     {
       "id": "recipe-app-idea-card",
@@ -462,7 +462,7 @@
     {
       "id": "recipe-app-idea-card-cronsole",
       "name": "AI Recipe: App Idea Card (Cronsole)",
-      "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a current trend and writes a one-page app pitch (problem, user, MVP, monetization, risks, sources) with a concept-art cover. Rotates across five categories so the backlog stays balanced. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -479,7 +479,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-app-idea-card-cronsole.json",
-      "sha256": "06572caadc573a1e080fc9c9cb1d39c12f0ccde4953e99e9ac01c4d72fcb75b8"
+      "sha256": "28ce1e08e747d1f75220bcc2eea21587bb46ea32a1c98514383494f9e0c11666"
     },
     {
       "id": "recipe-app-prototype",
@@ -509,7 +509,7 @@
     {
       "id": "recipe-app-prototype-cronsole",
       "name": "AI Recipe: App Prototype (Cronsole)",
-      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a current trend and builds a runnable single-page app prototype — README pitch, requirements, HTML/CSS/JS and sample data — with a concept-art cover. Opens from file://, no build step. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -527,7 +527,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-app-prototype-cronsole.json",
-      "sha256": "786b5a04e83f3c444926b207d76d0d627b8533f5815eff0f1872cebdcd1238db"
+      "sha256": "48d35b469d5e2e79777180242af43a28295677f7bfa7c05d2dd3629e44117fb7"
     },
     {
       "id": "recipe-browser-extension",
@@ -557,7 +557,7 @@
     {
       "id": "recipe-browser-extension-cronsole",
       "name": "AI Recipe: Browser Extension (Cronsole)",
-      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a current pain point and builds a loadable Manifest V3 extension plus a mock-browser demo that shares the popup's code — README pitch, requirements, permissions table — with a concept-art cover. Structure and scripts are checked before publishing. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -575,7 +575,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-browser-extension-cronsole.json",
-      "sha256": "e91de6ce62dcaec21ab08a471920090b5f65096c591606517b4957111ef283a6"
+      "sha256": "53727f1c5897be2b9f6884df36e9dabbe074fe92547bfea908dfcfbeb88e76ea"
     },
     {
       "id": "recipe-browser-game",
@@ -604,7 +604,7 @@
     {
       "id": "recipe-browser-game-cronsole",
       "name": "AI Recipe: Browser Game (Cronsole)",
-      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude designs and builds a complete single-file HTML game in a rotating genre — playable from file://, touch-aware, syntax-checked before it is published — with a design brief and key-art cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -621,7 +621,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-browser-game-cronsole.json",
-      "sha256": "2a91f6b5ca82b7b2556e2e3ee220e7970980076c8aafc81dccd72c10e8490c73"
+      "sha256": "e93f94d761218adb27c841cb4a57b9fe8ef0809293a86e702af00e88d029bdd1"
     },
     {
       "id": "recipe-comics",
@@ -651,7 +651,7 @@
     {
       "id": "recipe-comics-cronsole",
       "name": "AI Recipe: Comic (Cronsole)",
-      "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a four-panel comic strip in a rotating topic — script with dialogue, original fictional characters only — and the runner renders the full-page strip with short balloon lettering. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -669,7 +669,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-comics-cronsole.json",
-      "sha256": "7a0dc8a4ff51f67ed19a3082e35225141b2019c31e3567d9912a7e9ba7b9412b"
+      "sha256": "96c828cd8856f07b66444de97e7b1b3c04fd6f9d61af3df255ffec491932f3d9"
     },
     {
       "id": "recipe-content-idea-gen",
@@ -699,7 +699,7 @@
     {
       "id": "recipe-content-idea-gen-cronsole",
       "name": "AI Recipe: Content Idea (Cronsole)",
-      "description": "Claude researches what is working on social platforms in a rotating topic area and pitches one automatable content series — hook, treatment, automation angle, sources — with a cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches what is working on social platforms in a rotating topic area and pitches one automatable content series — hook, treatment, automation angle, sources — with a cover. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -717,7 +717,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-content-idea-gen-cronsole.json",
-      "sha256": "683ee55e1029152b7858865955dd0359f71729b7a3744c93b672340d9d88bc12"
+      "sha256": "3d0b88986be17789a18fd7e939eae7b1428c3d5f74254201eb5c2ec90e8aa612"
     },
     {
       "id": "recipe-cool-websites",
@@ -747,7 +747,7 @@
     {
       "id": "recipe-cool-websites-cronsole",
       "name": "AI Recipe: Cool Websites (Cronsole)",
-      "description": "Claude finds and verifies 28+ genuinely useful, lesser-known websites across 8–12 categories, never repeating an earlier run. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude finds and verifies 28+ genuinely useful, lesser-known websites across 8–12 categories, never repeating an earlier run. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -765,7 +765,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-cool-websites-cronsole.json",
-      "sha256": "656e451e76c812f904f77852e3c5c3de4bb6ee09cf0a9e26ef674cd3e30504a3"
+      "sha256": "43a8adf14577b97b6efe97e5d34afb676b61eeb9b6092764251081c88d0e2f2c"
     },
     {
       "id": "recipe-family-recipe",
@@ -794,7 +794,7 @@
     {
       "id": "recipe-family-recipe-cronsole",
       "name": "AI Recipe: Family Recipe (Cronsole)",
-      "description": "Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a well-loved family dish from a rotating cuisine and writes a cookable recipe with complete allergen labeling, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -811,7 +811,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-family-recipe-cronsole.json",
-      "sha256": "f0dd2523aceaab5938e066a7617a00e953ae1e6224d0d8d21c5b1204deb237c0"
+      "sha256": "67048063d2810944f675342ef7d4e3d3b17bead7cd04c9aaeb6cc5ea5059209b"
     },
     {
       "id": "recipe-finance-app-prototype",
@@ -841,7 +841,7 @@
     {
       "id": "recipe-finance-app-prototype-cronsole",
       "name": "AI Recipe: Finance App Prototype (Cronsole)",
-      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude builds a runnable personal-finance app prototype (budgeting, saving, rewards, debt, investing tools…) on synthetic data, rotating themes so the catalogue stays balanced. Educational tooling, not advice. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -859,7 +859,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-finance-app-prototype-cronsole.json",
-      "sha256": "f4f930a38e14cb34416b9ddce8a949f7caacdd953a6b911d4e918aad6e9569f0"
+      "sha256": "6ce7af77ca750198aac4969d99214acfabec72f4e638c50d277d7f7f822c5ab3"
     },
     {
       "id": "recipe-finance-digest",
@@ -891,7 +891,7 @@
     {
       "id": "recipe-finance-digest-cronsole",
       "name": "AI Recipe: Finance Digest (Cronsole)",
-      "description": "Claude writes one of eight money briefings: a stock-market recap, paper trade ideas, a strategy brief, Chase Ultimate Rewards news, card sign-up bonuses, live transfer bonuses, the shopping-portal stack, or a cashback-portal leaderboard. The runner fetches the topic's feeds and rotates topics; market levels come from public pages the agent reads and cites. Every edition ends with the same Not Financial Advice section. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes one of eight money briefings: a stock-market recap, paper trade ideas, a strategy brief, Chase Ultimate Rewards news, card sign-up bonuses, live transfer bonuses, the shopping-portal stack, or a cashback-portal leaderboard. The runner fetches the topic's feeds and rotates topics; market levels come from public pages the agent reads and cites. Every edition ends with the same Not Financial Advice section. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -911,7 +911,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-finance-digest-cronsole.json",
-      "sha256": "4799ba4cfa1297ce33cc961d63a2c824e60c4a791f7c670d90f56d21af729c0a"
+      "sha256": "ecf01a4067d58d457ddda2570d44b377c5149ca8f83a9d23ccc504477c92db2f"
     },
     {
       "id": "recipe-finance-toolkit",
@@ -942,7 +942,7 @@
     {
       "id": "recipe-finance-toolkit-cronsole",
       "name": "AI Recipe: Finance Toolkit (Cronsole)",
-      "description": "Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps. Never investment advice. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches 22+ financial tools — market-data APIs, backtesting, broker SDKs, ledgers, finance AI — with verified free-tier caps. Never investment advice. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -961,7 +961,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-finance-toolkit-cronsole.json",
-      "sha256": "9921b122146ff93ff1998a7661665a4a87d59eb632d6d4e8071a6622966531ad"
+      "sha256": "fddd281bb846e352fe4fe675b5ffab50df11a94e62071051bf2163978c4a096b"
     },
     {
       "id": "recipe-funny-ai-content",
@@ -991,7 +991,7 @@
     {
       "id": "recipe-funny-ai-content-cronsole",
       "name": "AI Recipe: Funny AI Content (Cronsole)",
-      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes one satirical content concept about an absurd AI-agent use case — the bit, script beats, the fake automation angle — with a wordless cover gag. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1009,7 +1009,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-funny-ai-content-cronsole.json",
-      "sha256": "9268c5340127f1b599ff4fd4b7e5837ea3978a49020bf75970726d352a49b70f"
+      "sha256": "b925ad53fee95b201173215c9accc75da4b9cd23fc889afbaa02150bfc92c8f9"
     },
     {
       "id": "recipe-future-cities",
@@ -1039,7 +1039,7 @@
     {
       "id": "recipe-future-cities-cronsole",
       "name": "AI Recipe: Future Cities 2500 (Cronsole)",
-      "description": "Claude imagines a real city 475 years forward — landmarks, climate adaptation, transport, a named colour grade — and the runner renders one cinematic 16:9 cityscape. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude imagines a real city 475 years forward — landmarks, climate adaptation, transport, a named colour grade — and the runner renders one cinematic 16:9 cityscape. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1057,7 +1057,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-future-cities-cronsole.json",
-      "sha256": "95b9f3c2b25d1f719d08ba25e7f8854ef116201d073f5292d40f8788cf84b809"
+      "sha256": "d4d40a9f550d292ce815864aa6f0d745e17b6f9252e23b4defeab305bbd37ea5"
     },
     {
       "id": "recipe-iam-prototype",
@@ -1089,7 +1089,7 @@
     {
       "id": "recipe-iam-prototype-cronsole",
       "name": "AI Recipe: IAM App Prototype (Cronsole)",
-      "description": "Claude builds a runnable identity-and-access-management tool prototype (certification triage, lifecycle tracing, role mining, break-glass review, access-request UX…) on synthetic data, rotating ten IAM pain areas so the catalogue stays balanced. Vendor-neutral; speaks SCIM, OIDC and SAML, never one product. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude builds a runnable identity-and-access-management tool prototype (certification triage, lifecycle tracing, role mining, break-glass review, access-request UX…) on synthetic data, rotating ten IAM pain areas so the catalogue stays balanced. Vendor-neutral; speaks SCIM, OIDC and SAML, never one product. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1109,7 +1109,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-iam-prototype-cronsole.json",
-      "sha256": "b26724abaa6a898922174b418a8deae631c6095409d7cf2b4fb8eebb6a06dbaf"
+      "sha256": "58e7c2e7b6a2f18ca1885aba2b0d3158a86e9173348b1baec5b7722513bb04d5"
     },
     {
       "id": "recipe-icon-packs",
@@ -1139,7 +1139,7 @@
     {
       "id": "recipe-icon-packs-cronsole",
       "name": "AI Recipe: Icon Pack (Cronsole)",
-      "description": "Claude designs a cohesive pack of 12 icons and draws each symbol as SVG; code adds an identical container to all twelve and ships SVG, transparent 1024 px PNG and multi-size ICO. No image model involved. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude designs a cohesive pack of 12 icons and draws each symbol as SVG; code adds an identical container to all twelve and ships SVG, transparent 1024 px PNG and multi-size ICO. No image model involved. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1157,7 +1157,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-icon-packs-cronsole.json",
-      "sha256": "bef55b9a6fa2f7a23b5299806a6c6b127167929a4f39162757eb53c664d337f6"
+      "sha256": "edfea8c1a24ff41e3bf4cdda37a2f6b236712a39387ff4840b31eff9e4daac37"
     },
     {
       "id": "recipe-image-collections",
@@ -1187,7 +1187,7 @@
     {
       "id": "recipe-image-collections-cronsole",
       "name": "AI Recipe: Image Collections (Cronsole)",
-      "description": "Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Advances every long-running image collection by one researched entry — Science Breakthroughs year by year, Technology Milestones, Exoplanets, or your own — configured in an editable collections.json. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1205,7 +1205,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-image-collections-cronsole.json",
-      "sha256": "e567f61708d1a92eee852267398c04c24136582bc114dca4c12b86d9d4d61bca"
+      "sha256": "4ae622622d0242ef1a7be15f7b84aac23b7f88d34d7b6223ac93b9853f4a1f16"
     },
     {
       "id": "recipe-image-prompt-packs",
@@ -1234,7 +1234,7 @@
     {
       "id": "recipe-image-prompt-packs-cronsole",
       "name": "AI Recipe: Image Prompt Pack (Cronsole)",
-      "description": "Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a themed pack of 5–8 reusable, copy-ready image prompts — negative prompts, aspect ratios, style tags, use cases — and every prompt gets a rendered example image. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1251,7 +1251,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-image-prompt-packs-cronsole.json",
-      "sha256": "5fc4b7676387bf10c2788d21fd723255b55d64154f300c3e2d00043b600b3560"
+      "sha256": "facb1c4762f512a56b61ea5d95b5ad5c52b9376ba407754488ada9665756e2dd"
     },
     {
       "id": "recipe-mobile-game",
@@ -1281,7 +1281,7 @@
     {
       "id": "recipe-mobile-game-cronsole",
       "name": "AI Recipe: Mobile Game (Cronsole)",
-      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude designs and builds a portrait, touch-first phone game as one HTML file inside an on-screen phone frame, in a rotating genre — syntax-checked before publishing — with a design brief and key art. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1299,7 +1299,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-mobile-game-cronsole.json",
-      "sha256": "980c509a1e21acd190899c024990f01fe68cf5c3fb8b2298120e44bbd6fc0b2f"
+      "sha256": "2d13346d5a79fefa781565df7574480d0b568da2ea93b73638912fa913616586"
     },
     {
       "id": "recipe-model-benchmark-watch",
@@ -1329,7 +1329,7 @@
     {
       "id": "recipe-model-benchmark-watch-cronsole",
       "name": "AI Recipe: Model Benchmark Watch (Cronsole)",
-      "description": "Claude researches the week's AI model releases, commercial and open-weight, and writes a briefing with a sourced head-to-head benchmark table of the current frontier, leading with what changed since the previous edition. Every number traces to a cited source. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches the week's AI model releases, commercial and open-weight, and writes a briefing with a sourced head-to-head benchmark table of the current frontier, leading with what changed since the previous edition. Every number traces to a cited source. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1347,7 +1347,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-model-benchmark-watch-cronsole.json",
-      "sha256": "cd4dd2d8d9ca73e3a84502f52a631394152f7ab54d789e9e364df039dd22351e"
+      "sha256": "c98cfb996ce9706848003c3fbbd9084fb3314b03e37b6c1941b0cf79d1656bb2"
     },
     {
       "id": "recipe-news-collage",
@@ -1376,7 +1376,7 @@
     {
       "id": "recipe-news-collage-cronsole",
       "name": "AI Recipe: News Collage (Cronsole)",
-      "description": "Claude researches the major U.S. news stories of a day, a week or a month (rotating) and writes the image prompt; the runner renders one cartoon-editorial image — a six-panel grid for a day or month, a single newsroom scene for a week — with short in-world captions and no likeness of any real person. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches the major U.S. news stories of a day, a week or a month (rotating) and writes the image prompt; the runner renders one cartoon-editorial image — a six-panel grid for a day or month, a single newsroom scene for a week — with short in-world captions and no likeness of any real person. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1393,7 +1393,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-news-collage-cronsole.json",
-      "sha256": "dc7e18e689ac60d7baf10d5f8181a2f2a82d339c46cef4227826bf2fa016f153"
+      "sha256": "96ab77ddeff383c4b4b0e53c69e8d3bb73ff5aad2180f1ec50955b3040d7039b"
     },
     {
       "id": "recipe-news-digest",
@@ -1423,7 +1423,7 @@
     {
       "id": "recipe-news-digest-cronsole",
       "name": "AI Recipe: News Digest (Cronsole)",
-      "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a briefing on one of ten topics (AI, science and space, world, tech policy, energy, gaming, media, emerging technology, cybersecurity, IAM and security) from that topic's own RSS feeds: top stories, themed sections, a watchlist and every source. The runner fetches the feeds and rotates topics; the agent only writes what the feeds carried. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1441,7 +1441,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-news-digest-cronsole.json",
-      "sha256": "8d481b86ccfb309f1f547d649e0cbd06e53835fd2a0a74c92ee10dd46d7804d9"
+      "sha256": "af20f581a222a5df71eda5fbe0812400d43d0921b22e3c73e13acedbdb31fcd8"
     },
     {
       "id": "recipe-oss-spotlight",
@@ -1472,7 +1472,7 @@
     {
       "id": "recipe-oss-spotlight-cronsole",
       "name": "AI Recipe: Open-Source Spotlight (Cronsole)",
-      "description": "Pulls seven open-source news feeds, then Claude writes a six-section editorial read on the period — releases, community news, hidden gems — graded by significance. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Pulls seven open-source news feeds, then Claude writes a six-section editorial read on the period — releases, community news, hidden gems — graded by significance. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1491,7 +1491,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-oss-spotlight-cronsole.json",
-      "sha256": "4d268f95375465dad786a2a3d1fbbb530fffa01ea4603858753d08b994dd1c0a"
+      "sha256": "413af5388317dac051ba4bf540c2603ebc9fdb4c7468ed5fe9d84a158ad10f8c"
     },
     {
       "id": "recipe-pc-game-concept",
@@ -1521,7 +1521,7 @@
     {
       "id": "recipe-pc-game-concept-cronsole",
       "name": "AI Recipe: PC Game Concept (Cronsole)",
-      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a rotating genre and writes an original PC game concept — a design brief with a buildable core loop and 6-week prototype plan, a one-page pitch, sources and key art. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1539,7 +1539,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-pc-game-concept-cronsole.json",
-      "sha256": "69c05b83259535862bbdc22a83960706c460c0c993fde4f493d1ee8427034b42"
+      "sha256": "1ab4ba0588dd2f4048fb6da87957a811e14fe7d6872e723bb9cec0d1eab16459"
     },
     {
       "id": "recipe-podcast-episode",
@@ -1569,7 +1569,7 @@
     {
       "id": "recipe-podcast-episode-cronsole",
       "name": "AI Recipe: Podcast Episode (Cronsole)",
-      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY.",
+      "description": "Renders the oldest unrendered podcast script to an episode: Claude casts a preset voice per speaker and writes show notes, then every line is spoken with Gemini or ElevenLabs text-to-speech. Exits cleanly when there's nothing to render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1587,7 +1587,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-podcast-episode-cronsole.json",
-      "sha256": "addf069afb7c8e903c818d3dec35b0029096016cfebb6717b5c03fe72f6db5b7"
+      "sha256": "d420ced7b826b9d5437eb4d12f4b377936cee83e7a8932b4d31563265d9deb5d"
     },
     {
       "id": "recipe-podcast-script-generator",
@@ -1616,7 +1616,7 @@
     {
       "id": "recipe-podcast-script-generator-cronsole",
       "name": "AI Recipe: Podcast Script (Cronsole)",
-      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Podcast Episode recipe. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a 1,500–3,000-word AI-vs-AI debate podcast episode as a speaker-labelled transcript, with a fictional cast (or your own recurring cast cards) and an optional topic queue, plus a square cover. Pair it with the Podcast Episode recipe. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1633,7 +1633,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-podcast-script-generator-cronsole.json",
-      "sha256": "a8864ae2257c7d267a9281e1ddd101504fca0042a9b0ade9bf5298d1f98138d7"
+      "sha256": "0db0273467a43500d335a4c083d18fadbe2f5a5acb2fd0a38d99e8a96a222fde"
     },
     {
       "id": "recipe-poster",
@@ -1663,7 +1663,7 @@
     {
       "id": "recipe-poster-cronsole",
       "name": "AI Recipe: Poster (Cronsole)",
-      "description": "Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude designs a vertical poster on the next least-used of 200 themes — art movements, nature, science, space, myth, architecture — and the runner renders it at 2:3. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1681,7 +1681,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-poster-cronsole.json",
-      "sha256": "c082c3b51497d366c9c1b7db8f230f626656742170e524ce920b624098e4e190"
+      "sha256": "983d7574640224431b182264f3e1dfcbd844f3a16fe48e04f3d4255ecf89eddf"
     },
     {
       "id": "recipe-pr-review",
@@ -1711,7 +1711,7 @@
     {
       "id": "recipe-pr-review-cronsole",
       "name": "AI Recipe: PR Review (Cronsole)",
-      "description": "Claude reviews every open pull request in one GitHub repo against a fixed set of gates (red or pending checks, conflicts, secrets, infra files, destructive migrations, unrelated changes, human markers) and writes a verdict per PR. Report mode is read-only; comment mode posts one comment per PR; merge mode squash-merges the ones that pass and holds the rest. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Needs the GitHub CLI (gh) on the machine Cronsole runs on, logged in to an account that can read the repo, and write to it for comment or merge mode. Starts in report mode.",
+      "description": "Claude reviews every open pull request in one GitHub repo against a fixed set of gates (red or pending checks, conflicts, secrets, infra files, destructive migrations, unrelated changes, human markers) and writes a verdict per PR. Report mode is read-only; comment mode posts one comment per PR; merge mode squash-merges the ones that pass and holds the rest. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Needs the GitHub CLI (gh) on the machine Cronsole runs on, logged in to an account that can read the repo, and write to it for comment or merge mode. Starts in report mode.",
       "category": "dev-workflow",
       "tags": [
         "ai",
@@ -1729,7 +1729,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-pr-review-cronsole.json",
-      "sha256": "e65615ce5895cd31b061c3be48c371a93aefc23570ab083587193b47c080f899"
+      "sha256": "265897b669041e29a6f6b73c63ef77942b46f6fdc2df48615263237006abd204"
     },
     {
       "id": "recipe-recipes-update",
@@ -1779,7 +1779,7 @@
     {
       "id": "recipe-regional-recipe-cronsole",
       "name": "AI Recipe: Regional Recipe (Cronsole)",
-      "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude adds one authentic dish to a regional recipe library, always filling the region with the fewest recipes. Food-safety gated, with a cover and a Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1796,7 +1796,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-regional-recipe-cronsole.json",
-      "sha256": "c3fe9dced3d6c0efba42c22c4db18efc5412c181fdec4eca4430387fab7778fd"
+      "sha256": "445526a4a72a487399e9747dc9e6130399e35cd67475db23e211b281598f97d6"
     },
     {
       "id": "recipe-satirical-news",
@@ -1826,7 +1826,7 @@
     {
       "id": "recipe-satirical-news-cronsole",
       "name": "AI Recipe: Satirical News (Cronsole)",
-      "description": "Claude writes one deadpan, Onion-style article under the masthead The Overcorrect, rotating across twelve beats and optionally anchored on a real current story, with a metadata sidecar and, when an image key is set, a cover, a square thumbnail and two in-article illustrations. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes one deadpan, Onion-style article under the masthead The Overcorrect, rotating across twelve beats and optionally anchored on a real current story, with a metadata sidecar and, when an image key is set, a cover, a square thumbnail and two in-article illustrations. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1844,7 +1844,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-satirical-news-cronsole.json",
-      "sha256": "d35cfe21fd85813dc73e04d0eb8c6eb0d397354c247b34a00f53ecaefc04120f"
+      "sha256": "51430f82acfada3ddabda87a5fdfa6fe946405722480a9691c771fe33f9d0974"
     },
     {
       "id": "recipe-security-toolkit",
@@ -1875,7 +1875,7 @@
     {
       "id": "recipe-security-toolkit-cronsole",
       "name": "AI Recipe: Security Toolkit (Cronsole)",
-      "description": "Claude researches 24+ security tools across identity, detection, recon, AppSec, cloud and labs, with licences stated. Tools, never targets. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches 24+ security tools across identity, detection, recon, AppSec, cloud and labs, with licences stated. Tools, never targets. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1894,7 +1894,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-security-toolkit-cronsole.json",
-      "sha256": "3fbd642fec6ec02e555e8b4758e3b690680c8f1c3ec72e4543fd52e12a27e034"
+      "sha256": "14af94dc4101146cfbb978f605969f0b20415497d6aa36fcfaf461e00583bd71"
     },
     {
       "id": "recipe-serialized-novella",
@@ -1924,7 +1924,7 @@
     {
       "id": "recipe-serialized-novella-cronsole",
       "name": "AI Recipe: Serialized Novella (Cronsole)",
-      "description": "Claude writes the next chapter of an ongoing novel against its story bible — inventing the bible on the first run — keeping continuity through a rolling synopsis and the latest chapters, with a chapter illustration. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes the next chapter of an ongoing novel against its story bible — inventing the bible on the first run — keeping continuity through a rolling synopsis and the latest chapters, with a chapter illustration. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1942,7 +1942,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-serialized-novella-cronsole.json",
-      "sha256": "22e9129192e2374d43f260d7a7a8e4cb48208744fd800240fc5e82bc7101cf04"
+      "sha256": "49236ed794861b631e925a9609441ae987bd4a06954ec5f6f72106a8dbe59343"
     },
     {
       "id": "recipe-short-story",
@@ -1971,7 +1971,7 @@
     {
       "id": "recipe-short-story-cronsole",
       "name": "AI Recipe: Short Story (Cronsole)",
-      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes a complete 2,000–4,000-word short story in a rotating genre, avoiding every premise already written, with a portrait cover illustration. Optional idea queue via story-ideas.md. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -1988,7 +1988,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-short-story-cronsole.json",
-      "sha256": "38a72734fbeac63f6444afa1e1d32789731f18ee0bcdecdeaf73d2ed417c9283"
+      "sha256": "3b3258051ca736d2f84923031dd202d7890a0e30295222fdb11f44b7a007588c"
     },
     {
       "id": "recipe-signal-sources",
@@ -2019,7 +2019,7 @@
     {
       "id": "recipe-signal-sources-cronsole",
       "name": "AI Recipe: Signal Sources (Cronsole)",
-      "description": "Claude adds 12+ blogs, newsletters, changelogs and channels worth following to a cumulative reading list, each with a verified feed. Regenerates an all-time bookmarks file and an OPML bundle. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude adds 12+ blogs, newsletters, changelogs and channels worth following to a cumulative reading list, each with a verified feed. Regenerates an all-time bookmarks file and an OPML bundle. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2038,7 +2038,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-signal-sources-cronsole.json",
-      "sha256": "f92c0ba280ebf426b71e9d726eac07651dd3299506ea62fd2e357d67d9733892"
+      "sha256": "eb897dff3f2fe4d0944e8564ddd25751b06f0b5b66d87085ae7302c752441bde"
     },
     {
       "id": "recipe-song-generator",
@@ -2068,7 +2068,7 @@
     {
       "id": "recipe-song-generator-cronsole",
       "name": "AI Recipe: Song (Cronsole)",
-      "description": "Claude writes an original song in the type you choose — news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Required task secret: ELEVENLABS_API_KEY. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude writes an original song in the type you choose — news song, rock, country, rap, psychedelic, folk, jazz and more, most with a comedy twin — as lyrics plus an ElevenLabs composition plan, then the runner renders the MP3 and a square cover. Needs ELEVENLABS_API_KEY; each run spends music credits. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Required task secret: ELEVENLABS_API_KEY. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2086,7 +2086,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-song-generator-cronsole.json",
-      "sha256": "e72bca2650c27172ef8ba40eb588648a7fd74746c0fd5df7a7a74a399a00f358"
+      "sha256": "97f7cbc6d30c41d3e7fc9876bd19d8d9bf164aaf2b180fe060ca69e3ed190553"
     },
     {
       "id": "recipe-top-10-github-repos",
@@ -2117,7 +2117,7 @@
     {
       "id": "recipe-top-10-github-repos-cronsole",
       "name": "AI Recipe: Top 10 GitHub Repos (Cronsole)",
-      "description": "Fetches GitHub Trending's weekly feeds, then Claude ranks the ten strongest AI and developer-tooling repos with what is driving each. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Fetches GitHub Trending's weekly feeds, then Claude ranks the ten strongest AI and developer-tooling repos with what is driving each. Exports browser-importable bookmarks. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2136,7 +2136,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-top-10-github-repos-cronsole.json",
-      "sha256": "6446fa509132d1a91503e86b40ca5b072b0bd74bbdf147e006b68932db5bcfab"
+      "sha256": "f27fe7efc45ec1cf506ba5f1daea45b60f967ba18ff09d98ac5dd37047b80f90"
     },
     {
       "id": "recipe-trending-movers",
@@ -2167,7 +2167,7 @@
     {
       "id": "recipe-trending-movers-cronsole",
       "name": "AI Recipe: Trending Movers (Cronsole)",
-      "description": "Scrapes GitHub's weekly trending pages for stars gained, then Claude writes a star-velocity leaderboard in the measured order. Published figures are checked against the measurements. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Scrapes GitHub's weekly trending pages for stars gained, then Claude writes a star-velocity leaderboard in the measured order. Published figures are checked against the measurements. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2186,7 +2186,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-trending-movers-cronsole.json",
-      "sha256": "a0aed2ca66306941f40aeba8409b3b551bd16978af4e0367deb0e8e69686c582"
+      "sha256": "fcf554b9e5e1704fe8f200e099e582717582c08a30d4a598f8ed85bb954f0ba7"
     },
     {
       "id": "recipe-viewer-rebuild",
@@ -2237,7 +2237,7 @@
     {
       "id": "recipe-viral-recipe-cronsole",
       "name": "AI Recipe: Viral Recipe (Cronsole)",
-      "description": "Claude finds the recipe currently blowing up on TikTok, Instagram, YouTube, Reddit or Facebook, recreates it as a cookable recipe that credits the originating creator and explains why it went viral, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude finds the recipe currently blowing up on TikTok, Instagram, YouTube, Reddit or Facebook, recreates it as a cookable recipe that credits the originating creator and explains why it went viral, gated by a food-safety scanner, plus a cover and a self-contained Cook's Card page. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2255,7 +2255,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-viral-recipe-cronsole.json",
-      "sha256": "22c2b9aab4c956133cf7385de8d1dbeb1e31317ac2143424cca25205cac8cf46"
+      "sha256": "a324e6a0ba8b8b82e3f62bc2f59ec62d0b79318e5489f4e3c3b0984b1971651b"
     },
     {
       "id": "recipe-voiceover-script-generator",
@@ -2286,7 +2286,7 @@
     {
       "id": "recipe-voiceover-script-generator-cronsole",
       "name": "AI Recipe: Voiceover Script (Cronsole)",
-      "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Claude researches a real-world story and writes a 90–180-second narration with direction notes; the runner narrates it with a preset voice and, with ffmpeg, cuts a vertical short from generated scene stills. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: ELEVENLABS_API_KEY, GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2305,7 +2305,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-voiceover-script-generator-cronsole.json",
-      "sha256": "8544f0d7838d096b303adcf5ddc3cc564b525469c4acec9a91dc6464afc2494a"
+      "sha256": "fefd01f62708086b928f2d218451c363fc48ec66c46e893147ceb1aec77e4942"
     },
     {
       "id": "recipe-wallpaper-packs",
@@ -2334,7 +2334,7 @@
     {
       "id": "recipe-wallpaper-packs-cronsole",
       "name": "AI Recipe: Wallpaper Pack (Cronsole)",
-      "description": "Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.9 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
+      "description": "Three themed wallpapers from a rotating pool of twelve, each with a random lighting, palette, mood and framing twist, delivered as a matching 16:9 desktop and 9:16 phone pair cropped from one render. Cronsole edition: no clone or .env needed. The first run fetches runtime 0.12.10 (sha256-pinned) into your cache; the agent CLI is swappable. Optional task secrets: GEMINI_API_KEY, OPENAI_API_KEY.",
       "category": "ai-agent",
       "tags": [
         "ai",
@@ -2351,7 +2351,7 @@
         "cronsole-native"
       ],
       "path": "templates/recipe-wallpaper-packs-cronsole.json",
-      "sha256": "f048907861dc0ea6ad4d9c16964ef869f574e0c65ad8ab3eabc8e57867bad33d"
+      "sha256": "ebd5ed0b6b0f531f72d8abdd0cf18da2d49792bfd84b0c66bee5c2c886bcc148"
     }
   ],
   "packs": [
@@ -2460,7 +2460,7 @@
         "recipe-wallpaper-packs-cronsole"
       ],
       "path": "packs/ai-recipes.json",
-      "sha256": "0c759c5834760e0eb2c8a8261433c58e12d7deb8b717731fc4c1ab88c96936c6"
+      "sha256": "5bea4c0e4c1e2950e37bf0029d39dffb2bbfe60f23fb4cae87c0600e6adb2c81"
     },
     {
       "id": "ai-recipes-cronsole",
@@ -2517,7 +2517,7 @@
         "recipe-wallpaper-packs-cronsole"
       ],
       "path": "packs/ai-recipes-cronsole.json",
-      "sha256": "1581a2e42662c67c61be8e712c6d6fdc52e68b8db11e5be7c9df04e6ef16ea5e"
+      "sha256": "3fd9b92fdb2278ea9fe315f605b585983bd2b27b4eed369dccdbef388f58472b"
     },
     {
       "id": "ai-recipes-apps-games",

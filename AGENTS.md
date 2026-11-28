@@ -1,7 +1,7 @@
 # AGENTS.md — ai-automation-recipes
 
 Public recipes for scheduled Claude Code automations, importable into Cronsole. These rules are for
-every coding agent (Codex, Gemini CLI, opencode; Claude Code imports this file from `CLAUDE.md`). Read
+every coding agent (Claude Code, Codex, Gemini CLI, opencode). Read
 `docs/ARCHITECTURE.md` before changing `core/`.
 
 - **This repo is meant to be public.** Never add personal names, domains, hostnames, home paths or

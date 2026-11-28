@@ -20,6 +20,22 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
 - *Cronsole editions:* the demo viewer loads `https://ai-automation-tools.dev/consent.js`, and
   `build_viewer.py` stamps `<meta name="build">` with the checkout's short git sha each time it
   copies the page, so a hosted demo shows which commit built it. The runtime bundle is unchanged.
+## Unreleased — 2026-11-27
+
+**Changed**
+- `CLAUDE.md` is gone: Claude Code reads `AGENTS.md` directly, and the import held nothing Claude-only.
+
+**Added**
+- *CLI coverage:* a roadmap item to keep the importer's own Claude Code hooks, plugins and MCP
+  servers out of recipe runs (`--strict-mcp-config`, `--setting-sources project,local` in the
+  `claude` profile). Claude Code's headless docs say `claude -p` without `--bare` loads them from
+  `~/.claude`, and recipes now run on other people's machines through the Cronsole editions
+  (monthly roadmap refresh).
+
+## 0.12.10 — 2026-11-27
+
+**Changed**
+- `recipe-validator` brought level with its source, agent-skills' Core skill: the `SKILL.md` and `references/nutrition-and-quality.md` updates it had missed, plus its `evals/`. The scanner script is unchanged, so the food safety gate behaves as before. agent-skills now checks this copy weekly (`check-copies.py`). The bundle changed, so the patch bump and a rebuilt registry.
 
 ## Unreleased — 2026-11-18
 

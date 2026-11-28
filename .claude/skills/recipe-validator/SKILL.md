@@ -8,11 +8,11 @@ description: >-
   completeness, and recipe coherence — then reports findings ranked by severity
   with concrete fixes. Use this whenever the user wants to check, validate,
   review, audit, quality-check, or "sanity-check" one recipe or a whole folder
-  of recipes, asks whether a recipe is safe, healthy,
-  balanced, or well-made, or mentions reviewing recipe nutrition, salt/fat/sugar
-  content, or food-safety issues — even if they don't use the word "validate."
-  The recipe location is a parameter, so it works on any folder of recipe
-  markdown.
+  of recipes, asks whether a recipe is safe, healthy, balanced, or well-made, or
+  mentions reviewing recipe nutrition, salt/fat/sugar content, or food-safety
+  issues — even if they don't use the word "validate." The recipe location is a
+  parameter, so it works on a single file, a folder, or an entire recipe
+  collection in any layout.
 ---
 
 # Recipe validator
@@ -23,8 +23,8 @@ The engine is a hybrid. A **script does the objective, repetitive checks** the s
 
 ## Inputs
 
-- **Location** — a recipe `.md` file, or a folder of them. If none is given, ask — or, inside an automation, validate the recipe the run just wrote.
-- **Output** — for a single recipe, report inline. For a folder, write a markdown report `recipe-validation-report_<YYYY-MM-DD>.md` plus the raw `scan_<YYYY-MM-DD>.json` where the user asks (default: beside the folder you validated), and give a short inline summary. Inside an automation whose output format is fixed, apply the findings to the recipe instead of writing a report.
+- **Location** — a recipe `.md` file, or a folder of them. If the user doesn't say, ask which recipe or folder to validate.
+- **Output** — for a single recipe, report inline. For a folder, write the markdown report **into this skill's own `reports/` folder** — `skills/recipe-validator/reports/recipe-validation-report_<YYYY-MM-DD>.md` (create the folder if missing; it's gitignored, so run outputs stay local and never clutter the repo) — plus the raw `scan_<YYYY-MM-DD>.json` beside it, and give a short inline summary. Ask if the user wants a different destination. *(Don't confuse `reports/` — run output — with `evals/`, the tracked test-case definitions.)*
 
 ## Workflow
 
@@ -33,8 +33,8 @@ The engine is a hybrid. A **script does the objective, repetitive checks** the s
 Run the scanner over the target — it discovers recipes, parses them, and emits JSON findings:
 
 ```bash
-# path is relative to this skill's folder
-python scripts/scan_recipes.py <path> --out scan_<YYYY-MM-DD>.json
+# write the scan into this skill's gitignored reports/ folder (mkdir if needed)
+python skills/recipe-validator/scripts/scan_recipes.py <path> --out skills/recipe-validator/reports/scan_<YYYY-MM-DD>.json
 # add --summary for a quick human digest instead of JSON
 ```
 
@@ -106,4 +106,4 @@ Lead with the recipes that need fixes, group by verdict, and keep each finding t
 
 - **Don't invent facts.** If you're unsure whether an ingredient is present or a temp is safe, say so and point to the reference rather than guessing. A validator that hallucinates problems is worse than none.
 - **Scale gracefully.** Hundreds of recipes: batch the scan, prioritize by the scan's `max_severity`, and don't burn the context reading clean recipes you can trust from the parse.
-- **General-purpose.** Nothing here is repo-specific except the default path — point `scan_recipes.py` at any recipe folder. If a recipe format differs (no frontmatter, different nutrition layout), the scanner degrades gracefully and you fill the gaps by reading.
+- **General-purpose.** Point `scan_recipes.py` at any recipe folder. If a recipe format differs (no frontmatter, different nutrition layout), the scanner degrades gracefully and you fill the gaps by reading.
