@@ -14,12 +14,6 @@
 Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Recipe names before
 0.6.0 are the old ones; 0.6.0 lists the renames.
 
-## Unreleased — 2026-11-25
-
-**Added**
-- *Cronsole editions:* the demo viewer loads `https://ai-automation-tools.dev/consent.js`, and
-  `build_viewer.py` stamps `<meta name="build">` with the checkout's short git sha each time it
-  copies the page, so a hosted demo shows which commit built it. The runtime bundle is unchanged.
 ## Unreleased — 2026-11-27
 
 **Changed**
@@ -31,6 +25,13 @@ Entries that came off the [roadmap](ROADMAP.md) say which phase in italics. Reci
   `claude` profile). Claude Code's headless docs say `claude -p` without `--bare` loads them from
   `~/.claude`, and recipes now run on other people's machines through the Cronsole editions
   (monthly roadmap refresh).
+
+## Unreleased — 2026-11-25
+
+**Added**
+- *Cronsole editions:* the demo viewer loads `https://ai-automation-tools.dev/consent.js`, and
+  `build_viewer.py` stamps `<meta name="build">` with the checkout's short git sha each time it
+  copies the page, so a hosted demo shows which commit built it. The runtime bundle is unchanged.
 
 ## 0.12.10 — 2026-11-27
 
