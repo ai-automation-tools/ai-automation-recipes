@@ -130,6 +130,12 @@ class BuildViewerTests(unittest.TestCase):
         self.assertEqual(build_viewer.build(self.out, "T"), 0)
         self.assertEqual(load_catalog(self.out)["items"], [])
 
+    def test_page_loads_consent_and_is_stamped_with_the_build(self):
+        build_viewer.build(self.out, "T")
+        page = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('src="https://ai-automation-tools.dev/consent.js"', page)
+        self.assertIn(f'<meta name="build" content="{build_viewer.head_sha()}" />', page)
+
 
 if __name__ == "__main__":
     unittest.main()

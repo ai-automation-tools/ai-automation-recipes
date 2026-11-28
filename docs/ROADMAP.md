@@ -64,10 +64,12 @@ changed: adding names to `NATIVE` doesn't, so the new templates pin the bundle a
       link when the fetch fails; `tests/test_homepage.py` covers the markup — done 2026-11-18:
       `homepage/index.html` fetches `registry/index.json` and draws one card per recipe, 12 first and
       the rest on *Show all*
-- [ ] `viewer/index.html` loads `https://ai-automation-tools.dev/consent.js` (or self-hosts its
+- [x] `viewer/index.html` loads `https://ai-automation-tools.dev/consent.js` (or self-hosts its
       fonts; today it loads Google Fonts with no consent helper) and carries
       `<meta name="build" content="<sha>">` set when the demo is rebuilt; `Get-SurfaceDrift.py` shows
-      the recipes demo current
+      the recipes demo current — done 2026-11-25: the page loads `consent.js` (fonts stay on Google
+      Fonts) and `build_viewer.py` stamps the meta with the short git sha. The drift check runs
+      outside this repo: after the demo's next rebuild, run it once to confirm
 - [x] **Writing and files recipes, no keys:** `serialized-novella`, `alternate-history`,
       `funny-ai-content`, `agent-toolkit`, `ai-stack-radar`, `oss-spotlight`, `cool-websites`,
       `top-10-github-repos`, `trending-movers`, `signal-sources`, `security-toolkit`,

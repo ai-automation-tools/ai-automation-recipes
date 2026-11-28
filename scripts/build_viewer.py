@@ -29,7 +29,7 @@ import argparse
 import json
 import os
 import re
-import shutil
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -186,8 +186,19 @@ def build(out_dir: Path, title: str, repo_url: str | None = None) -> int:
     # </script>-safe: catalog.js is loaded as a script, so never let a string close the tag.
     payload = json.dumps(catalog, ensure_ascii=False).replace("</", "<\\/")
     (out_dir / "catalog.js").write_text(f"window.CATALOG = {payload};\n", encoding="utf-8")
-    shutil.copyfile(ROOT / "viewer" / "index.html", out_dir / "index.html")
+    page = (ROOT / "viewer" / "index.html").read_text(encoding="utf-8")
+    page = page.replace('<meta name="build" content="dev" />', f'<meta name="build" content="{head_sha()}" />')
+    (out_dir / "index.html").write_text(page, encoding="utf-8", newline="")
     return len(items)
+
+
+def head_sha() -> str:
+    """Short sha of this checkout's HEAD, the demo's build stamp; 'dev' outside a git checkout."""
+    try:
+        r = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--short", "HEAD"], capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() or "dev"
+    except (OSError, subprocess.SubprocessError):
+        return "dev"
 
 
 def main() -> int:
